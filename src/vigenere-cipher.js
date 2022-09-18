@@ -24,18 +24,11 @@ class VigenereCipheringMachine {
     Object.assign(this, { isDirect });
   }
   #ALPH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  /* #tabulaRecta0 = (() => {
-    const result = [];
-    for (const i in this.#ALPH) {
-      result[i] = this.#ALPH.slice(i) + this.#ALPH.slice(0, i);
-    }
-    return result;
-  })(); */
   #tabulaRecta = [...this.#ALPH].reduce((p, c, i) => {
     return [...p, this.#ALPH.slice(i) + this.#ALPH.slice(0, i)];
   }, []);
-  #getIndexes(str) {
-    return [...str].map(v => this.#ALPH.indexOf(v));
+  #getIndexes(...strings) {
+    return strings.map(str => [...str].map(char => this.#ALPH.indexOf(char)));
   }
   #checkArguments(a, b) {
     if (!a || !b) throw new Error("Incorrect arguments!");
@@ -44,40 +37,30 @@ class VigenereCipheringMachine {
     return [...str].reverse().join("");
   }
   encrypt(message, key) {
-    /* throw new NotImplementedError('Not implemented'); */
-    // remove line with error and write your code here
     this.#checkArguments(...arguments);
     message = message.toUpperCase();
     key = key.padEnd(message.length, key).toUpperCase();
-    const indexes = {
-      message: this.#getIndexes(message),
-      key: this.#getIndexes(key),
-    };
-    let keyIndex = 0;
-    let result = [...message].reduce((p, c, i) => {
-      if (!this.#ALPH.includes(c)) return p + c;
-      return p + this.#tabulaRecta[indexes.message[i]][indexes.key[keyIndex++]];
-    }, "");
+    const [mIndexes, kIndexes] = this.#getIndexes(message, key);
+    let result = "";
+    for (let i = 0, j = 0; i < message.length; i++) {
+      result += this.#ALPH.includes(message[i])
+        ? this.#tabulaRecta[mIndexes[i]][kIndexes[j++]]
+        : message[i];
+    }
     return this.isDirect ? result : this.#reverseString(result);
   }
   decrypt(message, key) {
-    /* throw new NotImplementedError('Not implemented'); */
-    // remove line with error and write your code here
     this.#checkArguments(...arguments);
     message = message.toUpperCase();
     key = key.padEnd(message.length, key).toUpperCase();
-    const indexes = {
-      message: this.#getIndexes(message),
-      key: this.#getIndexes(key),
-    };
-    let keyIndex = 0;
-    let result = [...message].reduce((p, c, i) => {
-      if (!this.#ALPH.includes(c)) return p + c;
-      const row = indexes.message[i];
-      const col =
-        (this.#ALPH.length - indexes.key[keyIndex++]) % this.#ALPH.length;
-      return p + this.#tabulaRecta[row][col];
-    }, "");
+    const [mIndexes, kIndexes] = this.#getIndexes(message, key);
+    const { length } = this.#ALPH;
+    let result = "";
+    for (let i = 0, j = 0; i < message.length; i++) {
+      result += this.#ALPH.includes(message[i])
+        ? this.#tabulaRecta[mIndexes[i]][(length - kIndexes[j++]) % length]
+        : message[i];
+    }
     return this.isDirect ? result : this.#reverseString(result);
   }
 }
