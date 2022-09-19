@@ -1,0 +1,26 @@
+:root {
+  --orange: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
+  --yellow: #ffee2e;
+  --orange-gradient: #ccc;
+  --pink-gradient: #ccc;
+  --black-blue: #333b41;
+  --green: #4b9200;
+  --frosted-glass-white: #fdfdff85;
+  --gray-light: #f1f3f2;
+  --gray: #767474;
+  --gray-smoky: #ababab;
+  --rad: #d31414;
+  --2: linear-gradient(113.96deg, #fa6f32 1.49%, #fe9013 101.44%);
+}
+
+.header {
+  background: #000;
+  color: #fff;
+}
+.nav-list {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
