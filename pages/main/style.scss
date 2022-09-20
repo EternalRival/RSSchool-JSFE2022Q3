@@ -61,6 +61,15 @@ $rad: #d31414;
   line-height: 140%;
   text-transform: uppercase;
 }
+
+@mixin font-nav-link {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+}
+
 @mixin font-body {
   font-family: "Roboto";
   font-style: normal;
@@ -104,6 +113,18 @@ body {
   margin: 0 auto;
   /* width: 1600px; */
   @include font-body;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }
 .section-background {
   width: 100vw;
@@ -163,6 +184,13 @@ body {
     }
     a {
       padding: 29px;
+      @include font-nav-link;
+      &:hover,
+      &.hover {
+        background: $orange;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
     }
   }
   a {
@@ -177,66 +205,3 @@ body {
 .pick-and-feed {}
 .testimonials {}
 .footer {} */
-/* .header,
-.main,
-.footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 1160px;
-} */
-/* 
-.header {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 80px;
-  padding: 0 13.75%;
-  background: #000000;
-  color: #ffffff;
-}
-.nav {
-  position: relative;
-  flex: 0 1 100%;
-}
-.logo {
-  position: relative;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  flex: 0 0 82px;
-  height: 52px;
-  font-size: 19px;
-  line-height: 120%;
-  text-align: center;
-  vertical-align: center;
-  border-radius: 2px;
-  border: 1px solid #ffffff;
-
-  img {
-    position: absolute;
-    bottom: 0.3em;
-    left: 0.5em;
-  }
-}
-.nav-list {
-  display: flex;
-  align-items: center;
-  list-style: none;
-  padding-left: 35px;
-  margin: 0;
-  li {
-    padding: 29px;
-    flex-shrink: 0;
-    &:last-child {
-      flex-grow: 1;
-      justify-self: flex-end;
-      text-align: end;
-      padding-right: 0;
-    }
-  }
-  a {
-    color: #fff;
-    text-decoration-line: none;
-  }
-} */
