@@ -1,30 +1,112 @@
 body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 0 auto;
+  /* width: 1600px; */
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 140%;
-  height: 100vh;
-  max-width: 1600px;
-  margin: auto;
 }
 
+.section-background {
+  width: 100vw;
+}
+
+.content {
+  margin: auto;
+  width: 1160px;
+}
+
+.logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 82px;
+  height: 52px;
+  font-size: 19px;
+  line-height: 120%;
+  text-align: center;
+  border: 1px solid #ffffff;
+  border-radius: 2px;
+}
+.logo img {
+  position: absolute;
+  bottom: 0.35em;
+  left: 0.5em;
+}
+
+.header {
+  height: 80px;
+}
+.header.section-background {
+  background: #000;
+}
+.header .content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #ffffff;
+}
+.header .logo {
+  flex: 0 0 82px;
+}
+.header .nav {
+  flex-basis: 100%;
+}
+.header .nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding-left: 34px;
+}
+.header .nav-list li:last-child {
+  flex-grow: 1;
+  justify-self: flex-end;
+  text-align: end;
+}
+.header .nav-list li:last-child a {
+  padding-right: 1px;
+}
+.header a {
+  display: inline-block;
+  padding: 29px;
+  color: #fff;
+  -webkit-text-decoration-line: none;
+          text-decoration-line: none;
+}
+
+/* .watch {}
+.backstage {}
+.pets {}
+.pick-and-feed {}
+.testimonials {}
+.footer {} */
+/* .header,
+.main,
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1160px;
+} */
+/* 
 .header {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   height: 80px;
-  width: auto;
   padding: 0 13.75%;
   background: #000000;
   color: #ffffff;
 }
-
 .nav {
   position: relative;
   flex: 0 1 100%;
 }
-
 .logo {
   position: relative;
   display: flex;
@@ -38,35 +120,31 @@ body {
   vertical-align: center;
   border-radius: 2px;
   border: 1px solid #ffffff;
-}
-.logo img {
-  position: absolute;
-  bottom: 0.3em;
-  left: 0.5em;
-}
 
+  img {
+    position: absolute;
+    bottom: 0.3em;
+    left: 0.5em;
+  }
+}
 .nav-list {
   display: flex;
   align-items: center;
   list-style: none;
   padding-left: 35px;
   margin: 0;
-}
-.nav-list li {
-  padding: 29px;
-  flex-shrink: 0;
-}
-.nav-list li:last-child {
-  flex-grow: 1;
-  justify-self: flex-end;
-  text-align: end;
-  padding-right: 0;
-  /* position: absolute;
-  right: 0;
-  padding-right: 0; */
-}
-.nav-list a {
-  color: #fff;
-  -webkit-text-decoration-line: none;
-          text-decoration-line: none;
-}/*# sourceMappingURL=style.css.map */
+  li {
+    padding: 29px;
+    flex-shrink: 0;
+    &:last-child {
+      flex-grow: 1;
+      justify-self: flex-end;
+      text-align: end;
+      padding-right: 0;
+    }
+  }
+  a {
+    color: #fff;
+    text-decoration-line: none;
+  }
+} *//*# sourceMappingURL=style.css.map */

@@ -96,18 +96,99 @@ $rad: #d31414;
   font-size: 36px;
   line-height: 130%;
 }
+
 body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 0 auto;
+  /* width: 1600px; */
   @include font-body;
-  height: 100vh;
-  max-width: 1600px;
-  margin: auto;
 }
+.section-background {
+  width: 100vw;
+}
+.content {
+  margin: auto;
+  width: 1160px;
+}
+.logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 82px;
+  height: 52px;
+  font-size: 19px;
+  line-height: 120%;
+  text-align: center;
+  border: 1px solid #ffffff;
+  border-radius: 2px;
+  img {
+    position: absolute;
+    bottom: 0.35em;
+    left: 0.5em;
+  }
+}
+.header {
+  &.section-background {
+    background: #000;
+  }
+  height: 80px;
+ 
+  .content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #ffffff;
+  }
+  .logo {
+    flex: 0 0 82px;
+  }
+  .nav {
+    flex-basis: 100%;
+  }
+  .nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding-left: 34px;
+    li:last-child {
+      flex-grow: 1;
+      justify-self: flex-end;
+      text-align: end;
+      a {
+        padding-right: 1px;
+      }
+    }
+  }
+  a {
+    display: inline-block;
+    padding: 29px;
+    color: #fff;
+    text-decoration-line: none;
+  }
+}
+/* .watch {}
+.backstage {}
+.pets {}
+.pick-and-feed {}
+.testimonials {}
+.footer {} */
+/* .header,
+.main,
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1160px;
+} */
+/* 
 .header {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   height: 80px;
-  width: auto;
   padding: 0 13.75%;
   background: #000000;
   color: #ffffff;
@@ -150,13 +231,10 @@ body {
       justify-self: flex-end;
       text-align: end;
       padding-right: 0;
-      /* position: absolute;
-      right: 0;
-      padding-right: 0; */
     }
   }
   a {
     color: #fff;
     text-decoration-line: none;
   }
-}
+} */
