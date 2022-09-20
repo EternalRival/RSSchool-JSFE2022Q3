@@ -71,9 +71,11 @@ body {
 .header .nav-list li:last-child a {
   padding-right: 1px;
 }
+.header .nav-list a {
+  padding: 29px;
+}
 .header a {
   display: inline-block;
-  padding: 29px;
   color: #fff;
   -webkit-text-decoration-line: none;
           text-decoration-line: none;

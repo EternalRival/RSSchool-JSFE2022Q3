@@ -135,7 +135,7 @@ body {
     background: #000;
   }
   height: 80px;
- 
+
   .content {
     display: flex;
     justify-content: flex-start;
@@ -161,10 +161,12 @@ body {
         padding-right: 1px;
       }
     }
+    a {
+      padding: 29px;
+    }
   }
   a {
     display: inline-block;
-    padding: 29px;
     color: #fff;
     text-decoration-line: none;
   }
