@@ -1,111 +1,4 @@
-$orange: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
-$yellow: #ffee2e;
-$orange-gradient: linear-gradient(
-    315.75deg,
-    rgba(254, 210, 144, 0.7) 30.06%,
-    #febdab 100.95%,
-    rgba(254, 210, 144, 0.7) 106.36%
-  ),
-  linear-gradient(
-    315.75deg,
-    rgba(254, 189, 171, 0.74) 30.06%,
-    rgba(243, 169, 248, 0.66) 50.74%,
-    #e0d8f0 80.49%,
-    #eaf7fe 127.9%,
-    #eaf7fe 149.54%
-  ),
-  linear-gradient(
-    315.75deg,
-    rgba(254, 189, 171, 0.74) 30.06%,
-    rgba(243, 169, 248, 0.66) 50.74%,
-    #e0d8f0 80.49%,
-    #eaf7fe 127.9%,
-    #eaf7fe 149.54%
-  );
-$pink-gradient: linear-gradient(
-    315.75deg,
-    rgba(254, 189, 171, 0.74) 30.06%,
-    rgba(243, 169, 248, 0.66) 50.74%,
-    #e0d8f0 80.49%,
-    #eaf7fe 127.9%,
-    #eaf7fe 149.54%
-  ),
-  linear-gradient(
-    315.75deg,
-    rgba(254, 189, 171, 0.74) 30.06%,
-    rgba(243, 169, 248, 0.66) 50.74%,
-    #e0d8f0 80.49%,
-    #eaf7fe 127.9%,
-    #eaf7fe 149.54%
-  );
-$black-blue: #333b41;
-$green: #4b9200;
-$frosted-glass-white: rgba(253, 253, 255, 0.52);
-$gray-light: #f1f3f2;
-$gray: #767474;
-$gray-smoky: #ababab;
-$rad: #d31414;
-@mixin font-h1 {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 114px;
-  line-height: 80%;
-  text-transform: uppercase;
-}
-@mixin font-btn {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 140%;
-  text-transform: uppercase;
-}
-
-@mixin font-nav-link {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 140%;
-}
-
-@mixin font-body {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 140%;
-}
-@mixin font-h2 {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 120%;
-}
-@mixin font-subtitle {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 120%;
-}
-@mixin font-smallParagraph {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 300;
-  font-size: 15px;
-  line-height: 120%;
-}
-@mixin font-h3 {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 36px;
-  line-height: 130%;
-}
-
+@import "base";
 body {
   display: flex;
   flex-direction: column;
@@ -155,6 +48,7 @@ body {
   &.section-background {
     background: #000;
   }
+  position: absolute;
   height: 80px;
 
   .content {
@@ -199,8 +93,50 @@ body {
     text-decoration-line: none;
   }
 }
-/* .watch {}
-.backstage {}
+.watch {
+  &.section-background {
+    background-image: url("../../assets/images/Giant Panda.jpg");
+    background-color: #283035;
+    background-size: cover;
+    overflow-y: hidden;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    height: 780px;
+    outline: 1px dashed red;
+  }
+  .watch-text {
+    margin: 365px 250px 0 0;
+    transform: translate(50%, -50%);
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 666%; //106.496px;
+    line-height: 75%;
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #ffffff;
+    span {
+      color: $yellow;
+    }
+    &:before {
+      content: "";
+      height: 465px;
+      width: 465px;
+      position: absolute;
+      border-radius: 50%;
+      z-index: -1;
+      /* transform: translate(-30.2%, -15.75%); */
+      top: -73px;
+      left: -82px;
+      background: $orange;
+    }
+  }
+}
+/*.backstage {}
 .pets {}
 .pick-and-feed {}
 .testimonials {}

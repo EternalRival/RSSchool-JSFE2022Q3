@@ -54,6 +54,7 @@ body {
 }
 
 .header {
+  position: absolute;
   height: 80px;
 }
 .header.section-background {
@@ -106,8 +107,48 @@ body {
           text-decoration-line: none;
 }
 
-/* .watch {}
-.backstage {}
+.watch.section-background {
+  background-image: url("../../assets/images/Giant Panda.jpg");
+  background-color: #283035;
+  background-size: cover;
+  overflow-y: hidden;
+}
+.watch .content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  height: 780px;
+  outline: 1px dashed red;
+}
+.watch .watch-text {
+  margin: 365px 250px 0 0;
+  transform: translate(50%, -50%);
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 666%;
+  line-height: 75%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.watch .watch-text span {
+  color: #ffee2e;
+}
+.watch .watch-text:before {
+  content: "";
+  height: 465px;
+  width: 465px;
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+  /* transform: translate(-30.2%, -15.75%); */
+  top: -73px;
+  left: -82px;
+  background: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
+}
+
+/*.backstage {}
 .pets {}
 .pick-and-feed {}
 .testimonials {}
