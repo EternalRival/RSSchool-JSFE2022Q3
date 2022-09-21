@@ -23,7 +23,7 @@ body {
   width: 100vw;
 }
 .content {
-  margin: auto;
+  margin: 0 auto;
   width: 1160px;
 }
 .logo {
@@ -44,11 +44,34 @@ body {
     left: 0.5em;
   }
 }
+.button {
+  @include font-btn;
+  width: 298px;
+  height: 54px;
+  margin: 0;
+  padding: 16px 1px 16px 5px;
+  border: none;
+  border-radius: 25px;
+  text-align: center;
+  background: $orange;
+  color: #ffffff;
+  cursor: pointer;
+  &:hover {
+    background: #e47209;
+  }
+  &:active {
+    background: $green;
+  }
+  &:disabled {
+    background: $gray;
+  }
+}
 .header {
   &.section-background {
     background: #000;
   }
   position: absolute;
+  z-index: 1;
   height: 80px;
 
   .content {
@@ -98,42 +121,55 @@ body {
     background-image: url("../../assets/images/Giant Panda.jpg");
     background-color: #283035;
     background-size: cover;
-    overflow-y: hidden;
   }
+  margin-top: 0;
+  padding-top: 0;
   .content {
+    position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     align-items: flex-end;
     height: 780px;
-    outline: 1px dashed red;
+    /* outline: 1px dashed red; */
   }
   .watch-text {
-    margin: 365px 250px 0 0;
-    transform: translate(50%, -50%);
+    position: absolute;
+    width: 500.31px;
+    height: 400px;
+    top: 166px;
+    z-index: 0;
+    left: calc(50% - 500.31px / 2 + 330.15px);
+    /* right: 9px; */
     font-family: "Roboto";
     font-style: normal;
     font-weight: 700;
-    font-size: 666%; //106.496px;
+    font-size: 106.496px; // 666%; // 106.496px;
     line-height: 75%;
     text-align: center;
     text-transform: uppercase;
 
-    color: #ffffff;
+    color: #fff;
     span {
       color: $yellow;
     }
     &:before {
       content: "";
+      display: block;
       height: 465px;
       width: 465px;
+      z-index: -1;
       position: absolute;
       border-radius: 50%;
-      z-index: -1;
-      /* transform: translate(-30.2%, -15.75%); */
-      top: -73px;
-      left: -82px;
+      transform: translate(-16%, -16%);
+      /* top: -73px;
+      left: -82px; */
       background: $orange;
     }
+  }
+  .button {
+    margin-right: 99px;
+    margin-bottom: 100px;
   }
 }
 /*.backstage {}
