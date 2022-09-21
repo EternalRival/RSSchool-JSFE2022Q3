@@ -4,7 +4,7 @@ body {
   flex-direction: column;
   align-items: stretch;
   margin: 0 auto;
-  /* width: 1600px; */
+  width: 100vw; 
   @include font-body;
 }
 .visually-hidden {
@@ -33,15 +33,22 @@ body {
   box-sizing: border-box;
   width: 82px;
   height: 52px;
-  font-size: 19px;
-  line-height: 120%;
-  text-align: center;
+  padding: 1px 0 0;
   border: 1px solid #ffffff;
   border-radius: 2px;
+  text-align: center;
   img {
     position: absolute;
-    bottom: 0.35em;
-    left: 0.5em;
+    bottom: 0.4em;
+    left: 0.55em;
+  }
+  span {
+    display: block;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19.0145px;
+    line-height: 120%;
   }
 }
 .button {
@@ -118,7 +125,7 @@ body {
 }
 .watch {
   &.section-background {
-    background-image: url("../../assets/images/Giant Panda.jpg");
+    background-image: url("../../assets/images/giant-panda.jpg");
     background-color: #283035;
     background-size: cover;
   }
