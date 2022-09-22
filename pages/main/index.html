@@ -9,27 +9,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;800;900&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
-    <!-- <header class="header"><div class="logo header-logo"><img class="bamboo-icon" src="../../assets/icons/bamboo.svg" alt="bamboo_icon"><span>PetStory online</span></div><nav class="nav"><ul class="nav-list"><li><a href="#">About</a></li><li><a href="#">Map</a></li><li><a href="#">Zoos</a></li><li><a href="#">Donate</a></li><li><a href="#">Contact us</a></li><li><a href="#">Designed by &copy;</a></li></ul></nav></header> -->
     <header class="header section-background">
       <div class="content">
-        <div class="logo">
-          <a href="../main"
-            ><img
-              class="bamboo-icon"
-              src="../../assets/icons/bamboo.svg"
-              alt="bamboo_icon"
-            /><span>PetStory online</span></a
-          >
-        </div>
+        <a href="../main" class="logo">
+          <p class="text">PetStory <span class="coco">o</span>nline</p>
+        </a>
         <nav class="nav">
           <h1 class="visually-hidden">PetStory Online</h1>
           <ul class="nav-list">
-            <li><a href="../main" class="hover">About</a></li>
+            <li><a href="../main" class="active">About</a></li>
             <li><a href="#">Map</a></li>
             <li><a href="#">Zoos</a></li>
             <li><a href="../donate">Donate</a></li>
@@ -44,14 +37,14 @@
         </nav>
       </div>
     </header>
-    <main>
+    <main class="main">
       <section class="watch section-background">
         <div class="content">
-          <div class="watch-text">
+          <p class="watch-text">
             Watch<br />your<br /><span class="watch-text-favorite"
               >favorite</span
             ><br />animal<br />online
-          </div>
+          </p>
           <button
             class="button"
             onclick="window.location.href='../cam_panda_online'"
@@ -61,7 +54,33 @@
         </div>
       </section>
       <section class="backstage section-background">
-        <div class="content">The Backstage</div>
+        <img
+          class="flower-foto1"
+          src="../../assets/images/flower-foto1.png"
+          alt="flower-foto1"
+        />
+        <div class="content">
+          <img
+            class="bamboo-cap"
+            src="../../assets/images/bamboo-cap.jpg"
+            alt="bamboo-cap"
+          />
+          <div class="backstage-text">
+            <h2 class="h2">The Backstage of the Wilderness World.</h2>
+            <p>
+              The site was founded on the basis of a volunteer movement to
+              protect and care for animals.
+            </p>
+            <p>How it works</p>
+            <p>
+              The main goal is to help the animals, as well as the nature
+              reserves and zoos where they are kept. We are currently working on
+              video projects targeting pandas in China, eagles on an island near
+              Los Angeles, alligators in Florida and gorillas in the Congo.
+              These have a total of more than 1,500 mammals and reptiles.
+            </p>
+          </div>
+        </div>
       </section>
       <section class="pets section-background">
         <div class="content">Pets</div>
@@ -74,7 +93,63 @@
       </section>
     </main>
     <footer class="footer section-background">
-      <div class="content">Footer</div>
+      <div class="content">
+        <div class="top">
+          <a href="../main" class="logo">
+            <p class="text">PetStory online</p>
+          </a>
+          <div class="subscribe">
+            <p class="text">Subscribe to our news</p>
+            <form class="form" action="">
+              <input
+                class="email input"
+                type="email"
+                placeholder="Enter your email"
+                required
+              />
+              <div class="email border"></div>
+              <input class="submit" type="submit" value="Submit" />
+            </form>
+          </div>
+        </div>
+        <div class="donate">
+          <button class="button" onclick="window.location.href='../donate'">
+            Donate for volunteers
+          </button>
+        </div>
+        <div class="bottom">
+          <div class="social">
+            <a href="https://www.facebook.com/" class="facebook social-link"
+              ><div class="facebook icon"></div>
+              <p class="text">Facebook</p></a
+            >
+            <a href="https://twitter.com/" class="twitter social-link"
+              ><div class="twitter icon"></div>
+              <p class="text">Twitter</p></a
+            >
+            <a href="https://instagram.com/" class="instagram social-link"
+              ><div class="instagram icon"></div>
+              <p class="text">Instagram</p></a
+            >
+            <a href="https://www.youtube.com/" class="youtube social-link"
+              ><div class="youtube icon"></div>
+              <p class="text">YouTube</p></a
+            >
+          </div>
+          <div class="footer-nav">
+            <ul class="footer-nav-list">
+              <li><a href="../main" class="active">About</a></li>
+              <li><a href="#">Map</a></li>
+              <li><a href="#">Zoos</a></li>
+              <li><a href="#">Contact us</a></li>
+            </ul>
+          </div>
+          <div class="watermark">
+            <p>Designed by Alisa Samborskaya</p>
+            <p>&copy;RSSchool & &copy;Yem Digital 2021</p>
+          </div>
+        </div>
+      </div>
     </footer>
   </body>
 </html>
