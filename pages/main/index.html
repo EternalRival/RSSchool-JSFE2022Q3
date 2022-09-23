@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PetStory Online</title>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="../../assets/styles/sass/main.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,22 +14,26 @@
     />
   </head>
   <body>
-    <header class="header section-background">
-      <div class="content">
-        <a href="../main" class="logo">
-          <p class="text">PetStory <span class="coco">o</span>nline</p>
-        </a>
-        <nav class="nav">
-          <h1 class="visually-hidden">PetStory Online</h1>
-          <ul class="nav-list">
-            <li><a href="../main" class="active">About</a></li>
-            <li><a href="#">Map</a></li>
-            <li><a href="#">Zoos</a></li>
-            <li><a href="../donate">Donate</a></li>
-            <li><a href="#">Contact us</a></li>
-            <li>
+    <header class="header section-wrapper">
+      <div class="content-wrapper">
+        <a href="../main" class="header logo container"
+          ><h1 class="header logo text">PetStory <span>Online</span></h1></a
+        >
+        <nav class="header nav">
+          <ul class="header nav-list">
+            <li class="nav-item">
+              <a href="../main" class="nav-link active">About</a>
+            </li>
+            <li class="nav-item"><a href="" class="nav-link">Map</a></li>
+            <li class="nav-item"><a href="" class="nav-link">Zoos</a></li>
+            <li class="nav-item">
+              <a href="../donate" class="nav-link">Donate</a>
+            </li>
+            <li class="nav-item"><a href="" class="nav-link">Contact us</a></li>
+            <li class="nav-item">
               <a
                 href="https://www.figma.com/file/jfEFwkXVj1WRq7sUHDr8os/PetStory-online"
+                class="nav-link"
                 >Designed by &copy;</a
               >
             </li>
@@ -37,29 +41,19 @@
         </nav>
       </div>
     </header>
-    <main class="main">
-      <section class="watch section-background">
-        <div class="content">
-          <p class="watch-text">
-            Watch<br />your<br /><span class="watch-text-favorite"
-              >favorite</span
-            ><br />animal<br />online
-          </p>
-          <button
-            class="button"
-            onclick="window.location.href='../cam_panda_online'"
-          >
-            watch online
-          </button>
+    <main class="main main-page">
+      <section class="watch section-wrapper">
+        <div class="content-wrapper">
+          <div class="watch-circle">
+            <p class="watch-circle-text">
+              Watch your <span>favorite</span> animal online
+            </p>
+          </div>
+          <button class="button rounded">Wath online</button>
         </div>
       </section>
-      <section class="backstage section-background">
-        <img
-          class="flower-foto1"
-          src="../../assets/images/flower-foto1.png"
-          alt="flower-foto1"
-        />
-        <div class="content">
+      <section class="backstage section-wrapper">
+        <div class="content-wrapper">
           <img
             class="bamboo-cap"
             src="../../assets/images/bamboo-cap.jpg"
@@ -82,72 +76,74 @@
           </div>
         </div>
       </section>
-      <section class="pets section-background">
-        <div class="content">Pets</div>
+      <section class="pets section-wrapper">
+        <div class="content-wrapper">pets</div>
       </section>
-      <section class="pick-and-feed section-background">
-        <div class="content">Pick and feed a friend</div>
+      <section class="pick-n-feed section-wrapper">
+        <div class="content-wrapper">pick-n-feed</div>
       </section>
-      <section class="testimonials section-background">
-        <div class="content">Testimonials</div>
+      <section class="testimonials section-wrapper">
+        <div class="content-wrapper">testimonials</div>
       </section>
     </main>
-    <footer class="footer section-background">
-      <div class="content">
-        <div class="top">
-          <a href="../main" class="logo">
-            <p class="text">PetStory online</p>
-          </a>
-          <div class="subscribe">
+    <footer class="footer section-wrapper">
+      <div class="content-wrapper">
+        <!-- logo+donate; form; social+watermark -->
+        <div class="first-part">
+          <a href="../main" class="footer logo container"
+            ><p class="footer logo text">PetStory online</p></a
+          >
+          <button class="button">Donate for volunteers</button>
+
+          <form class="form subscribe" action="">
             <p class="text">Subscribe to our news</p>
-            <form class="form" action="">
+            <div class="email">
               <input
-                class="email input"
+                class="input"
                 type="email"
                 placeholder="Enter your email"
                 required
               />
-              <div class="email border"></div>
+              <div class="border"></div>
               <input class="submit" type="submit" value="Submit" />
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
-        <div class="donate">
-          <button class="button" onclick="window.location.href='../donate'">
-            Donate for volunteers
-          </button>
-        </div>
-        <div class="bottom">
+        <div class="second-part">
           <div class="social">
             <a href="https://www.facebook.com/" class="facebook social-link"
               ><div class="facebook icon"></div>
-              <p class="text">Facebook</p></a
+              <p class="facebook text">Facebook</p></a
             >
             <a href="https://twitter.com/" class="twitter social-link"
               ><div class="twitter icon"></div>
-              <p class="text">Twitter</p></a
+              <p class="twitter text">Twitter</p></a
             >
             <a href="https://instagram.com/" class="instagram social-link"
               ><div class="instagram icon"></div>
-              <p class="text">Instagram</p></a
+              <p class="instagram text">Instagram</p></a
             >
             <a href="https://www.youtube.com/" class="youtube social-link"
               ><div class="youtube icon"></div>
-              <p class="text">YouTube</p></a
+              <p class="youtube text">YouTube</p></a
             >
-          </div>
-          <div class="footer-nav">
-            <ul class="footer-nav-list">
-              <li><a href="../main" class="active">About</a></li>
-              <li><a href="#">Map</a></li>
-              <li><a href="#">Zoos</a></li>
-              <li><a href="#">Contact us</a></li>
-            </ul>
           </div>
           <div class="watermark">
             <p>Designed by Alisa Samborskaya</p>
             <p>&copy;RSSchool & &copy;Yem Digital 2021</p>
           </div>
+          <nav class="footer nav">
+            <ul class="footer nav-list">
+              <li class="nav-item">
+                <a href="../main" class="nav-link active">About</a>
+              </li>
+              <li class="nav-item"><a href="" class="nav-link">Map</a></li>
+              <li class="nav-item"><a href="" class="nav-link">Zoos</a></li>
+              <li class="nav-item">
+                <a href="" class="nav-link">Contact us</a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </footer>

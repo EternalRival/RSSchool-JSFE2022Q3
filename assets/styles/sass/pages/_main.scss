@@ -1,0 +1,122 @@
+.main-page {
+  .watch {
+    &.section-wrapper {
+      background: #283035 url("../../images/giant-panda.jpg");
+      background-position: center;
+      background-size: cover;
+    }
+    .content-wrapper {
+      height: 780px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    .watch-circle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 92px;
+      margin-right: 108px;
+      width: 465px;
+      height: 465px;
+      background: $orange;
+      border-radius: 50%;
+      .watch-circle-text {
+        position: relative;
+        top: 8.9%;
+        left: 19.5%;
+        color: $white;
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 106.496px; // 666%; // 106.496px;
+        line-height: 75%;
+        text-align: center;
+        text-transform: uppercase;
+        cursor: default;
+      }
+      span {
+        color: $yellow;
+      }
+    }
+    .button {
+      margin-top: 69px;
+      margin-right: 99px;
+    }
+  }
+  .backstage {
+    &.section-wrapper {
+      background: $white;
+      background-image: url("../../images/flower-foto1.png");
+      background-repeat: no-repeat;
+      background-position: right top 12px;
+    }
+    .content-wrapper {
+      display: flex;
+      justify-content: space-between;
+      margin: 140px auto 180px;
+      height: 403px;
+      background: #ffffffbf;
+    }
+    .bamboo-cap {
+      margin-left: -1px;
+    }
+    .backstage-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      width: 465px;
+      color: $black-blue;
+      & > * {
+        margin: 0;
+      }
+      .h2 {
+        @extend %font-h2;
+      }
+      p:nth-child(2) {
+        margin-top: 22px;
+        line-height: 130%;
+      }
+      p:nth-child(3) {
+        margin-top: 54px;
+        @extend %font-subtitle;
+      }
+      p:nth-child(4) {
+        margin-top: 33px;
+      }
+    }
+  }
+  .pets {
+    &.section-wrapper {
+      outline: 1px dashed $toxic;
+      background: #333333;
+    }
+    .content-wrapper {
+      height: 872px;
+      margin-bottom: 234px;
+      display: flex;
+    }
+  }
+  .pick-n-feed {
+    &.section-wrapper {
+      outline: 1px dashed $toxic;
+      background: $frosted-glass-white;
+    }
+    .content-wrapper {
+      height: 835px;
+      margin: 69px auto 100px;
+      display: flex;
+    }
+  }
+  .testimonials {
+    &.section-wrapper {
+      outline: 1px dashed $toxic;
+      background: #333333;
+    }
+    .content-wrapper {
+      height: 575px;
+      margin: 140px auto 204px;
+      display: flex;
+    }
+  }
+}

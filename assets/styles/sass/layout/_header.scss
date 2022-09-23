@@ -1,0 +1,29 @@
+.header {
+  &.section-wrapper {
+    position:absolute;
+    background-color: $black;
+  }
+  .content-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 80px;
+  }
+  .logo {
+    padding-top: 2px;
+    .text > span {
+      text-transform: lowercase;
+    }
+  }
+  .nav {
+    margin-left: 34px;
+  }
+  .nav-item:last-child {
+    flex-grow: 1;
+    text-align: end;
+    .nav-link {
+      padding-right: 1px;
+    }
+  }
+}

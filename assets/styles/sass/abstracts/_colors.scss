@@ -1,3 +1,7 @@
+$white: #ffffff;
+$black: #000000;
+$toxic: #00ff00;
+
 $orange: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
 $yellow: #ffee2e;
 $orange-gradient: linear-gradient(
@@ -45,63 +49,3 @@ $gray-light: #f1f3f2;
 $gray: #767474;
 $gray-smoky: #ababab;
 $rad: #d31414;
-@mixin font-h1 {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 114px;
-  line-height: 80%;
-  text-transform: uppercase;
-}
-@mixin font-btn {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 140%;
-  text-transform: uppercase;
-}
-
-@mixin font-nav-link {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 140%;
-}
-
-@mixin font-body {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 140%;
-}
-@mixin font-h2 {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 120%;
-}
-@mixin font-subtitle {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 120%;
-}
-@mixin font-smallParagraph {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 300;
-  font-size: 15px;
-  line-height: 120%;
-}
-@mixin font-h3 {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 36px;
-  line-height: 130%;
-}

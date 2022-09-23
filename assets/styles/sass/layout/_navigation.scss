@@ -1,0 +1,29 @@
+.nav {
+  flex-basis: 100%;
+}
+.nav-list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+.nav-item {
+  list-style: none;
+}
+.nav-link {
+  display: inline-block;
+  padding: 1.25em 29px;
+  color: $white;
+  @extend %font-nav-link;
+  text-decoration-line: none;
+
+  &:hover {
+    transform: scale(1.2);
+    transition: transform 0.3s;
+  }
+  &:active,
+  &.active {
+    background: $orange;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}

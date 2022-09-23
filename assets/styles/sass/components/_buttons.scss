@@ -1,0 +1,28 @@
+%defaultbutton {
+  width: 298px;
+  height: 54px;
+  padding: 16px 0;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  @extend %font-btn;
+  background: $orange;
+  color: $white;
+  &:hover {
+    cursor: pointer;
+    background: #e47209;
+  }
+  &:active {
+    background: $green;
+  }
+  &:disabled {
+    background: $gray;
+  }
+}
+.button {
+  @extend %defaultbutton;
+  &.rounded {
+    border-radius: 25px;
+    padding: 16px 1px 16px 5px;
+  }
+}
