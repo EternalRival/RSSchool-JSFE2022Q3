@@ -16,7 +16,8 @@
   @extend %font-nav-link;
   text-decoration-line: none;
 
-  &:hover {
+  &:hover:not(.active) {
+    cursor: pointer;
     transform: scale(1.2);
     transition: transform 0.3s;
   }
