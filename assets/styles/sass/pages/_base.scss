@@ -14,9 +14,8 @@ body {
 }
 .section-wrapper {
   width: 100%;
-  background-color: $toxic;
 }
 .content-wrapper {
   margin: 0 auto;
-  width: 1160px;
+  max-width: 1160px;
 }
