@@ -98,9 +98,10 @@
   }
   .pick-n-feed {
     &.section-wrapper {
-      background: $frosted-glass-white;
+      background: $orange-gradient;
     }
     .content-wrapper {
+      background: $frosted-glass-white;
       height: 835px;
       margin: 69px auto 100px;
       display: flex;
