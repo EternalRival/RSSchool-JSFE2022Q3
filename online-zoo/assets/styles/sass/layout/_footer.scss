@@ -137,7 +137,41 @@
           transform: translateY(-1px);
         }
       }
-      &:hover,
+      &:hover {
+        .facebook {
+          &.text {
+            filter: drop-shadow(0 0 1px #1178f2);
+          }
+          &.icon {
+            background-color: #1178f2;
+          }
+        }
+        .twitter {
+          &.text {
+            filter: drop-shadow(0 0 1px #1d9bf0);
+          }
+          &.icon {
+            background-color: #1d9bf0;
+          }
+        }
+        .instagram {
+          &.text {
+            filter: drop-shadow(0 0 1px #a14daf);
+          }
+          &.icon {
+            background-image: url("../../icons/icon-ig.svg"),
+              $instagram-gradient;
+          }
+        }
+        .youtube {
+          &.text {
+            filter: drop-shadow(0 0 1px #ff011d);
+          }
+          &.icon {
+            background-color: #ff011d;
+          }
+        }
+      }
       &:active {
         .text {
           color: $green;

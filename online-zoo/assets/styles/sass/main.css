@@ -559,10 +559,34 @@ body {
 .footer .social .social-link .text.twitter, .footer .social .social-link .text.instagram {
   transform: translateY(-1px);
 }
-.footer .social .social-link:hover .text, .footer .social .social-link:active .text {
+.footer .social .social-link:hover .facebook.text {
+  filter: drop-shadow(0 0 1px #1178f2);
+}
+.footer .social .social-link:hover .facebook.icon {
+  background-color: #1178f2;
+}
+.footer .social .social-link:hover .twitter.text {
+  filter: drop-shadow(0 0 1px #1d9bf0);
+}
+.footer .social .social-link:hover .twitter.icon {
+  background-color: #1d9bf0;
+}
+.footer .social .social-link:hover .instagram.text {
+  filter: drop-shadow(0 0 1px #a14daf);
+}
+.footer .social .social-link:hover .instagram.icon {
+  background-image: url("../../icons/icon-ig.svg"), linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+}
+.footer .social .social-link:hover .youtube.text {
+  filter: drop-shadow(0 0 1px #ff011d);
+}
+.footer .social .social-link:hover .youtube.icon {
+  background-color: #ff011d;
+}
+.footer .social .social-link:active .text {
   color: #4b9200;
 }
-.footer .social .social-link:hover .icon, .footer .social .social-link:active .icon {
+.footer .social .social-link:active .icon {
   background-color: #4b9200;
 }
 .footer .social .icon {
