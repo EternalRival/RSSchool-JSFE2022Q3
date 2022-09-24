@@ -88,7 +88,6 @@
   }
   .pets {
     &.section-wrapper {
-      outline: 1px dashed $toxic;
       background: #333333;
     }
     .content-wrapper {
@@ -99,7 +98,6 @@
   }
   .pick-n-feed {
     &.section-wrapper {
-      outline: 1px dashed $toxic;
       background: $frosted-glass-white;
     }
     .content-wrapper {
@@ -110,7 +108,6 @@
   }
   .testimonials {
     &.section-wrapper {
-      outline: 1px dashed $toxic;
       background: #333333;
     }
     .content-wrapper {
