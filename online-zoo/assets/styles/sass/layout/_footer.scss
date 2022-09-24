@@ -109,78 +109,13 @@
           border: 1px solid $green;
           color: $green;
         }
+        &:hover {
+          cursor: pointer;
+          box-shadow: 0 0 4px 2px $gray-light;
+          transition: box-shadow 0.2s;
+        }
       }
     }
-    /*  
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-top: 40px;
-    width: 367px;
-    height: 85px;
-    .text {
-      @extend %font-subtitle;
-    }
-    .form {
-      position: relative;
-      display: flex;
-      justify-content: space-between;
-    }
-    .email {
-      box-sizing: border-box;
-      width: 228px;
-      height: 42px;
-      border-radius: 2px;
-    }
-    .border {
-      display: inline-block;
-      position: absolute;
-      z-index: 0;
-    }
-    .input {
-      padding: 9px;
-      background: #000000 padding-box;
-      border: 1px solid transparent;
-      color: #ffffff;
-      z-index: 1;
-      outline: none;
-      &::placeholder {
-        color: #bdbdbd;
-      }
-      &:invalid ~ .border {
-        background: $rad;
-      }
-      &:invalid ~ .submit {
-        border: 1px solid $rad;
-        color: $rad;
-      }
-      &:valid ~ .border,
-      &:not(:focus) ~ .border {
-        background: $orange;
-      }
-      &:placeholder-shown ~ .submit {
-        border: 1px solid $black-blue;
-        color: #000000;
-      }
-      &:active ~ .border {
-        background: $green;
-      }
-    }
-    .submit {
-      box-sizing: border-box;
-      width: 129px;
-      height: 42px;
-      margin: 0;
-      border: 1px solid $black-blue;
-      color: #000000;
-      border-radius: 5px;
-      background-color: $gray-light;
-      &:active {
-        border: 1px solid $green;
-        color: $green;
-      }
-    } */
   }
   .social {
     display: flex;
