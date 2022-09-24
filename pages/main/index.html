@@ -24,12 +24,12 @@
             <li class="nav-item">
               <a href="../main" class="nav-link active">About</a>
             </li>
-            <li class="nav-item"><a href="" class="nav-link">Map</a></li>
-            <li class="nav-item"><a href="" class="nav-link">Zoos</a></li>
+            <li class="nav-item"><a class="nav-link">Map</a></li>
+            <li class="nav-item"><a class="nav-link">Zoos</a></li>
             <li class="nav-item">
               <a href="../donate" class="nav-link">Donate</a>
             </li>
-            <li class="nav-item"><a href="" class="nav-link">Contact us</a></li>
+            <li class="nav-item"><a class="nav-link">Contact us</a></li>
             <li class="nav-item">
               <a
                 href="https://www.figma.com/file/jfEFwkXVj1WRq7sUHDr8os/PetStory-online"
@@ -45,11 +45,16 @@
       <section class="watch section-wrapper">
         <div class="content-wrapper">
           <div class="watch-circle">
-            <p class="watch-circle-text">
+            <h2 class="watch-circle-text">
               Watch your <span>favorite</span> animal online
-            </p>
+            </h2>
           </div>
-          <button class="button rounded">Wath online</button>
+          <button
+            class="button rounded"
+            onclick="window.location.href='../cam_panda_online'"
+          >
+            Wacth online
+          </button>
         </div>
       </section>
       <section class="backstage section-wrapper">
@@ -77,25 +82,25 @@
         </div>
       </section>
       <section class="pets section-wrapper">
-        <div class="content-wrapper">pets</div>
+        <div class="content-wrapper"><h2>pets</h2></div>
       </section>
       <section class="pick-n-feed section-wrapper">
-        <div class="content-wrapper">pick-n-feed</div>
+        <div class="content-wrapper"><h2>pick-n-feed</h2></div>
       </section>
       <section class="testimonials section-wrapper">
-        <div class="content-wrapper">testimonials</div>
+        <div class="content-wrapper"><h2>testimonials</h2></div>
       </section>
     </main>
     <footer class="footer section-wrapper">
       <div class="content-wrapper">
-        <!-- logo+donate; form; social+watermark -->
         <div class="first-part">
           <a href="../main" class="footer logo container"
             ><p class="footer logo text">PetStory online</p></a
           >
-          <button class="button">Donate for volunteers</button>
-
-          <form class="form subscribe" action="">
+          <button class="button" onclick="window.location.href='../donate'">
+            Donate for volunteers
+          </button>
+          <form class="form subscribe">
             <p class="text">Subscribe to our news</p>
             <div class="email">
               <input
@@ -137,11 +142,9 @@
               <li class="nav-item">
                 <a href="../main" class="nav-link active">About</a>
               </li>
-              <li class="nav-item"><a href="" class="nav-link">Map</a></li>
-              <li class="nav-item"><a href="" class="nav-link">Zoos</a></li>
-              <li class="nav-item">
-                <a href="" class="nav-link">Contact us</a>
-              </li>
+              <li class="nav-item"><a class="nav-link">Map</a></li>
+              <li class="nav-item"><a class="nav-link">Zoos</a></li>
+              <li class="nav-item"><a class="nav-link">Contact us</a></li>
             </ul>
           </nav>
         </div>
