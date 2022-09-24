@@ -102,3 +102,19 @@ dist
 
 # TernJS port file
 .tern-port
+
+#custom
+checklist.md
+
+#unused files
+online-zoo/assets/styles/sass/abstracts/_mixins.scss
+online-zoo/assets/styles/sass/abstracts/_variables.scss
+
+online-zoo/assets/styles/sass/components/_carousel.scss
+online-zoo/assets/styles/sass/components/_cover.scss
+online-zoo/assets/styles/sass/components/_dropdown.scss
+
+online-zoo/assets/styles/sass/layout/_forms.scss
+online-zoo/assets/styles/sass/layout/_grid.scss
+online-zoo/assets/styles/sass/layout/_sidebar.scss
+
