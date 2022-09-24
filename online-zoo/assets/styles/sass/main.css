@@ -370,7 +370,8 @@ body {
   -webkit-text-decoration-line: none;
           text-decoration-line: none;
 }
-.nav-link:hover {
+.nav-link:hover:not(.active) {
+  cursor: pointer;
   transform: scale(1.2);
   transition: transform 0.3s;
 }
@@ -413,7 +414,6 @@ body {
   color: #ffffff;
 }
 .footer.section-wrapper {
-  outline: 1px dashed #00ff00;
   background: #111115;
   height: 443px;
 }
@@ -736,12 +736,11 @@ body {
 
 .section-wrapper {
   width: 100%;
-  background-color: #00ff00;
 }
 
 .content-wrapper {
   margin: 0 auto;
-  width: 1160px;
+  max-width: 1160px;
 }
 
 .main-page .watch.section-wrapper {
@@ -824,7 +823,6 @@ body {
   margin-top: 33px;
 }
 .main-page .pets.section-wrapper {
-  outline: 1px dashed #00ff00;
   background: #333333;
 }
 .main-page .pets .content-wrapper {
@@ -833,7 +831,6 @@ body {
   display: flex;
 }
 .main-page .pick-n-feed.section-wrapper {
-  outline: 1px dashed #00ff00;
   background: rgba(253, 253, 255, 0.52);
 }
 .main-page .pick-n-feed .content-wrapper {
@@ -842,7 +839,6 @@ body {
   display: flex;
 }
 .main-page .testimonials.section-wrapper {
-  outline: 1px dashed #00ff00;
   background: #333333;
 }
 .main-page .testimonials .content-wrapper {
