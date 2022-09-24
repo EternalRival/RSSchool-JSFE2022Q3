@@ -1,0 +1,20 @@
+.donate-page {
+  .header {
+    position: static;
+  }
+  .panda-bg {
+    height: 386px;
+    background: #283035 url("../../images/giant-panda.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+  .pick-n-feed {
+    &.section-wrapper {
+      background: $orange-gradient;
+      height: 1482px;
+    }
+    .content-wrapper {
+      display: flex;
+    }
+  }
+}
