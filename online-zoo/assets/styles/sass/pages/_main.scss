@@ -88,12 +88,65 @@
   }
   .pets {
     &.section-wrapper {
-      background: #333333;
+      & > * {
+        outline: 1px solid blue;
+      }
+      background: $white;
     }
     .content-wrapper {
       height: 872px;
       margin-bottom: 234px;
       display: flex;
+      flex-flow: row wrap;
+      gap: 20px 30px;
+    }
+    .pet-card {
+      $border: 1px;
+      &.border,
+      .content {
+        box-sizing: border-box;
+        width: 366px;
+        height: 426px;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      &.border {
+        background: $orange;
+      }
+      .content {
+        background: $white padding-box;
+        border: $border solid transparent;
+        display: flex;
+        flex-direction: column;
+      }
+      .pet-img {
+        margin: -$border;
+      }
+      .pet-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 60px;
+        *{
+          outline:1px dashed red;
+        }
+      }
+      .text {
+        width: 294px;
+        height: 38px;
+        margin-left: 15px;
+        & > * {
+          margin: -2px 0;
+        }
+      }
+      .name {
+        @extend %font-btn;
+      }
+      .location {
+        @extend %font-small-paragraph;
+      }
+      .diet {
+      }
     }
   }
   .pick-n-feed {
