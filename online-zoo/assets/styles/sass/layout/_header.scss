@@ -1,7 +1,8 @@
 .header {
   &.section-wrapper {
-    position:absolute;
+    position: absolute;
     background-color: $black;
+    backdrop-filter: blur(2px);
   }
   .content-wrapper {
     display: flex;

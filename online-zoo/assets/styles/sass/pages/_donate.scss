@@ -15,6 +15,109 @@
     }
     .content-wrapper {
       display: flex;
+      flex-direction: column;
+    }
+    .h3 {
+      @extend %font-h3;
+    }
+    .heading-1 {
+      color: $white;
+      margin: 41px 0 0;
+      & + p {
+        margin: 10px 0;
+        color: $white;
+        span {
+          font-weight: 500;
+        }
+      }
+    }
+    .heading-2 {
+      color: #fe9013;
+      margin: 35px 0 0;
+    }
+    .pick-n-feed-form-background {
+      height: 964px;
+      margin-top: 59px;
+      background: rgba(255, 255, 255, 0.52);
+      backdrop-filter: blur(2px);
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .pick-n-feed-form {
+      width: 100%;
+      margin: 40px 92px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .h2 {
+      position: relative;
+      right: 7px;
+      @extend %font-h2;
+      color: #fe9013;
+      margin: 0;
+      & + p {
+        @extend %font-subtitle;
+        margin: 21px 0;
+        align-self: flex-start;
+        color: $black-blue;
+      }
+    }
+    .diet-for-day {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 532px;
+      height: 246px;
+      margin: 45px 14.5px 0 0;
+    }
+    .info {
+      position: relative;
+      margin-bottom: 56px;
+      &:before {
+        content: "";
+        position: absolute;
+        top: 24px;
+        right: -25px;
+        display: block;
+        width: 14px;
+        height: 14px;
+        background-image: url("../../icons/x_icon.svg");
+      }
+    }
+    .number {
+      margin-bottom: 11px;
+      color: $black;
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 72px;
+      line-height: 80%;
+
+      /* identical to box height, or 58px */
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .text {
+      color: $black-blue;
+    }
+    .animal-icon-wrapper {
+      position: relative;
+      bottom: 0;
+      left: 0;
+      width: 284px;
+    }
+    .animal-icon {
+    }
+    .progress-bar {
+    }
+    .another-amount {
+    }
+    .radio-containter {
+    }
+    .share-with-your-friends {
+      color: $black-blue;
     }
   }
 }

@@ -333,7 +333,7 @@ body {
   line-height: 140%;
 }
 
-.main-page .backstage .backstage-text .h2 {
+.donate-page .pick-n-feed .h2, .main-page .backstage .backstage-text .h2 {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
@@ -341,7 +341,7 @@ body {
   line-height: 120%;
 }
 
-.main-page .backstage .backstage-text p:nth-child(3), .footer .subscribe .text {
+.donate-page .pick-n-feed .h2 + p, .main-page .backstage .backstage-text p:nth-child(3), .footer .subscribe .text {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
@@ -355,6 +355,14 @@ body {
   font-weight: 300;
   font-size: 15px;
   line-height: 120%;
+}
+
+.donate-page .pick-n-feed .h3 {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 130%;
 }
 
 .nav {
@@ -393,6 +401,8 @@ body {
 .header.section-wrapper {
   position: absolute;
   background-color: #000000;
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
 }
 .header .content-wrapper {
   display: flex;
@@ -638,6 +648,7 @@ body {
   height: 54px;
   padding: 16px 0;
   border: none;
+  outline: none;
   border-radius: 5px;
   text-align: center;
   background: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
@@ -944,4 +955,94 @@ body {
 }
 .donate-page .pick-n-feed .content-wrapper {
   display: flex;
+  flex-direction: column;
+}
+.donate-page .pick-n-feed .heading-1 {
+  color: #ffffff;
+  margin: 41px 0 0;
+}
+.donate-page .pick-n-feed .heading-1 + p {
+  margin: 10px 0;
+  color: #ffffff;
+}
+.donate-page .pick-n-feed .heading-1 + p span {
+  font-weight: 500;
+}
+.donate-page .pick-n-feed .heading-2 {
+  color: #fe9013;
+  margin: 35px 0 0;
+}
+.donate-page .pick-n-feed .pick-n-feed-form-background {
+  height: 964px;
+  margin-top: 59px;
+  background: rgba(255, 255, 255, 0.52);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+}
+.donate-page .pick-n-feed .pick-n-feed-form {
+  width: 100%;
+  margin: 40px 92px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.donate-page .pick-n-feed .h2 {
+  position: relative;
+  right: 7px;
+  color: #fe9013;
+  margin: 0;
+}
+.donate-page .pick-n-feed .h2 + p {
+  margin: 21px 0;
+  align-self: flex-start;
+  color: #333b41;
+}
+.donate-page .pick-n-feed .diet-for-day {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 532px;
+  height: 246px;
+  margin: 45px 14.5px 0 0;
+}
+.donate-page .pick-n-feed .info {
+  position: relative;
+  margin-bottom: 56px;
+}
+.donate-page .pick-n-feed .info:before {
+  content: "";
+  position: absolute;
+  top: 24px;
+  right: -25px;
+  display: block;
+  width: 14px;
+  height: 14px;
+  background-image: url("../../icons/x_icon.svg");
+}
+.donate-page .pick-n-feed .number {
+  margin-bottom: 11px;
+  color: #000000;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 72px;
+  line-height: 80%;
+  /* identical to box height, or 58px */
+  text-align: center;
+  text-transform: uppercase;
+}
+.donate-page .pick-n-feed .text {
+  color: #333b41;
+}
+.donate-page .pick-n-feed .animal-icon-wrapper {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 284px;
+}
+.donate-page .pick-n-feed .share-with-your-friends {
+  color: #333b41;
 }/*# sourceMappingURL=main.css.map */
