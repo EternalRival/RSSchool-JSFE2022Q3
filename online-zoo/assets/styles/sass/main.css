@@ -485,7 +485,7 @@ body {
   border-radius: 2px;
 }
 .footer .subscribe .email .input {
-  padding: 8.8px;
+  padding: 0 0 0.1em 0.57em;
   background: #000000 padding-box;
   border: 1px solid transparent;
   color: #ffffff;
