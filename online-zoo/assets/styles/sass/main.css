@@ -308,7 +308,7 @@ template {
   display: none;
 }
 
-.button {
+.main-page .pets .pet-card .name, .button {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
@@ -346,6 +346,14 @@ body {
   font-style: normal;
   font-weight: 400;
   font-size: 24px;
+  line-height: 120%;
+}
+
+.main-page .pets .pet-card .location {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
   line-height: 120%;
 }
 
@@ -559,28 +567,28 @@ body {
 .footer .social .social-link .text.twitter, .footer .social .social-link .text.instagram {
   transform: translateY(-1px);
 }
-.footer .social .social-link:hover .facebook.text {
+.footer .social .social-link:hover:not(:active) .facebook.text {
   filter: drop-shadow(0 0 1px #1178f2);
 }
-.footer .social .social-link:hover .facebook.icon {
+.footer .social .social-link:hover:not(:active) .facebook.icon {
   background-color: #1178f2;
 }
-.footer .social .social-link:hover .twitter.text {
+.footer .social .social-link:hover:not(:active) .twitter.text {
   filter: drop-shadow(0 0 1px #1d9bf0);
 }
-.footer .social .social-link:hover .twitter.icon {
+.footer .social .social-link:hover:not(:active) .twitter.icon {
   background-color: #1d9bf0;
 }
-.footer .social .social-link:hover .instagram.text {
+.footer .social .social-link:hover:not(:active) .instagram.text {
   filter: drop-shadow(0 0 1px #a14daf);
 }
-.footer .social .social-link:hover .instagram.icon {
+.footer .social .social-link:hover:not(:active) .instagram.icon {
   background-image: url("../../icons/icon-ig.svg"), linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
 }
-.footer .social .social-link:hover .youtube.text {
+.footer .social .social-link:hover:not(:active) .youtube.text {
   filter: drop-shadow(0 0 1px #ff011d);
 }
-.footer .social .social-link:hover .youtube.icon {
+.footer .social .social-link:hover:not(:active) .youtube.icon {
   background-color: #ff011d;
 }
 .footer .social .social-link:active .text {
@@ -782,12 +790,126 @@ body {
   margin-top: 33px;
 }
 .main-page .pets.section-wrapper {
-  background: #333333;
+  background: #ffffff;
+  background-image: url("../../images/bush.png"), url("../../images/strelitzia.png");
+  background-repeat: no-repeat;
+  background-position-y: bottom;
+  background-position-x: -588px, right;
 }
 .main-page .pets .content-wrapper {
+  position: relative;
   height: 872px;
   margin-bottom: 234px;
+}
+.main-page .pets .carousel {
   display: flex;
+  flex-flow: row wrap;
+  gap: 20px 30px;
+}
+.main-page .pets .pet-card {
+  position: relative;
+}
+.main-page .pets .pet-card.border,
+.main-page .pets .pet-card .content {
+  box-sizing: border-box;
+  width: 366px;
+  height: 426px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.main-page .pets .pet-card.border {
+  background: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
+}
+.main-page .pets .pet-card .content {
+  background: #ffffff padding-box;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+}
+.main-page .pets .pet-card .pet-img {
+  margin: -1px;
+}
+.main-page .pets .pet-card .pet-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+.main-page .pets .pet-card .text {
+  width: 294px;
+  height: 38px;
+  margin-left: 15px;
+}
+.main-page .pets .pet-card .text > * {
+  margin: -2px 0;
+}
+.main-page .pets .pet-card:before {
+  content: "";
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+.main-page .pets .pet-card:hover:before {
+  background-color: rgba(0, 0, 0, 0.5019607843);
+  transition: background-color 0.5s;
+}
+.main-page .pets .pet-card:hover .pet-img {
+  transform: scale(1.0546448087);
+  transition: transform 0.5s;
+}
+.main-page .pets .pet-card:hover .text {
+  color: #ffffff;
+  margin: 0;
+  z-index: 1;
+  transform: translate(calc(366px/ 2 - 50%), calc(-426px/ 2 + 100%));
+  transition: all 0.5s;
+}
+.main-page .pets .carousel-control-wrapper {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  left: -82px;
+  right: -80px;
+  top: 50%;
+  transform: translateY(calc(-50% - 2px));
+}
+.main-page .pets .carousel-control-wrapper > * {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: none;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.main-page .pets .carousel-control-wrapper > *:hover {
+  cursor: pointer;
+  background-color: #e47209;
+}
+.main-page .pets .carousel-control-wrapper > *:active {
+  background-color: #4b9200;
+}
+.main-page .pets .carousel-control-wrapper > *:disabled {
+  background-color: #767474;
+}
+.main-page .pets .carousel-control-wrapper .carousel-control-left {
+  background-image: url("../../icons/arrow-left.svg"), linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
+}
+.main-page .pets .carousel-control-wrapper .carousel-control-left:hover, .main-page .pets .carousel-control-wrapper .carousel-control-left:active, .main-page .pets .carousel-control-wrapper .carousel-control-left:disabled {
+  background-image: url("../../icons/arrow-left.svg");
+}
+.main-page .pets .carousel-control-wrapper .carousel-control-right {
+  background-image: url("../../icons/arrow-right.svg"), linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
+}
+.main-page .pets .carousel-control-wrapper .carousel-control-right:hover, .main-page .pets .carousel-control-wrapper .carousel-control-right:active, .main-page .pets .carousel-control-wrapper .carousel-control-right:disabled {
+  background-image: url("../../icons/arrow-right.svg");
+}
+.main-page .pets .button.choose-favorite {
+  position: absolute;
+  bottom: -80px;
+  left: 50%;
+  transform: translate(-50%, 100%);
 }
 .main-page .pick-n-feed.section-wrapper {
   background: linear-gradient(315.75deg, rgba(254, 210, 144, 0.7) 30.06%, #febdab 100.95%, rgba(254, 210, 144, 0.7) 106.36%), linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #e0d8f0 80.49%, #eaf7fe 127.9%, #eaf7fe 149.54%), linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #e0d8f0 80.49%, #eaf7fe 127.9%, #eaf7fe 149.54%);

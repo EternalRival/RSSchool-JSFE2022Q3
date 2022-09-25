@@ -88,25 +88,35 @@
   }
   .pets {
     &.section-wrapper {
-      & > * {
-        outline: 1px solid blue;
-      }
       background: $white;
+      background-image: url("../../images/bush.png"),
+        url("../../images/strelitzia.png");
+      background-repeat: no-repeat;
+      background-position-y: bottom;
+      background-position-x: -588px, right;
     }
     .content-wrapper {
+      position: relative;
       height: 872px;
       margin-bottom: 234px;
+    }
+    .carousel {
       display: flex;
       flex-flow: row wrap;
       gap: 20px 30px;
     }
     .pet-card {
       $border: 1px;
+      $width: 366px;
+      $height: 426px;
+      $scaled-image-size: $width + 20px;
+      $transition-duration: 0.5s;
+      position: relative;
       &.border,
       .content {
         box-sizing: border-box;
-        width: 366px;
-        height: 426px;
+        width: $width;
+        height: $height;
         border-radius: 5px;
         overflow: hidden;
       }
@@ -127,9 +137,6 @@
         justify-content: space-between;
         align-items: center;
         height: 60px;
-        *{
-          outline:1px dashed red;
-        }
       }
       .text {
         width: 294px;
@@ -145,8 +152,83 @@
       .location {
         @extend %font-small-paragraph;
       }
-      .diet {
+      &:before {
+        content: "";
+        position: absolute;
+        display: block;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
       }
+      &:hover {
+        &:before {
+          background-color: #00000080;
+          transition: background-color $transition-duration;
+        }
+        .pet-img {
+          transform: scale(calc(1 + 20px / $width));
+          transition: transform $transition-duration;
+        }
+        .text {
+          color: $white;
+          margin: 0;
+          z-index: 1;
+          transform: translate(
+            calc(#{$width}/ 2 - 50%),
+            calc(#{-$height}/ 2 + 100%)
+          );
+          transition: all $transition-duration;
+        }
+      }
+    }
+    .carousel-control-wrapper {
+      position: absolute;
+      display: flex;
+      justify-content: space-between;
+      left: -82px;
+      right: -80px;
+      top: 50%;
+      transform: translateY(calc(-50% - 2px));
+      & > * {
+        width: 62px;
+        height: 62px;
+        border-radius: 50%;
+        border: none;
+        background-repeat: no-repeat;
+        background-position: center;
+        &:hover {
+          cursor: pointer;
+          background-color: #e47209;
+        }
+        &:active {
+          background-color: $green;
+        }
+        &:disabled {
+          background-color: $gray;
+        }
+      }
+      .carousel-control-left {
+        background-image: url("../../icons/arrow-left.svg"), $orange;
+        &:hover,
+        &:active,
+        &:disabled {
+          background-image: url("../../icons/arrow-left.svg");
+        }
+      }
+      .carousel-control-right {
+        background-image: url("../../icons/arrow-right.svg"), $orange;
+        &:hover,
+        &:active,
+        &:disabled {
+          background-image: url("../../icons/arrow-right.svg");
+        }
+      }
+    }
+    .button.choose-favorite {
+      position: absolute;
+      bottom: -80px;
+      left: 50%;
+      transform: translate(-50%, 100%);
     }
   }
   .pick-n-feed {
