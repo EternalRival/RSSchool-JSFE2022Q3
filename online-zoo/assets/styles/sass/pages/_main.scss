@@ -240,6 +240,125 @@
       height: 835px;
       margin: 69px auto 100px;
       display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: 20px;
+    }
+    .h2 {
+      position: relative;
+      left: 1px;
+      margin: 41px 0 0;
+      @extend %font-h2;
+      color: #fe9013;
+    }
+    .subtitle {
+      position: relative;
+      right: 2.5em;
+      margin: 31px 0 0;
+      @extend %font-subtitle;
+      color: $black-blue;
+    }
+    .covid {
+      margin: 41px 0 0;
+      position: relative;
+      left: 1.22em;
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 130%;
+      color: $black-blue;
+    }
+    .support-fund {
+      margin: 10px 198px 0 99px;
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 130%;
+      color: $black-blue;
+      a {
+        position: relative;
+        color: $black-blue;
+        text-decoration: none;
+        &:after {
+          content: "";
+          display: block;
+          position: absolute;
+          left: 1px;
+          width: 178px;
+          height: 1px;
+          background: #fe9013;
+        }
+        &:active {
+          color: $green;
+          &:after {
+            background: $green;
+          }
+        }
+        &:hover:after {
+          background: $green;
+          box-shadow: 0 0 3px 1px $green;
+        }
+      }
+    }
+    .h3 {
+      margin: 60px 0 0 0;
+      position: relative;
+      right: 1px;
+      @extend %font-h3;
+    }
+    .widgets {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 39px;
+      width: 764px;
+      height: 244px;
+    }
+    .widget-card-container {
+      display: flex;
+      flex-direction: column;
+      width: 168px;
+      height: 244px;
+      &:nth-child(1) .widget-card-image {
+        background-image: url("../../icons/pay.svg");
+      }
+      &:nth-child(2) .widget-card-image {
+        background-image: url("../../icons/zoo.svg");
+        background-position: left 49% top 53%;
+      }
+      &:nth-child(3) .widget-card-image {
+        background-image: url("../../icons/monkey.svg");
+      }
+      p {
+        margin: 30px 0 0;
+      }
+      &:not(:first-child) {
+        position: relative;
+        &:before {
+          content: url("../../icons/fat-arrow.svg");
+          position: absolute;
+          left: -60%;
+          top: 24.5%;
+        }
+      }
+    }
+    .widget-card-image-wrapper,
+    .widget-card-image {
+      box-sizing: border-box;
+      width: 168px;
+      height: 168px;
+      border-radius: 5px;
+    }
+    .widget-card-image-wrapper {
+      background: $orange;
+    }
+    .widget-card-image {
+      background: $white padding-box no-repeat center;
+      border: 1px solid transparent;
+    }
+    .button {
+      margin-top: 60px;
     }
   }
   .testimonials {
