@@ -74,7 +74,6 @@
                 <div class="info">
                   <div class="number">4</div>
                   <div class="text">Panda diet for the day.</div>
-                  <!-- todo X через after  -->
                 </div>
                 <div class="animal-icon-wrapper">
                   <img
@@ -85,13 +84,79 @@
                 </div>
               </div>
               <div class="progress-bar">
-                точки всякие
-                <!-- amount через before -->
-                <!-- деньги через after от точек -->
+                <div class="fixed-amounts">
+                  <label class="fixed-amounts-radio-wrapper"
+                    ><input
+                      type="radio"
+                      class="fixed-amounts-radio"
+                      name="fixed-amounts"
+                      value="5000" /></label
+                  ><label class="fixed-amounts-radio-wrapper"
+                    ><input
+                      type="radio"
+                      class="fixed-amounts-radio"
+                      name="fixed-amounts"
+                      value="2000" /></label
+                  ><label class="fixed-amounts-radio-wrapper"
+                    ><input
+                      type="radio"
+                      class="fixed-amounts-radio"
+                      name="fixed-amounts"
+                      value="1000" /></label
+                  ><label class="fixed-amounts-radio-wrapper"
+                    ><input
+                      type="radio"
+                      class="fixed-amounts-radio"
+                      name="fixed-amounts"
+                      value="500" /></label
+                  ><label class="fixed-amounts-radio-wrapper"
+                    ><input
+                      type="radio"
+                      class="fixed-amounts-radio"
+                      name="fixed-amounts"
+                      value="250" /></label
+                  ><label class="fixed-amounts-radio-wrapper"
+                    ><input
+                      type="radio"
+                      class="fixed-amounts-radio"
+                      name="fixed-amounts"
+                      value="100" /></label
+                  ><label class="fixed-amounts-radio-wrapper"
+                    ><input
+                      type="radio"
+                      class="fixed-amounts-radio"
+                      name="fixed-amounts"
+                      value="50" /></label
+                  ><label class="fixed-amounts-radio-wrapper"
+                    ><input
+                      type="radio"
+                      class="fixed-amounts-radio"
+                      name="fixed-amounts"
+                      value="25"
+                  /></label>
+                </div>
               </div>
-              <div class="another-amount">инпут для доната</div>
-              <div class="radio-containter"></div>
-              <button class="button rounded">feed a friend now</button>
+              <!-- todo ввод четырех символов лимит -->
+              <input
+                type="number"
+                class="another-amount"
+                placeholder="Another amount"
+                oninput="this.value=this.value.slice(0,4)"
+              />
+              <div class="another-radio-container">
+                <label
+                  ><input type="radio" name="another-amounts" />Monthly</label
+                ><label
+                  ><input
+                    type="radio"
+                    name="another-amounts"
+                    checked
+                  />Once</label
+                >
+              </div>
+              <button class="button rounded feed-a-friend">
+                feed a friend now
+              </button>
               <div class="share-with-your-friends">
                 Share with your friends on social networks
               </div>

@@ -16,6 +16,9 @@
   @extend %font-nav-link;
   text-decoration-line: none;
 
+  &:hover {
+    cursor: default;
+  }
   &:hover:not(.active) {
     cursor: pointer;
     transform: scale(1.2);

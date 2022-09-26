@@ -111,12 +111,174 @@
     .animal-icon {
     }
     .progress-bar {
+      position: relative;
+      display: flex;
+      margin-top: 80px;
+      width: 100%;
+      height: 27px;
+      background-color: #404950;
+      &:before {
+        content: "Amount";
+        position: absolute;
+        margin-left: 4px;
+        top: -2.41em;
+      }
+    }
+    //progress > fixed > wrapper > radio
+    $radio-radius: 5px;
+    $hover-radius: 20px;
+    .fixed-amounts {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-left: 26px - $hover-radius;
+      margin-right: 30px - $hover-radius;
+      &:before {
+        content: "";
+        position: absolute;
+        height: 2px;
+        left: $hover-radius + $radio-radius;
+        right: $hover-radius + $radio-radius;
+        background-color: #72828e;
+      }
+      //      margin: 8px 30px 0 26px;
+    }
+    .fixed-amounts-radio-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 2 * ($hover-radius + $radio-radius);
+      height: 2 * ($hover-radius + $radio-radius);
+      border-radius: 50%;
+      z-index: 0;
+      &:hover {
+        cursor: pointer;
+        background: url("../../icons/roller_icon.svg") no-repeat center;
+      }
+    }
+    .fixed-amounts-radio {
+      appearance: none;
+      width: 2 * $radio-radius;
+      height: 2 * $radio-radius;
+      border-radius: 50%;
+      background-color: $yellow;
+      &:checked {
+        background: $orange;
+      }
+      &:before {
+        content: url("../../icons/dollar.svg");
+        position: relative;
+        bottom: -2.5em;
+        left: -1.6em;
+      }
+      &:after {
+        content: attr(value);
+        position: relative;
+        bottom: calc(-100% + 0.15em);
+        right: 14px;
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 26px;
+        line-height: 140%;
+        text-transform: uppercase;
+        color: $black-blue;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+      &:hover:before,
+      &:hover:after {
+        cursor: pointer;
+        filter: invert(54%) sepia(71%) saturate(590%) hue-rotate(349deg)
+          brightness(101%) contrast(99%);
+      }
     }
     .another-amount {
+      appearance: none;
+      outline: none;
+      margin-top: 98px;
+      padding-left: 0.5em;
+      box-sizing: border-box;
+      width: 268px;
+      height: 54px;
+      color: $black;
+      border: 1px solid;
+      border-radius: 2px;
+      background-color: transparent;
+      background-image: url("../../icons/dollar.svg");
+      background-repeat: no-repeat;
+      background-position: center right 0.55em;
+
+      &:placeholder-shown {
+        filter: invert(62%) sepia(8%) saturate(161%) hue-rotate(163deg)
+          brightness(96%) contrast(83%);
+      }
+      &:not(:placeholder-shown) {
+        &:valid {
+          filter: invert(42%) sepia(99%) saturate(1025%) hue-rotate(57deg)
+            brightness(86%) contrast(101%);
+        }
+        &:invalid {
+          filter: invert(13%) sepia(78%) saturate(4366%) hue-rotate(352deg)
+            brightness(106%) contrast(100%);
+        }
+      }
+
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        appearance: none;
+      }
+      -moz-appearance: textfield;
     }
-    .radio-containter {
+
+    .another-radio-container,
+    .feed-a-friend,
+    .share-with-your-friends {
+      position: relative;
+      left: 3px;
+    }
+    .another-radio-container {
+      margin-top: 25px;
+      width: 268px;
+      display: flex;
+      justify-content: space-around;
+      label {
+        width: 84px;
+        height: 21px;
+        display: flex;
+      }
+      input {
+        margin-top: 2px;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border: 1px solid #fe9013;
+        border-radius: 50%;
+
+        margin-right: 10px;
+        &:checked {
+          background: $green;
+          border: none;
+          box-shadow: 0 0;
+        }
+        &:hover {
+          box-shadow: 0 0 2px 2px #fe9013;
+        }
+      }
+      label:hover,
+      input:hover {
+        cursor: pointer;
+      }
+    }
+    .feed-a-friend {
+      margin-top: 31px;
     }
     .share-with-your-friends {
+      left: 0.14em;
+      margin-top: 30px;
       color: $black-blue;
     }
   }

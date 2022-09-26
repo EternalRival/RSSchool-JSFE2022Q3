@@ -308,6 +308,16 @@ template {
   display: none;
 }
 
+html,
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
 .main-page .pets .pet-card .name, .button {
   font-family: "Roboto";
   font-style: normal;
@@ -385,6 +395,9 @@ body {
   color: #ffffff;
   -webkit-text-decoration-line: none;
           text-decoration-line: none;
+}
+.nav-link:hover {
+  cursor: default;
 }
 .nav-link:hover:not(.active) {
   cursor: pointer;
@@ -644,6 +657,9 @@ body {
 }
 
 .button {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   width: 298px;
   height: 54px;
   padding: 16px 0;
@@ -1043,6 +1059,183 @@ body {
   left: 0;
   width: 284px;
 }
+.donate-page .pick-n-feed .progress-bar {
+  position: relative;
+  display: flex;
+  margin-top: 80px;
+  width: 100%;
+  height: 27px;
+  background-color: #404950;
+}
+.donate-page .pick-n-feed .progress-bar:before {
+  content: "Amount";
+  position: absolute;
+  margin-left: 4px;
+  top: -2.41em;
+}
+.donate-page .pick-n-feed .fixed-amounts {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-left: 6px;
+  margin-right: 10px;
+}
+.donate-page .pick-n-feed .fixed-amounts:before {
+  content: "";
+  position: absolute;
+  height: 2px;
+  left: 25px;
+  right: 25px;
+  background-color: #72828e;
+}
+.donate-page .pick-n-feed .fixed-amounts-radio-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  z-index: 0;
+}
+.donate-page .pick-n-feed .fixed-amounts-radio-wrapper:hover {
+  cursor: pointer;
+  background: url("../../icons/roller_icon.svg") no-repeat center;
+}
+.donate-page .pick-n-feed .fixed-amounts-radio {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ffee2e;
+}
+.donate-page .pick-n-feed .fixed-amounts-radio:checked {
+  background: linear-gradient(113.96deg, #f9804b 1.49%, #fe9013 101.44%);
+}
+.donate-page .pick-n-feed .fixed-amounts-radio:before {
+  content: url("../../icons/dollar.svg");
+  position: relative;
+  bottom: -2.5em;
+  left: -1.6em;
+}
+.donate-page .pick-n-feed .fixed-amounts-radio:after {
+  content: attr(value);
+  position: relative;
+  bottom: calc(-100% + 0.15em);
+  right: 14px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 140%;
+  text-transform: uppercase;
+  color: #333b41;
+}
+.donate-page .pick-n-feed .fixed-amounts-radio:hover {
+  cursor: pointer;
+}
+.donate-page .pick-n-feed .fixed-amounts-radio:hover:before, .donate-page .pick-n-feed .fixed-amounts-radio:hover:after {
+  cursor: pointer;
+  filter: invert(54%) sepia(71%) saturate(590%) hue-rotate(349deg) brightness(101%) contrast(99%);
+}
+.donate-page .pick-n-feed .another-amount {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: none;
+  margin-top: 98px;
+  padding-left: 0.5em;
+  box-sizing: border-box;
+  width: 268px;
+  height: 54px;
+  color: #000000;
+  border: 1px solid;
+  border-radius: 2px;
+  background-color: transparent;
+  background-image: url("../../icons/dollar.svg");
+  background-repeat: no-repeat;
+  background-position: center right 0.55em;
+  -moz-appearance: textfield;
+}
+.donate-page .pick-n-feed .another-amount:-moz-placeholder-shown {
+  filter: invert(62%) sepia(8%) saturate(161%) hue-rotate(163deg) brightness(96%) contrast(83%);
+}
+.donate-page .pick-n-feed .another-amount:-ms-input-placeholder {
+  filter: invert(62%) sepia(8%) saturate(161%) hue-rotate(163deg) brightness(96%) contrast(83%);
+}
+.donate-page .pick-n-feed .another-amount:placeholder-shown {
+  filter: invert(62%) sepia(8%) saturate(161%) hue-rotate(163deg) brightness(96%) contrast(83%);
+}
+.donate-page .pick-n-feed .another-amount:not(:-moz-placeholder-shown):valid {
+  filter: invert(42%) sepia(99%) saturate(1025%) hue-rotate(57deg) brightness(86%) contrast(101%);
+}
+.donate-page .pick-n-feed .another-amount:not(:-ms-input-placeholder):valid {
+  filter: invert(42%) sepia(99%) saturate(1025%) hue-rotate(57deg) brightness(86%) contrast(101%);
+}
+.donate-page .pick-n-feed .another-amount:not(:placeholder-shown):valid {
+  filter: invert(42%) sepia(99%) saturate(1025%) hue-rotate(57deg) brightness(86%) contrast(101%);
+}
+.donate-page .pick-n-feed .another-amount:not(:-moz-placeholder-shown):invalid {
+  filter: invert(13%) sepia(78%) saturate(4366%) hue-rotate(352deg) brightness(106%) contrast(100%);
+}
+.donate-page .pick-n-feed .another-amount:not(:-ms-input-placeholder):invalid {
+  filter: invert(13%) sepia(78%) saturate(4366%) hue-rotate(352deg) brightness(106%) contrast(100%);
+}
+.donate-page .pick-n-feed .another-amount:not(:placeholder-shown):invalid {
+  filter: invert(13%) sepia(78%) saturate(4366%) hue-rotate(352deg) brightness(106%) contrast(100%);
+}
+.donate-page .pick-n-feed .another-amount::-webkit-inner-spin-button, .donate-page .pick-n-feed .another-amount::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+          appearance: none;
+}
+.donate-page .pick-n-feed .another-radio-container,
+.donate-page .pick-n-feed .feed-a-friend,
 .donate-page .pick-n-feed .share-with-your-friends {
+  position: relative;
+  left: 3px;
+}
+.donate-page .pick-n-feed .another-radio-container {
+  margin-top: 25px;
+  width: 268px;
+  display: flex;
+  justify-content: space-around;
+}
+.donate-page .pick-n-feed .another-radio-container label {
+  width: 84px;
+  height: 21px;
+  display: flex;
+}
+.donate-page .pick-n-feed .another-radio-container input {
+  margin-top: 2px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #fe9013;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.donate-page .pick-n-feed .another-radio-container input:checked {
+  background: #4b9200;
+  border: none;
+  box-shadow: 0 0;
+}
+.donate-page .pick-n-feed .another-radio-container input:hover {
+  box-shadow: 0 0 2px 2px #fe9013;
+}
+.donate-page .pick-n-feed .another-radio-container label:hover,
+.donate-page .pick-n-feed .another-radio-container input:hover {
+  cursor: pointer;
+}
+.donate-page .pick-n-feed .feed-a-friend {
+  margin-top: 31px;
+}
+.donate-page .pick-n-feed .share-with-your-friends {
+  left: 0.14em;
+  margin-top: 30px;
   color: #333b41;
 }/*# sourceMappingURL=main.css.map */
