@@ -363,12 +363,126 @@
   }
   .testimonials {
     &.section-wrapper {
-      background: #333333;
+      background: $white url("../../images/leav_foto.png") no-repeat;
+      background-position: bottom -133px right -163px;
+      height: 919px;
     }
     .content-wrapper {
-      height: 575px;
-      margin: 140px auto 204px;
+      position: relative;
       display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .h3 {
+      margin: 141px 0 0 0;
+      @extend %font-h3;
+    }
+    .reviews-container {
+      margin-top: 47px;
+      height: 391px;
+      display: flex;
+      gap: 31px;
+    }
+    .review-wrapper,
+    .review {
+      box-sizing: border-box;
+      width: 267px;
+      height: 100%;
+      border-radius: 20px;
+    }
+    .review-wrapper {
+      background: $pink-gradient;
+    }
+    .review {
+      padding: 0.8em;
+      background: $gray-light padding-box;
+      border: 2px solid transparent;
+    }
+    .review-header {
+      display: flex;
+    }
+    .head {
+      margin-right: 10px;
+    }
+    .tail {
+    }
+    .name {
+      line-height: 120%;
+      color: $black;
+    }
+    .info {
+      @extend %font-small-paragraph;
+      color: #bdbdbd;
+    }
+    .text {
+      margin-top: 11px;
+      height: 309px;
+      @extend %font-small-paragraph;
+      color: $gray;
+      overflow-y: hidden;
+    }
+    .range-scrollbar-wrapper,
+    .range-scrollbar {
+      box-sizing: border-box;
+      width: 601px;
+      height: 8px;
+      border-radius: 5px;
+    }
+    .range-scrollbar-wrapper {
+      position: relative;
+      right: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0 0;
+      background: $pink-gradient;
+      &:hover {
+        box-shadow: 0 0 3px 1px #fe9013;
+      }
+    }
+    .range-scrollbar {
+      height: 6px;
+      appearance: none;
+      -webkit-appearance: none;
+      margin: 10px 0;
+      width: calc(100% - 2px);
+      &:focus {
+        outline: none;
+      }
+      &::-webkit-slider-thumb {
+        cursor: pointer;
+        -webkit-appearance: none;
+        border: none;
+        width: 115.19px;
+        height: 6px;
+        border-radius: 5px;
+        background: #fe9013;
+      }
+      &::-moz-range-thumb {
+        cursor: pointer;
+        border: none;
+        width: 115.19px;
+        height: 6px;
+        border-radius: 5px;
+        background: #fe9013;
+      }
+      &::-webkit-slider-runnable-track,
+      &::-moz-range-track {
+        cursor: pointer;
+        width: 100%;
+        height: 6px;
+        border: none;
+        border-radius: 5px;
+        background: #f5f7f6;
+      }
+      &:focus::-webkit-slider-runnable-track {
+        background: #f5f7f6 padding-box;
+      }
+    }
+    .button {
+      position: absolute;
+      left: 0;
+      bottom: -85px;
     }
   }
 }

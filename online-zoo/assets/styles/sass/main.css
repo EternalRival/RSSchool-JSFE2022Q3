@@ -359,7 +359,7 @@ body {
   line-height: 120%;
 }
 
-.main-page .pets .pet-card .location {
+.main-page .testimonials .text, .main-page .testimonials .info, .main-page .pets .pet-card .location {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 300;
@@ -367,7 +367,7 @@ body {
   line-height: 120%;
 }
 
-.donate-page .pick-n-feed .h3, .main-page .pick-n-feed .h3 {
+.donate-page .pick-n-feed .h3, .main-page .testimonials .h3, .main-page .pick-n-feed .h3 {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
@@ -1064,12 +1064,121 @@ body {
   margin-top: 60px;
 }
 .main-page .testimonials.section-wrapper {
-  background: #333333;
+  background: #ffffff url("../../images/leav_foto.png") no-repeat;
+  background-position: bottom -133px right -163px;
+  height: 919px;
 }
 .main-page .testimonials .content-wrapper {
-  height: 575px;
-  margin: 140px auto 204px;
+  position: relative;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main-page .testimonials .h3 {
+  margin: 141px 0 0 0;
+}
+.main-page .testimonials .reviews-container {
+  margin-top: 47px;
+  height: 391px;
+  display: flex;
+  gap: 31px;
+}
+.main-page .testimonials .review-wrapper,
+.main-page .testimonials .review {
+  box-sizing: border-box;
+  width: 267px;
+  height: 100%;
+  border-radius: 20px;
+}
+.main-page .testimonials .review-wrapper {
+  background: linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #e0d8f0 80.49%, #eaf7fe 127.9%, #eaf7fe 149.54%), linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #e0d8f0 80.49%, #eaf7fe 127.9%, #eaf7fe 149.54%);
+}
+.main-page .testimonials .review {
+  padding: 0.8em;
+  background: #f1f3f2 padding-box;
+  border: 2px solid transparent;
+}
+.main-page .testimonials .review-header {
+  display: flex;
+}
+.main-page .testimonials .head {
+  margin-right: 10px;
+}
+.main-page .testimonials .name {
+  line-height: 120%;
+  color: #000000;
+}
+.main-page .testimonials .info {
+  color: #bdbdbd;
+}
+.main-page .testimonials .text {
+  margin-top: 11px;
+  height: 309px;
+  color: #767474;
+  overflow-y: hidden;
+}
+.main-page .testimonials .range-scrollbar-wrapper,
+.main-page .testimonials .range-scrollbar {
+  box-sizing: border-box;
+  width: 601px;
+  height: 8px;
+  border-radius: 5px;
+}
+.main-page .testimonials .range-scrollbar-wrapper {
+  position: relative;
+  right: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 0;
+  background: linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #e0d8f0 80.49%, #eaf7fe 127.9%, #eaf7fe 149.54%), linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #e0d8f0 80.49%, #eaf7fe 127.9%, #eaf7fe 149.54%);
+}
+.main-page .testimonials .range-scrollbar-wrapper:hover {
+  box-shadow: 0 0 3px 1px #fe9013;
+}
+.main-page .testimonials .range-scrollbar {
+  height: 6px;
+  -moz-appearance: none;
+       appearance: none;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: calc(100% - 2px);
+}
+.main-page .testimonials .range-scrollbar:focus {
+  outline: none;
+}
+.main-page .testimonials .range-scrollbar::-webkit-slider-thumb {
+  cursor: pointer;
+  -webkit-appearance: none;
+  border: none;
+  width: 115.19px;
+  height: 6px;
+  border-radius: 5px;
+  background: #fe9013;
+}
+.main-page .testimonials .range-scrollbar::-moz-range-thumb {
+  cursor: pointer;
+  border: none;
+  width: 115.19px;
+  height: 6px;
+  border-radius: 5px;
+  background: #fe9013;
+}
+.main-page .testimonials .range-scrollbar::-webkit-slider-runnable-track, .main-page .testimonials .range-scrollbar::-moz-range-track {
+  cursor: pointer;
+  width: 100%;
+  height: 6px;
+  border: none;
+  border-radius: 5px;
+  background: #f5f7f6;
+}
+.main-page .testimonials .range-scrollbar:focus::-webkit-slider-runnable-track {
+  background: #f5f7f6 padding-box;
+}
+.main-page .testimonials .button {
+  position: absolute;
+  left: 0;
+  bottom: -85px;
 }
 
 .donate-page .header {
