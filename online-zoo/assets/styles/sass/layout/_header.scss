@@ -19,6 +19,9 @@
   }
   .nav {
     margin-left: 34px;
+    @media (max-width: $small) {
+      margin-left: 39px;
+    }
   }
   .nav-item:last-child {
     flex-grow: 1;
@@ -27,13 +30,5 @@
       padding-right: 1px;
     }
   }
-  /* @media (max-width: $small) {
-    .nav {
-      margin-left: 39px;
-    }
-    .nav-link {
-      padding-left: 24px;
-      padding-right: 24px;
-    }
-  } */
+  
 }
