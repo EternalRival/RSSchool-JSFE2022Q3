@@ -31,3 +31,12 @@
     background-clip: text;
   }
 }
+@media (max-width: $small) {
+  .nav {
+    margin-left: 39px;
+  }
+  .nav-link {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}

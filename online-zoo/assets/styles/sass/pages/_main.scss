@@ -1,7 +1,7 @@
 .main-page {
   .watch {
     &.section-wrapper {
-      background: #283035 url("../../images/giant-panda.jpg");
+      background: #283035 url("../../images/giant-panda-small.jpg");
       background-position: center;
       background-size: cover;
     }
@@ -21,6 +21,7 @@
       height: 465px;
       background: $orange;
       border-radius: 50%;
+
       .watch-circle-text {
         position: relative;
         top: 8.9%;
@@ -42,6 +43,26 @@
     .button {
       margin-top: 69px;
       margin-right: 99px;
+    }
+    @media (max-width: $small) {
+      .content-wrapper {
+        height: 584px;
+      }
+      .watch-circle {
+        width: 367px;
+        height: 367px;
+        margin-top: 69px;
+        margin-right: 147px;
+        .watch-circle-text {
+          font-size: 85px;
+          top: 8.3%;
+          left: 20.4%;
+        }
+      }
+      .button {
+        margin-top: 47px;
+        margin-right: 107px;
+      }
     }
   }
   .backstage {
@@ -85,6 +106,26 @@
         margin-top: 33px;
       }
     }
+    @media (max-width: $small) {
+      &.section-wrapper {
+        background: $white;
+      }
+      .content-wrapper {
+        margin: 100px auto 147px;
+        height: 423px;
+      }
+      .bamboo-cap {
+        object-fit: cover;
+        object-position: top 0 left -81px;
+        width: 455px;
+        height: 408px;
+        margin-left: 0px;
+        padding-top: 9px;
+      }
+      .backstage-text {
+        width: 454px;
+      }
+    }
   }
   .pets {
     &.section-wrapper {
@@ -94,22 +135,31 @@
       background-repeat: no-repeat;
       background-position-y: bottom;
       background-position-x: -588px, right;
+      @media (max-width: $small) {
+        background-position-x: -190px, right;
+        background-size: 38.2%, 24.1%;
+      }
     }
     .content-wrapper {
       position: relative;
       height: 872px;
       margin-bottom: 234px;
+      @media (max-width: $small) {
+        height: 840px;
+      }
     }
     .carousel {
       display: flex;
       flex-flow: row wrap;
       gap: 20px 30px;
+      @media (max-width: $small) {
+        gap: 92px 29px;
+      }
     }
     .pet-card {
       $border: 1px;
       $width: 366px;
       $height: 426px;
-      $scaled-image-size: $width + 20px;
       $transition-duration: 0.5s;
       position: relative;
       &.border,
@@ -180,6 +230,29 @@
           transition: all $transition-duration;
         }
       }
+      @media (max-width: $small) {
+        $width: 294px;
+        $height: 354px;
+        &.border,
+        .content {
+          width: $width;
+          height: $height;
+        }
+        .text {
+          width: 231px;
+        }
+        &:hover {
+          .pet-img {
+            transform: scale(calc(1 + 20px / $width));
+          }
+          .text {
+            transform: translate(
+              calc(#{$width}/ 2 - 50%),
+              calc(#{-$height}/ 2 + 100%)
+            );
+          }
+        }
+      }
     }
     .carousel-control-wrapper {
       position: absolute;
@@ -187,6 +260,11 @@
       justify-content: space-between;
       left: -82px;
       right: -80px;
+      @media (max-width: $small) {
+        left: 34.4%;
+        right: 34.2%;
+        top: 47.7%;
+      }
       top: 50%;
       transform: translateY(calc(-50% - 2px));
       & > * {
@@ -229,6 +307,9 @@
       bottom: -80px;
       left: 50%;
       transform: translate(-50%, 100%);
+      @media (max-width: $small) {
+        bottom: -4.8%;
+      }
     }
   }
   .pick-n-feed {
@@ -243,6 +324,10 @@
       flex-direction: column;
       align-items: center;
       border-radius: 20px;
+      @media (max-width: $small) {
+        margin: 30px auto 50px;
+        height: 796px;
+      }
     }
     .h2 {
       position: relative;
@@ -250,6 +335,9 @@
       margin: 41px 0 0;
       @extend %font-h2;
       color: #fe9013;
+      @media (max-width: $small) {
+        margin: 30px 0 0;
+      }
     }
     .subtitle {
       position: relative;
@@ -257,6 +345,10 @@
       margin: 31px 0 0;
       @extend %font-subtitle;
       color: $black-blue;
+      @media (max-width: $small) {
+        left: 0px;
+        margin: 0.88em 0 0;
+      }
     }
     .covid {
       margin: 41px 0 0;
@@ -268,6 +360,9 @@
       font-size: 16px;
       line-height: 130%;
       color: $black-blue;
+      @media (max-width: $small) {
+        margin: 20px 100px 0 30px;
+      }
     }
     .support-fund {
       margin: 10px 198px 0 99px;
@@ -277,6 +372,9 @@
       font-size: 16px;
       line-height: 130%;
       color: $black-blue;
+      @media (max-width: $small) {
+        margin: 11px 30px 0 50px;
+      }
       a {
         position: relative;
         color: $black-blue;
@@ -289,6 +387,9 @@
           width: 178px;
           height: 1px;
           background: #fe9013;
+          @media (max-width: $small) {
+            top: 1.18em;
+          }
         }
         &:active {
           color: $green;
@@ -307,6 +408,9 @@
       position: relative;
       right: 1px;
       @extend %font-h3;
+      @media (max-width: $small) {
+        margin: 40px 0 0 2px;
+      }
     }
     .widgets {
       display: flex;
@@ -359,6 +463,9 @@
     }
     .button {
       margin-top: 60px;
+      @media (max-width: $small) {
+        margin: 71px 0px 0 0px;
+      }
     }
   }
   .testimonials {
@@ -366,6 +473,11 @@
       background: $white url("../../images/leav_foto.png") no-repeat;
       background-position: bottom -133px right -163px;
       height: 919px;
+      @media (max-width: $small) {
+        height: 842px;
+        background-position: bottom -85px right -128px;
+        background-size: 32.5%;
+      }
     }
     .content-wrapper {
       position: relative;
@@ -376,12 +488,22 @@
     .h3 {
       margin: 141px 0 0 0;
       @extend %font-h3;
+      @media (max-width: $small) {
+        margin-top: 100.4px;
+      }
     }
     .reviews-container {
       margin-top: 47px;
       height: 391px;
+      width: 100%;
       display: flex;
+      justify-content: flex-start;
+      overflow: hidden;
       gap: 31px;
+      @media (max-width: $small) {
+        margin-top: 30px;
+        gap: 30px;
+      }
     }
     .review-wrapper,
     .review {
@@ -389,6 +511,9 @@
       width: 267px;
       height: 100%;
       border-radius: 20px;
+      @media (max-width: $small) {
+        width: 293px;
+      }
     }
     .review-wrapper {
       background: $pink-gradient;
@@ -427,6 +552,9 @@
       width: 601px;
       height: 8px;
       border-radius: 5px;
+      @media (max-width: $small) {
+        width: 390px;
+      }
     }
     .range-scrollbar-wrapper {
       position: relative;
@@ -438,6 +566,9 @@
       background: $pink-gradient;
       &:hover {
         box-shadow: 0 0 3px 1px #fe9013;
+      }
+      @media (max-width: $small) {
+        right: 7px;
       }
     }
     .range-scrollbar {
@@ -457,6 +588,10 @@
         height: 6px;
         border-radius: 5px;
         background: #fe9013;
+
+        @media (max-width: $small) {
+          width: 75px;
+        }
       }
       &::-moz-range-thumb {
         cursor: pointer;
@@ -465,6 +600,10 @@
         height: 6px;
         border-radius: 5px;
         background: #fe9013;
+
+        @media (max-width: $small) {
+          width: 75px;
+        }
       }
       &::-webkit-slider-runnable-track,
       &::-moz-range-track {
@@ -483,6 +622,10 @@
       position: absolute;
       left: 0;
       bottom: -85px;
+
+      @media (max-width: $small) {
+        bottom: -106px;
+      }
     }
   }
 }

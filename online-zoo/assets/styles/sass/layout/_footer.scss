@@ -38,11 +38,17 @@
     bottom: -20px;
     margin-left: 50%;
     transform: translatex(-50%);
+    @media (max-width: $small) {
+      margin-left: 48.7%;
+    }
   }
   .subscribe {
     position: absolute;
     top: 40px;
     right: 0;
+    @media (max-width: $small) {
+      right: 32px;
+    }
 
     width: 367px;
     height: 85px;
@@ -67,7 +73,7 @@
         border-radius: 2px;
       }
       .input {
-        padding: 0 0 0.1em 0.57em;//8.8px;
+        padding: 0 0 0.1em 0.57em; //8.8px;
         background: $black padding-box;
         border: 1px solid transparent;
         color: $white;
@@ -216,5 +222,5 @@
     & > p {
       margin: 0;
     }
-  }
+  };
 }

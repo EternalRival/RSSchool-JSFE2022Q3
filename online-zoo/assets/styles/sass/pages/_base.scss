@@ -1,6 +1,18 @@
 html,
 body {
-  @extend %remove-scrollbars;
+  /* @extend %remove-scrollbars; */
+  overflow-y: overlay;
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #0005;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $orange;
+    box-shadow: inset 0 0 6px #0005;
+    border-radius: 15px;
+  }
 }
 
 html {
@@ -23,4 +35,13 @@ body {
 .content-wrapper {
   margin: 0 auto;
   max-width: 1160px;
+  @media (max-width: 1000px) {
+    max-width: 940px;
+  }
+  @media (max-width: 640px) {
+    max-width: 600px;
+  }
+  @media (max-width: 320px) {
+    max-width: 298px;
+  }
 }
