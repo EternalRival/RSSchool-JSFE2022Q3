@@ -1,26 +1,50 @@
 .header {
   &.section-wrapper {
     position: absolute;
+    @media (max-width: $tablet) {
+      position: fixed;
+      z-index: 5;
+    }
     background-color: $black;
     backdrop-filter: blur(2px);
   }
   .content-wrapper {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     height: 80px;
+    @media (max-width: $tablet) {
+      height: 34px;
+    }
   }
   .logo {
     padding-top: 2px;
     .text > span {
       text-transform: lowercase;
     }
+    @media (max-width: $tablet) {
+      &.container {
+        position: relative;
+        right: 3%;
+        border: none;
+      }
+      .text {
+        transform: scale(64%);
+        span {
+          display: block;
+        }
+      }
+    }
   }
   .nav {
     margin-left: 34px;
     @media (max-width: $small) {
       margin-left: 39px;
+    }
+    @media (max-width: $tablet) {
+      display: none;
     }
   }
   .nav-item:last-child {
@@ -30,5 +54,18 @@
       padding-right: 1px;
     }
   }
-  
+  .burger-menu {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    display: none;
+    &:hover {
+      cursor: pointer;
+      animation: shake 0.5s;
+    }
+
+    @media (max-width: $tablet) {
+      display: block;
+    }
+  }
 }

@@ -64,6 +64,30 @@
         margin-right: 107px;
       }
     }
+    @media (max-width: $tablet) {
+      .content-wrapper {
+        height: 373px;
+      }
+      .watch-circle {
+        position: relative;
+        width: 237.6px;
+        height: 237.6px;
+        margin: 0;
+        margin-top: 44px;
+        margin-right: 51.6px;
+        .watch-circle-text {
+          font-size: 54.2894px;
+          top: 9.2%;
+          left: 19.5%;
+        }
+      }
+
+      .button {
+        position: relative;
+        bottom: 50px;
+        align-self: flex-start;
+      }
+    }
   }
   .backstage {
     &.section-wrapper {
@@ -108,7 +132,7 @@
     }
     @media (max-width: $small) {
       &.section-wrapper {
-        background: $white;
+        background-image: none;
       }
       .content-wrapper {
         margin: 100px auto 147px;
@@ -126,9 +150,39 @@
         width: 454px;
       }
     }
+    @media (max-width: $tablet) {
+      &.section-wrapper {
+        background-image: url("../../images/backgrounds/flower-foto1.png");
+        background-size: 161px 484px;
+        background-position: right -6% top -4px;
+      }
+      .content-wrapper {
+        margin: 60px auto 80px;
+        height: 367px;
+        background: none;
+      }
+      .bamboo-cap {
+        display: none;
+      }
+      .backstage-text {
+        width: 495px;
+        .h2 {
+          position: relative;
+          left: 4px;
+        }
+        p:nth-child(3) {
+          margin-top: 30px;
+          margin-left: 4px;
+        }
+        p:nth-child(4) {
+          margin-top: 19px;
+        }
+      }
+    }
   }
   .pets {
     &.section-wrapper {
+      height: 1106px;
       background: $white;
       background-image: url("../../images/backgrounds/bush.png"),
         url("../../images/backgrounds/strelitzia.png");
@@ -136,24 +190,36 @@
       background-position-y: bottom;
       background-position-x: -588px, right;
       @media (max-width: $small) {
+        height: 1075px;
         background-position-x: -190px, right;
         background-size: 38.2%, 24.1%;
       }
-    }
-    .content-wrapper {
-      position: relative;
-      height: 872px;
-      margin-bottom: 234px;
-      @media (max-width: $small) {
-        height: 840px;
+      @media (max-width: $tablet) {
+        height: 970px;
+        background-position-x: -248px, right;
+        background-size: 59.5%, 27%;
       }
     }
+    .content-wrapper {
+      outline: 1px red solid;
+      position: relative;
+    }
     .carousel {
+      outline: 1px blue solid;
+      position: relative;
+      height: 872px;
       display: flex;
       flex-flow: row wrap;
+      overflow-y: hidden;
+
       gap: 20px 30px;
       @media (max-width: $small) {
+        height: 801px;
         gap: 92px 29px;
+      }
+      @media (max-width: $tablet) {
+        height: 756px;
+        gap: 92px 30px;
       }
     }
     .pet-card {
@@ -181,6 +247,7 @@
       }
       .pet-img {
         margin: -$border;
+        transition: transform $transition-duration;
       }
       .pet-info {
         display: flex;
@@ -195,12 +262,17 @@
         & > * {
           margin: -2px 0;
         }
+        transition: color $transition-duration;
+        transition: transform $transition-duration;
       }
       .name {
         @extend %font-btn;
       }
       .location {
         @extend %font-small-paragraph;
+      }
+      .diet {
+        transition: transform $transition-duration;
       }
       &:before {
         content: "";
@@ -209,15 +281,14 @@
         height: 100%;
         width: 100%;
         z-index: 1;
+        transition: background-color $transition-duration;
       }
       &:hover {
         &:before {
           background-color: #00000080;
-          transition: background-color $transition-duration;
         }
         .pet-img {
           transform: scale(calc(1 + 20px / $width));
-          transition: transform $transition-duration;
         }
         .text {
           color: $white;
@@ -227,7 +298,6 @@
             calc(#{$width}/ 2 - 50%),
             calc(#{-$height}/ 2 + 100%)
           );
-          transition: all $transition-duration;
         }
       }
       @media (max-width: $small) {
@@ -253,6 +323,46 @@
           }
         }
       }
+      @media (max-width: $tablet) {
+        $width: 285px;
+        $height: 332px;
+        &.border,
+        .content {
+          width: $width;
+          height: $height;
+        }
+        .text {
+          width: 229.13px;
+          margin-left: 0.7em;
+          margin-top: 0.5em;
+          & > * {
+            margin: -1px 0;
+          }
+        }
+        .name {
+          font-size: 12.4695px;
+        }
+        .location {
+          font-size: 11.6901px;
+        }
+        .diet {
+          height: 31px;
+        }
+        &:hover {
+          .pet-img {
+            transform: scale(calc(1 + 20px / $width));
+          }
+          .text {
+            transform: translate(
+              calc(#{$width}/ 2 - 50%),
+              calc(#{-$height}/ 2 + 100%)
+            );
+          }
+          .diet {
+            transform: translateY(5px);
+          }
+        }
+      }
     }
     .carousel-control-wrapper {
       position: absolute;
@@ -260,10 +370,16 @@
       justify-content: space-between;
       left: -82px;
       right: -80px;
+      z-index: 5;
       @media (max-width: $small) {
         left: 34.4%;
-        right: 34.2%;
-        top: 47.7%;
+        right: 34.3%;
+        top: 50%;
+      }
+      @media (max-width: $tablet) {
+        left: 37.1%;
+        right: 37.1%;
+        top: 49.7%;
       }
       top: 50%;
       transform: translateY(calc(-50% - 2px));
@@ -307,8 +423,8 @@
       bottom: -80px;
       left: 50%;
       transform: translate(-50%, 100%);
-      @media (max-width: $small) {
-        bottom: -4.8%;
+      @media (max-width: $tablet) {
+        bottom: -8%;
       }
     }
   }
