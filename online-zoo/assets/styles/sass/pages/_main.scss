@@ -1,7 +1,7 @@
 .main-page {
   .watch {
     &.section-wrapper {
-      background: #283035 url("../../images/giant-panda-small.jpg");
+      background: #283035 url("../../images/backgrounds/giant-panda-small.jpg");
       background-position: center;
       background-size: cover;
     }
@@ -68,7 +68,7 @@
   .backstage {
     &.section-wrapper {
       background: $white;
-      background-image: url("../../images/flower-foto1.png");
+      background-image: url("../../images/backgrounds/flower-foto1.png");
       background-repeat: no-repeat;
       background-position: right top 12px;
     }
@@ -130,8 +130,8 @@
   .pets {
     &.section-wrapper {
       background: $white;
-      background-image: url("../../images/bush.png"),
-        url("../../images/strelitzia.png");
+      background-image: url("../../images/backgrounds/bush.png"),
+        url("../../images/backgrounds/strelitzia.png");
       background-repeat: no-repeat;
       background-position-y: bottom;
       background-position-x: -588px, right;
@@ -470,7 +470,7 @@
   }
   .testimonials {
     &.section-wrapper {
-      background: $white url("../../images/leav_foto.png") no-repeat;
+      background: $white url("../../images/backgrounds/leav_foto.png") no-repeat;
       background-position: bottom -133px right -163px;
       height: 919px;
       @media (max-width: $small) {
