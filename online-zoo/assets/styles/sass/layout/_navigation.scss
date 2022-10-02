@@ -15,6 +15,9 @@
   @media (max-width: $small) {
     padding: 1.25em 24px;
   }
+  @media (max-width: $tablet) {
+    padding: 1.25em 18.5px;
+  }
   color: $white;
   @extend %font-nav-link;
   text-decoration-line: none;
