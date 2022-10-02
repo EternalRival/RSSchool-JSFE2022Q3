@@ -6,6 +6,7 @@
       background-size: cover;
     }
     .content-wrapper {
+      position: relative;
       height: 780px;
       display: flex;
       flex-direction: column;
@@ -86,6 +87,29 @@
         position: relative;
         bottom: 50px;
         align-self: flex-start;
+      }
+    }
+    @media (max-width: $mobile) {
+      &.section-wrapper {
+        background-position-y: 34px;
+      }
+      .content-wrapper {
+        height: 187px;
+        margin-top: 34px;
+      }
+      .watch-circle {
+        width: 119.09px;
+        height: 119.09px;
+        margin-top: 22px;
+        margin-right: 27px;
+        .watch-circle-text {
+          font-size: 28px;
+          top: 10%;
+        }
+      }
+      .button {
+        position: absolute;
+        bottom: -74px;
       }
     }
   }
@@ -179,6 +203,40 @@
         }
       }
     }
+    @media (max-width: $mobile) {
+      &.section-wrapper {
+        background-size: 72px 217px;
+        background-position: right -40px top 40px;
+      }
+      .content-wrapper {
+        margin: 105px auto 40px;
+        height: 387px;
+      }
+      .backstage-text {
+        width: 100%;
+        .h2 {
+          left: -1px;
+          font-family: "Roboto";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 24px;
+          line-height: 120%;
+        }
+        p:nth-child(2) {
+          margin-top: 11px;
+          margin-left: 1px;
+        }
+        p:nth-child(3) {
+          margin-top: 21px;
+          margin-left: 1px;
+        }
+        p:nth-child(4) {
+          margin-top: 9px;
+          margin-left: -1px;
+          line-height: 138%;
+        }
+      }
+    }
   }
   .pets {
     &.section-wrapper {
@@ -199,6 +257,12 @@
         background-position-x: -248px, right;
         background-size: 59.5%, 27%;
       }
+      @media (max-width: $mobile) {
+        height: 1522px;
+        background-position-x: -80px, 110%;
+        background-position-y: bottom, 100.3%;
+        background-size: 43%, 30%;
+      }
     }
     .content-wrapper {
       position: relative;
@@ -218,6 +282,12 @@
       @media (max-width: $tablet) {
         height: 756px;
         gap: 92px 30px;
+      }
+      @media (max-width: $mobile) {
+        height: 1388px;
+        width: 100%;
+        justify-content: center;
+        gap: 20px 20px;
       }
     }
     .pet-card {
@@ -379,6 +449,9 @@
         right: 37.1%;
         top: 49.7%;
       }
+      @media (max-width: $mobile) {
+        display: none;
+      }
       top: 50%;
       transform: translateY(calc(-50% - 2px));
       & > * {
@@ -423,6 +496,9 @@
       transform: translate(-50%, 100%);
       @media (max-width: $tablet) {
         bottom: -8%;
+      }
+      @media (max-width: $mobile) {
+        bottom: -1.45%;
       }
     }
   }
@@ -477,7 +553,8 @@
       @media (max-width: $tablet) {
         font-size: 22px;
         right: auto;
-        margin-top: 0.94em;margin-left: 0.91em;
+        margin-top: 0.94em;
+        margin-left: 0.91em;
       }
     }
     .covid {
@@ -629,7 +706,7 @@
       background-position: bottom -133px right -163px;
       height: 919px;
       @media (max-width: $small) {
-        height: 842px;
+        height: 841px;
         background-position: bottom -85px right -128px;
         background-size: 32.5%;
       }

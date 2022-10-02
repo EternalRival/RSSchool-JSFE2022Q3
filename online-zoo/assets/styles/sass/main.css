@@ -470,6 +470,11 @@ body {
     display: block;
   }
 }
+@media (max-width: 940px) {
+  .header .logo.container {
+    right: 18px;
+  }
+}
 .header .nav {
   margin-left: 34px;
 }
@@ -899,7 +904,7 @@ body {
     max-width: 600px;
   }
 }
-@media (max-width: 320px) {
+@media (max-width: 600px) {
   .content-wrapper {
     max-width: 298px;
   }
@@ -911,6 +916,7 @@ body {
   background-size: cover;
 }
 .main-page .watch .content-wrapper {
+  position: relative;
   height: 780px;
   display: flex;
   flex-direction: column;
@@ -989,6 +995,29 @@ body {
     position: relative;
     bottom: 50px;
     align-self: flex-start;
+  }
+}
+@media (max-width: 600px) {
+  .main-page .watch.section-wrapper {
+    background-position-y: 34px;
+  }
+  .main-page .watch .content-wrapper {
+    height: 187px;
+    margin-top: 34px;
+  }
+  .main-page .watch .watch-circle {
+    width: 119.09px;
+    height: 119.09px;
+    margin-top: 22px;
+    margin-right: 27px;
+  }
+  .main-page .watch .watch-circle .watch-circle-text {
+    font-size: 28px;
+    top: 10%;
+  }
+  .main-page .watch .button {
+    position: absolute;
+    bottom: -74px;
   }
 }
 .main-page .backstage.section-wrapper {
@@ -1078,6 +1107,40 @@ body {
     margin-top: 19px;
   }
 }
+@media (max-width: 600px) {
+  .main-page .backstage.section-wrapper {
+    background-size: 72px 217px;
+    background-position: right -40px top 40px;
+  }
+  .main-page .backstage .content-wrapper {
+    margin: 105px auto 40px;
+    height: 387px;
+  }
+  .main-page .backstage .backstage-text {
+    width: 100%;
+  }
+  .main-page .backstage .backstage-text .h2 {
+    left: -1px;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 120%;
+  }
+  .main-page .backstage .backstage-text p:nth-child(2) {
+    margin-top: 11px;
+    margin-left: 1px;
+  }
+  .main-page .backstage .backstage-text p:nth-child(3) {
+    margin-top: 21px;
+    margin-left: 1px;
+  }
+  .main-page .backstage .backstage-text p:nth-child(4) {
+    margin-top: 9px;
+    margin-left: -1px;
+    line-height: 138%;
+  }
+}
 .main-page .pets.section-wrapper {
   height: 1106px;
   background: #ffffff;
@@ -1098,6 +1161,14 @@ body {
     height: 970px;
     background-position-x: -248px, right;
     background-size: 59.5%, 27%;
+  }
+}
+@media (max-width: 600px) {
+  .main-page .pets.section-wrapper {
+    height: 1522px;
+    background-position-x: -80px, 110%;
+    background-position-y: bottom, 100.3%;
+    background-size: 43%, 30%;
   }
 }
 .main-page .pets .content-wrapper {
@@ -1121,6 +1192,14 @@ body {
   .main-page .pets .carousel {
     height: 756px;
     gap: 92px 30px;
+  }
+}
+@media (max-width: 600px) {
+  .main-page .pets .carousel {
+    height: 1388px;
+    width: 100%;
+    justify-content: center;
+    gap: 20px 20px;
   }
 }
 .main-page .pets .pet-card {
@@ -1260,6 +1339,11 @@ body {
     top: 49.7%;
   }
 }
+@media (max-width: 600px) {
+  .main-page .pets .carousel-control-wrapper {
+    display: none;
+  }
+}
 .main-page .pets .carousel-control-wrapper > * {
   width: 62px;
   height: 62px;
@@ -1299,6 +1383,11 @@ body {
 @media (max-width: 940px) {
   .main-page .pets .button.choose-favorite {
     bottom: -8%;
+  }
+}
+@media (max-width: 600px) {
+  .main-page .pets .button.choose-favorite {
+    bottom: -1.45%;
   }
 }
 .main-page .pick-n-feed.section-wrapper {
@@ -1535,7 +1624,7 @@ body {
 }
 @media (max-width: 1320px) {
   .main-page .testimonials.section-wrapper {
-    height: 842px;
+    height: 841px;
     background-position: bottom -85px right -128px;
     background-size: 32.5%;
   }
