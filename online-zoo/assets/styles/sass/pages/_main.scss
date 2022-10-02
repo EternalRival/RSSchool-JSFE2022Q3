@@ -525,6 +525,10 @@
         height: 741px;
         max-width: 640px;
       }
+      @media (max-width: $mobile) {
+        height: 1042px;
+        max-width: 300px;
+      }
     }
     .h2 {
       position: relative;
@@ -538,6 +542,16 @@
       @media (max-width: $tablet) {
         margin: 10px 0 0;
         font-size: 42px;
+      }
+      @media (max-width: $mobile) {
+        margin-top: 21px;
+        margin-left: -2px;
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 120%;
+        text-align: center;
       }
     }
     .subtitle {
@@ -556,6 +570,12 @@
         margin-top: 0.94em;
         margin-left: 0.91em;
       }
+      @media (max-width: $mobile) {
+        margin-top: 11px;
+        margin-left: -3px;
+        font-size: 18px;
+        text-align: center;
+      }
     }
     .covid {
       margin: 41px 0 0;
@@ -573,6 +593,9 @@
       @media (max-width: $tablet) {
         margin: 19px 30px 0 0px;
       }
+      @media (max-width: $mobile) {
+        display: none;
+      }
     }
     .support-fund {
       margin: 10px 198px 0 99px;
@@ -587,6 +610,9 @@
       }
       @media (max-width: $tablet) {
         margin: 11px 20px 0 20px;
+      }
+      @media (max-width: $mobile) {
+        display: none;
       }
       a {
         position: relative;
@@ -627,6 +653,11 @@
       @media (max-width: $tablet) {
         margin: 30px 0 0 2px;
       }
+      @media (max-width: $mobile) {
+        margin-top: 18px;
+        margin-right: -1px;
+        font-size: 24px;
+      }
     }
     .widgets {
       display: flex;
@@ -641,12 +672,26 @@
         width: 588px;
         height: 244px;
       }
+      @media (max-width: $mobile) {
+        width: 168px;
+        height: 724px;
+        right: 0;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
     }
     .widget-card-container {
       display: flex;
       flex-direction: column;
       width: 168px;
       height: 244px;
+      @media (max-width: $mobile) {
+        &:first-child {
+          height: 222px;
+        }
+        height: 231px;
+      }
       &:nth-child(1) .widget-card-image {
         background-image: url("../../icons/pay.svg");
       }
@@ -659,6 +704,9 @@
       }
       p {
         margin: 30px 0 0;
+        @media (max-width: $mobile) {
+          margin-top: 10px;
+        }
       }
       &:not(:first-child) {
         position: relative;
@@ -669,9 +717,14 @@
           top: 24.5%;
           @media (max-width: $tablet) {
             content: url("../../icons/arrow.svg");
-            position: absolute;
             top: -7%;
             left: -44%;
+          }
+          @media (max-width: $mobile) {
+            top: -55px;
+            left: auto;
+            right: -58px;
+            transform: rotate(84.44deg);
           }
         }
       }
@@ -698,6 +751,9 @@
       @media (max-width: $tablet) {
         margin: 40px 0px 0 0px;
       }
+      @media (max-width: $mobile) {
+        margin: 30px 0px 0 0px;
+      }
     }
   }
   .testimonials {
@@ -714,6 +770,12 @@
         height: 668px;
         background-position: bottom -71px right -90px;
         background-size: 32.5%;
+      }
+      @media (max-width: $mobile) {
+        height: 580px;
+        background: $white url("../../images/backgrounds/leav_foto_mobile.png")
+          no-repeat;
+        background-position: bottom -30px right;
       }
     }
     .content-wrapper {
@@ -733,6 +795,12 @@
         position: relative;
         right: 2px;
       }
+      @media (max-width: $mobile) {
+        margin-top: 29px;
+        position: relative;
+        right: 0px;
+        font-size: 24px;
+      }
     }
     .reviews-container {
       margin-top: 47px;
@@ -750,6 +818,9 @@
         flex-direction: column;
         height: 357px;
         gap: 15px;
+      }
+      @media (max-width: $mobile) {
+        margin-top: 19px;
       }
     }
     .review-wrapper,
@@ -777,20 +848,33 @@
         padding-left: 0.6em;
         padding-top: 0.75em;
       }
+      @media (max-width: $mobile) {
+        padding-left: 0.6em;
+        padding-top: 0.5em;
+      }
     }
     .review-header {
       display: flex;
     }
     .head {
       margin-right: 10px;
+      @media (max-width: $mobile) {
+        margin-right: 6.5px;
+      }
     }
     .name {
       line-height: 120%;
       color: $black;
+      @media (max-width: $mobile) {
+        margin-top: 1px;
+      }
     }
     .info {
       @extend %font-small-paragraph;
       color: #bdbdbd;
+      @media (max-width: $mobile) {
+        letter-spacing: -0.01em;
+      }
     }
     .text {
       margin-top: 11px;
@@ -891,6 +975,9 @@
         left: 50%;
         transform: translate(-50%);
         width: 240px;
+      }
+      @media (max-width: $mobile) {
+        bottom: -84px;
       }
     }
   }
