@@ -340,7 +340,6 @@
           right: ($hover-radius + $radio-radius)/2;
         }
       }
-      //      margin: 8px 30px 0 26px;
     }
     .fixed-amounts-radio-wrapper {
       display: flex;
@@ -400,7 +399,7 @@
       &:after {
         content: attr(value);
         position: relative;
-        bottom: calc(-100% + 0.15em);
+        bottom: calc(-100% + 0em);
         right: 14px;
         font-family: "Roboto";
         font-style: normal;
@@ -410,9 +409,8 @@
         text-transform: uppercase;
         color: $black-blue;
         @media (max-width: $small) {
-          bottom: calc(-100% + 0.11em);
-          //right: -0.08em;
-          right: -2px;
+          bottom: calc(-100% + -0.063em);
+          right: -1px;
         }
         @media (max-width: $tablet) {
           right: 6px;

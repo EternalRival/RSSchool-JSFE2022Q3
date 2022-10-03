@@ -2514,7 +2514,7 @@ body {
 .donate-page .pick-n-feed .fixed-amounts-radio:after {
   content: attr(value);
   position: relative;
-  bottom: calc(-100% + 0.15em);
+  bottom: calc(-100% + 0em);
   right: 14px;
   font-family: "Roboto";
   font-style: normal;
@@ -2526,8 +2526,8 @@ body {
 }
 @media (max-width: 1320px) {
   .donate-page .pick-n-feed .fixed-amounts-radio:after {
-    bottom: calc(-100% + 0.11em);
-    right: -2px;
+    bottom: calc(-100% - 0.063em);
+    right: -1px;
   }
 }
 @media (max-width: 940px) {
