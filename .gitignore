@@ -104,11 +104,10 @@ dist
 .tern-port
 
 #custom
-checklist*
+.checklists
 
 #unused files
 online-zoo/assets/styles/sass/abstracts/_mixins.scss
-online-zoo/assets/styles/sass/abstracts/_variables.scss
 
 online-zoo/assets/styles/sass/components/_carousel.scss
 online-zoo/assets/styles/sass/components/_cover.scss
