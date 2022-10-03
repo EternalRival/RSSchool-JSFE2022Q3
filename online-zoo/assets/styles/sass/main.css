@@ -2545,7 +2545,7 @@ body {
 .donate-page .pick-n-feed .fixed-amounts-radio:hover {
   cursor: pointer;
 }
-.donate-page .pick-n-feed .fixed-amounts-radio:hover:before, .donate-page .pick-n-feed .fixed-amounts-radio:hover:after {
+.donate-page .pick-n-feed .fixed-amounts-radio:checked:before, .donate-page .pick-n-feed .fixed-amounts-radio:checked:after, .donate-page .pick-n-feed .fixed-amounts-radio:hover:before, .donate-page .pick-n-feed .fixed-amounts-radio:hover:after {
   cursor: pointer;
   filter: invert(54%) sepia(71%) saturate(590%) hue-rotate(349deg) brightness(101%) contrast(99%);
 }

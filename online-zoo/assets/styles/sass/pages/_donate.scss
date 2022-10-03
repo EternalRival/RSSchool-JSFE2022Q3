@@ -336,8 +336,8 @@
         background-color: #72828e;
         @media (max-width: $mobile) {
           height: 1px;
-          left: ($hover-radius + $radio-radius)/2;
-          right: ($hover-radius + $radio-radius)/2;
+          left: calc(($hover-radius + $radio-radius) / 2);
+          right: calc(($hover-radius + $radio-radius) / 2);
         }
       }
     }
@@ -424,6 +424,8 @@
       &:hover {
         cursor: pointer;
       }
+      &:checked:before,
+      &:checked:after,
       &:hover:before,
       &:hover:after {
         cursor: pointer;
