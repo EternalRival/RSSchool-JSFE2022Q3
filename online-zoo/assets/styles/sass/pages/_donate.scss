@@ -1,6 +1,9 @@
 .donate-page {
   .header {
     position: static;
+    @media (max-width: $tablet) {
+      position: fixed;
+    }
   }
   .footer {
     @media (max-width: $small) {
@@ -8,7 +11,12 @@
         right: 33px;
       }
       .nav {
-        left: 12px;
+        left: 50%;
+      }
+    }
+    @media (max-width: $tablet) {
+      .nav {
+        left: 0;
       }
     }
   }
@@ -21,6 +29,15 @@
       height: 390px;
       background-position: left 28% top 0;
     }
+    @media (max-width: $tablet) {
+      margin-top: 34px;
+      height: 335px;
+      background-position: left 37% top 0;
+    }
+    @media (max-width: $mobile) {
+      height: 187px;
+      background-position: left 33% top 0;
+    }
   }
   .pick-n-feed {
     &.section-wrapper {
@@ -28,6 +45,9 @@
       height: 1482px;
       @media (max-width: $small) {
         height: 1333px;
+      }
+      @media (max-width: $mobile) {
+        height: 1146px;
       }
     }
     .content-wrapper {
@@ -43,6 +63,13 @@
       @media (max-width: $small) {
         margin-right: 3em;
       }
+      @media (max-width: $tablet) {
+        margin-top: 31px;
+        margin-right: 0;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 120%;
+      }
       & + p {
         margin: 10px 0;
         color: $white;
@@ -52,6 +79,10 @@
         @media (max-width: $small) {
           margin: 29px 0px 0 1px;
         }
+        @media (max-width: $tablet) {
+          margin: 19px 0 0 0px;
+          line-height: 138%;
+        }
       }
     }
     .heading-2 {
@@ -59,6 +90,15 @@
       margin: 35px 0 0;
       @media (max-width: $small) {
         margin-top: 46px;
+      }
+      @media (max-width: $tablet) {
+        margin-top: 31px;
+      }
+      @media (max-width: $mobile) {
+        margin-top: 31px;
+
+        font-size: 24px;
+        line-height: 120%;
       }
     }
     .pick-n-feed-form-background {
@@ -73,6 +113,12 @@
         height: 918px;
         margin-top: 39px;
       }
+      @media (max-width: $tablet) {
+        margin-top: 29px;
+      }
+      @media (max-width: $mobile) {
+        height: 591px;
+      }
     }
     .pick-n-feed-form {
       width: 100%;
@@ -80,6 +126,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      @media (max-width: $tablet) {
+        margin: 50px 0 0;
+      }
     }
     .h2 {
       position: relative;
@@ -91,6 +140,13 @@
         right: 7.5px;
         margin-top: -20px;
       }
+      @media (max-width: $tablet) {
+        right: 0;
+      }
+      @media (max-width: $mobile) {
+        margin-top: -29px;
+        font-size: 24px;
+      }
       & + p {
         @extend %font-subtitle;
         margin: 21px 0;
@@ -98,6 +154,16 @@
         color: $black-blue;
         @media (max-width: $small) {
           margin: 11px -45px 0;
+        }
+        @media (max-width: $tablet) {
+          align-self: center;
+          text-align: center;
+          margin: 20px 0;
+          line-height: 122%;
+        }
+        @media (max-width: $mobile) {
+          margin: 11px 0;
+          font-size: 16px;
         }
       }
     }
@@ -111,10 +177,21 @@
       @media (max-width: $small) {
         margin: 67px 16px 0 0;
       }
+      @media (max-width: $tablet) {
+        margin: 37px 14px 0 0;
+      }
+      @media (max-width: $mobile) {
+        width: 100%;
+        height: 138.72px;
+        margin: 0;
+      }
     }
     .info {
       position: relative;
       margin-bottom: 56px;
+      @media (max-width: $mobile) {
+        margin-bottom: 19px;
+      }
       &:before {
         content: "";
         position: absolute;
@@ -124,6 +201,14 @@
         width: 14px;
         height: 14px;
         background-image: url("../../icons/x_icon.svg");
+        @media (max-width: $mobile) {
+          top: 13px;
+          right: -13px;
+          width: 7.89px;
+          height: 7.89px;
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
       }
     }
     .number {
@@ -136,9 +221,19 @@
       line-height: 80%;
       text-align: center;
       text-transform: uppercase;
+
+      @media (max-width: $mobile) {
+        margin-bottom: 3px;
+        margin-left: -2px;
+        font-weight: 500;
+        font-size: 40.6015px;
+      }
     }
     .text {
       color: $black-blue;
+      @media (max-width: $mobile) {
+        font-size: 9.02255px;
+      }
     }
     .animal-icon-wrapper {
       position: relative;
@@ -149,8 +244,14 @@
       @media (max-width: $small) {
         bottom: 1px;
       }
+      @media (max-width: $mobile) {
+        width: 160.15px;
+        height: 100%;
+        bottom: -2px;
+      }
     }
     .animal-icon {
+      width: 100%;
     }
     .progress-bar {
       position: relative;
@@ -162,6 +263,14 @@
       @media (max-width: $small) {
         width: 107.1%;
       }
+      @media (max-width: $tablet) {
+        margin-top: 63px;
+        width: 100%;
+      }
+      @media (max-width: $mobile) {
+        height: 13.5px;
+        margin-top: 36.8px;
+      }
       &:before {
         content: "Amount";
         position: absolute;
@@ -170,6 +279,14 @@
         @media (max-width: $small) {
           margin-left: 0px;
           top: -2.44em;
+        }
+        @media (max-width: $tablet) {
+          margin-left: 0.6em;
+          top: -1.8em;
+        }
+        @media (max-width: $mobile) {
+          margin-left: -0.07em;
+          top: -1.9em;
         }
       }
     }
@@ -194,6 +311,22 @@
           display: none;
         }
       }
+      @media (max-width: $tablet) {
+        margin-left: 35px - $hover-radius;
+        margin-right: 35px - $hover-radius;
+        & > *:nth-child(-n + 3) {
+          display: none;
+        }
+      }
+      @media (max-width: $mobile) {
+        margin-top: -1px;
+        margin-left: 8.5px;
+        margin-right: 9.5px;
+        & > *:nth-child(-n + 3) {
+          display: none;
+        }
+      }
+
       &:before {
         content: "";
         position: absolute;
@@ -201,6 +334,11 @@
         left: $hover-radius + $radio-radius;
         right: $hover-radius + $radio-radius;
         background-color: #72828e;
+        @media (max-width: $mobile) {
+          height: 1px;
+          left: ($hover-radius + $radio-radius)/2;
+          right: ($hover-radius + $radio-radius)/2;
+        }
       }
       //      margin: 8px 30px 0 26px;
     }
@@ -216,6 +354,14 @@
         cursor: pointer;
         background: url("../../icons/roller_icon.svg") no-repeat center;
       }
+      @media (max-width: $mobile) {
+        width: 20px;
+        height: 20px;
+        &:hover {
+          cursor: pointer;
+          background-size: contain;
+        }
+      }
     }
     .fixed-amounts-radio {
       appearance: none;
@@ -227,13 +373,28 @@
         background: $orange;
       }
       &:before {
-        content: url("../../icons/dollar.svg");
+        content: "";
         position: relative;
+        display: block;
+        width: 10px;
+        height: 20px;
         bottom: -2.5em;
         left: -1.6em;
+        background: url("../../icons/dollar.svg") center no-repeat;
+        background-size: contain;
         @media (max-width: $small) {
           bottom: -2.54em;
           left: -0.63em;
+        }
+        @media (max-width: $tablet) {
+          bottom: -2.5em;
+          left: -1.1em;
+        }
+        @media (max-width: $mobile) {
+          width: 5px;
+          height: 10px;
+          bottom: -1.25em;
+          left: -0.53em;
         }
       }
       &:after {
@@ -241,11 +402,6 @@
         position: relative;
         bottom: calc(-100% + 0.15em);
         right: 14px;
-        @media (max-width: $small) {
-          bottom: calc(-100% + 0.11em);
-          //right: -0.08em;
-          right: -2px;
-        }
         font-family: "Roboto";
         font-style: normal;
         font-weight: 500;
@@ -253,6 +409,19 @@
         line-height: 140%;
         text-transform: uppercase;
         color: $black-blue;
+        @media (max-width: $small) {
+          bottom: calc(-100% + 0.11em);
+          //right: -0.08em;
+          right: -2px;
+        }
+        @media (max-width: $tablet) {
+          right: 6px;
+        }
+        @media (max-width: $mobile) {
+          font-size: 13px;
+          right: 0.2em;
+          top: 0.35em;
+        }
       }
       &:hover {
         cursor: pointer;
@@ -263,7 +432,12 @@
         filter: invert(54%) sepia(71%) saturate(590%) hue-rotate(349deg)
           brightness(101%) contrast(99%);
       }
+      @media (max-width: $mobile) {
+        width: $radio-radius;
+        height: $radio-radius;
+      }
     }
+
     .another-amount {
       appearance: none;
       outline: none;
@@ -279,6 +453,14 @@
       background-image: url("../../icons/dollar.svg");
       background-repeat: no-repeat;
       background-position: center right 0.55em;
+      @media (max-width: $tablet) {
+        height: 42px;
+        width: 180px;
+        padding-left: 0.4em;
+      }
+      @media (max-width: $mobile) {
+        margin-top: 49px;
+      }
 
       &:placeholder-shown {
         filter: invert(62%) sepia(8%) saturate(161%) hue-rotate(163deg)
@@ -301,18 +483,27 @@
       }
       -moz-appearance: textfield;
     }
-
     .another-radio-container,
     .feed-a-friend,
     .share-with-your-friends {
       position: relative;
       left: 3px;
+      @media (max-width: $tablet) {
+        left: 1px;
+      }
     }
     .another-radio-container {
       margin-top: 25px;
       width: 268px;
       display: flex;
       justify-content: space-around;
+      @media (max-width: $tablet) {
+        margin-top: 31px;
+      }
+      @media (max-width: $mobile) {
+        margin-top: 25px;
+        margin-left: -2px;
+      }
       label {
         width: 84px;
         height: 21px;
@@ -343,11 +534,21 @@
     }
     .feed-a-friend {
       margin-top: 31px;
+
+      @media (max-width: $mobile) {
+        margin-top: 28px;
+        margin-left: -2px;
+      }
     }
     .share-with-your-friends {
       left: 0.14em;
       margin-top: 30px;
       color: $black-blue;
+
+      @media (max-width: $mobile) {
+        margin-top: 30px;
+        margin-left: -4px;
+      }
     }
   }
 }
