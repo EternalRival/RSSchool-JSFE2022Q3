@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
     <title>Donate - PetStory Online</title>
     <link rel="stylesheet" href="../../assets/styles/sass/main.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -42,7 +45,6 @@
         </nav>
         <div
           class="burger-menu"
-          onclick="alert('Прямая цитата из ТЗ:\n2. Бургер-меню может быть не активным. Т.е. если при нажатии на него ничего не проиходит, то баллы снимать не будем.')"
         >
           <img
             src="../../assets/icons/burger_menu.svg"
@@ -125,12 +127,14 @@
                       class="fixed-amounts-radio"
                       name="fixed-amounts"
                       value="250" /></label
-                  ><label class="fixed-amounts-radio-wrapper"
+                  ><label
+                    class="fixed-amounts-radio-wrapper fixed-amounts-radio-wrapper-checked"
                     ><input
                       type="radio"
                       class="fixed-amounts-radio"
                       name="fixed-amounts"
-                      value="100" /></label
+                      value="100"
+                      checked /></label
                   ><label class="fixed-amounts-radio-wrapper"
                     ><input
                       type="radio"
@@ -150,7 +154,7 @@
                 type="number"
                 class="another-amount"
                 placeholder="Another amount"
-                oninput="this.value=this.value.slice(0,4)"
+                value="100"
               />
               <div class="another-radio-container">
                 <label
@@ -180,10 +184,7 @@
           <a href="../../" class="footer logo container"
             ><p class="footer logo text">PetStory online</p></a
           >
-          <button
-            class="button"
-            onclick="window.location.href='./'"
-          >
+          <button class="button" onclick="window.location.href='./'">
             Donate for volunteers
           </button>
           <form class="form subscribe">
@@ -227,7 +228,7 @@
         <nav class="footer nav">
           <ul class="footer nav-list">
             <li class="nav-item">
-              <a href="../../" class="nav-link ">About</a>
+              <a href="../../" class="nav-link">About</a>
             </li>
             <li class="nav-item"><a class="nav-link">Map</a></li>
             <li class="nav-item"><a class="nav-link">Zoos</a></li>
@@ -236,5 +237,6 @@
         </nav>
       </div>
     </footer>
+    <script src="../../assets/js/fixed-amounts.js"></script>
   </body>
 </html>
