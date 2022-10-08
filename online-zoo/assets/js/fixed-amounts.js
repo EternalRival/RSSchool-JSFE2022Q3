@@ -43,5 +43,3 @@ amounts.list.forEach(node =>
   node.addEventListener("input", amounts.renderChecked.bind(amounts))
 );
 amounts.input.addEventListener("input", amounts.handleInput.bind(amounts));
-
-/* console.log(fixedAmounts.getList().lastElementChild); */

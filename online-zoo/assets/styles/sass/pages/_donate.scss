@@ -1,10 +1,4 @@
 .donate-page {
-  .header {
-    position: static;
-    @media (max-width: $tablet) {
-      position: fixed;
-    }
-  }
   .footer {
     @media (max-width: $small) {
       .subscribe {
@@ -21,6 +15,7 @@
     }
   }
   .panda-bg {
+    margin-top: 80px;
     height: 386px;
     background: #283035 url("../../images/backgrounds/giant-panda.jpg");
     background-position: center;
