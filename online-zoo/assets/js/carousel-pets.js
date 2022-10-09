@@ -132,7 +132,7 @@ function scroll() {
   });
 }
 async function playAnimation(node, direction, timeout) {
-  node.style.transition = `transform ${timeout}s`;
+  node.style.transition = `transform ease-in-out ${timeout}s`;
   node.style.transform = `translate(-${direction * getWidth(node)}px)`;
   await new Promise(_ => setTimeout(_, timeout * 1000));
 }
