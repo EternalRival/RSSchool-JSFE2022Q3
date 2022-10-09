@@ -1,10 +1,4 @@
 .donate-page {
-  .header {
-    position: static;
-    @media (max-width: $tablet) {
-      position: fixed;
-    }
-  }
   .footer {
     @media (max-width: $small) {
       .subscribe {
@@ -21,6 +15,7 @@
     }
   }
   .panda-bg {
+    margin-top: 80px;
     height: 386px;
     background: #283035 url("../../images/backgrounds/giant-panda.jpg");
     background-position: center;
@@ -320,8 +315,8 @@
       }
       @media (max-width: $mobile) {
         margin-top: -1px;
-        margin-left: 8.5px;
-        margin-right: 9.5px;
+        margin-left: 7px;
+        margin-right: 7px;
         & > *:nth-child(-n + 3) {
           display: none;
         }
@@ -349,17 +344,25 @@
       height: 2 * ($hover-radius + $radio-radius);
       border-radius: 50%;
       z-index: 0;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 80%;
+      @media (max-width: $mobile) {
+        width: ($hover-radius + $radio-radius);
+        height: ($hover-radius + $radio-radius);
+      }
       &:hover {
         cursor: pointer;
-        background: url("../../icons/roller_icon.svg") no-repeat center;
+        background-image: url("../../icons/roller_icon.svg");
       }
-      @media (max-width: $mobile) {
-        width: 20px;
-        height: 20px;
-        &:hover {
-          cursor: pointer;
-          background-size: contain;
-        }
+    }
+    .fixed-amounts-radio-wrapper-checked {
+      background-image: url("../../icons/roller_icon.svg");
+
+      .fixed-amounts-radio:after,
+      .fixed-amounts-radio:before {
+        filter: invert(54%) sepia(71%) saturate(590%) hue-rotate(349deg)
+          brightness(101%) contrast(99%);
       }
     }
     .fixed-amounts-radio {
@@ -368,9 +371,7 @@
       height: 2 * $radio-radius;
       border-radius: 50%;
       background-color: $yellow;
-      &:checked {
-        background: $orange;
-      }
+
       &:before {
         content: "";
         position: relative;
@@ -437,7 +438,7 @@
         height: $radio-radius;
       }
     }
-
+    //!fixed-amounts-end
     .another-amount {
       appearance: none;
       outline: none;

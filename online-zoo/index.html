@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
     <title>PetStory Online</title>
     <link rel="stylesheet" href="./assets/styles/sass/main.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -40,15 +43,46 @@
             </li>
           </ul>
         </nav>
-        <div
-          class="burger-menu"
-          onclick="alert('Прямая цитата из ТЗ:\n2. Бургер-меню может быть не активным. Т.е. если при нажатии на него ничего не проиходит, то баллы снимать не будем.')"
-        >
+        <div class="burger-menu">
           <img
             src="./assets/icons/burger_menu.svg"
             alt="burger-icon"
             class="burger-icon"
           />
+        </div>
+        <div class="burger-menu-container">
+          <div class="burger-menu-nav">
+            <div class="burger-menu-nav-head">
+              <a href="./" class="logo container"
+                ><p class="logo text">PetStory <span>online</span></p></a
+              ><img
+                class="burger-menu-close"
+                src="./assets/icons/burger_menu_close.svg"
+                alt="burger-menu-close-icon"
+              />
+            </div>
+            <nav class="header nav">
+              <ul class="header nav-list">
+                <li class="nav-item">
+                  <a href="./" class="nav-link active">About</a>
+                </li>
+                <li class="nav-item"><a class="nav-link">Map</a></li>
+                <li class="nav-item"><a class="nav-link">Zoos</a></li>
+                <li class="nav-item">
+                  <a href="./pages/donate/" class="nav-link">Donate</a>
+                </li>
+                <li class="nav-item"><a class="nav-link">Contact us</a></li>
+                <li class="nav-item">
+                  <a
+                    href="https://www.figma.com/file/jfEFwkXVj1WRq7sUHDr8os/PetStory-online"
+                    class="nav-link"
+                    >Designed by &copy;</a
+                  >
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="burger-menu-background"></div>
         </div>
       </div>
     </header>
@@ -94,167 +128,8 @@
             <button class="carousel-control-left"></button
             ><button class="carousel-control-right"></button>
           </div>
-          <div class="carousel">
-            <div class="pet-card border">
-              <div class="content">
-                <img
-                  src="./assets/images/pets/giant-pandas.jpg"
-                  alt="giant-pandas"
-                  class="pet-img"
-                />
-                <div class="pet-info">
-                  <div class="text">
-                    <p class="name">giant pandas</p>
-                    <p class="location">Native to Southwest China</p>
-                  </div>
-                  <img
-                    src="./assets/icons/herbivore.svg"
-                    alt="herbivore"
-                    class="diet"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="pet-card border">
-              <div class="content">
-                <img
-                  src="./assets/images/pets/eagles.jpg"
-                  alt="eagles"
-                  class="pet-img"
-                />
-                <div class="pet-info">
-                  <div class="text">
-                    <p class="name">eagles</p>
-                    <p class="location">Native to South America</p>
-                  </div>
-                  <img
-                    src="./assets/icons/carnivore.svg"
-                    alt="carnivore"
-                    class="diet"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="pet-card border">
-              <div class="content">
-                <img
-                  src="./assets/images/pets/gorillas-1.jpg"
-                  alt="gorillas-1"
-                  class="pet-img"
-                />
-                <div class="pet-info">
-                  <div class="text">
-                    <p class="name">gorillas</p>
-                    <p class="location">Native to Congo</p>
-                  </div>
-                  <img
-                    src="./assets/icons/herbivore.svg"
-                    alt="herbivore"
-                    class="diet"
-                  />
-                </div>
-              </div>
-            </div>
-            <div hidden class="pet-card border">
-              <div class="content">
-                <img
-                  src="./assets/images/pets/alligators.jpg"
-                  alt="alligators"
-                  class="pet-img"
-                />
-                <div class="pet-info">
-                  <div class="text">
-                    <p class="name">alligators</p>
-                    <p class="location">Native to Southeastern United States</p>
-                  </div>
-                  <img
-                    src="./assets/icons/carnivore.svg"
-                    alt="carnivore"
-                    class="diet"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="pet-card border">
-              <div class="content">
-                <img
-                  src="./assets/images/pets/two-toed-sloth.jpg"
-                  alt="two-toed-sloth"
-                  class="pet-img"
-                />
-                <div class="pet-info">
-                  <div class="text">
-                    <p class="name">two-toed sloth</p>
-                    <p class="location">Mesoamerica, South America</p>
-                  </div>
-                  <img
-                    src="./assets/icons/herbivore.svg"
-                    alt="herbivore"
-                    class="diet"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="pet-card border">
-              <div class="content">
-                <img
-                  src="./assets/images/pets/cheetahs.jpg"
-                  alt="cheetahs"
-                  class="pet-img"
-                />
-                <div class="pet-info">
-                  <div class="text">
-                    <p class="name">cheetahs</p>
-                    <p class="location">Native to Africa</p>
-                  </div>
-                  <img
-                    src="./assets/icons/carnivore.svg"
-                    alt="carnivore"
-                    class="diet"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="pet-card border">
-              <div class="content">
-                <img
-                  src="./assets/images/pets/penguins.jpg"
-                  alt="penguins"
-                  class="pet-img"
-                />
-                <div class="pet-info">
-                  <div class="text">
-                    <p class="name">penguins</p>
-                    <p class="location">Native to Antarctica</p>
-                  </div>
-                  <img
-                    src="./assets/icons/carnivore.svg"
-                    alt="carnivore"
-                    class="diet"
-                  />
-                </div>
-              </div>
-            </div>
-            <div hidden class="pet-card border">
-              <div class="content">
-                <img
-                  src="./assets/images/pets/gorillas-2.jpg"
-                  alt="gorillas"
-                  class="pet-img"
-                />
-                <div class="pet-info">
-                  <div class="text">
-                    <p class="name">gorillas</p>
-                    <p class="location">Native to Congo</p>
-                  </div>
-                  <img
-                    src="./assets/icons/herbivore.svg"
-                    alt="herbivore"
-                    class="diet"
-                  />
-                </div>
-              </div>
-            </div>
+          <div class="carousel-wrapper">
+            <div class="carousel"></div>
           </div>
           <button
             class="button rounded choose-favorite"
@@ -511,5 +386,7 @@
         </nav>
       </div>
     </footer>
+    <script type="module" src="./assets/js/main.js"></script>
+    <script type="module" src="./assets/js/carousel-pets.js"></script>
   </body>
 </html>

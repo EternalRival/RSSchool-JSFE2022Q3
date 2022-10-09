@@ -10,9 +10,8 @@
     "sourceType": "module"
   },
   "rules": {
-    "indent": ["error", 4],
     "linebreak-style": ["error", "windows"],
-    "quotes": ["error", "double"],
+    "quotes": ["warn", "double"],
     "semi": ["warn", "always"]
   }
 }
