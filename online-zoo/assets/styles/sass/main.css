@@ -503,7 +503,7 @@ body {
 .header .burger-menu {
   position: absolute;
   right: 0;
-  top: 5px;
+  top: 6px;
   display: none;
 }
 .header .burger-menu:hover {
@@ -658,11 +658,13 @@ body {
 @media (max-width: 600px) {
   .footer .first-part {
     align-items: center;
+    margin-top: -1px;
+    margin-left: -1px;
   }
   .footer .first-part .button {
     position: absolute;
     margin-top: 110px;
-    margin-left: -2px;
+    margin-left: -3.5px;
     z-index: 1;
   }
 }
@@ -911,6 +913,7 @@ body {
 }
 @media (max-width: 600px) {
   .footer .social {
+    margin-top: 2px;
     gap: 30px;
     flex-direction: row;
     align-self: center;
@@ -1054,10 +1057,15 @@ body {
 }
 @media (max-width: 600px) {
   .content-wrapper {
-    max-width: 298px;
+    max-width: 300px;
   }
 }
 
+.main-page {
+  /*  * {
+    outline: 1px dashed red;
+  } */
+}
 .main-page .watch.section-wrapper {
   background: #283035 url("../../images/backgrounds/giant-panda-small.jpg");
   background-position: center;
@@ -1157,7 +1165,7 @@ body {
     width: 119.09px;
     height: 119.09px;
     margin-top: 22px;
-    margin-right: 27px;
+    margin-right: 28px;
   }
   .main-page .watch .watch-circle .watch-circle-text {
     font-size: 28px;
@@ -1165,6 +1173,7 @@ body {
   }
   .main-page .watch .button {
     position: absolute;
+    transform: translateX(1px);
     bottom: -74px;
   }
 }
@@ -1268,7 +1277,7 @@ body {
     width: 100%;
   }
   .main-page .backstage .backstage-text .h2 {
-    left: -1px;
+    left: 0px;
     font-family: "Roboto";
     font-style: normal;
     font-weight: 400;
@@ -1276,16 +1285,16 @@ body {
     line-height: 120%;
   }
   .main-page .backstage .backstage-text p:nth-child(2) {
-    margin-top: 11px;
-    margin-left: 1px;
+    margin-top: 10px;
+    margin-left: 2px;
   }
   .main-page .backstage .backstage-text p:nth-child(3) {
     margin-top: 21px;
-    margin-left: 1px;
+    margin-left: 2px;
   }
   .main-page .backstage .backstage-text p:nth-child(4) {
     margin-top: 9px;
-    margin-left: -1px;
+    margin-left: 0px;
     line-height: 138%;
   }
 }
@@ -1321,13 +1330,20 @@ body {
 }
 .main-page .pets .content-wrapper {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main-page .pets .carousel-wrapper {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
 }
 .main-page .pets .carousel {
   position: relative;
   height: 872px;
   display: flex;
-  flex-flow: row wrap;
-  overflow-y: hidden;
+  flex-flow: column wrap;
   gap: 20px 30px;
 }
 @media (max-width: 1320px) {
@@ -1346,7 +1362,7 @@ body {
   .main-page .pets .carousel {
     height: 1388px;
     width: 100%;
-    justify-content: center;
+    margin-left: 22px;
     gap: 20px 20px;
   }
 }
@@ -1470,21 +1486,20 @@ body {
   left: -82px;
   right: -80px;
   z-index: 1;
-  top: 50%;
-  transform: translateY(calc(-50% - 2px));
+  top: 403px;
 }
 @media (max-width: 1320px) {
   .main-page .pets .carousel-control-wrapper {
     left: 34.4%;
     right: 34.3%;
-    top: 50%;
+    top: 368px;
   }
 }
 @media (max-width: 940px) {
   .main-page .pets .carousel-control-wrapper {
     left: 37.1%;
     right: 37.1%;
-    top: 49.7%;
+    top: 343px;
   }
 }
 @media (max-width: 600px) {
@@ -1523,19 +1538,16 @@ body {
   background-image: url("../../icons/arrow-right.svg");
 }
 .main-page .pets .button.choose-favorite {
-  position: absolute;
-  bottom: -80px;
-  left: 50%;
-  transform: translate(-50%, 100%);
+  margin-top: 80px;
 }
 @media (max-width: 940px) {
   .main-page .pets .button.choose-favorite {
-    bottom: -8%;
+    margin-top: 60px;
   }
 }
 @media (max-width: 600px) {
   .main-page .pets .button.choose-favorite {
-    bottom: -1.45%;
+    margin-top: 20px;
   }
 }
 .main-page .pick-n-feed.section-wrapper {
@@ -1805,9 +1817,9 @@ body {
 }
 @media (max-width: 600px) {
   .main-page .pick-n-feed .widget-card-container:not(:first-child):before {
-    top: -55px;
+    top: -54px;
     left: auto;
-    right: -58px;
+    right: -57px;
     transform: rotate(84.44deg);
   }
 }
@@ -1840,7 +1852,7 @@ body {
 }
 @media (max-width: 600px) {
   .main-page .pick-n-feed .button {
-    margin: 30px 0px 0 0px;
+    margin: 30px 2px 0 0px;
   }
 }
 .main-page .testimonials.section-wrapper {

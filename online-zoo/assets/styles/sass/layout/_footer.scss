@@ -47,10 +47,12 @@
     }
     @media (max-width: $mobile) {
       align-items: center;
+      margin-top: -1px;
+      margin-left: -1px;
       .button {
         position: absolute;
         margin-top: 110px;
-        margin-left: -2px;
+        margin-left: -3.5px;
         z-index: 1;
       }
     }
@@ -286,6 +288,7 @@
       }
     }
     @media (max-width: $mobile) {
+      margin-top:2px;
       gap: 30px;
       flex-direction: row;
       align-self: center;
