@@ -1345,9 +1345,11 @@ body {
   display: flex;
   flex-flow: column wrap;
   gap: 20px 30px;
+  margin-left: 2px;
 }
 @media (max-width: 1320px) {
   .main-page .pets .carousel {
+    margin-left: 0px;
     height: 801px;
     gap: 92px 29px;
   }
@@ -1483,8 +1485,8 @@ body {
   position: absolute;
   display: flex;
   justify-content: space-between;
-  left: -82px;
-  right: -80px;
+  left: -81px;
+  right: -81px;
   z-index: 1;
   top: 403px;
 }

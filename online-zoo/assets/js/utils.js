@@ -1,4 +1,8 @@
 export default {
+  create(tag = "div") {
+    return document.createElement(tag);
+  },
+  getByClass: document.getElementsByClassName.bind(document),
   randomizer: (min = 1, max = 20) =>
     Math.floor(Math.random() * (max - min + 1)) + min,
   shuffle: arr => {

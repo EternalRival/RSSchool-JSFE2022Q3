@@ -1,21 +1,13 @@
 import _ from "./utils.js";
 
-const create = (tag = "div") => document.createElement(tag);
-const getByClass = document.getElementsByClassName.bind(document);
-const carousel = getByClass("carousel")[0];
-const button = {
-  left: getByClass("carousel-control-left")[0],
-  right: getByClass("carousel-control-right")[0],
-};
-
 class PetCard {
   constructor(fileName, name, location, diet) {
     Object.assign(this, { fileName, name, location, diet });
   }
   generate() {
-    const [img, diet] = Array.from(Array(2), () => create("img")),
-      [name, location] = Array.from(Array(2), () => create("p")),
-      [card, content, info, text] = Array.from(Array(4), () => create());
+    const [img, diet] = Array.from(Array(2), () => _.create("img")),
+      [name, location] = Array.from(Array(2), () => _.create("p")),
+      [card, content, info, text] = Array.from(Array(4), () => _.create());
     card.classList.add("pet-card", "border");
     content.className = "content";
     img.className = "pet-img";
@@ -38,6 +30,16 @@ class PetCard {
     return card;
   }
 }
+
+const carousel = _.getByClass("carousel")[0];
+const button = {
+  left: _.getByClass("carousel-control-left")[0],
+  right: _.getByClass("carousel-control-right")[0],
+};
+
+onresize = () => resetStyles(carousel);
+button.right.onclick = scroll;
+button.left.onclick = scroll;
 
 const cards = [
   new PetCard(
@@ -64,6 +66,9 @@ const cards = [
   new PetCard("penguins", "penguins", "Native to Antarctica", "carnivore"),
   new PetCard("gorillas-2", "gorillas", "Native to Congo", "herbivore"),
 ];
+cards.shuffle = function () {
+  Object.assign(this, _.shuffle(this));
+};
 const cardsCustom = [
   new PetCard(
     "lernaean-hydra",
@@ -108,44 +113,51 @@ const cardsCustom = [
   ),
   new PetCard("quokka", "quokka", "Native to SW Australia", "herbivore"),
 ];
-
 cards.push(...cardsCustom);
+cards.shuffle();
+renderPets(carousel, cards);
 
-console.log("cards", cards.length);
-carousel.append(..._.shuffle(cards).map(card => card.generate()));
-
-button.right.onclick = scroll;
-button.left.onclick = scroll;
+resetStyles(carousel);
 
 function scroll() {
   const direction = event.target === button.right ? 2 : 0;
   const timeout = 0.5;
-  disableButtons(timeout);
-  carousel.style.transition = `transform ${timeout}s`;
-  carousel.style.transform = `translate(-${direction * getWidth(carousel)}px)`;
 
-  resetStyles(carousel, timeout);
+  disableButtons(timeout * 1.1);
+
+  playAnimation(carousel, direction, timeout).then(() => {
+    replaceCards(direction);
+    resetStyles(carousel);
+    renderPets(carousel, cards);
+  });
+}
+async function playAnimation(node, direction, timeout) {
+  node.style.transition = `transform ${timeout}s`;
+  node.style.transform = `translate(-${direction * getWidth(node)}px)`;
+  await new Promise(_ => setTimeout(_, timeout * 1000));
+}
+function replaceCards(direction) {
+  const offset = getWidth(carousel) < 640 ? 4 : 6;
+  const hand = cards.splice(direction ? offset * 2 : 0, offset);
+  cards.shuffle();
+  cards.splice(offset, 0, ...hand);
 }
 function disableButtons(timeout = 0) {
-  button.left.disabled = true;
-  button.right.disabled = true;
+  button.right.onclick = null;
+  button.left.onclick = null;
   setTimeout(() => {
-    button.left.disabled = false;
-    button.right.disabled = false;
+    button.right.onclick = scroll;
+    button.left.onclick = scroll;
   }, timeout * 1000);
 }
 function getWidth(n) {
   return +getComputedStyle(n).columnGap.slice(0, -2) + n.offsetWidth;
 }
-function resetStyles(node, s = 0) {
-  setTimeout(() => {
-    node.style = "";
-    node.style.transform = `translate(-${getWidth(carousel)}px)`;
-  }, s * 1000);
+function resetStyles(node) {
+  node.style = null;
+  node.style.transform = `translate(-${getWidth(carousel)}px)`;
 }
-resetStyles(carousel);
-onresize = () => resetStyles(carousel);
-
-/*
-перед или после скролла шафл карточек
-*/
+function renderPets(node, children) {
+  node.innerHTML = null;
+  node.append(...children.map(child => child.generate()));
+}

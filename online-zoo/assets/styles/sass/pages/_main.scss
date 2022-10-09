@@ -285,7 +285,9 @@
       display: flex;
       flex-flow: column wrap;
       gap: 20px 30px;
+      margin-left: 2px;
       @media (max-width: $small) {
+        margin-left: 0px;
         height: 801px;
         gap: 92px 29px;
       }
@@ -446,8 +448,8 @@
       position: absolute;
       display: flex;
       justify-content: space-between;
-      left: -82px;
-      right: -80px;
+      left: -81px;
+      right: -81px;
       z-index: 1;
       @media (max-width: $small) {
         left: 34.4%;
