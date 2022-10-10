@@ -1,8 +1,8 @@
 import _ from "./utils.js";
 
 class PetCard {
-  constructor(fileName, name, location, diet) {
-    Object.assign(this, { fileName, name, location, diet });
+  constructor(card) {
+    Object.assign(this, card);
   }
   generate() {
     const [img, diet] = Array.from(Array(2), () => _.create("img")),
@@ -167,9 +167,7 @@ const cardsCustom = [
   },
 ];
 
-const cards = [...cardsBased, ...cardsCustom].map(
-  card => new PetCard(card.fileName, card.name, card.location, card.diet)
-);
+const cards = cardsBased.concat(cardsCustom).map(card => new PetCard(card));
 cards.shuffle = function () {
   Object.assign(this, _.shuffle(this));
 };
