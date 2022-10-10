@@ -1,8 +1,8 @@
 import _ from "./utils.js";
 
 class PetCard {
-  constructor(fileName, name, location, diet) {
-    Object.assign(this, { fileName, name, location, diet });
+  constructor(card) {
+    Object.assign(this, card);
   }
   generate() {
     const [img, diet] = Array.from(Array(2), () => _.create("img")),
@@ -18,8 +18,8 @@ class PetCard {
     diet.className = "diet";
     img.src = `./assets/images/pets/${this.fileName}.jpg`;
     img.alt = this.fileName;
-    name.textContent = this.name;
-    location.textContent = this.location;
+    name.innerText = this.name;
+    location.innerText = this.location;
     diet.src = `./assets/icons/${this.diet}.svg`;
     diet.alt = this.diet;
 
@@ -36,84 +36,141 @@ const button = {
   left: _.getByClass("carousel-control-left")[0],
   right: _.getByClass("carousel-control-right")[0],
 };
-
-onresize = () => resetStyles(carousel);
+addEventListener("resize", () => resetStyles(carousel));
 button.right.onclick = scroll;
 button.left.onclick = scroll;
 
-const cards = [
-  new PetCard(
-    "giant-pandas",
-    "giant pandas",
-    "Native to Southwest China",
-    "herbivore"
-  ),
-  new PetCard("eagles", "eagles", "Native to South America", "carnivore"),
-  new PetCard("gorillas-1", "gorillas", "Native to Congo", "herbivore"),
-  new PetCard(
-    "alligators",
-    "alligators",
-    "Native to Southeastern US",
-    "carnivore"
-  ),
-  new PetCard(
-    "two-toed-sloth",
-    "two-toed sloth",
-    "Mesoamerica, South America",
-    "herbivore"
-  ),
-  new PetCard("cheetahs", "cheetahs", "Native to Africa", "carnivore"),
-  new PetCard("penguins", "penguins", "Native to Antarctica", "carnivore"),
-  new PetCard("gorillas-2", "gorillas", "Native to Congo", "herbivore"),
+const cardsBased = [
+  {
+    fileName: "giant-pandas",
+    name: "giant pandas",
+    location: "Native to Southwest China",
+    diet: "herbivore",
+  },
+  {
+    fileName: "eagles",
+    name: "eagles",
+    location: "Native to South America",
+    diet: "carnivore",
+  },
+  {
+    fileName: "gorillas-1",
+    name: "gorillas",
+    location: "Native to Congo",
+    diet: "herbivore",
+  },
+  {
+    fileName: "alligators",
+    name: "alligators",
+    location: "Native to Southeastern US",
+    diet: "carnivore",
+  },
+  {
+    fileName: "two-toed-sloth",
+    name: "two-toed sloth",
+    location: "Mesoamerica, South America",
+    diet: "herbivore",
+  },
+  {
+    fileName: "cheetahs",
+    name: "cheetahs",
+    location: "Native to Africa",
+    diet: "carnivore",
+  },
+  {
+    fileName: "penguins",
+    name: "penguins",
+    location: "Native to Antarctica",
+    diet: "carnivore",
+  },
+  {
+    fileName: "gorillas-2",
+    name: "gorillas",
+    location: "Native to Congo",
+    diet: "herbivore",
+  },
 ];
+
+const cardsCustom = [
+  {
+    fileName: "lernaean-hydra",
+    name: "lernaean hydra",
+    location: "Native to South Greece",
+    diet: "carnivore",
+  },
+  {
+    fileName: "platypus",
+    name: "platypus",
+    location: "Native to Australia",
+    diet: "carnivore",
+  },
+  {
+    fileName: "hyena",
+    name: "hyena",
+    location: "Native to Africa",
+    diet: "carnivore",
+  },
+  {
+    fileName: "honey-badger",
+    name: "honey badger",
+    location: "Native to Africa",
+    diet: "carnivore",
+  },
+  {
+    fileName: "graboid",
+    name: "graboid",
+    location: "Native to Western US",
+    diet: "carnivore",
+  },
+  {
+    fileName: "procoptodon",
+    name: "procoptodon",
+    location: "Native to South Australia",
+    diet: "herbivore",
+  },
+  {
+    fileName: "carbonemys",
+    name: "carbonemys",
+    location: "Native to Colombia",
+    diet: "carnivore",
+  },
+  {
+    fileName: "chacoan-peccary",
+    name: "chacoan peccary",
+    location: "Native to Gran Chaco",
+    diet: "herbivore",
+  },
+  {
+    fileName: "pygmy-tarsier",
+    name: "pygmy tarsier",
+    location: "Native to Indonesia",
+    diet: "carnivore",
+  },
+  {
+    fileName: "arakan-forest-turtle",
+    name: "arakan forest turtle",
+    location: "Native to Arakan Hills",
+    diet: "carnivore",
+  },
+  {
+    fileName: "paraceratherium",
+    name: "paraceratherium",
+    location: "Native to South Asia",
+    diet: "herbivore",
+  },
+  {
+    fileName: "quokka",
+    name: "quokka",
+    location: "Native to SW Australia",
+    diet: "herbivore",
+  },
+];
+
+const cards = cardsBased.concat(cardsCustom).map(card => new PetCard(card));
 cards.shuffle = function () {
   Object.assign(this, _.shuffle(this));
 };
-const cardsCustom = [
-  new PetCard(
-    "lernaean-hydra",
-    "lernaean hydra",
-    "Native to South Greece",
-    "carnivore"
-  ),
-  new PetCard("platypus", "platypus", "Native to Australia", "carnivore"),
-  new PetCard("hyena", "hyena", "Native to Africa", "carnivore"),
-  new PetCard("honey-badger", "honey badger", "Native to Africa", "carnivore"),
-  new PetCard("graboid", "graboid", "Native to Western US", "carnivore"),
-  new PetCard(
-    "procoptodon",
-    "procoptodon",
-    "Native to South Australia",
-    "herbivore"
-  ),
-  new PetCard("carbonemys", "carbonemys", "Native to Colombia", "carnivore"),
-  new PetCard(
-    "chacoan-peccary",
-    "chacoan peccary",
-    "Native to Gran Chaco",
-    "herbivore"
-  ),
-  new PetCard(
-    "pygmy-tarsier",
-    "pygmy tarsier",
-    "Native to Indonesia",
-    "carnivore"
-  ),
-  new PetCard(
-    "arakan-forest-turtle",
-    "arakan forest turtle",
-    "Native to Arakan Hills",
-    "carnivore"
-  ),
-  new PetCard(
-    "paraceratherium",
-    "paraceratherium",
-    "Native to South Asia",
-    "herbivore"
-  ),
-  new PetCard("quokka", "quokka", "Native to SW Australia", "herbivore"),
-];
-cards.push(...cardsCustom);
+
 cards.shuffle();
 renderPets(carousel, cards);
 
@@ -132,7 +189,7 @@ function scroll() {
   });
 }
 async function playAnimation(node, direction, timeout) {
-  node.style.transition = `transform ${timeout}s`;
+  node.style.transition = `transform ease-in-out ${timeout}s`;
   node.style.transform = `translate(-${direction * getWidth(node)}px)`;
   await new Promise(_ => setTimeout(_, timeout * 1000));
 }

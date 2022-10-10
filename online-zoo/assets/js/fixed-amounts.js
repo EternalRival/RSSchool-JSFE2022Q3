@@ -5,7 +5,7 @@ class DonateAmounts {
     this.fixedAmountsValues = Array.from(list, node => node.value);
   }
   handleInput() {
-    this.input.value = this.input.value.slice(0, 4);
+    this.input.value = this.input.value.replace(/\D/gi, "").slice(0, 4);
     if (this.fixedAmountsValues.includes(this.input.value)) {
       for (const input of this.list) {
         if (this.input.value === input.value) {
