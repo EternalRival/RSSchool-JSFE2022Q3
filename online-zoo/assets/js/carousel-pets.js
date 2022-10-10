@@ -18,8 +18,8 @@ class PetCard {
     diet.className = "diet";
     img.src = `./assets/images/pets/${this.fileName}.jpg`;
     img.alt = this.fileName;
-    name.textContent = this.name;
-    location.textContent = this.location;
+    name.innerText = this.name;
+    location.innerText = this.location;
     diet.src = `./assets/icons/${this.diet}.svg`;
     diet.alt = this.diet;
 

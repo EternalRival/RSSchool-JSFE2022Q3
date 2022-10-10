@@ -1061,11 +1061,6 @@ body {
   }
 }
 
-.main-page {
-  /*  * {
-    outline: 1px dashed red;
-  } */
-}
 .main-page .watch.section-wrapper {
   background: #283035 url("../../images/backgrounds/giant-panda-small.jpg");
   background-position: center;
@@ -1912,13 +1907,16 @@ body {
     font-size: 24px;
   }
 }
+.main-page .testimonials .reviews-container-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
 .main-page .testimonials .reviews-container {
   margin-top: 47px;
   height: 391px;
-  width: 100%;
   display: flex;
   justify-content: flex-start;
-  overflow: hidden;
   gap: 31px;
 }
 @media (max-width: 1320px) {
@@ -2019,6 +2017,29 @@ body {
     padding-left: 0.4em;
   }
 }
+.main-page .testimonials.popup {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10%;
+  left: 10%;
+  z-index: 5;
+}
+.main-page .testimonials.popup .review-wrapper,
+.main-page .testimonials.popup .review {
+  height: 100%;
+}
+.main-page .testimonials.popup .text {
+  height: 100%;
+}
+.main-page .testimonials.popup .popup-close-button {
+  position: absolute;
+  height: 14px;
+  width: 14px;
+  top: -10px;
+  right: -10px;
+  background: url("../../icons/popup_icon_close.svg");
+}
 .main-page .testimonials .range-scrollbar-wrapper,
 .main-page .testimonials .range-scrollbar {
   box-sizing: border-box;
@@ -2069,20 +2090,20 @@ body {
   cursor: pointer;
   -webkit-appearance: none;
   border: none;
-  width: 115.19px;
+  width: 12.5%;
   height: 6px;
   border-radius: 5px;
   background: #fe9013;
 }
 @media (max-width: 1320px) {
   .main-page .testimonials .range-scrollbar::-webkit-slider-thumb {
-    width: 75px;
+    width: 11.1111111111%;
   }
 }
 .main-page .testimonials .range-scrollbar::-moz-range-thumb {
   cursor: pointer;
   border: none;
-  width: 115.19px;
+  width: 12.5%;
   height: 6px;
   border-radius: 5px;
   background: #fe9013;
@@ -2541,7 +2562,7 @@ body {
   z-index: 0;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 80%;
+  background-size: 40%;
 }
 @media (max-width: 600px) {
   .donate-page .pick-n-feed .fixed-amounts-radio-wrapper {
@@ -2552,8 +2573,11 @@ body {
 .donate-page .pick-n-feed .fixed-amounts-radio-wrapper:hover {
   cursor: pointer;
   background-image: url("../../icons/roller_icon.svg");
+  background-size: 80%;
+  transition: background-size 0.3s;
 }
 .donate-page .pick-n-feed .fixed-amounts-radio-wrapper-checked {
+  background-size: 80%;
   background-image: url("../../icons/roller_icon.svg");
 }
 .donate-page .pick-n-feed .fixed-amounts-radio-wrapper-checked .fixed-amounts-radio:after,

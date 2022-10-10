@@ -346,7 +346,7 @@
       z-index: 0;
       background-repeat: no-repeat;
       background-position: center;
-      background-size: 80%;
+      background-size: 40%;
       @media (max-width: $mobile) {
         width: ($hover-radius + $radio-radius);
         height: ($hover-radius + $radio-radius);
@@ -354,9 +354,13 @@
       &:hover {
         cursor: pointer;
         background-image: url("../../icons/roller_icon.svg");
+
+        background-size: 80%;
+        transition: background-size 0.3s;
       }
     }
     .fixed-amounts-radio-wrapper-checked {
+      background-size: 80%;
       background-image: url("../../icons/roller_icon.svg");
 
       .fixed-amounts-radio:after,

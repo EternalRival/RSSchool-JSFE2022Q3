@@ -239,9 +239,6 @@
       }
     }
   }
-  /*  * {
-    outline: 1px dashed red;
-  } */
   .pets {
     &.section-wrapper {
       height: 1106px;
@@ -811,13 +808,16 @@
         font-size: 24px;
       }
     }
+    .reviews-container-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
     .reviews-container {
       margin-top: 47px;
       height: 391px;
-      width: 100%;
       display: flex;
       justify-content: flex-start;
-      overflow: hidden;
       gap: 31px;
       @media (max-width: $small) {
         margin-top: 30px;
@@ -896,6 +896,31 @@
         padding-left: 0.4em;
       }
     }
+
+    &.popup {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 10%;
+      left: 10%;
+      z-index: 5;
+      .review-wrapper,
+      .review {
+        height: 100%;
+      }
+      .text {
+        height: 100%;
+      }
+      .popup-close-button {
+        position: absolute;
+        height: 14px;
+        width: 14px;
+        top: -10px;
+        right: -10px;
+        background: url("../../icons/popup_icon_close.svg");
+      }
+    }
+
     .range-scrollbar-wrapper,
     .range-scrollbar {
       box-sizing: border-box;
@@ -937,19 +962,19 @@
         cursor: pointer;
         -webkit-appearance: none;
         border: none;
-        width: 115.19px;
+        width: calc(100% / 8);
         height: 6px;
         border-radius: 5px;
         background: #fe9013;
 
         @media (max-width: $small) {
-          width: 75px;
+          width: calc(100% / 9);
         }
       }
       &::-moz-range-thumb {
         cursor: pointer;
         border: none;
-        width: 115.19px;
+        width: 12.5%;
         height: 6px;
         border-radius: 5px;
         background: #fe9013;
