@@ -36,8 +36,7 @@ const button = {
   left: _.getByClass("carousel-control-left")[0],
   right: _.getByClass("carousel-control-right")[0],
 };
-
-onresize = () => resetStyles(carousel);
+addEventListener("resize", () => resetStyles(carousel));
 button.right.onclick = scroll;
 button.left.onclick = scroll;
 

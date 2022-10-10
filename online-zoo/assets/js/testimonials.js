@@ -129,21 +129,26 @@ function getOffset(n) {
 scrollbar.oninput = function () {
   scroll(reviews, this.value);
 };
+addEventListener("resize", handleResizeTestimonials);
 
-onresize = function () {
+function handleResizeTestimonials() {
   switch (reviews.offsetWidth) {
     case 1160:
-      scrollbar.max = 7;
+      if (scrollbar.max != 7) scrollbar.max = 7;
       scroll(reviews, scrollbar.value);
       break;
     case 940:
-      scrollbar.max = 8;
+      if (scrollbar.max != 8) scrollbar.max = 8;
       scroll(reviews, scrollbar.value);
       break;
     default:
       scroll(reviews, 0);
   }
-};
+  if (reviews.offsetWidth >= 940) {
+    _.getByClass("popup-background")[0].remove();
+    _.getByClass("popup")[0].remove();
+  }
+}
 
 reviews.onclick = function (e) {
   if (reviews.offsetWidth < 940 && e.target.closest(".review-wrapper")) {
@@ -158,6 +163,7 @@ reviews.onclick = function (e) {
     background.style.backgroundColor = "#000000cc";
     background.style.zIndex = 5;
 
+    background.className = "testimonials popup-background";
     cloneWrapper.className = "testimonials popup";
     closeButton.className = "testimonials popup-close-button";
 
