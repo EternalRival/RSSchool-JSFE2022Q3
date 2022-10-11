@@ -153,7 +153,6 @@ function handleResizeTestimonials() {
 reviews.onclick = function (e) {
   if (reviews.offsetWidth < 940 && e.target.closest(".review-wrapper")) {
     const clone = e.target.closest(".review-wrapper").cloneNode(true);
-    console.log(clone);
     const background = document.createElement("div");
     const cloneWrapper = document.createElement("div");
     const closeButton = document.createElement("div");
