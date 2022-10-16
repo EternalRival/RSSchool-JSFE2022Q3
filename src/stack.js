@@ -17,19 +17,19 @@ class Stack {
   push(element /* element */) {
     //throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
-    return this.#array.unshift(element), this.#array;
+    return this.#array.push(element), this.#array;
   }
 
   pop() {
     //throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
-    return this.#array.shift();
+    return this.#array.pop();
   }
 
   peek() {
     // throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
-    return this.#array[0];
+    return this.#array.at(-1);
   }
 }
 
