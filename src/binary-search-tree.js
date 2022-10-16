@@ -45,16 +45,39 @@ class BinarySearchTree extends Node {
   }
 
   remove(data, node = this, parent /* data */) {
-    
     //throw new NotImplementedError("Not implemented");
     // remove line with error and write your code here
-    if (!this.has(data)) return;
+    /* if (!this.has(data)) return;
 
-    if (node.data !== data)
-      this.remove(data, node[this.#getSide(node, data)], node);
-    else {
-      Object.assign(node, {data:null})
+    if (this.data === data) {
+      const max = this.max(this.left);
+      this.remove(max, this.left);
+      this.data = max;
     }
+    if (node.data !== data) {
+      this.remove(data, node[this.#getSide(node, data)], node);
+    } else {
+      if (!node.left && !node.right) {
+        parent[parent.data < node.data ? "right" : "left"] = null;
+      } else {
+        if (node.data > this.data) {
+          Object.assign(node, node.left ?? node.right);
+        } else {
+          Object.assign(node, node.right ?? node.left);
+        }
+      }
+      //9-14-128 6-8- -9-6 
+      */
+    if (!this.has(data)) return;
+    else if (node.data !== data)
+      this.remove(data, node[this.#getSide(node, data)], node);
+    else if (!node.left && !node.right)
+      parent[parent.data > data ? "left" : "right"] = null;
+    else if (node.left && node.right) {
+      const leftMax = this.max(node.left);
+      this.remove(leftMax, node.left, node);
+      node.data = leftMax;
+    } else Object.assign(node, node.left ?? node.right);
   }
 
   min(node = this) {
