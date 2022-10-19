@@ -1,17 +1,19 @@
 {
   "name": "eternalrival-jsfe2022q3",
   "version": "1.0.0",
-  "description": "Private repository for @eternalrival",
-  "main": "src/index.js",
+  "description": "",
+  "main": "index.js",
+
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
+    "start": "rmdir /s /q dist && webpack && webpack serve",
     "deploy": "npm run build && npx gh-pages -d dist -e gem-puzzle -m 'feat: update deploy'"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rolling-scopes-school/eternalrival-JSFE2022Q3.git"
   },
+  "keywords": [],
   "author": "erdev",
   "license": "MIT",
   "bugs": {
@@ -19,9 +21,14 @@
   },
   "homepage": "https://github.com/rolling-scopes-school/eternalrival-JSFE2022Q3#readme",
   "devDependencies": {
+    "css-loader": "^6.7.1",
     "eslint": "^8.25.0",
-    "gh-pages": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
-    "webpack-cli": "^4.10.0"
+    "sass": "^1.55.0",
+    "sass-loader": "^13.1.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.11.1"
   }
 }
