@@ -1,3 +1,33 @@
 * {
-  outline: 1px red solid;
+  /*  outline: 1px red solid; */
+}
+body {
+  margin: 0;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+}
+
+.game {
+  /*  display: grid;
+  grid-template-areas:'' */
+  /* outline: 1px dashed red; */
+  display: flex;
+  flex-direction: column;
+   /* width: 70%; */
+ max-height: 70%;
+  aspect-ratio: 1/1;
+  margin: 0 10px;
+}
+.game-canvas {
+  box-sizing: border-box;
+  border: 1px solid #bdd69b;
+  background-color: #d7e6c3;
 }
