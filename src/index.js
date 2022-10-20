@@ -109,13 +109,22 @@ class Game {
     ctx.draw = this.draw;
     const cell = new Path2D();
     const [x, y] = [tile.x.current, tile.y.current];
-    cell.roundRect(
-      x * ((width - gap * 3) / size) + gap * 2.5,
-      y * ((height - gap * 3) / size) + gap * 2.5,
-      (width - gap * 3) / size - gap * 2,
-      (height - gap * 3) / size - gap * 2,
-      gap * 2.5
-    );
+    try {
+      cell.roundRect(
+        x * ((width - gap * 3) / size) + gap * 2.5,
+        y * ((height - gap * 3) / size) + gap * 2.5,
+        (width - gap * 3) / size - gap * 2,
+        (height - gap * 3) / size - gap * 2,
+        gap * 2.5
+      );
+    } catch (e) {
+      cell.rect(
+        x * ((width - gap * 3) / size) + gap * 2.5,
+        y * ((height - gap * 3) / size) + gap * 2.5,
+        (width - gap * 3) / size - gap * 2,
+        (height - gap * 3) / size - gap * 2
+      );
+    }
     ctx.draw(cell, "#020");
     ctx.draw(cell, "#0f0", gap);
 
