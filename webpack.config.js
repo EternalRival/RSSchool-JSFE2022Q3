@@ -32,7 +32,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: "Gem Puzzle",
       filename: "index.html",
-      favicon: "./src/assets/favicon.ico",
+      favicon: "./src/assets/favicon.png",
     }),
   ],
 };
