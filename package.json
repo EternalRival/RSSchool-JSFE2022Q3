@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start": "rmdir /s /q dist && webpack && webpack serve",
+    "start": "webpack serve",
     "deploy": "npm run build && npx gh-pages -d dist -e gem-puzzle -m 'feat: update deploy'"
   },
   "repository": {
