@@ -64,6 +64,7 @@ class Game {
 
     this.canvas = document.createElement("canvas");
     this.canvas.className = "game-canvas";
+    this.canvas.addEventListener("click", e => this.canvasClickHandler(e));
     this.wrapper.append(this.canvas);
 
     this.gridSize = gridSize;
@@ -72,6 +73,8 @@ class Game {
       (v, k) => new Tile(k % this.gridSize, Math.floor(k / this.gridSize), ++k)
     );
   }
+  #raf;
+
   setMatrix(size) {
     this.gridSize = size;
     this.matrix = Array.from(
@@ -106,69 +109,79 @@ class Game {
       this.fill(path);
     }
   }
-  #gap = 3;
-  renderCell(tile) {
-    const gap = this.#gap;
-    const width = this.getFieldSize().width,
-      height = this.getFieldSize().height;
+  #cellBorder = 3;
+  getCellDrawInfo(x, y) {
+    const border = this.#cellBorder;
+    const { width, height } = this.getFieldSize();
     const size = this.gridSize;
+    const cellWidth = (width - border * 3) / size - border * 2;
+    const cellHeight = (height - border * 3) / size - border * 2;
+    const x0 = x * ((width - border * 3) / size) + border * 2.5;
+    const y0 = y * ((height - border * 3) / size) + border * 2.5;
+    const x1 = x0 + cellWidth;
+    const y1 = y0 + cellHeight;
+    return { x0, y0, x1, y1, width: cellWidth, height: cellHeight };
+  }
+  renderCell(tile) {
+    /* requestAnimationFrame(this.renderCell); */
+    const border = this.#cellBorder;
+    const { width, height } = this.getFieldSize();
     const ctx = this.getCtx();
     ctx.draw = this.draw;
     const cell = new Path2D();
     const [x, y] = [tile.x.current, tile.y.current];
-    try {
-      cell.roundRect(
-        x * ((width - gap * 3) / size) + gap * 2.5,
-        y * ((height - gap * 3) / size) + gap * 2.5,
-        (width - gap * 3) / size - gap * 2,
-        (height - gap * 3) / size - gap * 2,
-        gap * 2.5
-      );
-    } catch (e) {
-      cell.rect(
-        x * ((width - gap * 3) / size) + gap * 2.5,
-        y * ((height - gap * 3) / size) + gap * 2.5,
-        (width - gap * 3) / size - gap * 2,
-        (height - gap * 3) / size - gap * 2
-      );
-    }
-    ctx.draw(cell, "#020");
-    ctx.draw(cell, "#0f0", gap);
-
-    ctx.font = Math.min(width / size, height / size) * 0.6 + "px beon";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.lineWidth = gap / 2;
-    ctx.strokeText(
-      tile.number,
-      x * ((width - gap * 3) / size) +
-        gap * 2.5 +
-        ((width - gap * 3) / size - gap * 2) / 2,
-      y * ((height - gap * 3) / size) +
-        gap * 2.5 +
-        ((height - gap * 3) / size - gap * 2) / 2
-    );
-    //todo заменить отрисовку пустой клетки
+    const cellDrawInfo = this.getCellDrawInfo(x, y);
     if (tile === this.getEmptyCell()) {
       const emptyCell = new Path2D();
       emptyCell.rect(
-        x * ((width - gap * 3) / size) + gap * 2.5,
-        y * ((height - gap * 3) / size) + gap * 2.5,
-        (width - gap * 3) / size - gap * 2,
-        (height - gap * 3) / size - gap * 2
+        cellDrawInfo.x0,
+        cellDrawInfo.y0,
+        cellDrawInfo.width,
+        cellDrawInfo.height
       );
       ctx.draw(emptyCell, "#020");
-      ctx.draw(emptyCell, "#020", gap + 5);
+      ctx.draw(emptyCell, "#020", border + 0);
+      return;
     }
+    try {
+      cell.roundRect(
+        cellDrawInfo.x0,
+        cellDrawInfo.y0,
+        cellDrawInfo.width,
+        cellDrawInfo.height,
+        border * 2.5
+      );
+    } catch (e) {
+      cell.rect(
+        cellDrawInfo.x0,
+        cellDrawInfo.y0,
+        cellDrawInfo.width,
+        cellDrawInfo.height
+      );
+    }
+    ctx.draw(cell, "#020");
+    ctx.draw(cell, "#0f0", border);
+
+    ctx.font =
+      Math.min(width / this.gridSize, height / this.gridSize) * 0.6 + "px beon";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.lineWidth = border / 2;
+    ctx.strokeText(
+      tile.number,
+      cellDrawInfo.x0 + cellDrawInfo.width / 2,
+      cellDrawInfo.y0 + cellDrawInfo.height / 2
+    );
   }
   async renderField() {
     await beon.load();
     const { width, height } = this.getFieldSize();
     Object.assign(this.canvas, { width, height });
-    const gap = this.#gap;
+    const gap = this.#cellBorder;
     const ctx = this.getCtx();
     ctx.draw = this.draw;
     //10 82 154 226
+    ctx.clearRect(0, 0, width, height);
     const frame = new Path2D();
     frame.rect(gap / 2, gap / 2, width - gap, height - gap);
     ctx.draw(frame, "#020");
@@ -184,7 +197,7 @@ class Game {
   #shuffling = false;
   async shuffle() {
     await pause(0.5);
-    const timeout = 5 / this.matrix.length ** 2;
+    const timeout = 15 / this.matrix.length ** 2;
     const getRandomCell = arr => arr[utils.randomizer(0, arr.length - 1)];
     const isTotallyShuffled = arr =>
       arr.every(v => {
@@ -198,11 +211,10 @@ class Game {
       const activeCells = this.getActiveCellList().filter(v => v !== lastMoved);
       const untouchedCells = activeCells.filter(v => v.isRightPosition());
       lastMoved = getRandomCell(untouchedCells) || getRandomCell(activeCells);
-     
+
       lastMoved.move(this.getEmptyCell(), timeout);
-      this.renderCell(lastMoved);
-      //todo переделатЬ!
-      this.renderCell(this.getEmptyCell());
+
+      this.renderField();
 
       if (isTotallyShuffled(this.matrix)) clearInterval(this.#shuffling);
     }, timeout * 1000);
@@ -210,6 +222,15 @@ class Game {
   start(num) {
     this.setMatrix(num);
     this.shuffle();
+  }
+  canvasClickHandler(e) {
+    const isClicked = (x, y, x0, y0, x1, y1) =>
+      x > x0 && x < x1 && y > y0 && y < y1;
+    const clickedIndex = this.matrix
+      .map(v => this.getCellDrawInfo(v.x.current, v.y.current))
+      .findIndex(v => isClicked(e.offsetX, e.offsetY, v.x0, v.y0, v.x1, v.y1));
+    this.matrix[clickedIndex]?.move(this.getEmptyCell());
+    this.renderField();
   }
 }
 const main = new Element(document.body, "main");
