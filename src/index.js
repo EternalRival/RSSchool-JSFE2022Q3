@@ -1,6 +1,8 @@
 import "./styles/main.scss";
 import utils from "./utils.js";
 const DIV = "div";
+const beon = new FontFace("beon", "url('beon.otf')");
+
 class Element {
   constructor(parent, tag = DIV, className, content) {
     const element = document.createElement(tag);
@@ -145,7 +147,8 @@ class Game {
         ((height - gap * 3) / size - gap * 2) / 2
     );
   }
-  renderField() {
+  async renderField() {
+    await beon.load();
     const { width, height } = this.getFieldSize();
     Object.assign(this.canvas, { width, height });
     const gap = this.#gap;
