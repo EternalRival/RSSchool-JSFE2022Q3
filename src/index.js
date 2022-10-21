@@ -76,6 +76,9 @@ class Game {
     );
     this.renderField();
   }
+  getEmptyCell() {
+    return this.matrix.at(-1);
+  }
   getCtx() {
     return this.canvas.getContext("2d");
   }
@@ -157,6 +160,24 @@ class Game {
     for (let i = 0; i < this.matrix.length - 1; i++)
       this.renderCell(this.matrix[i]);
   }
+  getActiveCellList() {
+    const empty = this.getEmptyCell();
+    const [x0, y0] = [empty.x.current, empty.y.current];
+    this.matrix.forEach((v, i) => {
+      if (v.x.current == x0) console.log(v);
+    });
+    /*  const [x1, y1] = [this.x.current, this.y.current];
+
+    const isNextToEmptyCell = () =>
+      (x0 === x1 && (y0 + 1 === y1 || y0 === y1 + 1)) ||
+      (y0 === y1 && (x0 + 1 === x1 || x0 === x1 + 1));
+
+    if (isNextToEmptyCell()) {
+      [this.x.current, empty.x.current] = [empty.x.current, this.x.current];
+      [this.y.current, empty.y.current] = [empty.y.current, this.y.current];
+    } */
+  }
+  shuffle() {}
 }
 const main = new Element(document.body, "main");
 const buttons = new Container(main.el);
@@ -169,7 +190,7 @@ console.log("game.getFieldSize()", game.getFieldSize());
 console.log("game.matrix:", game.matrix);
 console.log("game:", game);
 game.renderField();
-
+game.getActiveCellList(game.matrix.at(-1));
 //!!!
 buttons.start = new Button(buttons.el, "Shuffle & start");
 buttons.save = new Button(buttons.el, "Stop");
@@ -197,7 +218,7 @@ for (let i = 3; i <= 8; i++) {
     sizePickerHandler
   );
 }
-console.log(sizePicker);
+
 function sizePickerHandler() {
   size.current.el.textContent = this.textContent;
   game.setMatrix(this.textContent[0]);
