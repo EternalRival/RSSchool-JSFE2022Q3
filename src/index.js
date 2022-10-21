@@ -184,39 +184,28 @@ class Game {
   #shuffling = false;
   async shuffle() {
     await pause(0.5);
-    const timeout = 1 / this.matrix.length ** 2;
-    const getNearbyNumbers = () => this.getActiveCellList().map(v => v.number);
-    const getRandomNumber = arr => arr[utils.randomizer(0, arr.length - 1)];
+    const timeout = 5 / this.matrix.length ** 2;
+    const getRandomCell = arr => arr[utils.randomizer(0, arr.length - 1)];
     const isTotallyShuffled = arr =>
       arr.every(v => {
         return v.x.current !== v.x.initial || v.y.current !== v.y.initial;
       });
 
-    let previousCell;
-    /* while (!isTotallyShuffled(this.matrix)) {
-      const cellToMove = this.matrix[getRandomNumber(nearbyNumbers()) - 1];
-      // console.log(cellToMove);
-      if (cellToMove === previousCell) continue;
-      previousCell = cellToMove;
-      await cellToMove.move(this.getEmptyCell(), timeout);
-      this.renderCell(cellToMove);
-      //todo переделатЬ!
-      this.renderCell(this.getEmptyCell());
-    } */
+    let lastMoved;
+
     clearInterval(this.#shuffling);
     this.#shuffling = setInterval(() => {
-      const nearby = getNearbyNumbers().filter(v => v !== previousCell?.number);
-      const cellToMove = this.matrix[getRandomNumber(nearby) - 1];
-      previousCell = cellToMove;
-      cellToMove.move(this.getEmptyCell(), timeout);
-
-      this.renderCell(cellToMove);
+      const activeCells = this.getActiveCellList().filter(v => v !== lastMoved);
+      const untouchedCells = activeCells.filter(v => v.isRightPosition());
+      lastMoved = getRandomCell(untouchedCells) || getRandomCell(activeCells);
+     
+      lastMoved.move(this.getEmptyCell(), timeout);
+      this.renderCell(lastMoved);
       //todo переделатЬ!
       this.renderCell(this.getEmptyCell());
+
       if (isTotallyShuffled(this.matrix)) clearInterval(this.#shuffling);
     }, timeout * 1000);
-
-    /* this.renderField(); */
   }
   start(num) {
     this.setMatrix(num);
@@ -231,8 +220,6 @@ const size = new Container(main.el);
 const sizePicker = new Container(main.el);
 //!!!
 console.log("game.getFieldSize()", game.getFieldSize());
-console.log("game.matrix:", game.matrix);
-console.log("game:", game);
 game.start(4);
 //!!!
 buttons.start = new Button(buttons.el, "Shuffle & start");
