@@ -40,18 +40,20 @@ class Tile {
       this.x.initial === this.x.current && this.y.initial === this.y.current
     );
   }
-  move(empty) {
-    const [x0, y0] = [empty.x.current, empty.y.current];
-    const [x1, y1] = [this.x.current, this.y.current];
-
-    const isNextToEmptyCell = () =>
-      (x0 === x1 && (y0 + 1 === y1 || y0 === y1 + 1)) ||
-      (y0 === y1 && (x0 + 1 === x1 || x0 === x1 + 1));
-
-    if (isNextToEmptyCell()) {
+  async move(empty, timeout = 0.3) {
+    if (this.isNextToEmptyCell(empty)) {
       [this.x.current, empty.x.current] = [empty.x.current, this.x.current];
       [this.y.current, empty.y.current] = [empty.y.current, this.y.current];
     }
+    await pause(timeout);
+  }
+  isNextToEmptyCell(empty) {
+    const [x0, y0] = [empty.x.current, empty.y.current];
+    const [x1, y1] = [this.x.current, this.y.current];
+    return (
+      (x0 === x1 && (y0 + 1 === y1 || y0 === y1 + 1)) ||
+      (y0 === y1 && (x0 + 1 === x1 || x0 === x1 + 1))
+    );
   }
 }
 class Game {
@@ -146,6 +148,18 @@ class Game {
         gap * 2.5 +
         ((height - gap * 3) / size - gap * 2) / 2
     );
+    //todo заменить отрисовку пустой клетки
+    if (tile === this.getEmptyCell()) {
+      const emptyCell = new Path2D();
+      emptyCell.rect(
+        x * ((width - gap * 3) / size) + gap * 2.5,
+        y * ((height - gap * 3) / size) + gap * 2.5,
+        (width - gap * 3) / size - gap * 2,
+        (height - gap * 3) / size - gap * 2
+      );
+      ctx.draw(emptyCell, "#020");
+      ctx.draw(emptyCell, "#020", gap + 5);
+    }
   }
   async renderField() {
     await beon.load();
@@ -160,27 +174,54 @@ class Game {
     ctx.draw(frame, "#020");
     ctx.draw(frame, "#0f0", gap);
 
-    for (let i = 0; i < this.matrix.length - 1; i++)
-      this.renderCell(this.matrix[i]);
+    this.matrix.forEach(v => this.renderCell(v));
   }
   getActiveCellList() {
     const empty = this.getEmptyCell();
-    const [x0, y0] = [empty.x.current, empty.y.current];
-    this.matrix.forEach((v, i) => {
-      if (v.x.current == x0) console.log(v);
-    });
-    /*  const [x1, y1] = [this.x.current, this.y.current];
-
-    const isNextToEmptyCell = () =>
-      (x0 === x1 && (y0 + 1 === y1 || y0 === y1 + 1)) ||
-      (y0 === y1 && (x0 + 1 === x1 || x0 === x1 + 1));
-
-    if (isNextToEmptyCell()) {
-      [this.x.current, empty.x.current] = [empty.x.current, this.x.current];
-      [this.y.current, empty.y.current] = [empty.y.current, this.y.current];
-    } */
+    const neighbors = this.matrix.filter(v => v.isNextToEmptyCell(empty));
+    return neighbors;
   }
-  shuffle() {}
+  #shuffling = false;
+  async shuffle() {
+    await pause(0.5);
+    const timeout = 1 / this.matrix.length ** 2;
+    const getNearbyNumbers = () => this.getActiveCellList().map(v => v.number);
+    const getRandomNumber = arr => arr[utils.randomizer(0, arr.length - 1)];
+    const isTotallyShuffled = arr =>
+      arr.every(v => {
+        return v.x.current !== v.x.initial || v.y.current !== v.y.initial;
+      });
+
+    let previousCell;
+    /* while (!isTotallyShuffled(this.matrix)) {
+      const cellToMove = this.matrix[getRandomNumber(nearbyNumbers()) - 1];
+      // console.log(cellToMove);
+      if (cellToMove === previousCell) continue;
+      previousCell = cellToMove;
+      await cellToMove.move(this.getEmptyCell(), timeout);
+      this.renderCell(cellToMove);
+      //todo переделатЬ!
+      this.renderCell(this.getEmptyCell());
+    } */
+    clearInterval(this.#shuffling);
+    this.#shuffling = setInterval(() => {
+      const nearby = getNearbyNumbers().filter(v => v !== previousCell?.number);
+      const cellToMove = this.matrix[getRandomNumber(nearby) - 1];
+      previousCell = cellToMove;
+      cellToMove.move(this.getEmptyCell(), timeout);
+
+      this.renderCell(cellToMove);
+      //todo переделатЬ!
+      this.renderCell(this.getEmptyCell());
+      if (isTotallyShuffled(this.matrix)) clearInterval(this.#shuffling);
+    }, timeout * 1000);
+
+    /* this.renderField(); */
+  }
+  start(num) {
+    this.setMatrix(num);
+    this.shuffle();
+  }
 }
 const main = new Element(document.body, "main");
 const buttons = new Container(main.el);
@@ -192,8 +233,7 @@ const sizePicker = new Container(main.el);
 console.log("game.getFieldSize()", game.getFieldSize());
 console.log("game.matrix:", game.matrix);
 console.log("game:", game);
-game.renderField();
-game.getActiveCellList(game.matrix.at(-1));
+game.start(4);
 //!!!
 buttons.start = new Button(buttons.el, "Shuffle & start");
 buttons.save = new Button(buttons.el, "Stop");
@@ -224,5 +264,9 @@ for (let i = 3; i <= 8; i++) {
 
 function sizePickerHandler() {
   size.current.el.textContent = this.textContent;
-  game.setMatrix(this.textContent[0]);
+  game.start(this.textContent[0]);
+}
+
+async function pause(timeout) {
+  return new Promise(_ => setTimeout(_, timeout * 1000));
 }
