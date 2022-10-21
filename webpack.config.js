@@ -1,21 +1,22 @@
 /* eslint-disable no-undef */
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
-  mode: "production",
-  entry: path.resolve(__dirname, "src/index.js"),
+  mode: 'production',
+  entry: path.resolve(__dirname, 'src/index.js'),
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "[name].js",
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
     clean: true,
-    assetModuleFilename: "[name][ext]",
+    assetModuleFilename: '[name][ext]',
   },
-  devtool: "source-map",
+  devtool: 'source-map',
   devServer: {
-    static: { directory: path.resolve(__dirname, "dist") },
+    static: { directory: path.resolve(__dirname, 'dist') },
     port: 4567,
     open: false,
-    hot: true,
+    hot: false,
     compress: true,
     historyApiFallback: true,
   },
@@ -23,16 +24,16 @@ module.exports = {
     rules: [
       {
         test: /\.s[ac]ss$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
-      { test: /\.(png|svg|jpg|jpeg|gif|otf)$/i, type: "asset/resource" },
+      { test: /\.(png|svg|jpg|jpeg|gif|otf)$/i, type: 'asset/resource' },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Gem Puzzle",
-      filename: "index.html",
-      favicon: "./src/assets/favicon.png",
+      title: 'Gem Puzzle',
+      filename: 'index.html',
+      favicon: './src/assets/favicon.png',
     }),
   ],
 };

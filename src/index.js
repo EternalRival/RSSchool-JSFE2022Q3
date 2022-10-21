@@ -1,105 +1,64 @@
-import "./styles/main.scss";
-import utils from "./utils.js";
-const DIV = "div";
-const beon = new FontFace("beon", "url('beon.otf')");
+import './styles/main.scss';
+import utils from './js/utils';
+import Element from './js/Element';
+import Button from './js/Button';
+import Container from './js/Container';
+import Tile from './js/Tile';
 
-class Element {
-  constructor(parent, tag = DIV, className, content) {
-    const element = document.createElement(tag);
-    if (className) element.className = className;
-    element.textContent = content;
-    parent.append(element);
-    this.el = element;
-  }
-  destroy() {
-    this.el.remove();
-  }
-}
+const DIV = 'div';
+const { pause } = utils;
+const beon = new FontFace('beon', "url('beon.otf')");
 
-class Button extends Element {
-  constructor(parent, name, onClick) {
-    super(parent, "button", "button", name);
-    this.el.onclick = onClick;
-  }
-}
-class Container extends Element {
-  constructor(parent, className = "container") {
-    super(parent, DIV, className);
-  }
-}
-class Tile {
-  constructor(x, y, number) {
-    Object.assign(this, {
-      number,
-      x: { initial: x, current: x },
-      y: { initial: y, current: y },
-    });
-  }
-  isRightPosition() {
-    return (
-      this.x.initial === this.x.current && this.y.initial === this.y.current
-    );
-  }
-  async move(empty, timeout = 0.3) {
-    if (this.isNextToEmptyCell(empty)) {
-      [this.x.current, empty.x.current] = [empty.x.current, this.x.current];
-      [this.y.current, empty.y.current] = [empty.y.current, this.y.current];
-    }
-    await pause(timeout);
-  }
-  isNextToEmptyCell(empty) {
-    const [x0, y0] = [empty.x.current, empty.y.current];
-    const [x1, y1] = [this.x.current, this.y.current];
-    return (
-      (x0 === x1 && (y0 + 1 === y1 || y0 === y1 + 1)) ||
-      (y0 === y1 && (x0 + 1 === x1 || x0 === x1 + 1))
-    );
-  }
-}
 class Game {
   constructor(parent, gridSize = 4) {
     this.wrapper = document.createElement(DIV);
-    this.wrapper.className = "game-wrapper";
+    this.wrapper.className = 'game-wrapper';
     parent.append(this.wrapper);
 
-    this.canvas = document.createElement("canvas");
-    this.canvas.className = "game-canvas";
-    this.canvas.addEventListener("click", e => this.canvasClickHandler(e));
+    this.canvas = document.createElement('canvas');
+    this.canvas.className = 'game-canvas';
+    this.canvas.addEventListener('click', (e) => this.canvasClickHandler(e));
     this.wrapper.append(this.canvas);
 
     this.gridSize = gridSize;
     this.matrix = Array.from(
       Array(this.gridSize ** 2),
-      (v, k) => new Tile(k % this.gridSize, Math.floor(k / this.gridSize), ++k)
+      (v, k) => new Tile(k % this.gridSize, Math.floor(k / this.gridSize), k + 1),
     );
   }
+
   #raf;
 
   setMatrix(size) {
     this.gridSize = size;
     this.matrix = Array.from(
       Array(size ** 2),
-      (v, k) => new Tile(k % size, Math.floor(k / size), ++k)
+      (v, k) => new Tile(k % size, Math.floor(k / size), k + 1),
     );
     this.renderField();
   }
+
   getEmptyCell() {
     return this.matrix.at(-1);
   }
+
   getCtx() {
-    return this.canvas.getContext("2d");
+    return this.canvas.getContext('2d');
   }
+
   getFieldSize() {
     return {
       width: this.wrapper.offsetWidth,
       height: this.wrapper.offsetHeight,
     };
   }
+
   isCompleted() {
-    this.matrix.every(v => v.isRightPosition());
+    this.matrix.every((v) => v.isRightPosition());
   }
+
   draw(path, color, width) {
-    //this.beginPath();
+    // this.beginPath();
     if (width) {
       this.strokeStyle = color;
       this.lineWidth = width;
@@ -109,7 +68,9 @@ class Game {
       this.fill(path);
     }
   }
+
   #cellBorder = 3;
+
   getCellDrawInfo(x, y) {
     const border = this.#cellBorder;
     const { width, height } = this.getFieldSize();
@@ -120,8 +81,16 @@ class Game {
     const y0 = y * ((height - border * 3) / size) + border * 2.5;
     const x1 = x0 + cellWidth;
     const y1 = y0 + cellHeight;
-    return { x0, y0, x1, y1, width: cellWidth, height: cellHeight };
+    return {
+      x0,
+      y0,
+      x1,
+      y1,
+      width: cellWidth,
+      height: cellHeight,
+    };
   }
+
   renderCell(tile) {
     /* requestAnimationFrame(this.renderCell); */
     const border = this.#cellBorder;
@@ -133,14 +102,9 @@ class Game {
     const cellDrawInfo = this.getCellDrawInfo(x, y);
     if (tile === this.getEmptyCell()) {
       const emptyCell = new Path2D();
-      emptyCell.rect(
-        cellDrawInfo.x0,
-        cellDrawInfo.y0,
-        cellDrawInfo.width,
-        cellDrawInfo.height
-      );
-      ctx.draw(emptyCell, "#020");
-      ctx.draw(emptyCell, "#020", border + 0);
+      emptyCell.rect(cellDrawInfo.x0, cellDrawInfo.y0, cellDrawInfo.width, cellDrawInfo.height);
+      ctx.draw(emptyCell, '#020');
+      ctx.draw(emptyCell, '#020', border + 0);
       return;
     }
     try {
@@ -149,30 +113,25 @@ class Game {
         cellDrawInfo.y0,
         cellDrawInfo.width,
         cellDrawInfo.height,
-        border * 2.5
+        border * 2.5,
       );
     } catch (e) {
-      cell.rect(
-        cellDrawInfo.x0,
-        cellDrawInfo.y0,
-        cellDrawInfo.width,
-        cellDrawInfo.height
-      );
+      cell.rect(cellDrawInfo.x0, cellDrawInfo.y0, cellDrawInfo.width, cellDrawInfo.height);
     }
-    ctx.draw(cell, "#020");
-    ctx.draw(cell, "#0f0", border);
+    ctx.draw(cell, '#020');
+    ctx.draw(cell, '#0f0', border);
 
-    ctx.font =
-      Math.min(width / this.gridSize, height / this.gridSize) * 0.6 + "px beon";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
+    ctx.font = `${Math.min(width / this.gridSize, height / this.gridSize) * 0.6}px beon`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
     ctx.lineWidth = border / 2;
     ctx.strokeText(
       tile.number,
       cellDrawInfo.x0 + cellDrawInfo.width / 2,
-      cellDrawInfo.y0 + cellDrawInfo.height / 2
+      cellDrawInfo.y0 + cellDrawInfo.height / 2,
     );
   }
+
   async renderField() {
     await beon.load();
     const { width, height } = this.getFieldSize();
@@ -180,36 +139,39 @@ class Game {
     const gap = this.#cellBorder;
     const ctx = this.getCtx();
     ctx.draw = this.draw;
-    //10 82 154 226
+
+    // 10 82 154 226
+
     ctx.clearRect(0, 0, width, height);
     const frame = new Path2D();
     frame.rect(gap / 2, gap / 2, width - gap, height - gap);
-    ctx.draw(frame, "#020");
-    ctx.draw(frame, "#0f0", gap);
+    ctx.draw(frame, '#020');
+    ctx.draw(frame, '#0f0', gap);
 
-    this.matrix.forEach(v => this.renderCell(v));
+    this.matrix.forEach((v) => this.renderCell(v));
   }
+
   getActiveCellList() {
     const empty = this.getEmptyCell();
-    const neighbors = this.matrix.filter(v => v.isNextToEmptyCell(empty));
+    const neighbors = this.matrix.filter((v) => v.isNextToEmptyCell(empty));
     return neighbors;
   }
+
   #shuffling = false;
+
   async shuffle() {
     await pause(0.5);
     const timeout = 15 / this.matrix.length ** 2;
-    const getRandomCell = arr => arr[utils.randomizer(0, arr.length - 1)];
-    const isTotallyShuffled = arr =>
-      arr.every(v => {
-        return v.x.current !== v.x.initial || v.y.current !== v.y.initial;
-      });
+    const getRandomCell = (arr) => arr[utils.randomizer(0, arr.length - 1)];
+    const isTotallyShuffled = (arr) =>
+      arr.every((v) => v.x.current !== v.x.initial || v.y.current !== v.y.initial);
 
     let lastMoved;
 
     clearInterval(this.#shuffling);
     this.#shuffling = setInterval(() => {
-      const activeCells = this.getActiveCellList().filter(v => v !== lastMoved);
-      const untouchedCells = activeCells.filter(v => v.isRightPosition());
+      const activeCells = this.getActiveCellList().filter((v) => v !== lastMoved);
+      const untouchedCells = activeCells.filter((v) => v.isRightPosition());
       lastMoved = getRandomCell(untouchedCells) || getRandomCell(activeCells);
 
       lastMoved.move(this.getEmptyCell(), timeout);
@@ -219,62 +181,56 @@ class Game {
       if (isTotallyShuffled(this.matrix)) clearInterval(this.#shuffling);
     }, timeout * 1000);
   }
+
   start(num) {
     this.setMatrix(num);
     this.shuffle();
   }
+
   canvasClickHandler(e) {
-    const isClicked = (x, y, x0, y0, x1, y1) =>
-      x > x0 && x < x1 && y > y0 && y < y1;
+    const isClicked = (x, y, x0, y0, x1, y1) => x > x0 && x < x1 && y > y0 && y < y1;
     const clickedIndex = this.matrix
-      .map(v => this.getCellDrawInfo(v.x.current, v.y.current))
-      .findIndex(v => isClicked(e.offsetX, e.offsetY, v.x0, v.y0, v.x1, v.y1));
+      .map((v) => this.getCellDrawInfo(v.x.current, v.y.current))
+      .findIndex((v) => isClicked(e.offsetX, e.offsetY, v.x0, v.y0, v.x1, v.y1));
     this.matrix[clickedIndex]?.move(this.getEmptyCell());
     this.renderField();
   }
 }
-const main = new Element(document.body, "main");
+const main = new Element(document.body, 'main');
 const buttons = new Container(main.el);
 const info = new Container(main.el);
 const game = new Game(main.el);
 const size = new Container(main.el);
 const sizePicker = new Container(main.el);
-//!!!
-console.log("game.getFieldSize()", game.getFieldSize());
+//
+console.log('game.getFieldSize()', game.getFieldSize());
 game.start(4);
-//!!!
-buttons.start = new Button(buttons.el, "Shuffle & start");
-buttons.save = new Button(buttons.el, "Stop");
-buttons.stop = new Button(buttons.el, "Save");
-buttons.results = new Button(buttons.el, "Results");
+//
+buttons.start = new Button(buttons.el, 'Shuffle & start');
+buttons.save = new Button(buttons.el, 'Stop');
+buttons.stop = new Button(buttons.el, 'Save');
+buttons.results = new Button(buttons.el, 'Results');
 
 const moves = new Container(info.el);
-moves.label = new Element(moves.el, DIV, "", "Moves:");
-moves.counter = new Element(moves.el, DIV, "", "0");
+moves.label = new Element(moves.el, DIV, '', 'Moves:');
+moves.counter = new Element(moves.el, DIV, '', '0');
 
 const time = new Container(info.el);
-time.label = new Element(time.el, DIV, "", "Time:");
-time.counter = new Element(time.el, DIV, "", "00:00");
+time.label = new Element(time.el, DIV, '', 'Time:');
+time.counter = new Element(time.el, DIV, '', '00:00');
 
-size.label = new Element(size.el, DIV, "", "Frame size:");
-size.current = new Element(size.el, DIV, "", "4x4");
-size.current.el.style = "display: block; min-width:44px";
+size.label = new Element(size.el, DIV, '', 'Frame size:');
+size.current = new Element(size.el, DIV, '', '4x4');
+size.current.el.style = 'display: block; min-width:44px';
 
-sizePicker.label = new Element(sizePicker.el, DIV, "", "Other sizes:");
+sizePicker.label = new Element(sizePicker.el, DIV, '', 'Other sizes:');
 sizePicker.options = new Container(sizePicker.el);
-for (let i = 3; i <= 8; i++) {
-  sizePicker.options[`x${i}`] = new Button(
-    sizePicker.options.el,
-    `${i}x${i}`,
-    sizePickerHandler
-  );
-}
 
-function sizePickerHandler() {
+const sizePickerHandler = () => {
   size.current.el.textContent = this.textContent;
   game.start(this.textContent[0]);
-}
+};
 
-async function pause(timeout) {
-  return new Promise(_ => setTimeout(_, timeout * 1000));
+for (let i = 3; i <= 8; i += 1) {
+  sizePicker.options[`x${i}`] = new Button(sizePicker.options.el, `${i}x${i}`, sizePickerHandler);
 }
