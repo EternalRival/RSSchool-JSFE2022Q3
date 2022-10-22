@@ -226,10 +226,10 @@ size.current.el.style = 'display: block; min-width:44px';
 sizePicker.label = new Element(sizePicker.el, DIV, '', 'Other sizes:');
 sizePicker.options = new Container(sizePicker.el);
 
-const sizePickerHandler = () => {
+function sizePickerHandler() {
   size.current.el.textContent = this.textContent;
   game.start(this.textContent[0]);
-};
+}
 
 for (let i = 3; i <= 8; i += 1) {
   sizePicker.options[`x${i}`] = new Button(sizePicker.options.el, `${i}x${i}`, sizePickerHandler);
