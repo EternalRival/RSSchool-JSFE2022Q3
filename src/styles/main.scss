@@ -4,6 +4,8 @@
 }
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
   background-color: #000;
   color: #fff;
   font-family: 'beon';
@@ -22,7 +24,29 @@ main {
   align-items: center;
   gap: 5px;
 }
+.info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .time {
+    min-width: 4.2em;
+  }
+  .moves {
+    min-width: 1em;
+  }
+}
+.size-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
 
+  .size-current {
+    display: block;
+    min-width: 2em;
+    text-align: center;
+  }
+}
 .game-wrapper {
   /*  display: grid;
   grid-template-areas:'' */
@@ -32,7 +56,7 @@ main {
   /* width: 70%; */
   width: 300px;
   height: 300px;
-  margin: 0 10px;
+  margin: 0;
 }
 .game-canvas {
   /*  box-sizing: border-box;

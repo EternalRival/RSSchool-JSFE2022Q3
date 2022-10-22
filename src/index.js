@@ -235,11 +235,32 @@ class Game {
 }
 const main = new Element(document.body, 'main');
 const buttons = new Container(main.el, 'container buttons-container');
-const info = new Container(main.el);
+const info = new Container(main.el, 'container info-container');
 const game = new Game(main.el);
-const size = new Container(main.el);
+const size = new Container(main.el, 'container size-container');
 const sizePicker = new Container(main.el);
 
+const time = new Container(info.el);
+time.label = new Element(time.el, DIV, '', 'Time:');
+time.counter = new Element(time.el, DIV, 'info-counter time', '00:00:00');
+time.current = new TimeCounter(time.counter.el);
+
+const moves = new Container(info.el);
+moves.label = new Element(moves.el, DIV, '', 'Moves:');
+moves.counter = new Element(moves.el, DIV, 'info-counter moves', '0');
+moves.change = function renderCounter(n) {
+  this.counter.el.textContent = n;
+};
+
+size.label = new Element(size.el, DIV, 'size-label', 'Frame size:');
+size.current = new Element(size.el, DIV, 'size-current', '4x4');
+
+sizePicker.options = new Container(sizePicker.el);
+
+function btnStartHandler() {
+  time.current.clear();
+  time.current.start();
+}
 function btnSoundHandler() {
   switch (game.soundVolume.current) {
     case 'muted':
@@ -256,35 +277,16 @@ function btnSoundHandler() {
   }
   this.style.backgroundImage = game.soundVolume.getIcon();
 }
-
-const moves = new Container(info.el);
-moves.label = new Element(moves.el, DIV, '', 'Moves:');
-moves.counter = new Element(moves.el, DIV, '', '0');
-moves.change = function renderCounter(n) {
-  this.counter.el.textContent = n;
-};
-
-const time = new Container(info.el);
-time.label = new Element(time.el, DIV, '', 'Time:');
-time.counter = new Element(time.el, DIV, '', '00:00');
-time.current = new TimeCounter(time.counter.el);
-
-size.label = new Element(size.el, DIV, '', 'Frame size:');
-size.current = new Element(size.el, DIV, '', '4x4');
-size.current.el.style = 'display: block; min-width:44px';
-
-sizePicker.label = new Element(sizePicker.el, DIV, '', 'Other sizes:');
-sizePicker.options = new Container(sizePicker.el);
-
-function btnStartHandler() {
-  time.current.start();
+function btnSaveHandler() {
+  time.current.pause(); // ! это не для того
 }
+function btnResultsHandler() {}
 
 buttons.start = new Button(buttons.el, 'Shuffle & start', btnStartHandler);
 buttons.sound = new Button(buttons.el, '', btnSoundHandler);
 buttons.sound.el.style.backgroundImage = game.soundVolume.getIcon();
-buttons.stop = new Button(buttons.el, 'Save');
-buttons.results = new Button(buttons.el, 'Top 10');
+buttons.save = new Button(buttons.el, 'Save', btnSaveHandler);
+buttons.results = new Button(buttons.el, 'Top 10', btnResultsHandler);
 
 function sizePickerHandler() {
   size.current.el.textContent = this.textContent;

@@ -7,6 +7,8 @@ export default class {
 
   #ticking;
 
+  #isPaused = false;
+
   getTime() {
     const pad = (v) => `${v}`.padStart(2, 0);
     const h = pad(Math.floor(this.#current / 60 / 60) % 24);
@@ -20,14 +22,18 @@ export default class {
   }
 
   start() {
-    this.clear();
     this.#ticking = setInterval(() => {
       this.setTime(this.#current + 1);
       this.#renderTime();
     }, 1000);
   }
 
-  pause() {}
+  pause() {
+    if (this.#isPaused) this.start();
+    else clearInterval(this.#ticking);
+
+    this.#isPaused = !this.#isPaused;
+  }
 
   clear() {
     clearInterval(this.#ticking);
