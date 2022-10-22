@@ -29,6 +29,7 @@ export default class {
   }
 
   pause() {
+    if (!this.#ticking) return;
     if (this.#isPaused) this.start();
     else clearInterval(this.#ticking);
 
@@ -37,6 +38,7 @@ export default class {
 
   clear() {
     clearInterval(this.#ticking);
+    this.#ticking = null;
     this.setTime(0);
     this.#renderTime();
   }
