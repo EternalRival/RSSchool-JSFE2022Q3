@@ -4,13 +4,7 @@ import Element from './js/Element';
 import Button from './js/Button';
 import Container from './js/Container';
 import Tile from './js/Tile';
-import MoveSound from './assets/move.ogg';
-
-const zap = (vol) => {
-  const sound = new Audio(MoveSound);
-  sound.volume = vol;
-  sound.play();
-};
+import Sounds from './js/Sounds';
 
 const DIV = 'div';
 const { pause } = utils;
@@ -35,6 +29,10 @@ class Game {
   }
 
   #raf;
+
+  movesCounter = 0;
+
+  gameTimer = 0;
 
   setMatrix(size) {
     this.gridSize = size;
@@ -189,9 +187,24 @@ class Game {
     }, timeout * 1000);
   }
 
+  counterChange(n) {
+    this.movesCounter = +(n ?? this.movesCounter + 1);
+    moves.change(this.movesCounter);
+  }
+
   start(num) {
     this.setMatrix(num);
     this.shuffle();
+    this.movesCounter = 0;
+    this.counterChange('0');
+  }
+
+  soundVolume = 1;
+
+  zap() {
+    const sound = new Audio(Sounds.moveSound);
+    sound.volume = this.soundVolume;
+    sound.play();
   }
 
   canvasClickHandler(e) {
@@ -199,29 +212,54 @@ class Game {
     const clickedIndex = this.matrix
       .map((v) => this.getCellDrawInfo(v.x.current, v.y.current))
       .findIndex((v) => isClicked(e.offsetX, e.offsetY, v.x0, v.y0, v.x1, v.y1));
-    this.matrix[clickedIndex]?.move(this.getEmptyCell());
-    this.renderField();
-    if (this.matrix[clickedIndex].isNextToEmptyCell(this.getEmptyCell())) zap(1);
+    if (clickedIndex >= 0 && this.matrix[clickedIndex].isNextToEmptyCell(this.getEmptyCell())) {
+      this.matrix[clickedIndex].move(this.getEmptyCell());
+      this.counterChange();
+      this.renderField();
+      this.zap();
+    }
   }
 }
 const main = new Element(document.body, 'main');
-const buttons = new Container(main.el);
+const buttons = new Container(main.el, 'container buttons-container');
 const info = new Container(main.el);
 const game = new Game(main.el);
 const size = new Container(main.el);
 const sizePicker = new Container(main.el);
-//
-console.log('game.getFieldSize()', game.getFieldSize());
-game.start(4);
-//
+
+function soundControlHandler() {
+  switch (game.soundVolume) {
+    case 0:
+      game.soundVolume = 1 / 3;
+      this.style.backgroundImage = `url(${Sounds.none})`;
+      break;
+    case 1 / 3:
+      game.soundVolume = 2 / 3;
+      this.style.backgroundImage = `url(${Sounds.low})`;
+      break;
+    case 2 / 3:
+      game.soundVolume = 1;
+      this.style.backgroundImage = `url(${Sounds.high})`;
+      break;
+    default:
+      game.soundVolume = 0;
+      this.style.backgroundImage = `url(${Sounds.x})`;
+      break;
+  }
+}
+
 buttons.start = new Button(buttons.el, 'Shuffle & start');
-buttons.save = new Button(buttons.el, 'Stop');
+buttons.sound = new Button(buttons.el, '', soundControlHandler);
+buttons.sound.el.style.backgroundImage = `url(${Sounds.high})`; // !
 buttons.stop = new Button(buttons.el, 'Save');
-buttons.results = new Button(buttons.el, 'Results');
+buttons.results = new Button(buttons.el, 'Top 10');
 
 const moves = new Container(info.el);
 moves.label = new Element(moves.el, DIV, '', 'Moves:');
 moves.counter = new Element(moves.el, DIV, '', '0');
+moves.change = function renderCounter(n) {
+  this.counter.el.textContent = n;
+};
 
 const time = new Container(info.el);
 time.label = new Element(time.el, DIV, '', 'Time:');
@@ -242,3 +280,8 @@ function sizePickerHandler() {
 for (let i = 3; i <= 8; i += 1) {
   sizePicker.options[`x${i}`] = new Button(sizePicker.options.el, `${i}x${i}`, sizePickerHandler);
 }
+
+//
+console.log('game.getFieldSize()', game.getFieldSize());
+game.start(4);
+//

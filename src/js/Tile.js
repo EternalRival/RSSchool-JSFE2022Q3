@@ -20,8 +20,9 @@ export default class Tile {
     if (this.isNextToEmptyCell(empty)) {
       [this.x.current, empty.x.current] = [empty.x.current, this.x.current];
       [this.y.current, empty.y.current] = [empty.y.current, this.y.current];
+
+      await pause(timeout);
     }
-    await pause(timeout);
   }
 
   isNextToEmptyCell(empty) {

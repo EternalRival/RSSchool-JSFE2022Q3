@@ -8,10 +8,13 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
-    clean: true,
+    clean: {
+      dry: false,
+      keep: /\.git/,
+    },
     assetModuleFilename: '[name][ext]',
   },
-  devtool: 'source-map',
+  devtool: 'hidden-source-map',
   devServer: {
     static: { directory: path.resolve(__dirname, 'dist') },
     port: 4567,
@@ -32,8 +35,17 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Gem Puzzle',
+      inject: 'head',
       filename: 'index.html',
       favicon: './src/assets/favicon.png',
     }),
   ],
+  cache: {
+    type: 'filesystem',
+    cacheDirectory: path.resolve(__dirname, '../cache'),
+    hashAlgorithm: 'md5',
+    buildDependencies: {
+      config: [path.join(__dirname, './webpack.config.js')],
+    },
+  },
 };

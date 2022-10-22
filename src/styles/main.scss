@@ -1,12 +1,12 @@
 @font-face {
-  font-family: "beon";
-  src: url("../assets/beon.otf") format("opentype");
+  font-family: 'beon';
+  src: url('../assets/beon.otf') format('opentype');
 }
 body {
   margin: 0;
   background-color: #000;
   color: #fff;
-  font-family: "beon";
+  font-family: 'beon';
   /* font-size: 1.5rem; */
 }
 main {
@@ -42,12 +42,16 @@ main {
 }
 
 .button {
+  height: 100%;
+  min-width: 29px * 1.2;
   font-family: beon;
   /* font-size: 1.2rem; */
   outline: none;
   border: 2px solid #0f0;
   color: #0f0;
   background-color: #020;
+  background-repeat: no-repeat;
+  background-position: center;
   border-radius: 10px;
   padding: 5px;
   &:hover {
