@@ -29,7 +29,7 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
-      { test: /\.(png|svg|jpg|jpeg|gif|otf|ogg)$/i, type: 'asset/resource' },
+      { test: /\.(png|svg|otf|ogg)$/i, type: 'asset/resource' },
     ],
   },
   plugins: [

@@ -30,9 +30,27 @@ class Game {
 
   #raf;
 
+  #cellBorder = 3;
+
+  #shuffling = false;
+
   movesCounter = 0;
 
   gameTimer = 0;
+
+  soundVolume = {
+    current: 'high',
+    muted: { volume: 0 / 3, icon: Sounds.muted },
+    none: { volume: 1 / 3, icon: Sounds.none },
+    low: { volume: 2 / 3, icon: Sounds.low },
+    high: { volume: 3 / 3, icon: Sounds.high },
+    getIcon() {
+      return `url(${this.getIconURL()})`;
+    },
+    getIconURL() {
+      return this[this.current].icon;
+    },
+  };
 
   setMatrix(size) {
     this.gridSize = size;
@@ -47,10 +65,6 @@ class Game {
     return this.matrix.at(-1);
   }
 
-  getCtx() {
-    return this.canvas.getContext('2d');
-  }
-
   getFieldSize() {
     return {
       width: this.wrapper.offsetWidth,
@@ -58,8 +72,18 @@ class Game {
     };
   }
 
-  isCompleted() {
+  getActiveCellList() {
+    const empty = this.getEmptyCell();
+    const neighbors = this.matrix.filter((v) => v.isNextToEmptyCell(empty));
+    return neighbors;
+  }
+
+  isPuzzleCompleted() {
     this.matrix.every((v) => v.isRightPosition());
+  }
+
+  getCtx() {
+    return this.canvas.getContext('2d');
   }
 
   draw(path, color, width) {
@@ -73,8 +97,6 @@ class Game {
       this.fill(path);
     }
   }
-
-  #cellBorder = 3;
 
   getCellDrawInfo(x, y) {
     const border = this.#cellBorder;
@@ -156,14 +178,6 @@ class Game {
     this.matrix.forEach((v) => this.renderCell(v));
   }
 
-  getActiveCellList() {
-    const empty = this.getEmptyCell();
-    const neighbors = this.matrix.filter((v) => v.isNextToEmptyCell(empty));
-    return neighbors;
-  }
-
-  #shuffling = false;
-
   async shuffle() {
     await pause(0.5);
     const timeout = 15 / this.matrix.length ** 2;
@@ -199,11 +213,9 @@ class Game {
     this.counterChange('0');
   }
 
-  soundVolume = 1;
-
   zap() {
     const sound = new Audio(Sounds.moveSound);
-    sound.volume = this.soundVolume;
+    sound.volume = this.soundVolume[this.soundVolume.current].volume;
     sound.play();
   }
 
@@ -228,29 +240,25 @@ const size = new Container(main.el);
 const sizePicker = new Container(main.el);
 
 function soundControlHandler() {
-  switch (game.soundVolume) {
-    case 0:
-      game.soundVolume = 1 / 3;
-      this.style.backgroundImage = `url(${Sounds.none})`;
+  switch (game.soundVolume.current) {
+    case 'muted':
+      game.soundVolume.current = 'none';
       break;
-    case 1 / 3:
-      game.soundVolume = 2 / 3;
-      this.style.backgroundImage = `url(${Sounds.low})`;
+    case 'none':
+      game.soundVolume.current = 'low';
       break;
-    case 2 / 3:
-      game.soundVolume = 1;
-      this.style.backgroundImage = `url(${Sounds.high})`;
+    case 'low':
+      game.soundVolume.current = 'high';
       break;
     default:
-      game.soundVolume = 0;
-      this.style.backgroundImage = `url(${Sounds.x})`;
-      break;
+      game.soundVolume.current = 'muted';
   }
+  this.style.backgroundImage = game.soundVolume.getIcon();
 }
 
 buttons.start = new Button(buttons.el, 'Shuffle & start');
 buttons.sound = new Button(buttons.el, '', soundControlHandler);
-buttons.sound.el.style.backgroundImage = `url(${Sounds.high})`; // !
+buttons.sound.el.style.backgroundImage = game.soundVolume.getIcon();
 buttons.stop = new Button(buttons.el, 'Save');
 buttons.results = new Button(buttons.el, 'Top 10');
 

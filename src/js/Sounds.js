@@ -5,7 +5,7 @@ import soundHigh from '../assets/sound_high.svg';
 import MoveSound from '../assets/move.ogg';
 
 export default {
-  x: soundX,
+  muted: soundX,
   none: soundNone,
   low: soundLow,
   high: soundHigh,
