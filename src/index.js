@@ -4,6 +4,13 @@ import Element from './js/Element';
 import Button from './js/Button';
 import Container from './js/Container';
 import Tile from './js/Tile';
+import MoveSound from './assets/move.ogg';
+
+const zap = (vol) => {
+  const sound = new Audio(MoveSound);
+  sound.volume = vol;
+  sound.play();
+};
 
 const DIV = 'div';
 const { pause } = utils;
@@ -194,6 +201,7 @@ class Game {
       .findIndex((v) => isClicked(e.offsetX, e.offsetY, v.x0, v.y0, v.x1, v.y1));
     this.matrix[clickedIndex]?.move(this.getEmptyCell());
     this.renderField();
+    if (this.matrix[clickedIndex].isNextToEmptyCell(this.getEmptyCell())) zap();
   }
 }
 const main = new Element(document.body, 'main');
