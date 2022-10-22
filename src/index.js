@@ -201,7 +201,7 @@ class Game {
       .findIndex((v) => isClicked(e.offsetX, e.offsetY, v.x0, v.y0, v.x1, v.y1));
     this.matrix[clickedIndex]?.move(this.getEmptyCell());
     this.renderField();
-    if (this.matrix[clickedIndex].isNextToEmptyCell(this.getEmptyCell())) zap();
+    if (this.matrix[clickedIndex].isNextToEmptyCell(this.getEmptyCell())) zap(1);
   }
 }
 const main = new Element(document.body, 'main');
