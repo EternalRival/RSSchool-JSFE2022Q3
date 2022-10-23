@@ -38,6 +38,9 @@ module.exports = {
       inject: 'head',
       filename: 'index.html',
       favicon: './src/assets/favicon.png',
+      meta: {
+        viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no,user-scalable=false',
+      },
     }),
   ],
   cache: {

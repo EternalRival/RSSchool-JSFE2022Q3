@@ -2,82 +2,61 @@
   font-family: 'beon';
   src: url('../assets/beon.otf') format('opentype');
 }
+
+* {
+  box-sizing: border-box;
+}
+html {
+  overflow: hidden;
+}
 body {
   margin: 0;
-  display: flex;
-  justify-content: center;
-  background-color: #000;
-  color: #fff;
-  font-family: 'beon';
-  /* font-size: 1.5rem; */
-}
-main {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
   height: 100vh;
-}
-
-.container {
   display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.info-container {
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  .time {
-    min-width: 4.2em;
-  }
-  .moves {
-    min-width: 1em;
+  font-family: beon;
+  color: #fff;
+  background-color: #000;
+}
+.main {
+  height: 90%;
+  justify-content: space-evenly;
+  outline: 2px solid rgb(95, 94, 12);
+  & > * {
+    outline: 1px dashed rgb(245, 0, 224);
   }
 }
-.size-container {
-  display: flex;
-  width: 100%;
-  justify-content: center;
 
-  .size-current {
-    display: block;
-    min-width: 2em;
-    text-align: center;
-  }
-}
-.game-wrapper {
-  /*  display: grid;
-  grid-template-areas:'' */
-  /* outline: 1px dashed red; */
+.flex {
   display: flex;
-  flex-direction: column;
-  /* width: 70%; */
-  width: 300px;
-  height: 300px;
-  margin: 0;
+  align-items: center;
+  gap: 0.5rem;
 }
-.game-canvas {
-  /*  box-sizing: border-box;
-  border: 5px solid #bdd69b;
-  background-color: #d7e6c3; */
-  /*   outline: 5px dashed blue; */
+.column {
+  flex-direction: column;
+}
+.time__counter {
+  min-width: 4.2rem;
+}
+.moves-counter {
+  min-width: 1rem;
 }
 
 .button {
-  height: 100%;
   min-width: 29px * 1.2;
+  padding: 5px;
+
   font-family: beon;
-  /* font-size: 1.2rem; */
-  outline: none;
-  border: 2px solid #0f0;
+
   color: #0f0;
   background-color: #020;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 10px;
-  padding: 5px;
+  border: 2px solid #0f0;
+  outline: none;
+
   &:hover {
     cursor: pointer;
     box-shadow: 0 0 3px 2px #0f0;
@@ -85,5 +64,22 @@ main {
   }
   &:active {
     box-shadow: inset 0 0 3px 1px #0f0;
+  }
+}
+.menu__sound-button {
+  align-self: stretch;
+}
+
+.game {
+  /* height: 100%;
+  width: 100%; */
+  width: 100%;
+}
+.game__canvas {
+}
+._ {
+  outline: 2px solid blue;
+  & > * {
+    outline: 1px dashed red;
   }
 }

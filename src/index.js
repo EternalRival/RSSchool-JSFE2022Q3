@@ -2,24 +2,24 @@ import './styles/main.scss';
 import utils from './js/utils';
 import Element from './js/Element';
 import Button from './js/Button';
-import Container from './js/Container';
 import Tile from './js/Tile';
 import Sounds from './js/Sounds';
 import TimeCounter from './js/TimeCounter';
 
-const DIV = 'div';
 const { pause } = utils;
 const beon = new FontFace('beon', "url('beon.otf')");
 
 class Game {
   constructor(parent, gridSize = 4) {
-    this.wrapper = document.createElement(DIV);
-    this.wrapper.className = 'game-wrapper';
+    this.wrapper = document.createElement('div');
+    this.wrapper.className = 'game';
     parent.append(this.wrapper);
 
     this.canvas = document.createElement('canvas');
-    this.canvas.className = 'game-canvas';
+    this.canvas.className = 'game__canvas';
     this.canvas.addEventListener('click', (e) => this.canvasClickHandler(e));
+    this.canvas.width = 300;
+    this.canvas.height = this.canvas.width;
     this.wrapper.append(this.canvas);
 
     this.gridSize = gridSize;
@@ -53,6 +53,12 @@ class Game {
     },
   };
 
+  getCanvasSize() {
+    const height = this.canvas.offsetHeight;
+    const width = this.canvas.offsetWidth;
+    return Math.min(height, width);
+  }
+
   setMatrix(size) {
     this.gridSize = size;
     this.matrix = Array.from(
@@ -64,13 +70,6 @@ class Game {
 
   getEmptyCell() {
     return this.matrix.at(-1);
-  }
-
-  getFieldSize() {
-    return {
-      width: this.wrapper.offsetWidth,
-      height: this.wrapper.offsetHeight,
-    };
   }
 
   getActiveCellList() {
@@ -101,28 +100,25 @@ class Game {
 
   getCellDrawInfo(x, y) {
     const border = this.#cellBorder;
-    const { width, height } = this.getFieldSize();
-    const size = this.gridSize;
-    const cellWidth = (width - border * 3) / size - border * 2;
-    const cellHeight = (height - border * 3) / size - border * 2;
-    const x0 = x * ((width - border * 3) / size) + border * 2.5;
-    const y0 = y * ((height - border * 3) / size) + border * 2.5;
-    const x1 = x0 + cellWidth;
-    const y1 = y0 + cellHeight;
+    const cellSize = (this.getCanvasSize() - border * 3) / this.gridSize - border * 2;
+    const x0 = x * ((this.getCanvasSize() - border * 3) / this.gridSize) + border * 2.5;
+    const y0 = y * ((this.getCanvasSize() - border * 3) / this.gridSize) + border * 2.5;
+    const x1 = x0 + cellSize;
+    const y1 = y0 + cellSize;
     return {
       x0,
       y0,
       x1,
       y1,
-      width: cellWidth,
-      height: cellHeight,
+      size: cellSize,
     };
   }
 
   renderCell(tile) {
     /* requestAnimationFrame(this.renderCell); */
     const border = this.#cellBorder;
-    const { width, height } = this.getFieldSize();
+    const size = this.getCanvasSize();
+
     const ctx = this.getCtx();
     ctx.draw = this.draw;
     const cell = new Path2D();
@@ -130,7 +126,7 @@ class Game {
     const cellDrawInfo = this.getCellDrawInfo(x, y);
     if (tile === this.getEmptyCell()) {
       const emptyCell = new Path2D();
-      emptyCell.rect(cellDrawInfo.x0, cellDrawInfo.y0, cellDrawInfo.width, cellDrawInfo.height);
+      emptyCell.rect(cellDrawInfo.x0, cellDrawInfo.y0, cellDrawInfo.size, cellDrawInfo.size);
       ctx.draw(emptyCell, '#020');
       ctx.draw(emptyCell, '#020', border + 0);
       return;
@@ -139,42 +135,40 @@ class Game {
       cell.roundRect(
         cellDrawInfo.x0,
         cellDrawInfo.y0,
-        cellDrawInfo.width,
-        cellDrawInfo.height,
+        cellDrawInfo.size,
+        cellDrawInfo.size,
         border * 2.5,
       );
     } catch (e) {
-      cell.rect(cellDrawInfo.x0, cellDrawInfo.y0, cellDrawInfo.width, cellDrawInfo.height);
+      cell.rect(cellDrawInfo.x0, cellDrawInfo.y0, cellDrawInfo.size, cellDrawInfo.size);
     }
     ctx.draw(cell, '#020');
     ctx.draw(cell, '#0f0', border);
 
-    ctx.font = `${Math.min(width / this.gridSize, height / this.gridSize) * 0.6}px beon`;
+    ctx.font = `${Math.min(size / this.gridSize, size / this.gridSize) * 0.6}px beon`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.lineWidth = border / 2;
     ctx.strokeText(
       tile.number,
-      cellDrawInfo.x0 + cellDrawInfo.width / 2,
-      cellDrawInfo.y0 + cellDrawInfo.height / 2,
+      cellDrawInfo.x0 + cellDrawInfo.size / 2,
+      cellDrawInfo.y0 + cellDrawInfo.size / 2,
     );
   }
 
   async renderField() {
+    const size = this.getCanvasSize();
     await beon.load();
-    const { width, height } = this.getFieldSize();
-    Object.assign(this.canvas, { width, height });
-    const gap = this.#cellBorder;
+    const border = this.#cellBorder;
     const ctx = this.getCtx();
     ctx.draw = this.draw;
-
     // 10 82 154 226
 
-    ctx.clearRect(0, 0, width, height);
+    ctx.clearRect(0, 0, size, size);
     const frame = new Path2D();
-    frame.rect(gap / 2, gap / 2, width - gap, height - gap);
+    frame.rect(border / 2, border / 2, size - border, size - border);
     ctx.draw(frame, '#020');
-    ctx.draw(frame, '#0f0', gap);
+    ctx.draw(frame, '#0f0', border);
 
     this.matrix.forEach((v) => this.renderCell(v));
   }
@@ -233,29 +227,32 @@ class Game {
     }
   }
 }
-const main = new Element(document.body, 'main');
-const buttons = new Container(main.el, 'container buttons-container');
-const info = new Container(main.el, 'container info-container');
-const game = new Game(main.el);
-const size = new Container(main.el, 'container size-container');
-const sizePicker = new Container(main.el);
 
-const time = new Container(info.el);
-time.label = new Element(time.el, DIV, '', 'Time:');
-time.counter = new Element(time.el, DIV, 'info-counter time', '00:00:00');
+const main = new Element(document.body, 'main', 'main flex column');
+const header = new Element(main.el, 'div', 'header flex column');
+const game = new Game(main.el);
+const footer = new Element(main.el, 'div', 'footer flex column');
+
+const menu = new Element(header.el, 'div', 'menu flex');
+const info = new Element(header.el, 'div', 'game-info flex column');
+const size = new Element(footer.el, 'div', 'size flex column');
+
+const time = new Element(info.el, 'div', 'time flex');
+time.label = new Element(time.el, 'div', 'time__label', 'Time:');
+time.counter = new Element(time.el, 'div', 'time__counter', '00:00:00');
 time.current = new TimeCounter(time.counter.el);
 
-const moves = new Container(info.el);
-moves.label = new Element(moves.el, DIV, '', 'Moves:');
-moves.counter = new Element(moves.el, DIV, 'info-counter moves', '0');
+const moves = new Element(info.el, 'div', 'moves flex');
+moves.label = new Element(moves.el, 'div', 'moves__label', 'Moves:');
+moves.counter = new Element(moves.el, 'div', 'moves__counter', '0');
 moves.change = function renderCounter(n) {
   this.counter.el.textContent = n;
 };
 
-size.label = new Element(size.el, DIV, 'size-label', 'Frame size:');
-size.current = new Element(size.el, DIV, 'size-current', '4x4');
-
-sizePicker.options = new Container(sizePicker.el);
+size.info = new Element(size.el, 'div', 'size__container flex');
+size.info.label = new Element(size.info.el, 'div', 'size__label', 'Frame size:');
+size.info.current = new Element(size.info.el, 'div', 'size__current', '4x4');
+size.options = new Element(size.el, 'div', 'size__options flex');
 
 function btnStartHandler() {
   time.current.clear();
@@ -282,22 +279,27 @@ function btnSaveHandler() {
 }
 function btnResultsHandler() {}
 
-buttons.start = new Button(buttons.el, 'Shuffle & start', btnStartHandler);
-buttons.sound = new Button(buttons.el, '', btnSoundHandler);
-buttons.sound.el.style.backgroundImage = game.soundVolume.getIcon();
-buttons.save = new Button(buttons.el, 'Save', btnSaveHandler);
-buttons.results = new Button(buttons.el, 'Top 10', btnResultsHandler);
+menu.start = new Button(menu.el, 'Shuffle & start', btnStartHandler);
+menu.sound = new Button(menu.el, '', btnSoundHandler);
+menu.sound.el.classList.add('menu__sound-button');
+menu.sound.el.style.backgroundImage = game.soundVolume.getIcon();
+menu.save = new Button(menu.el, 'Save', btnSaveHandler);
+menu.results = new Button(menu.el, 'Top 10', btnResultsHandler);
 
 function sizePickerHandler() {
-  size.current.el.textContent = this.textContent;
+  size.info.current.el.textContent = this.textContent;
   game.start(this.textContent[0]);
 }
 
 for (let i = 3; i <= 8; i += 1) {
-  sizePicker.options[`x${i}`] = new Button(sizePicker.options.el, `${i}x${i}`, sizePickerHandler);
+  size.options[`x${i}`] = new Button(size.options.el, `${i}x${i}`, sizePickerHandler);
 }
 
+/* window.addEventListener('resize', () => {
+  console.log('kek');
+}); */
 //
-console.log('game.getFieldSize()', game.getFieldSize());
 game.start(4);
 //
+
+window.addEventListener('resize', () => game.renderField());
