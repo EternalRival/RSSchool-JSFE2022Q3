@@ -39,6 +39,7 @@ export default class {
   clear() {
     clearInterval(this.#ticking);
     this.#ticking = null;
+    this.#isPaused = false;
     this.setTime(0);
     this.#renderTime();
   }
