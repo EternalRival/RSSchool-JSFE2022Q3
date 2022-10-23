@@ -22,10 +22,10 @@ body {
 .main {
   height: 90%;
   justify-content: space-evenly;
-  outline: 2px solid rgb(95, 94, 12);
+  /* outline: 2px solid rgb(95, 94, 12);
   & > * {
     outline: 1px dashed rgb(245, 0, 224);
-  }
+  } */
 }
 
 .flex {
@@ -73,7 +73,7 @@ body {
 .game {
   /* height: 100%;
   width: 100%; */
-  width: 100%;
+/*   width: 100%; */
 }
 .game__canvas {
 }
