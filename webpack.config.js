@@ -40,7 +40,7 @@ module.exports = {
       filename: 'index.html',
       favicon: './src/assets/favicon.png',
       meta: {
-        viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no,user-scalable=false',
+        viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no,user-scalable=no',
       },
     }),
   ],
@@ -53,8 +53,8 @@ module.exports = {
     },
   },
   performance: {
-    hints: false,
-    maxEntrypointSize: 512000,
-    maxAssetSize: 512000,
+    /* hints: false, */
+    maxEntrypointSize: 1024000,
+    maxAssetSize: 1024000,
   },
 };

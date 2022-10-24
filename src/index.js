@@ -177,6 +177,7 @@ class Game {
   }
 
   async shuffle() {
+    time.current.clear();
     await pause(0.5);
     const timeout = 15 / this.matrix.length ** 2;
     const getRandomCell = (arr) => arr[utils.randomizer(0, arr.length - 1)];
@@ -195,7 +196,10 @@ class Game {
 
       this.renderField();
 
-      if (isTotallyShuffled(this.matrix)) clearInterval(this.#shuffling);
+      if (isTotallyShuffled(this.matrix)) {
+        clearInterval(this.#shuffling);
+        time.current.start();
+      }
     }, timeout * 1000);
   }
 
@@ -260,8 +264,7 @@ size.info.current = new Element(size.info.el, 'div', 'size__current', '4x4');
 size.options = new Element(size.el, 'div', 'size__options flex');
 
 function btnStartHandler() {
-  time.current.clear();
-  time.current.start();
+  game.start(game.gridSize);
 }
 function btnSoundHandler() {
   switch (game.soundVolume.current) {
