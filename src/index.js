@@ -6,8 +6,6 @@ import Tile from './js/Tile';
 import Sounds from './js/Sounds';
 import TimeCounter from './js/TimeCounter';
 
-console.log(fixedsys);
-
 const { pause } = utils;
 const beon = new FontFace('beon', "url('beon.otf')");
 
@@ -233,7 +231,6 @@ const main = new Element(document.body, 'main', 'main flex column');
 const header = new Element(main.el, 'div', 'header flex column');
 const game = new Game(main.el);
 const footer = new Element(main.el, 'div', 'footer flex column');
-
 
 const bgText = new Element(main.el, 'div', 'bg-text');
 bgText.el.innerText =
