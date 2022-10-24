@@ -10,7 +10,7 @@ const { pause } = _;
 const beon = new FontFace('beon', "url('beon.otf')");
 
 class Game {
-  constructor(parent, gridSize = 4) {
+  constructor(parent) {
     this.wrapper = document.createElement('div');
     this.wrapper.className = 'game';
     parent.append(this.wrapper);
@@ -24,12 +24,6 @@ class Game {
     this.wrapper.style.width = `${min}px`;
     this.wrapper.style.height = `${min}px`;
     this.wrapper.append(this.canvas);
-
-    this.gridSize = gridSize;
-    this.matrix = Array.from(
-      Array(this.gridSize ** 2),
-      (v, k) => new Tile(k % this.gridSize, Math.floor(k / this.gridSize), k + 1),
-    );
   }
 
   #raf;
@@ -37,6 +31,10 @@ class Game {
   #cellBorder = 3;
 
   #shuffling = false;
+
+  gridSize = null;
+
+  matrix = null;
 
   movesCounter = 0;
 
@@ -60,12 +58,17 @@ class Game {
     return Math.min(height, width);
   }
 
-  setMatrix(size) {
-    this.gridSize = size;
+  setMatrix(matrix) {
     this.matrix = Array.from(
-      Array(size ** 2),
-      (v, k) => new Tile(k % size, Math.floor(k / size), k + 1),
+      Array(this.gridSize ** 2),
+      (v, k) => new Tile(k % this.gridSize, Math.floor(k / this.gridSize), k + 1),
     );
+    if (matrix) {
+      for (let i = 0; i < this.matrix.length; i += 1) {
+        this.matrix[i].x.current = matrix[i].x.current;
+        this.matrix[i].y.current = matrix[i].y.current;
+      }
+    }
     this.renderField();
   }
 
@@ -80,7 +83,7 @@ class Game {
   }
 
   isPuzzleCompleted() {
-    this.matrix.every((v) => v.isRightPosition());
+    return this.movesCounter !== 0 && this.matrix.every((v) => v.isRightPosition());
   }
 
   getCtx() {
@@ -171,13 +174,16 @@ class Game {
     ctx.draw(frame, '#020');
     ctx.draw(frame, '#0f0', border);
 
-    this.matrix.forEach((v) => this.renderCell(v));
-    this.autoSave();
+    if (this.matrix) {
+      this.matrix.forEach((v) => this.renderCell(v));
+      this.saveGame('auto');
+      if (this.isPuzzleCompleted()) this.finish();
+    }
   }
 
   async shuffle() {
     time.current.clear();
-    await pause(0.5);
+    await pause(0.3);
     const timeout = 15 / this.matrix.length ** 2;
     const getRandomCell = (arr) => arr[_.randomizer(0, arr.length - 1)];
     const isTotallyShuffled = (arr) =>
@@ -208,10 +214,72 @@ class Game {
   }
 
   start(num) {
-    this.setMatrix(num);
+    this.gridSize = num ?? 4;
+    this.setMatrix();
     this.shuffle();
     this.movesCounter = 0;
-    this.counterChange('0');
+    this.counterChange(`${this.movesCounter}`);
+  }
+
+  resume(type) {
+    const load = (name) => _.ls.load(`gem-puzzle__${type}-save_${name}`);
+    if (!load('erdev__gem-puzzle__auto-save_gridSize')) {
+      this.start();
+      return;
+    }
+    this.gridSize = load('gridSize');
+    this.setMatrix(load('matrix'));
+    time.current.setTime(load('time'));
+    time.current.start();
+    this.movesCounter = load('moves') ?? 0;
+    this.counterChange(`${this.movesCounter}`);
+    this.renderField();
+  }
+
+  finish() {
+    const spent = time.current.getTime('short');
+    const moves = this.movesCounter;
+    const { gridSize } = this;
+    const hoorayMessage = `Hooray! You solved the puzzle in ${spent} and ${moves} moves!`;
+
+    time.current.clear();
+    this.movesCounter = 0;
+    this.counterChange(`${this.movesCounter}`);
+    this.matrix = null;
+    this.renderField();
+    [
+      'erdev__gem-puzzle__manual-save_moves',
+      'erdev__gem-puzzle__manual-save_time',
+      'erdev__gem-puzzle__manual-save_gridSize',
+      'erdev__gem-puzzle__auto-save_moves',
+      'erdev__gem-puzzle__auto-save_matrix',
+      'erdev__gem-puzzle__auto-save_gridSize',
+      'erdev__gem-puzzle__auto-save_time',
+      'erdev__gem-puzzle__manual-save_matrix',
+    ].forEach((v) => localStorage.removeItem(v));
+
+    const blocker = new Element(document.body, 'div', 'blocker');
+    const hoorayForm = new Element(this.wrapper, 'form', 'game__winner-form');
+    const hoorayText = new Element(hoorayForm.el, 'div', 'game__hooray-text', hoorayMessage);
+    const winnerInput = new Element(hoorayForm.el, 'input', 'game__winner-input', 'kekeke');
+    winnerInput.el.placeholder = 'Enter your nickname…';
+    hoorayForm.el.onsubmit = (e) => {
+      // spent moves gridSize winnerInput
+      const save = (data) => {
+        const saved = _.ls.load('gem-puzzle__top-list') ?? [];
+        _.ls.save('gem-puzzle__top-list', [...saved, data]);
+      };
+      save({
+        mode: gridSize,
+        name: winnerInput.el.value || 'Wanderer',
+        moves,
+        time: spent,
+      });
+      hoorayForm.destroy();
+      blocker.destroy();
+      this.start(this.gridSize);
+      return false;
+    };
   }
 
   zap() {
@@ -221,6 +289,7 @@ class Game {
   }
 
   canvasClickHandler(e) {
+    if (!this.matrix) return console.log('kek');
     const isClicked = (x, y, x0, y0, x1, y1) => x > x0 && x < x1 && y > y0 && y < y1;
     const clickedIndex = this.matrix
       .map((v) => this.getCellDrawInfo(v.x.current, v.y.current))
@@ -233,15 +302,14 @@ class Game {
     }
   }
 
-  autoSave() {
-    _.ls.save('gem-puzzle', {
-      autoSave: {
-        time: time.current.getTime('raw'),
-        matrix: this.matrix,
-        moves: this.movesCounter,
-        gridSize: this.gridSize,
-      },
-    });
+  saveGame(type) {
+    const save = (name, data) => {
+      _.ls.save(`gem-puzzle__${type}-save_${name}`, data);
+    };
+    save('time', time.current.getTime('raw'));
+    save('matrix', this.matrix);
+    save('moves', this.movesCounter);
+    save('gridSize', this.gridSize);
   }
 }
 const main = new Element(document.body, 'main', 'main flex column');
@@ -258,7 +326,7 @@ const size = new Element(footer.el, 'div', 'size flex column');
 
 const time = new Element(info.el, 'div', 'time flex');
 time.label = new Element(time.el, 'div', 'time__label', 'Time:');
-time.counter = new Element(time.el, 'div', 'time__counter', '00:00:00');
+time.counter = new Element(time.el, 'div', 'time__counter', '------------------');
 time.current = new TimeCounter(time.counter.el);
 
 const moves = new Element(info.el, 'div', 'moves flex');
@@ -293,15 +361,19 @@ function btnSoundHandler() {
   this.style.backgroundImage = game.soundVolume.getIcon();
 }
 function btnSaveHandler() {
-  time.current.pause(); // ! это не для того
+  game.saveGame('manual');
+}
+function btnLoadHandler() {
+  game.resume('manual');
 }
 function btnResultsHandler() {}
 
-menu.start = new Button(menu.el, 'Shuffle & start', btnStartHandler);
+menu.start = new Button(menu.el, 'restart', btnStartHandler);
 menu.sound = new Button(menu.el, '', btnSoundHandler);
 menu.sound.el.classList.add('menu__sound-button');
 menu.sound.el.style.backgroundImage = game.soundVolume.getIcon();
 menu.save = new Button(menu.el, 'Save', btnSaveHandler);
+menu.load = new Button(menu.el, 'Load', btnLoadHandler);
 menu.results = new Button(menu.el, 'Top 10', btnResultsHandler);
 
 function sizePickerHandler() {
@@ -317,7 +389,8 @@ for (let i = 3; i <= 8; i += 1) {
   console.log('kek');
 }); */
 //
-game.start(4);
+// game.start();
+game.resume('auto');
 //
 
 window.addEventListener('resize', () => {
@@ -330,5 +403,5 @@ window.addEventListener('resize', () => {
 });
 
 time.counter.el.addEventListener('text-changed', () => {
-  game.autoSave();
+  game.saveGame('auto');
 });

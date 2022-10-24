@@ -17,7 +17,7 @@ export default class {
     const h = pad(Math.floor(this.#current / 60 / 60) % 24);
     const m = pad(Math.floor(this.#current / 60) % 60);
     const s = pad(Math.floor(this.#current) % 60);
-    return `${h}:${m}:${s}`;
+    return type === 'short' ? `${pad(h * 60 + +m)}:${s}` : `${h}:${m}:${s}`;
   }
 
   setTime(n) {
@@ -25,6 +25,7 @@ export default class {
   }
 
   start() {
+    clearInterval(this.#ticking);
     this.#ticking = setInterval(() => {
       this.setTime(this.#current + 1);
       this.#renderTime();

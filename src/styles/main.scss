@@ -107,6 +107,8 @@ body {
 }
 
 .game {
+  position: relative;
+  display: flex;
   box-shadow: 0 0 7px 4px #00ff0054;
   /* height: 100%;
   width: 100%; */
@@ -120,3 +122,51 @@ body {
     outline: 1px dashed red;
   }
 }
+
+.game__winner-form {
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+}
+.game__hooray-text {
+}
+.game__winner-input {
+  width: 13rem;
+  height: 2rem;
+  padding-left: 0.5rem;
+  font-family: fixedsys;
+  font-size: 1.15rem;
+  outline: none;
+  color: rgba(192, 255, 192, 0.9);
+  background-color: #030;
+  border: 1px solid #0f0;
+  &::placeholder {
+    color: rgba(192, 255, 192, 0.5);
+  }
+  &:hover {
+    cursor: url('../assets/cursor.png'), auto;
+    box-shadow: 0 0 3px 2px #00ff00b3;
+    text-shadow: 0 0 1px #0f06;
+  }
+}
+.blocker {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0008;
+  z-index: 0;
+}
+/*
+
+this.wrapper, 'form', 'game__winner-form');
+hoorayForm.el, 'div', 'game__hooray-text', hoorayMessage);
+hoorayForm.el, 'input', 'game__winner-input', 'kekeke');
+
+*/

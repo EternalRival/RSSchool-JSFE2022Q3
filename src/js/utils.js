@@ -15,10 +15,10 @@ export default {
   },
   ls: {
     load(key) {
-      return (JSON.parse(localStorage.getItem('erdev')) || {})[key];
+      return JSON.parse(localStorage.getItem(`erdev__${key}`));
     },
     save(key, data) {
-      localStorage.setItem('erdev', JSON.stringify({ [key]: { ...this.load(key), ...data } }));
+      localStorage.setItem(`erdev__${key}`, JSON.stringify(data));
     },
   },
 };
