@@ -225,10 +225,13 @@ class Game {
 
   resume(type) {
     const load = (name) => _.ls.load(`gem-puzzle__${type}-save_${name}`);
-    /*  if (!load('erdev__gem-puzzle__auto-save_gridSize')) {
+    if (type === 'auto' && !load('erdev__gem-puzzle__auto-save_gridSize')) {
       this.start();
       return;
-    } */
+    }
+    if (type === 'manual' && !load('erdev__gem-puzzle__manual-save_gridSize')) {
+      return;
+    }
     this.gridSize = load('gridSize');
     this.setMatrix(load('matrix'));
     time.current.setTime(load('time'));
