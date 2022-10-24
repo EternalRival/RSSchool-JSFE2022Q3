@@ -2,6 +2,10 @@
   font-family: 'beon';
   src: url('../assets/beon.otf') format('opentype');
 }
+@font-face {
+  font-family: 'fixedsys';
+  src: url('../assets/FSEX302.ttf') format('opentype');
+}
 
 * {
   box-sizing: border-box;
@@ -19,11 +23,25 @@ body {
   color: #fff;
   background-color: #000;
   background-image: url('../assets/bg-pattern.png');
-  background-size: auto 100%;
+  background-size: contain;
   background-position: center top;
   background-repeat: repeat-x;
 }
-.main {
+.bg-text {
+  position: absolute;
+  display: inline-block;
+  font-size:0.9rem;
+  top:0;
+  left: 0;
+  right: 0;z-index:-1;
+  text-align: center;
+  color: #0f0;
+  font-family: fixedsys;transition:opacity 0.3s;
+  @media (max-height:620px){
+    opacity:0;
+  }
+}
+.main {position:relative;
   height: 90%;
   /*  justify-content: space-evenly; */
   justify-content: center;

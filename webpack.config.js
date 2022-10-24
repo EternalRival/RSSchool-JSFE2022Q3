@@ -14,7 +14,8 @@ module.exports = {
     },
     assetModuleFilename: '[name][ext]',
   },
-  devtool: 'hidden-source-map',
+  devtool: false,
+  /*  devtool: 'hidden-source-map', */
   devServer: {
     static: { directory: path.resolve(__dirname, 'dist') },
     port: 4567,
@@ -29,7 +30,7 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
-      { test: /\.(png|svg|otf|ogg)$/i, type: 'asset/resource' },
+      { test: /\.(png|svg|otf|ttf|ogg)$/i, type: 'asset/resource' },
     ],
   },
   plugins: [
@@ -50,5 +51,10 @@ module.exports = {
     buildDependencies: {
       config: [path.join(__dirname, './webpack.config.js')],
     },
+  },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
   },
 };

@@ -6,6 +6,8 @@ import Tile from './js/Tile';
 import Sounds from './js/Sounds';
 import TimeCounter from './js/TimeCounter';
 
+console.log(fixedsys);
+
 const { pause } = utils;
 const beon = new FontFace('beon', "url('beon.otf')");
 
@@ -227,12 +229,15 @@ class Game {
     }
   }
 }
-
 const main = new Element(document.body, 'main', 'main flex column');
 const header = new Element(main.el, 'div', 'header flex column');
 const game = new Game(main.el);
 const footer = new Element(main.el, 'div', 'footer flex column');
 
+
+const bgText = new Element(main.el, 'div', 'bg-text');
+bgText.el.innerText =
+  'ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM\nCOPYRIGHT 2075-2077 ROBCO INDUSTRIES\n-Display 1-';
 const menu = new Element(header.el, 'div', 'menu flex');
 const info = new Element(header.el, 'div', 'game-info flex column');
 const size = new Element(footer.el, 'div', 'size flex column');
@@ -309,6 +314,8 @@ window.addEventListener('resize', () => {
   game.renderField();
 });
 
-/* ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM
-COPYRIGHT 2075-2077 ROBCO INDUSTRIES
--Display 1- */
+/* 
+ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM\nCOPYRIGHT 2075-2077 ROBCO INDUSTRIES\n-Display 1- */
+/* 
+f42d9881-5e43-40ce-ac39-4cb0be8533b1
+ */
