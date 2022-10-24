@@ -366,7 +366,27 @@ function btnSaveHandler() {
 function btnLoadHandler() {
   game.resume('manual');
 }
-function btnResultsHandler() {}
+function btnResultsHandler() {
+  time.current.pause();
+  const top = new Element(main.el, 'table', 'top__table');
+  top.el.addEventListener('click', () => {
+    time.current.start();
+    top.destroy();
+  });
+  const list = _.ls.load('gem-puzzle__top-list');
+  list.sort((a, b) => a.time.replace(':', '') - b.time.replace(':', ''));
+  top.header = new Element(top.el, 'tr', 'top__record-theader');
+  ['name', 'mode', 'time', 'moves'].forEach((v) => {
+    new Element(top.header.el, 'th', 'top__record-th', v);
+  });
+  list.slice(0, 10).forEach((v) => {
+    const record = new Element(top.el, 'tr', 'top__record');
+    new Element(record.el, 'td', 'top__record-td', v.name);
+    new Element(record.el, 'td', 'top__record-td', `${v.mode ?? 0}x${v.mode ?? 0}`);
+    new Element(record.el, 'td', 'top__record-td', v.time);
+    new Element(record.el, 'td', 'top__record-td', v.moves);
+  });
+}
 
 menu.start = new Button(menu.el, 'restart', btnStartHandler);
 menu.sound = new Button(menu.el, '', btnSoundHandler);

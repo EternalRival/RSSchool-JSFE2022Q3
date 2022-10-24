@@ -163,10 +163,37 @@ body {
   background-color: #0008;
   z-index: 0;
 }
-/*
+.top__table {
+  position: absolute;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: stretch;
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  background-color: #030;
+  border: 2px solid #0f0;
+  text-align: center;
+}
+.top__record {
+  height: 1.5rem;
+  color: #fff;
+  background-color: #0001;
+}
+.top__record-theader {
+  border: 2px solid #0f0;
+}
+.top__record-th {
+  background-color: #0003;
+  border: 1px solid #0f0;
+  height: 1rem;
+}
+.top__record-td {
+  border: 1px solid #0f0;
+  overflow: hidden;
+}
 
-this.wrapper, 'form', 'game__winner-form');
-hoorayForm.el, 'div', 'game__hooray-text', hoorayMessage);
-hoorayForm.el, 'input', 'game__winner-input', 'kekeke');
-
-*/
+/* * {
+  outline: 1px solid red;
+} */
