@@ -13,9 +13,13 @@
   -ms-user-select: none;
   user-select: none;
 }
+body,
+html,
+* {
+  cursor: url('../assets/cursor_dark.png'), auto;
+}
 html {
   overflow: hidden;
-  cursor: url('../assets/cursor_dark.png'), auto;
 }
 body {
   margin: 0;
@@ -103,6 +107,7 @@ body {
 }
 
 .game {
+  box-shadow: 0 0 7px 4px rgba(0, 255, 0, 0.33);
   /* height: 100%;
   width: 100%; */
   /*   width: 100%; */

@@ -18,8 +18,11 @@ class Game {
     this.canvas = document.createElement('canvas');
     this.canvas.className = 'game__canvas';
     this.canvas.addEventListener('click', (e) => this.canvasClickHandler(e));
-    this.canvas.width = Math.min(window.innerHeight * 0.5, window.innerWidth * 0.9375);
-    this.canvas.height = this.canvas.width;
+    const min = Math.min(window.innerHeight * 0.5, window.innerWidth * 0.9375);
+    this.canvas.width = min;
+    this.canvas.height = min;
+    this.wrapper.style.width = `${min}px`;
+    this.wrapper.style.height = `${min}px`;
     this.wrapper.append(this.canvas);
 
     this.gridSize = gridSize;
@@ -308,6 +311,8 @@ window.addEventListener('resize', () => {
   const min = Math.min(window.innerHeight * 0.5, window.innerWidth * 0.9375);
   game.canvas.width = min;
   game.canvas.height = min;
+  game.wrapper.style.width = `${min}px`;
+  game.wrapper.style.height = `${min}px`;
   game.renderField();
 });
 
