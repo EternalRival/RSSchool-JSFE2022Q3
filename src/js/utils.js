@@ -13,4 +13,12 @@ export default {
       setTimeout(_, ms * 1000);
     });
   },
+  ls: {
+    load(key) {
+      return (JSON.parse(localStorage.getItem('erdev')) || {})[key];
+    },
+    save(key, data) {
+      localStorage.setItem('erdev', JSON.stringify({ [key]: { ...this.load(key), ...data } }));
+    },
+  },
 };

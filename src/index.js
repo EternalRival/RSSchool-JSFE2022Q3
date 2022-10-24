@@ -1,12 +1,12 @@
 import './styles/main.scss';
-import utils from './js/utils';
+import _ from './js/utils';
 import Element from './js/Element';
 import Button from './js/Button';
 import Tile from './js/Tile';
 import Sounds from './js/Sounds';
 import TimeCounter from './js/TimeCounter';
 
-const { pause } = utils;
+const { pause } = _;
 const beon = new FontFace('beon', "url('beon.otf')");
 
 class Game {
@@ -180,7 +180,7 @@ class Game {
     time.current.clear();
     await pause(0.5);
     const timeout = 15 / this.matrix.length ** 2;
-    const getRandomCell = (arr) => arr[utils.randomizer(0, arr.length - 1)];
+    const getRandomCell = (arr) => arr[_.randomizer(0, arr.length - 1)];
     const isTotallyShuffled = (arr) =>
       arr.every((v) => v.x.current !== v.x.initial || v.y.current !== v.y.initial);
 
@@ -319,8 +319,3 @@ window.addEventListener('resize', () => {
   game.renderField();
 });
 
-/* 
-ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM\nCOPYRIGHT 2075-2077 ROBCO INDUSTRIES\n-Display 1- */
-/* 
-f42d9881-5e43-40ce-ac39-4cb0be8533b1
- */
