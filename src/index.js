@@ -18,7 +18,7 @@ class Game {
     this.canvas = document.createElement('canvas');
     this.canvas.className = 'game__canvas';
     this.canvas.addEventListener('click', (e) => this.canvasClickHandler(e));
-    this.canvas.width = 300;
+    this.canvas.width = Math.min(window.innerHeight * 0.5, window.innerWidth * 0.9375);
     this.canvas.height = this.canvas.width;
     this.wrapper.append(this.canvas);
 
@@ -54,8 +54,8 @@ class Game {
   };
 
   getCanvasSize() {
-    const height = this.canvas.offsetHeight;
-    const width = this.canvas.offsetWidth;
+    const { height } = this.canvas;
+    const { width } = this.canvas;
     return Math.min(height, width);
   }
 
@@ -302,4 +302,9 @@ for (let i = 3; i <= 8; i += 1) {
 game.start(4);
 //
 
-window.addEventListener('resize', () => game.renderField());
+window.addEventListener('resize', () => {
+  const min = Math.min(window.innerHeight * 0.6, window.innerWidth * 0.9375);
+  game.canvas.width = min;
+  game.canvas.height = min;
+  game.renderField();
+});
