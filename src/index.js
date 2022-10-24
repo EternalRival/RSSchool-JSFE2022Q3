@@ -40,8 +40,6 @@ class Game {
 
   movesCounter = 0;
 
-  gameTimer = 0;
-
   soundVolume = {
     current: 'high',
     muted: { volume: 0 / 3, icon: Sounds.muted },
@@ -174,6 +172,7 @@ class Game {
     ctx.draw(frame, '#0f0', border);
 
     this.matrix.forEach((v) => this.renderCell(v));
+    this.autoSave();
   }
 
   async shuffle() {
@@ -232,6 +231,17 @@ class Game {
       this.renderField();
       this.zap();
     }
+  }
+
+  autoSave() {
+    _.ls.save('gem-puzzle', {
+      autoSave: {
+        time: time.current.getTime('raw'),
+        matrix: this.matrix,
+        moves: this.movesCounter,
+        gridSize: this.gridSize,
+      },
+    });
   }
 }
 const main = new Element(document.body, 'main', 'main flex column');
@@ -319,3 +329,6 @@ window.addEventListener('resize', () => {
   game.renderField();
 });
 
+time.counter.el.addEventListener('text-changed', () => {
+  game.autoSave();
+});

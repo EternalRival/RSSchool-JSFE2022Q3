@@ -1,3 +1,5 @@
+import TextChanged from './Events';
+
 export default class {
   constructor(el) {
     this.el = el;
@@ -9,7 +11,8 @@ export default class {
 
   #isPaused = false;
 
-  getTime() {
+  getTime(type) {
+    if (type === 'raw') return this.#current;
     const pad = (v) => `${v}`.padStart(2, 0);
     const h = pad(Math.floor(this.#current / 60 / 60) % 24);
     const m = pad(Math.floor(this.#current / 60) % 60);
@@ -46,5 +49,6 @@ export default class {
 
   #renderTime() {
     this.el.textContent = this.getTime();
+    this.el.dispatchEvent(TextChanged);
   }
 }
