@@ -30,7 +30,7 @@ class Game {
 
   #cellBorder = 3;
 
-  #shuffling = false;
+  #shuffling = null;
 
   gridSize = null;
 
@@ -205,7 +205,7 @@ class Game {
 
       if (isTotallyShuffled(this.matrix)) {
         clearInterval(this.#shuffling);
-        this.#shuffling = false;
+        this.#shuffling = null;
         time.current.start();
       }
     }, timeout * 1000);
