@@ -205,6 +205,7 @@ class Game {
 
       if (isTotallyShuffled(this.matrix)) {
         clearInterval(this.#shuffling);
+        this.#shuffling = false;
         time.current.start();
       }
     }, timeout * 1000);
