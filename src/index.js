@@ -73,7 +73,7 @@ class Game {
   }
 
   getEmptyCell() {
-    return this.matrix.at(-1);
+    return this.matrix[this.matrix.length - 1];
   }
 
   getActiveCellList() {
@@ -374,6 +374,11 @@ function btnResultsHandler() {
     top.destroy();
   });
   const list = _.ls.load('gem-puzzle__top-list');
+  console.log(list);
+  if (!list || list.length === 0) {
+    top.el.click();
+    return;
+  }
   list.sort((a, b) => a.time.replace(':', '') - b.time.replace(':', ''));
   top.header = new Element(top.el, 'tr', 'top__record-theader');
   ['name', 'mode', 'time', 'moves'].forEach((v) => {
