@@ -40,7 +40,7 @@ module.exports = {
       filename: 'index.html',
       favicon: './src/assets/favicon.png',
       meta: {
-        viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no,user-scalable=no',
+        viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimum-scale=1.0, minimum-scale=1.0',
       },
     }),
   ],

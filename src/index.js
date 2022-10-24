@@ -83,7 +83,9 @@ class Game {
   }
 
   isPuzzleCompleted() {
-    return this.movesCounter !== 0 && this.matrix.every((v) => v.isRightPosition());
+    return (
+      this.movesCounter !== 0 && !this.#shuffling && this.matrix.every((v) => v.isRightPosition())
+    );
   }
 
   getCtx() {
@@ -223,10 +225,10 @@ class Game {
 
   resume(type) {
     const load = (name) => _.ls.load(`gem-puzzle__${type}-save_${name}`);
-    if (!load('erdev__gem-puzzle__auto-save_gridSize')) {
+    /*  if (!load('erdev__gem-puzzle__auto-save_gridSize')) {
       this.start();
       return;
-    }
+    } */
     this.gridSize = load('gridSize');
     this.setMatrix(load('matrix'));
     time.current.setTime(load('time'));
@@ -289,7 +291,7 @@ class Game {
   }
 
   canvasClickHandler(e) {
-    if (!this.matrix) return console.log('kek');
+    if (!this.matrix) return; /* console.log('kek'); */
     const isClicked = (x, y, x0, y0, x1, y1) => x > x0 && x < x1 && y > y0 && y < y1;
     const clickedIndex = this.matrix
       .map((v) => this.getCellDrawInfo(v.x.current, v.y.current))
@@ -374,7 +376,6 @@ function btnResultsHandler() {
     top.destroy();
   });
   const list = _.ls.load('gem-puzzle__top-list');
-  console.log(list);
   if (!list || list.length === 0) {
     top.el.click();
     return;
