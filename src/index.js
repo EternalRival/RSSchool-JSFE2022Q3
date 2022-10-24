@@ -303,8 +303,12 @@ game.start(4);
 //
 
 window.addEventListener('resize', () => {
-  const min = Math.min(window.innerHeight * 0.6, window.innerWidth * 0.9375);
+  const min = Math.min(window.innerHeight * 0.5, window.innerWidth * 0.9375);
   game.canvas.width = min;
   game.canvas.height = min;
   game.renderField();
 });
+
+/* ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM
+COPYRIGHT 2075-2077 ROBCO INDUSTRIES
+-Display 1- */
