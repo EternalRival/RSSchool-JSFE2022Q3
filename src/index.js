@@ -148,8 +148,11 @@ class Game {
     } catch (e) {
       cell.rect(cellDrawInfo.x0, cellDrawInfo.y0, cellDrawInfo.size, cellDrawInfo.size);
     }
-    ctx.draw(cell, '#020');
+    if (tile.isRightPosition()) ctx.shadowBlur = border * 1.5;
+    ctx.shadowColor = '#0f0';
+    ctx.draw(cell, tile.isRightPosition() ? '#003300' : '#020');
     ctx.draw(cell, '#0f0', border);
+    ctx.shadowBlur = 0;
 
     ctx.font = `${Math.min(size / this.gridSize, size / this.gridSize) * 0.6}px beon`;
     ctx.textAlign = 'center';
