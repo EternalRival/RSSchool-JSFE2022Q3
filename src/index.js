@@ -230,7 +230,7 @@ class Game {
       this.start();
       return;
     }
-    if (type === 'manual' && !load('gem-puzzle__manual-save_gridSize')) {
+    if (type === 'manual' && !_.ls.load('gem-puzzle__manual-save_gridSize')) {
       return;
     }
     this.gridSize = load('gridSize');
