@@ -226,11 +226,11 @@ class Game {
 
   resume(type) {
     const load = (name) => _.ls.load(`gem-puzzle__${type}-save_${name}`);
-    if (type === 'auto' && !load('erdev__gem-puzzle__auto-save_gridSize')) {
+    if (type === 'auto' && !_.ls.load('gem-puzzle__auto-save_gridSize')) {
       this.start();
       return;
     }
-    if (type === 'manual' && !load('erdev__gem-puzzle__manual-save_gridSize')) {
+    if (type === 'manual' && !load('gem-puzzle__manual-save_gridSize')) {
       return;
     }
     this.gridSize = load('gridSize');
