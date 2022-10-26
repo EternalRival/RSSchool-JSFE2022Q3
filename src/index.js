@@ -201,6 +201,9 @@ class Game {
 
     const blockerGame = new Element(this.wrapper, 'div', 'blocker blocker_game');
     this.blockerList.push(blockerGame);
+    menu.save.el.disabled = true;
+    menu.load.el.disabled = true;
+    menu.results.el.disabled = true;
     clearInterval(this.#shuffling);
     this.#shuffling = setInterval(() => {
       const activeCells = this.getActiveCellList().filter((v) => v !== lastMoved);
@@ -216,6 +219,9 @@ class Game {
         this.#shuffling = null;
         time.current.start();
         this.blockerList.forEach((v) => v.destroy());
+        menu.save.el.disabled = false;
+        menu.load.el.disabled = false;
+        menu.results.el.disabled = false;
       }
     }, timeout * 1000);
   }
