@@ -5,6 +5,7 @@ import Button from './js/Button';
 import Tile from './js/Tile';
 import Sounds from './js/Sounds';
 import TimeCounter from './js/TimeCounter';
+import Events from './js/Events';
 
 const { pause } = _;
 const beon = new FontFace('beon', "url('beon.otf')");
@@ -186,6 +187,8 @@ class Game {
     }
   }
 
+  blockerList = [];
+
   async shuffle() {
     time.current.clear();
     await pause(0.3);
@@ -196,6 +199,8 @@ class Game {
 
     let lastMoved;
 
+    const blockerGame = new Element(this.wrapper, 'div', 'blocker blocker_game');
+    this.blockerList.push(blockerGame);
     clearInterval(this.#shuffling);
     this.#shuffling = setInterval(() => {
       const activeCells = this.getActiveCellList().filter((v) => v !== lastMoved);
@@ -210,6 +215,7 @@ class Game {
         clearInterval(this.#shuffling);
         this.#shuffling = null;
         time.current.start();
+        this.blockerList.forEach((v) => v.destroy());
       }
     }, timeout * 1000);
   }
@@ -267,7 +273,7 @@ class Game {
       'erdev__gem-puzzle__manual-save_matrix',
     ].forEach((v) => localStorage.removeItem(v));
 
-    const blocker = new Element(document.body, 'div', 'blocker');
+    const blocker = new Element(document.body, 'div', 'blocker blocker_main');
     const hoorayForm = new Element(this.wrapper, 'form', 'game__winner-form');
     const hoorayText = new Element(hoorayForm.el, 'div', 'game__hooray-text', hoorayMessage);
     const winnerInput = new Element(hoorayForm.el, 'input', 'game__winner-input', 'kekeke');
@@ -438,3 +444,15 @@ window.addEventListener('resize', () => {
 time.counter.el.addEventListener('text-changed', () => {
   game.saveGame('auto');
 });
+
+console.log('-'.repeat(30));
+console.log('🌼Доброго времени суток!');
+console.log('🌼Прошу при проверке оставить свои контакты и не скрываться за маской анонимности.');
+console.log(
+  '🌼Переключение звука имеет 4 режима. Иконка выключенного звука имеет вид "Динамик с крестиком"',
+);
+console.log(
+  '🌼Сохранение и загрузка игры при ручном и автоматическом сейве происходят независимо друг от друга.',
+);
+console.log('🌼Спасибо за внимание! :)');
+console.log('-'.repeat(30));

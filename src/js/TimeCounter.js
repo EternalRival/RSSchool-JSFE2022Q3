@@ -1,4 +1,4 @@
-import TextChanged from './Events';
+import  Events  from './Events';
 
 export default class {
   constructor(el) {
@@ -50,6 +50,6 @@ export default class {
 
   #renderTime() {
     this.el.textContent = this.getTime();
-    this.el.dispatchEvent(TextChanged);
+    this.el.dispatchEvent(Events.TextChanged);
   }
 }
