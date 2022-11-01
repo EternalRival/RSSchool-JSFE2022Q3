@@ -9,7 +9,8 @@ fs.readdir(path.resolve(__dirname, dir), (_, files) => {
     fs.stat(filePath, (_, v) => {
       if (v.isFile()) {
         const { name, ext } = path.parse(filePath);
-        console.log(`${name} - ${ext.slice(1)} - ${v.size}b`);
+        const kb = v.size / 1024;
+        console.log(`${name} - ${ext.slice(1)} - ${kb.toFixed(3)}kb`);
       }
     });
   }
