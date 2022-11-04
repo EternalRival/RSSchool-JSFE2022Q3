@@ -1,31 +1,30 @@
 const { readdir, stat } = require('fs/promises');
 const { resolve, parse } = require('path');
 
-const dir = 'secret-folder';
+const DIR = 'secret-folder';
 
-function getPath(fileName) {
-  return resolve(__dirname, dir, fileName);
+async function getFilesData(dirPath) {
+  const fileNames = await readdir(dirPath);
+
+  return fileNames.reduce(async (p, c) => {
+    const path = resolve(__dirname, DIR, c);
+    const stats = await stat(path);
+
+    if (!stats.isFile()) return p;
+
+    const file = parse(path);
+    const { name } = file;
+    const ext = file.ext.slice(1);
+    const bytes = stats.size;
+
+    return [...(await p), { path, name, ext, bytes, stats }];
+  }, []);
 }
 
-async function getFileData(path) {
-  const stats = await stat(path);
-  return { path, stats };
-}
-
-function getFilesData(paths) {
-  return Promise.all(paths.map(getFileData));
-}
-
-async function getFilesInfo(path) {
-  const fileNames = await readdir(path);
-  const paths = fileNames.map(getPath);
-  const files = await getFilesData(paths);
-  for (const file of files) {
-    if (!file.stats.isFile()) continue;
-    const { name, ext } = parse(file.path);
-    const kb = file.stats.size / 1024;
-    console.log(`${name} - ${ext.slice(1)} - ${kb.toFixed(3)}kb`);
-  }
-}
-
-getFilesInfo(resolve(__dirname, dir));
+getFilesData(resolve(__dirname, DIR)).then((files) => {
+  files.forEach((file) => {
+    const { name, ext } = file;
+    const kb = (file.bytes / 1024).toFixed(3);
+    console.log(`${name} - ${ext} - ${kb}kb`);
+  });
+});
