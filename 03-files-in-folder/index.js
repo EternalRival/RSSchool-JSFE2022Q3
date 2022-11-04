@@ -1,17 +1,31 @@
-const fs = require('fs');
-const path = require('path');
+const { readdir, stat } = require('fs/promises');
+const { resolve, parse } = require('path');
 
 const dir = 'secret-folder';
 
-fs.readdir(path.resolve(__dirname, dir), (_, files) => {
+function getPath(fileName) {
+  return resolve(__dirname, dir, fileName);
+}
+
+async function getFileData(path) {
+  const stats = await stat(path);
+  return { path, stats };
+}
+
+function getFilesData(paths) {
+  return Promise.all(paths.map(getFileData));
+}
+
+async function getFilesInfo(path) {
+  const fileNames = await readdir(path);
+  const paths = fileNames.map(getPath);
+  const files = await getFilesData(paths);
   for (const file of files) {
-    const filePath = path.resolve(__dirname, dir, file);
-    fs.stat(filePath, (_, v) => {
-      if (v.isFile()) {
-        const { name, ext } = path.parse(filePath);
-        const kb = v.size / 1024;
-        console.log(`${name} - ${ext.slice(1)} - ${kb.toFixed(3)}kb`);
-      }
-    });
+    if (!file.stats.isFile()) continue;
+    const { name, ext } = parse(file.path);
+    const kb = file.stats.size / 1024;
+    console.log(`${name} - ${ext.slice(1)} - ${kb.toFixed(3)}kb`);
   }
-});
+}
+
+getFilesInfo(resolve(__dirname, dir));
