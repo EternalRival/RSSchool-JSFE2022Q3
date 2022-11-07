@@ -1,6 +1,6 @@
 const { createReadStream, createWriteStream } = require('fs');
-const { rm, mkdir, readdir } = require('fs/promises');
-const { resolve, extname, basename } = require('path');
+const { rm, mkdir, readdir, stat, copyFile } = require('fs/promises');
+const { resolve, extname, basename, dirname } = require('path');
 
 const distName = 'project-dist';
 
@@ -14,6 +14,7 @@ async function buildLayout(distName) {
     resolve(__dirname, 'components'),
   );
   buildStyles(resolve(distPath, 'style.css'), resolve(__dirname, 'styles'));
+  buildAssets(resolve(distPath, 'assets'), resolve(__dirname, 'styles'));
 }
 
 async function buildHTML(bundlePath, templatePath, componentsDirPath) {
@@ -62,6 +63,33 @@ async function buildStyles(bundlePath, componentsPath) {
   }, []);
   const writeStream = createWriteStream(bundlePath);
   const readStreams = filePaths.map((filePath) => createReadStream(filePath).pipe(writeStream));
+}
+
+async function buildAssets() {
+  const dirPath = resolve(__dirname, 'assets');
+  const distPath = resolve(dirname(dirPath), distName, basename(dirPath));
+
+  await rm(distPath, { recursive: true, force: true });
+  await mkdir(distPath, { recursive: true });
+
+  const filePaths = await getFilePaths(dirPath);
+  await Promise.all(
+    filePaths.map(async (v) => {
+      const dest = v.replace(dirPath, distPath);
+      await mkdir(dirname(dest), { recursive: true });
+      copyFile(v, dest);
+    }),
+  );
+}
+
+async function getFilePaths(dir) {
+  const fileNames = await readdir(dir);
+  const filePaths = fileNames.map((v) => resolve(dir, v));
+
+  return filePaths.reduce(async (p, c) => {
+    if ((await stat(c)).isFile()) return [...(await p), c];
+    return [...(await p), ...(await getFilePaths(c))];
+  }, []);
 }
 
 buildLayout(distName);
