@@ -61,8 +61,8 @@ async function buildStyles(bundlePath, componentsPath) {
     if (!c.isFile() || extname(path) !== '.css') return p;
     return [...p, path];
   }, []);
-  const writeStream = createWriteStream(bundlePath);
-  const readStreams = filePaths.map((filePath) => createReadStream(filePath).pipe(writeStream));
+  const stream = createWriteStream(bundlePath);
+  await Promise.all(filePaths.map((filePath) => createReadStream(filePath).pipe(stream)));
 }
 
 async function buildAssets() {

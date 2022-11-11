@@ -12,8 +12,8 @@ async function buildStyles(dir) {
     if (!c.isFile() || extname(path) !== '.css') return p;
     return [...p, path];
   }, []);
-  const writeStream = createWriteStream(resolve(__dirname, 'project-dist', 'bundle.css'));
-  const readStreams = filePaths.map((filePath) => createReadStream(filePath).pipe(writeStream));
+  const stream = createWriteStream(resolve(__dirname, 'project-dist', 'bundle.css'));
+  await Promise.all(filePaths.map((filePath) => createReadStream(filePath).pipe(stream)));
 }
 
 buildStyles(DIR);
