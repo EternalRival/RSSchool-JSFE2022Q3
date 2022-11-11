@@ -13,7 +13,11 @@ async function buildStyles(dir) {
     return [...p, path];
   }, []);
   const stream = createWriteStream(resolve(__dirname, 'project-dist', 'bundle.css'));
+
   await Promise.all(filePaths.map((filePath) => createReadStream(filePath).pipe(stream)));
 }
 
-buildStyles(DIR);
+console.log('Building styles…');
+buildStyles(DIR).then(() => {
+  console.log('Build completed');
+});

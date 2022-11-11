@@ -24,9 +24,12 @@ async function copyDir(dir) {
     filePaths.map(async (v) => {
       const dest = v.replace(dirPath, copyPath);
       await mkdir(dirname(dest), { recursive: true });
-      copyFile(v, dest);
+      return copyFile(v, dest);
     }),
   );
 }
 
-copyDir(DIR);
+console.log('Copying files…');
+copyDir(DIR).then(() => {
+  console.log('Copying completed!');
+});

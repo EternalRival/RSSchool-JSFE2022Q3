@@ -8,13 +8,25 @@ async function buildLayout(distName) {
   const distPath = resolve(__dirname, distName);
   await rm(distPath, { recursive: true, force: true });
   await mkdir(distPath, { recursive: true });
+
+  console.log('Building markup…');
   buildHTML(
     resolve(distPath, 'index.html'),
     resolve(__dirname, 'template.html'),
     resolve(__dirname, 'components'),
-  );
-  buildStyles(resolve(distPath, 'style.css'), resolve(__dirname, 'styles'));
-  buildAssets(resolve(distPath, 'assets'), resolve(__dirname, 'styles'));
+  ).then(() => {
+    console.log('Build completed (markup)');
+  });
+
+  console.log('Building styles…');
+  buildStyles(resolve(distPath, 'style.css'), resolve(__dirname, 'styles')).then(() => {
+    console.log('Build completed (styles)');
+  });
+  
+  console.log('Building assets…');
+  buildAssets(resolve(distPath, 'assets'), resolve(__dirname, 'styles')).then(() => {
+    console.log('Build completed (assets)');
+  });
 }
 
 async function buildHTML(bundlePath, templatePath, componentsDirPath) {
@@ -62,6 +74,7 @@ async function buildStyles(bundlePath, componentsPath) {
     return [...p, path];
   }, []);
   const stream = createWriteStream(bundlePath);
+
   await Promise.all(filePaths.map((filePath) => createReadStream(filePath).pipe(stream)));
 }
 
@@ -73,11 +86,12 @@ async function buildAssets() {
   await mkdir(distPath, { recursive: true });
 
   const filePaths = await getFilePaths(dirPath);
+
   await Promise.all(
     filePaths.map(async (v) => {
       const dest = v.replace(dirPath, distPath);
       await mkdir(dirname(dest), { recursive: true });
-      copyFile(v, dest);
+      return copyFile(v, dest);
     }),
   );
 }
