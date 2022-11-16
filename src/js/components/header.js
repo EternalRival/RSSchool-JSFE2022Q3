@@ -4,8 +4,9 @@ import Anchor from '../class/Anchor';
 export default class Header extends Element {
   constructor() {
     super(document.body, 'header', 'header');
-    this.logo = new Element(this.el, 'div', 'logo');
-    this.nav = new Element(this.el, 'nav', 'nav');
+    this.container = new Element(this.el, 'div', 'header__container');
+    this.logo = new Element(this.container.el, 'div', 'logo');
+    this.nav = new Element(this.container.el, 'nav', 'nav');
 
     this.main = {};
     this.main.item = new Element(this.nav.el, 'li', 'nav-item');

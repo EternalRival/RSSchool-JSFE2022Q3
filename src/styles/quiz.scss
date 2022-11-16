@@ -1,20 +1,4 @@
 @import './base';
-.main {
-  // outline: 1px dashed red;
-  // * {
-  //   outline: 1px dashed red;
-  // }
-  width: 100%;
-  max-width: 1600px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-
-  gap: 1em;
-  padding: 0.5em;
-}
 
 .game-info {
   width: 100%;

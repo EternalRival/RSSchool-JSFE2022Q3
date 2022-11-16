@@ -51,7 +51,7 @@ Object.assign(game.question, {
 
 Object.assign(game.answers, {
   options: new Element(game.answers.el, 'div', 'options'),
-  description: new Element(game.answers.el, 'div', 'description', 'play song and guess'),
+  description: new Element(game.answers.el, 'div', 'description', 'play song and guess tv-show'),
 });
 
 Object.assign(
