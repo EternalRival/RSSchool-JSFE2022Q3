@@ -25,7 +25,7 @@ const config = {
   output: {
     path: path.resolve('dist'),
     clean: true,
-    assetModuleFilename: '[name][ext]',
+    assetModuleFilename: 'assets/[name][ext]',
   },
   devServer: {
     static: { directory: path.resolve('dist') },
@@ -39,7 +39,7 @@ const config = {
     compress: true,
   },
   plugins: [
-    new FaviconsWebpackPlugin(path.resolve('src', 'assets', 'favicon.png')),
+    new FaviconsWebpackPlugin(path.resolve('src', 'assets', 'favicon.svg')),
     new HtmlWebpackPlugin({
       templateContent: getTemplate(),
       filename: 'index.html',
@@ -63,8 +63,8 @@ const config = {
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-        type: 'asset',
+        test: /\.(svg|png|jpg|mp4)$/i,
+        type: 'asset/resource',
       },
     ],
   },

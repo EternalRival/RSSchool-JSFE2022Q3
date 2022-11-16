@@ -1,11 +1,11 @@
 import Element from '../class/Element';
 import Anchor from '../class/Anchor';
 
-export default class Footer {
+export default class Footer extends Element {
   constructor() {
-    this.container = new Element(document.body, 'footer', 'footer');
-    this.github = new Anchor(this.container.el, 'https://github.com/EternalRival', 'github');
-    this.year = new Element(this.container.el, 'div', 'year', '2022');
-    this.rssLogo = new Anchor(this.container.el, 'https://rs.school/js/', 'rss-logo');
+    super(document.body, 'footer', 'footer');
+    this.github = new Anchor(this.el, 'https://github.com/EternalRival', 'github interactive');
+    this.year = new Element(this.el, 'div', 'year', '2022');
+    this.rssLogo = new Anchor(this.el, 'https://rs.school/js/', 'rss-logo interactive');
   }
 }
