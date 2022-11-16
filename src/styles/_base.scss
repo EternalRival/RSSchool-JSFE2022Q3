@@ -1,8 +1,11 @@
 $color-main: #0f0;
 $color-main-transparent: #0f05;
 $color-dark: #080;
+$color-dark-transparent: #080c;
 $color-darker: #060;
+$color-darker-transparent: #060c;
 $color-darkest: #030;
+$color-darkest-transparent: #030c;
 
 @font-face {
   font-family: 'beon';
@@ -14,6 +17,9 @@ $color-darkest: #030;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 html {
   height: 100vh;
@@ -35,10 +41,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
   height: 64px;
   width: 100%;
   background-color: $color-main-transparent;
   box-shadow: 0 0 3px 3px $color-dark;
+  text-shadow: 0 0 2px $color-main;
   @media (max-width: 400px) {
     height: 48px;
   }
@@ -99,14 +107,6 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
   }
-}
-
-.main {
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-  align-items: center;
-  gap: 1em;
 }
 
 .interactive {

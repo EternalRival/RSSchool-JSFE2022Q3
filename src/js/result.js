@@ -4,7 +4,7 @@
  - Если набрано максимально возможное количество баллов, выводится поздравление и уведомление об окончании игры (этот пункт не проверяется)
  */
 
-import '../styles/main.scss';
+import '../styles/result.scss';
 import Element from './class/Element';
 import Header from './components/header';
 import Footer from './components/footer';

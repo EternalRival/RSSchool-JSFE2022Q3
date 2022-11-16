@@ -11,9 +11,8 @@ import Footer from './components/footer';
 import BackgroundVideo from './components/background';
 
 const header = new Header();
-
 const main = new Element(document.body, 'main', 'main');
 const bgMatrix = new BackgroundVideo();
-const startGame = new Anchor(main.el, './quiz', 'start-game interactive', 'Start Game');
-
 const footer = new Footer();
+
+const startGame = new Anchor(main.el, './quiz', 'start-game interactive', 'Start Game');
