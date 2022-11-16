@@ -1,0 +1,82 @@
+* {
+  outline: 1px dashed red;
+  margin: 0;
+  padding: 0;
+}
+html {
+  background-color: #ccc;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header,
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.header {
+  position: relative;
+  .nav {
+    display: flex;
+    gap: 1em;
+  }
+  .logo {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    aspect-ratio: 1;
+    background-image: url('../assets/favicon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .nav-item {
+    list-style: none;
+    transition: transform 0.3s;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+  .nav-link {
+    padding: 1em;
+  }
+}
+
+.footer {
+  padding: 0.3em;
+  gap: 1em;
+  .github {
+    display: block;
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-image: url('../assets/gh-logo.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .rss-logo {
+    display: block;
+    height: 66%;
+    aspect-ratio: 2.7/1;
+    background-image: url('../assets/rs_school_js.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .github,
+  .rss-logo {
+    transition: transform 0.3s;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}

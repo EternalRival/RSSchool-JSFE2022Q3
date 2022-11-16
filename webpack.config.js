@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+/* eslint-disable */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
@@ -25,11 +25,14 @@ const config = {
   output: {
     path: path.resolve('dist'),
     clean: true,
-    /*  assetModuleFilename: '[name][ext]', */
+    assetModuleFilename: '[name][ext]',
   },
   devServer: {
     static: { directory: path.resolve('dist') },
-    open: true,
+    open: {
+      target: ['/' /* , '/quiz', '/result' */],
+      app: { name: 'chrome', arguments: ['--incognito'] },
+    },
     port: 4567,
     host: 'localhost',
     hot: true,
