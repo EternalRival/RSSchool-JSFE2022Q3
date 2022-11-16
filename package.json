@@ -4,7 +4,7 @@
   "description": "Private repository for @eternalrival",
   "main": "index.js",
   "scripts": {
-    "deploy": "npm run build && npx gh-pages -d dist -e gem-puzzle -m feat:_update_deploy",
+    "deploy": "npm run build && npx gh-pages -d dist -e songbird -m feat:_update_deploy",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rmdir /s /q dist",
     "prod": "cross-env NODE_ENV=production webpack",

@@ -63,8 +63,8 @@ const config = {
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.(svg|png|jpg|mp4)$/i,
-        type: 'asset/resource',
+        test: /\.(otf|svg|png|jpg|mp4)$/i,
+        type: 'asset',
       },
     ],
   },
