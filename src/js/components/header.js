@@ -8,11 +8,11 @@ export default class Header extends Element {
     this.nav = new Element(this.el, 'nav', 'nav');
 
     this.main = {};
-    this.main.item = new Element(this.nav.el, 'li', 'nav-item interactive');
-    this.main.link = new Anchor(this.main.item.el, './', 'nav-link', 'Menu');
+    this.main.item = new Element(this.nav.el, 'li', 'nav-item');
+    this.main.link = new Anchor(this.main.item.el, './', 'nav-link interactive', 'Menu');
 
     this.quiz = {};
-    this.quiz.item = new Element(this.nav.el, 'li', 'nav-item interactive');
-    this.quiz.link = new Anchor(this.quiz.item.el, './quiz', 'nav-link', 'Quiz');
+    this.quiz.item = new Element(this.nav.el, 'li', 'nav-item');
+    this.quiz.link = new Anchor(this.quiz.item.el, './quiz', 'nav-link interactive', 'Quiz');
   }
 }

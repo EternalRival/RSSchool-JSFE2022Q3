@@ -20,6 +20,7 @@ $color-darkest-transparent: #030c;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  cursor: url('../assets/cursor_dark.png'), auto;
 }
 html {
   height: 100vh;
@@ -69,16 +70,16 @@ body {
     background-position: center;
   }
   .nav-item {
-    padding: 0.4em;
     list-style: none;
-    background-color: $color-darkest;
-    border-radius: 0.3em;
-    box-shadow: inset 0 0 2px 2px $color-main;
   }
   .nav-link {
-    padding: 1em;
+    display: block;
+    padding: 0.4em 1em;
+    border-radius: 0.3em;
     text-decoration-line: none;
     color: $color-main;
+    background-color: $color-darkest;
+    box-shadow: inset 0 0 2px 2px $color-main;
   }
   @media (max-width: 400px) {
     justify-content: flex-end;
@@ -113,6 +114,7 @@ body {
   transition: transform 0.3s;
   &:hover {
     transform: scale(1.1);
+    cursor: url('../assets/cursor.png'), auto;
   }
   &:active {
     box-shadow: 0 0 3px 3px $color-main;
