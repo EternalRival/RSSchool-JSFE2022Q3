@@ -58,3 +58,12 @@ Object.assign(
   game.answers.options,
   placeholders.map((v) => new Element(game.answers.options.el, 'div', 'option', v)),
 );
+
+/* async function kek() {
+  const kekz = await import('../assets/music-list.json');
+  console.log(kekz.default);
+ // const lel = JSON.parse(kekz);
+ // console.log(lel);
+}
+kek();
+ */

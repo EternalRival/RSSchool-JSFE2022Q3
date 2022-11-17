@@ -1,6 +1,6 @@
 import Element from '../class/Element';
-import matrixImg from '../../assets/matrix.jpg';
-import matrixVideo from '../../assets/matrix.mp4';
+import matrixImg from '../../assets/backgrounds/matrix.jpg';
+import matrixVideo from '../../assets/backgrounds/matrix.mp4';
 
 export default class BackgroundVideo extends Element {
   constructor() {

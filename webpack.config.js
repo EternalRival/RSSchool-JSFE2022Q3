@@ -39,7 +39,7 @@ const config = {
     compress: true,
   },
   plugins: [
-    new FaviconsWebpackPlugin(path.resolve('src', 'assets', 'favicon.svg')),
+    new FaviconsWebpackPlugin(path.resolve('./','src', 'assets', 'images', 'favicon.svg')),
     new HtmlWebpackPlugin({
       templateContent: getTemplate(),
       filename: 'index.html',
