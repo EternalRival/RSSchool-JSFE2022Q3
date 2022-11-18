@@ -20,9 +20,9 @@ class TVShow {
 
   getDescription() { return this.#description; }
 
-  async setAudio(element) {
+  async setAudio(element, options) {
     const audio = await import(`../assets/tv-shows/music/${this.#URN}.mp3`);
-    Object.assign(element, { src: audio.default, controls: true });
+    Object.assign(element, { src: audio.default, ...options });
   }
 
   async setImage(element) {
