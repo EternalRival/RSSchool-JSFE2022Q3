@@ -20,7 +20,8 @@ import Header from './components/header';
 import Footer from './components/footer';
 import BackgroundVideo from './components/background';
 
-import ShowList from '../db/TVShowList';
+import TVShowCard from './components/tv-show-card';
+import TVShowList from '../db/TVShowList';
 
 const header = new Header();
 const main = new Element(document.body, 'main', 'main');
@@ -46,10 +47,10 @@ Object.assign(
   placeholders.map((v) => new Element(game.info.categories.el, 'div', 'category', v)),
 );
 
-Object.assign(game.question, {
+/* Object.assign(game.question, {
   img: new Element(game.question.el, 'div', 'question__img', 'img'),
   player: new Element(game.question.el, 'div', 'question__player', 'player'),
-});
+}); */
 
 Object.assign(game.answers, {
   options: new Element(game.answers.el, 'div', 'options'),
@@ -61,4 +62,6 @@ Object.assign(
   placeholders.map((v) => new Element(game.answers.options.el, 'div', 'option', v)),
 );
 
-console.log(ShowList);
+game.answers.description.el.textContent = '';
+new TVShowCard(game.answers.description.el, TVShowList.Anime[0]);
+new TVShowCard(game.question.el, TVShowList.Anime[0]);
