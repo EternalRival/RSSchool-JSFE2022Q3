@@ -59,9 +59,9 @@
 .options,
 .description {
   width: 50%;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   background-color: $color-darkest-transparent;
 }
 
@@ -78,11 +78,7 @@
   }
 }
 .description {
-  padding: 1em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-shadow: 0 0 2px $color-main;
+  text-align: center;
 }
 
 .next-button {

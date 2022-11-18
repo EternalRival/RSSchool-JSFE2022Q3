@@ -20,6 +20,8 @@ import Header from './components/header';
 import Footer from './components/footer';
 import BackgroundVideo from './components/background';
 
+import ShowList from '../db/TVShowList';
+
 const header = new Header();
 const main = new Element(document.body, 'main', 'main');
 const bgMatrix = new BackgroundVideo();
@@ -59,11 +61,4 @@ Object.assign(
   placeholders.map((v) => new Element(game.answers.options.el, 'div', 'option', v)),
 );
 
-/* async function kek() {
-  const kekz = await import('../assets/music-list.json');
-  console.log(kekz.default);
- // const lel = JSON.parse(kekz);
- // console.log(lel);
-}
-kek();
- */
+console.log(ShowList);
