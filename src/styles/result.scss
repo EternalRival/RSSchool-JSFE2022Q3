@@ -1,1 +1,34 @@
 @import './base';
+
+.congratulations {
+  padding: 1em 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  border-radius: 0.5em;
+  box-shadow: inset 0 0 5px 1px $color-main, 0 0 5px 2px $color-main;
+  background-color: $color-darkest-transparent;
+}
+
+.congratulations__heading {
+  font-size: 1.7em;
+  text-shadow: 0 0 5px $color-main;
+}
+
+.congratulations__result-text {
+  padding: 0 0.5em;
+  text-align: center;
+  font-size: 1.2em;
+  text-shadow: 0 0 5px $color-main;
+}
+
+.congratulations__restart {
+  display: block;
+  padding: 0.4em 1em;
+  border-radius: 0.3em;
+  text-decoration-line: none;
+  color: $color-main;
+  background-color: $color-darkest;
+  box-shadow: inset 0 0 2px 2px $color-main;
+}
