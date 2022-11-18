@@ -65,3 +65,5 @@ Object.assign(
 game.answers.description.el.textContent = '';
 new TVShowCard(game.answers.description.el, TVShowList.Anime[0]);
 new TVShowCard(game.question.el, TVShowList.Anime[0]);
+
+import('./checklist');
