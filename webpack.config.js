@@ -21,6 +21,7 @@ const config = {
     main: path.resolve('src', 'js', 'main'),
     quiz: path.resolve('src', 'js', 'quiz'),
     result: path.resolve('src', 'js', 'result'),
+    gallery: path.resolve('src', 'js', 'gallery'),
   },
   output: {
     path: path.resolve('dist'),
@@ -55,6 +56,11 @@ const config = {
       filename: 'result.html',
       chunks: ['result'],
     }),
+    new HtmlWebpackPlugin({
+      templateContent: getTemplate('Gallery'),
+      filename: 'gallery.html',
+      chunks: ['gallery'],
+    }),
   ],
   module: {
     rules: [
@@ -63,8 +69,12 @@ const config = {
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.(otf|svg|png|jpg|mp4)$/i,
+        test: /\.(otf|svg|png|mp4|mp3)$/i,
         type: 'asset',
+      },
+      {
+        test: /\.(jpg)$/i,
+        type: 'asset/resource',
       },
     ],
   },
