@@ -28,14 +28,8 @@ class TVShowCard {
       tvShow.getDescription(),
     );
     tvShow.setImage(this.img.el);
-    tvShow.setAudio(this.audio.el);
-
-    // const info = {
-    //   preview: { image, player },
-    //   description,
-    // };
+    tvShow.setAudio(this.audio.el, { controls: true, preload: 'metadata' });
   }
 }
 
 const gallery = Array.from(Object.values(TVShowList).flat(), (v) => new TVShowCard(main.el, v));
-
