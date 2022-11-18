@@ -1,6 +1,10 @@
 @import './base';
 
-.start-game {
+.main{
+  justify-content: center;
+}
+
+.main-menu {
   display: block;
   padding: 0.3em;
   color: $color-main;
