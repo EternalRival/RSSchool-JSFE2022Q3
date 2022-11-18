@@ -15,4 +15,5 @@ const main = new Element(document.body, 'main', 'main');
 const bgMatrix = new BackgroundVideo();
 const footer = new Footer();
 
-const startGame = new Anchor(main.el, './quiz', 'start-game interactive', 'Start Game');
+const startGame = new Anchor(main.el, './quiz', 'start-game main-menu interactive', 'Start Game');
+const gallery = new Anchor(main.el, './gallery', 'gallery main-menu interactive', 'Gallery');
