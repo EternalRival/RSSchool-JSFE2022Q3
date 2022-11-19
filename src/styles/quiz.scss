@@ -1,26 +1,27 @@
 @import './base';
 @import './tv-show';
 
-.game-info {
+.quiz__info {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   background-color: $color-darker-transparent;
-  .categories {
+  .quiz__categories {
+    padding-right: 0.2em;
     width: 100%;
     display: flex;
     flex-flow: row wrap;
   }
-  .category {
+  .quiz__category {
     flex: 1;
     padding: 0.5em;
     text-align: center;
-    &.current {
-      background-color: $color-main-transparent;
+    &.quiz__category_active {
+      box-shadow: inset 0px 0px 3px 1px $color-main, 0px 0px 3px 1px $color-main;
     }
   }
-  .score {
+  .quiz__score {
     display: flex;
     align-items: center;
     padding: 0.5em;
@@ -29,7 +30,7 @@
   }
 }
 
-.question {
+.quiz__question {
   background-color: $color-darkest-transparent;
   width: 100%;
   .tv-show__description,
@@ -37,50 +38,61 @@
     display: none;
   }
 }
-.answers {
+.quiz__answers {
   width: 100%;
+  min-height: 18em;
   display: flex;
   flex-direction: column;
   gap: 1em;
-  @media (min-width: 720px) {
+  @media (min-width: 768px) {
     flex-direction: row;
   }
 }
-.options,
-.description {
+.quiz__options,
+.quiz__description {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  @media (min-width: 720px) {
+  @media (min-width: 768px) {
     width: 50%;
   }
   // background-color: $color-darkest-transparent;
 }
 
-.option {
+.quiz__option {
   position: relative;
-  padding: 0.5em 2em;
+  padding: 0.5em;
+  padding-left: 2em;
   height: 100%;
   display: flex;
   align-items: center;
   border: 1px solid $color-darker-transparent;
   background-color: $color-darkest-transparent;
   &:before {
-    /* 
-    content: '❌';
-    content: '';
-    */
-    content: '✔️';
+    content: attr(iscorrectmark);
     position: absolute;
     left: 0.5em;
   }
+  @media (hover: hover) and (pointer: fine) {
+    transition: transform 0.3s;
+    &:hover {
+      z-index: 1;
+      transform: scale(1.05);
+      cursor: url('../assets/images/cursor.png'), auto;
+    }
+  }
+  &:active {
+    z-index: 1;
+    box-shadow: 0 0 4px 2px #fff3;
+  }
 }
-.description {
+.quiz__description {
+  min-height: 3em;
   background-color: $color-darkest-transparent;
   text-align: center;
 }
 
-.next-button {
+.quiz__next-button {
   width: 10em;
   padding: 0.3em;
   font-family: beon, 'Segoe UI', sans-serif;
@@ -88,7 +100,12 @@
   color: $color-main;
   background-color: $color-darkest;
   border-radius: 0.3em;
+  border: none;
+  outline: none;
   box-shadow: inset 0 0 2px 2px $color-main;
+  &:disabled {
+    filter: grayscale(1);
+  }
 }
 
 .tv-show {
