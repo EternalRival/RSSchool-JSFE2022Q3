@@ -23,13 +23,15 @@ const footer = new Footer();
 
 const congratulations = new Element(main.el, 'div', 'congratulations');
 
-const getUserPoints = () => null ?? 0;
+const getUserPoints = () => +localStorage.getItem('erdev__songbird-score') ?? 0;
 
 const getMaxPoints = (list) => {
   const questions = Object.values(list);
   const answersPerQuestion = questions.flat().length / questions.length;
   return questions.length * (answersPerQuestion - 1);
 };
+
+const isPerfectResult = getUserPoints() === getMaxPoints(TVShowList);
 
 Object.assign(congratulations, {
   heading: new Element(congratulations.el, 'div', 'congratulations__heading', 'Congratulations!'),
@@ -43,8 +45,8 @@ Object.assign(congratulations, {
   ),
   restartLink: new Anchor(
     congratulations.el,
-    './quiz',
+    `${isPerfectResult ? './' : './quiz'}`,
     'congratulations__restart interactive',
-    'Restart Quiz',
+    `${isPerfectResult ? 'Main menu' : 'Try Again'}`,
   ),
 });
