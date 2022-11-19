@@ -192,6 +192,7 @@ class Game {
     if (isCorrect) {
       this.#current.question.title.el.textContent = this.#current.correct.getTitle();
       this.#current.question.img.el.classList.remove('tv-show__image_hidden');
+      this.#current.question.audio.el.pause();
       this.#handleNextButtonState('on');
       this.#isGuessed = true;
       this.#score += 6 - this.#current.try;
