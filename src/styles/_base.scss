@@ -30,7 +30,7 @@ html {
   font-size: 18px;
   overflow-y: auto;
   &::-webkit-scrollbar {
-    width: .5em;
+    width: 0.5em;
   }
   &::-webkit-scrollbar-track {
     background: $color-darkest-transparent;
@@ -144,10 +144,12 @@ body {
 }
 
 .interactive {
-  transition: transform 0.3s;
-  &:hover {
-    transform: scale(1.1);
-    cursor: url('../assets/images/cursor.png'), auto;
+  @media (hover: hover) and (pointer: fine) {
+    transition: transform 0.3s;
+    &:hover {
+      transform: scale(1.1);
+      cursor: url('../assets/images/cursor.png'), auto;
+    }
   }
   &:active {
     box-shadow: 0 0 3px 3px $color-main;
