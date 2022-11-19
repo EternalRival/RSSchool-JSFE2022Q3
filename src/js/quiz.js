@@ -189,7 +189,6 @@ class Game {
   #answerClickHandler(isCorrect, id) {
     this.#renderDescription(id);
     if (this.#isGuessed) return;
-    this.#elements.answers[id].setAttribute('iscorrectmark', isCorrect ? '✔️' : '❌');
     if (isCorrect) {
       this.#current.question.title.el.textContent = this.#current.correct.getTitle();
       this.#current.question.img.el.classList.remove('tv-show__image_hidden');
@@ -197,9 +196,10 @@ class Game {
       this.#isGuessed = true;
       this.#score += 6 - this.#current.try;
       this.#renderScore();
-    } else {
+    } else if (!this.#elements.answers[id].hasAttribute('iscorrectmark')) {
       this.#current.try += 1;
     }
+    this.#elements.answers[id].setAttribute('iscorrectmark', isCorrect ? '✔️' : '❌');
   }
 
   #renderDescription(id) {
