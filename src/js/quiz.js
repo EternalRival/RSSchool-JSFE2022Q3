@@ -22,6 +22,7 @@ import BackgroundVideo from './components/background';
 
 import TVShowCard from './components/tv-show-card';
 import TVShowList from '../db/TVShowList';
+import sounds from './components/game-sounds';
 
 const header = new Header();
 const main = new Element(document.body, 'main', 'main quiz');
@@ -137,6 +138,8 @@ class Game {
     this.#renderDescription();
     this.#handleNextButtonState();
     this.#isGuessed = false;
+
+    sounds.start.play();
   }
 
   #handleNextButtonState(state) {
@@ -189,16 +192,20 @@ class Game {
   #answerClickHandler(isCorrect, id) {
     this.#renderDescription(id);
     if (this.#isGuessed) return;
-    if (isCorrect) {
-      this.#current.question.title.el.textContent = this.#current.correct.getTitle();
-      this.#current.question.img.el.classList.remove('tv-show__image_hidden');
-      this.#current.question.audio.el.pause();
-      this.#handleNextButtonState('on');
-      this.#isGuessed = true;
-      this.#score += 6 - this.#current.try;
-      this.#renderScore();
-    } else if (!this.#elements.answers[id].hasAttribute('iscorrectmark')) {
-      this.#current.try += 1;
+    if (!this.#elements.answers[id].hasAttribute('iscorrectmark')) {
+      if (isCorrect) {
+        sounds.correct.play();
+        this.#current.question.title.el.textContent = this.#current.correct.getTitle();
+        this.#current.question.img.el.classList.remove('tv-show__image_hidden');
+        this.#current.question.audio.el.pause();
+        this.#handleNextButtonState('on');
+        this.#isGuessed = true;
+        this.#score += 6 - this.#current.try;
+        this.#renderScore();
+      } else {
+        sounds.wrong.play();
+        this.#current.try += 1;
+      }
     }
     this.#elements.answers[id].setAttribute('iscorrectmark', isCorrect ? '✔️' : '❌');
   }

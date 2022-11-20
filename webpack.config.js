@@ -40,47 +40,18 @@ const config = {
     compress: true,
   },
   plugins: [
-    new FaviconsWebpackPlugin(path.resolve('./','src', 'assets', 'images', 'favicon.svg')),
-    new HtmlWebpackPlugin({
-      templateContent: getTemplate(),
-      filename: 'index.html',
-      chunks: ['main'],
-    }),
-    new HtmlWebpackPlugin({
-      templateContent: getTemplate('Quiz'),
-      filename: 'quiz.html',
-      chunks: ['quiz'],
-    }),
-    new HtmlWebpackPlugin({
-      templateContent: getTemplate('Result'),
-      filename: 'result.html',
-      chunks: ['result'],
-    }),
-    new HtmlWebpackPlugin({
-      templateContent: getTemplate('Gallery'),
-      filename: 'gallery.html',
-      chunks: ['gallery'],
-    }),
+    new FaviconsWebpackPlugin(path.resolve('./', 'src', 'assets', 'images', 'favicon.svg')),
+    new HtmlWebpackPlugin({ templateContent: getTemplate(), filename: 'index.html', chunks: ['main'], }),
+    new HtmlWebpackPlugin({ templateContent: getTemplate('Quiz'), filename: 'quiz.html', chunks: ['quiz'], }),
+    new HtmlWebpackPlugin({ templateContent: getTemplate('Result'), filename: 'result.html', chunks: ['result'], }),
+    new HtmlWebpackPlugin({ templateContent: getTemplate('Gallery'), filename: 'gallery.html', chunks: ['gallery'], }),
   ],
   module: {
-    rules: [
-      {
-        test: /\.s[ac]ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
-      },
-      {
-        test: /\.(otf|svg|png|mp4|mp3)$/i,
-        type: 'asset',
-      },
-      {
-        test: /\.(jpg)$/i,
-        type: 'asset/resource',
-      },
+    rules: [{ test: /\.s[ac]ss$/i, use: ['style-loader', 'css-loader', 'sass-loader'], },
+      { test: /\.(otf|svg|png|mp4|mp3)$/i, type: 'asset' },
+      { test: /\.(jpg)$/i, type: 'asset/resource' },
     ],
   },
 };
 
-module.exports = () => {
-  config.mode = isProduction ? 'production' : 'development';
-  return config;
-};
+module.exports = () => { config.mode = isProduction ? 'production' : 'development'; return config; };
