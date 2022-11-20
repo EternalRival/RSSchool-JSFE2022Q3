@@ -138,8 +138,6 @@ class Game {
     this.#renderDescription();
     this.#handleNextButtonState();
     this.#isGuessed = false;
-
-    sounds.start.play();
   }
 
   #handleNextButtonState(state) {
