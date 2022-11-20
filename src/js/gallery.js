@@ -3,7 +3,7 @@ import Element from './class/Element';
 import Header from './components/header';
 import Footer from './components/footer';
 import BackgroundVideo from './components/background';
-import TVShowCard from './components/tv-show-card';
+import TVShowCard from './class/TVShowCard';
 import TVShowList from '../db/TVShowList';
 
 const header = new Header();

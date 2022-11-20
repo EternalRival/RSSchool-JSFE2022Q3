@@ -20,7 +20,7 @@ import Header from './components/header';
 import Footer from './components/footer';
 import BackgroundVideo from './components/background';
 
-import TVShowCard from './components/tv-show-card';
+import TVShowCard from './class/TVShowCard';
 import TVShowList from '../db/TVShowList';
 import sounds from './components/game-sounds';
 
