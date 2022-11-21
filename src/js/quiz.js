@@ -33,11 +33,6 @@ Object.assign(
   placeholders.map((v) => new Element(quiz.info.categories.el, 'div', 'quiz__category', v)),
 );
 
-/* Object.assign(game.question, {
-  img: new Element(game.question.el, 'div', 'question__img', 'img'),
-  player: new Element(game.question.el, 'div', 'question__player', 'player'),
-}); */
-
 Object.assign(quiz.answers, {
   options: new Element(quiz.answers.el, 'div', 'quiz__options'),
   description: new Element(quiz.answers.el, 'div', 'quiz__description'),

@@ -9,7 +9,6 @@
 .tv-show__preview {
   display: flex;
   align-items: stretch;
-  //height: 128px;
   gap: 0.5em;
   flex-flow: row wrap;
 }
@@ -23,7 +22,6 @@
   }
 }
 .tv-show__player {
-  //width: 100%;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -33,13 +31,8 @@
 .tv-show__title,
 .tv-show__year {
   border-bottom: 1px solid $color-darker-transparent;
-  //padding: 0.5em;
 }
-.tv-show__audio {
-  //max-height: 2em;
-  // min-width: 256px;
-  // width: 100%;
-}
+
 .tv-show__description {
   padding: 0 0.5em;
   font-size: 16px;
