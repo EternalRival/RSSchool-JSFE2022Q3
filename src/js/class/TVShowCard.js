@@ -13,8 +13,8 @@ export default class TVShowCard extends Element {
       preload: 'metadata',
       volume: 0.33,
     });
-
     this.description = new Element(this.el, 'div', 'tv-show__description', tvShow.getDescription());
+    this.img.el.alt = '';
     tvShow.setImage(this.img.el);
   }
 }
