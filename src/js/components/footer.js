@@ -10,6 +10,7 @@ export default class Footer extends Element {
       'github interactive',
       '',
       '_blank',
+      'Author github link',
     );
     this.year = new Element(this.el, 'div', 'year', '2022');
     this.rssLogo = new Anchor(
@@ -18,6 +19,7 @@ export default class Footer extends Element {
       'rss-logo interactive',
       '',
       '_blank',
+      'course link',
     );
   }
 }
