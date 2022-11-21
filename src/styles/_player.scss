@@ -1,0 +1,117 @@
+@import './variables';
+
+.player {
+  padding-right: 0.3em;
+  display: flex;
+  gap: 0.2em;
+  align-items: center;
+  background-color: $color-dark-transparent;
+
+  transition: opacity 0.3s;
+  &.player_disabled {
+    /* pointer-events: none; */
+    opacity: 0.3;
+    filter: grayscale(1);
+  }
+}
+
+.player__button {
+  height: 32px;
+  aspect-ratio: 1;
+  background-size: contain;
+}
+.player__play-button {
+  background-image: url('../assets/images/play-icon.svg');
+  &.player__play-button_pause {
+    background-image: url('../assets/images/pause-icon.svg');
+  }
+}
+.player__volume-button {
+  background-image: url('../assets/images/sound-icon.svg');
+  &.player__volume-button_muted {
+    filter: grayscale(1);
+  }
+}
+
+.player__duration {
+  display: flex;
+  font-size: 14px;
+}
+.player__duration-current,
+.player__duration-max {
+  text-align: center;
+  width: 3em;
+}
+
+.player__bar {
+  min-width: 32px;
+  width: 0;
+  flex-grow: 1;
+
+  $track-size: 5px;
+  $thumb-size: 12px;
+  height: $track-size;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: $color-darkest;
+  outline: none;
+  opacity: 0.8;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      opacity: 1;
+    }
+  }
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: $thumb-size;
+    width: $thumb-size;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: $color-main; 
+
+    
+    /* background: #fff;
+    box-shadow: -200px 0 0 200px dodgerblue; 
+    border: 2px solid #999; */
+  }
+  &::-moz-range-thumb {
+    height: $thumb-size;
+    width: $thumb-size;
+    border: none;
+    border-radius: 50%;
+    background-color: $color-main;
+  }
+  &::-moz-range-progress {
+    height: $track-size;
+    background-color: $color-main;
+    opacity: 0.7;
+    filter: brightness(200%);
+  }
+}
+.player__volume-bar {
+  max-width: 48px;
+}
+
+.player__button,
+.player__bar {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      cursor: url('../assets/images/cursor.png'), auto;
+    }
+  }
+}
+.player__button {
+  @media (hover: hover) and (pointer: fine) {
+    transition: transform 0.3s;
+    &:hover {
+      transform: scale(1.1);
+      cursor: url('../assets/images/cursor.png'), auto;
+    }
+  }
+  &:active {
+    filter: drop-shadow(0 0 2px $color-main);
+  }
+}

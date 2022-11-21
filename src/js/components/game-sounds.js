@@ -14,6 +14,6 @@ class Sound {
 }
 
 export default {
-  correct: new Sound(correct),
-  wrong: new Sound(wrong),
+  correct: new Sound(correct, { volume: 0.5 }),
+  wrong: new Sound(wrong, { volume: 0.5 }),
 };

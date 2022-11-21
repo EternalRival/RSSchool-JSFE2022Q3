@@ -26,9 +26,8 @@ export default class TVShow {
     return this.#description;
   }
 
-  async setAudio(element, options) {
-    const audio = await import(`../../assets/tv-shows/music/${this.#URN}.mp3`);
-    Object.assign(element, { src: audio.default, ...options });
+  async getAudio() {
+    return (await import(`../../assets/tv-shows/music/${this.#URN}.mp3`)).default;
   }
 
   async setImage(element) {

@@ -1,18 +1,3 @@
-/**
- - верхняя панель
-    содержит список вопросов и текущий счёт игры
- - блок с текущим вопросом
-    содержит аудиоплеер с записью голоса птицы и заглушки на месте названия и изображения птицы.
-    Когда игрок выбирает правильный ответ,
-    в блоке отображаются название и изображение птицы, голос которой звучал
- - блок с вариантами ответов
-    содержит список с названиями шести разных птиц
- - блок с описанием птицы
-    содержит приглашение послушать плеер и выбрать птицу из списка.
-    Когда игрок выбирает вариант ответа, в блоке отображаются данные о выбранной птице:
-    изображение, русское и латинское название, аудиозапись голоса, краткая информация
-*/
-
 import '../styles/quiz.scss';
 import Element from './class/Element';
 import Button from './class/Button';
@@ -195,7 +180,7 @@ class Game {
         sounds.correct.play();
         this.#current.question.title.el.textContent = this.#current.correct.getTitle();
         this.#current.question.img.el.classList.remove('tv-show__image_hidden');
-        this.#current.question.audio.el.pause();
+        this.#current.question.audio.pause();
         this.#handleNextButtonState('on');
         this.#isGuessed = true;
         this.#score += 6 - this.#current.try;

@@ -1,4 +1,5 @@
 import Element from './Element';
+import Player from './Player';
 
 export default class TVShowCard extends Element {
   constructor(parent, tvShow) {
@@ -8,9 +9,12 @@ export default class TVShowCard extends Element {
     this.player = new Element(this.preview.el, 'div', 'tv-show__player');
     this.title = new Element(this.player.el, 'div', 'tv-show__title', tvShow.getTitle());
     this.year = new Element(this.player.el, 'div', 'tv-show__year', tvShow.getYear());
-    this.audio = new Element(this.player.el, 'audio', 'tv-show__audio');
+    this.audio = new Player(this.player.el, tvShow.getAudio(), 'tv-show__audio', {
+      preload: 'metadata',
+      volume: 0.33,
+    });
+
     this.description = new Element(this.el, 'div', 'tv-show__description', tvShow.getDescription());
     tvShow.setImage(this.img.el);
-    tvShow.setAudio(this.audio.el, { controls: true, preload: 'metadata', volume: 0.5 });
   }
 }
