@@ -16,3 +16,5 @@ export default class BackgroundVideo extends Element {
     Object.assign(src.el, { src: matrixVideo, type: 'video/mp4' });
   }
 }
+
+import('../checklist');
