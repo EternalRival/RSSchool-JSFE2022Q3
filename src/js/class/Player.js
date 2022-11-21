@@ -8,7 +8,8 @@ export default class Player extends Element {
   constructor(parent, src, className, options) {
     super(parent, 'div', `${className} player player_disabled`);
     const playButton = new Element(this.el, 'div', 'player__button player__play-button');
-    const progressBar = new Element(this.el, 'input', 'player__bar player__progress-bar');
+    const progressBarLabel = new Element(this.el, 'label', 'player__bar-label player__progress-bar-label');
+    const progressBar = new Element(progressBarLabel.el, 'input', 'player__bar player__progress-bar');
     const duration = new Element(this.el, 'div', 'player__duration');
     Object.assign(duration, {
       current: new Element(duration.el, 'div', 'player__duration-current', '00:00'),
@@ -16,7 +17,8 @@ export default class Player extends Element {
       max: new Element(duration.el, 'div', 'player__duration-max', '00:00'),
     });
     const volumeButton = new Element(this.el, 'div', 'player__button player__volume-button');
-    const volumeBar = new Element(this.el, 'input', 'player__bar player__volume-bar');
+    const volumeBarLabel = new Element(this.el, 'label', 'player__bar-label player__volume-bar-label');
+    const volumeBar = new Element(volumeBarLabel.el, 'input', 'player__bar player__volume-bar');
 
     [progressBar.el, volumeBar.el].forEach((v) => Object.assign(v, { type: 'range', step: 'any' }));
     progressBar.el.value = 0;
