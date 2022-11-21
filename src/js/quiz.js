@@ -89,6 +89,8 @@ class Game {
   }
 
   #nextButtonClickHandler() {
+    this.#current.question.audio.pause();
+    this.#current.description?.audio.pause();
     if (this.#round < 6) {
       this.#round += 1;
       this.#startRound();
@@ -189,6 +191,7 @@ class Game {
   }
 
   #renderDescription(id) {
+    this.#current.description?.audio.pause();
     if (!(id in this.#current.answers)) {
       this.#elements.description.textContent = this.#defaultDescription;
       return;
