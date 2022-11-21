@@ -2,8 +2,8 @@
 @import './player';
 
 @font-face {
-  font-family: 'beon';
-  src: url('../assets/fonts/beon.otf') format('opentype');
+  font-family: 'marske';
+  src: url('../assets/fonts/Marske.otf') format('opentype');
 }
 
 * {
@@ -19,8 +19,10 @@
 html {
   background-color: #000;
   color: #fff;
-  font-family: beon, 'Segoe UI', sans-serif;
-  font-size: 18px;
+  font-family: marske, 'Segoe UI', sans-serif;
+  font-size: 20px;
+  line-height: 1em;
+  letter-spacing: 1px;
   overflow-y: auto;
   &::-webkit-scrollbar {
     width: 0.5em;
@@ -72,10 +74,6 @@ body {
       padding-right: 1em;
     }
   }
-  .nav {
-    display: flex;
-    gap: 1em;
-  }
   .logo {
     position: absolute;
     left: 0;
@@ -85,6 +83,10 @@ body {
     background-size: 90%;
     background-repeat: no-repeat;
     background-position: center;
+  }
+  .nav-list {
+    display: flex;
+    gap: 1em;
   }
   .nav-item {
     list-style: none;

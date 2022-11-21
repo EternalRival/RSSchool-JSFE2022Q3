@@ -48,7 +48,7 @@ const config = {
   ],
   module: {
     rules: [{ test: /\.s[ac]ss$/i, use: ['style-loader', 'css-loader', 'sass-loader'], },
-      { test: /\.(otf|svg|png|mp4|mp3)$/i, type: 'asset' },
+      { test: /\.(otf|svg|png|mp4|mp3|woff2)$/i, type: 'asset' },
       { test: /\.(jpg)$/i, type: 'asset/resource' },
     ],
   },
