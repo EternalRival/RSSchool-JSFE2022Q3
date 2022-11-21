@@ -31,7 +31,7 @@ export default class TVShow {
   }
 
   async setImage(element) {
-    const image = await import(`../../assets/tv-shows/img/${this.#URN}.jpg`);
+    const image = await import(`../../assets/tv-shows/img/${this.#URN}.webp`);
     Object.assign(element, { src: image.default });
   }
 }
