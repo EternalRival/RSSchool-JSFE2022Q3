@@ -2,7 +2,7 @@
 @import './player';
 
 @font-face {
-  font-family: 'marske';
+  font-family: 'Marske';
   src: url('../assets/fonts/Marske.otf') format('opentype');
 }
 
@@ -19,7 +19,7 @@
 html {
   background-color: #000;
   color: #fff;
-  font-family: marske, 'Segoe UI', sans-serif;
+  font-family: Marske, 'Segoe UI', sans-serif;
   font-size: 20px;
   line-height: 1em;
   letter-spacing: 1px;
