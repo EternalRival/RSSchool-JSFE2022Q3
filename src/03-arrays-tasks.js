@@ -142,7 +142,7 @@ function getStringsLength(arr /* arr */) {
  *    [ 1, 'b', 'c'], 'x', 0  => [ 'x', 1, 'b', 'c' ]
  */
 function insertItem(arr, item, index /* arr, item, index */) {
-  return arr.splice(index, 0, item), arr;
+  return (arr.splice(index, 0, item), arr);
 }
 
 /**
