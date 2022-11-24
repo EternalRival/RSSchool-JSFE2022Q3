@@ -14,7 +14,7 @@ jobs:
     - name: setup node environment
       uses: actions/setup-node@v1
       with:
-        node-version: '10.x'
+        node-version: '14.x'
     - name: install dependencies
       run: npm install
     - name: check styles
