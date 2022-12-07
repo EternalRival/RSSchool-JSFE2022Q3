@@ -1,4 +1,4 @@
-import AppLoader from './appLoader';
+import AppLoader from './appLoader.ts';
 
 class AppController extends AppLoader {
     getSources(callback) {
