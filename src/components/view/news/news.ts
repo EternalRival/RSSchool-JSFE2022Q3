@@ -2,7 +2,7 @@ import { IDrawSource, NewsItem } from '../../interfaces/interfaces';
 import './news.css';
 
 class News implements IDrawSource {
-    draw(data: NewsItem[]) {
+    draw(data: NewsItem[]): void {
         /*
         data: {
             "source": {
