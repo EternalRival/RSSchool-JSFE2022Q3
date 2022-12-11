@@ -1,7 +1,7 @@
-import { Source } from '../../interfaces/app';
+import { IDrawSource, Source } from '../../interfaces/interfaces';
 import './sources.css';
 
-class Sources {
+class Sources implements IDrawSource {
     draw(data: Source[]) {
         const fragment: DocumentFragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLTemplateElement | null = document.querySelector('#sourceItemTemp');
