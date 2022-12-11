@@ -2,7 +2,7 @@ import { IDrawSource, Source } from '../../interfaces/interfaces';
 import './sources.css';
 
 class Sources implements IDrawSource {
-    draw(data: Source[]) {
+    draw(data: Source[]): void {
         const fragment: DocumentFragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLTemplateElement | null = document.querySelector('#sourceItemTemp');
         if (!sourceItemTemp) throw new Error(`Element #sourceItemTemp is missing`);
