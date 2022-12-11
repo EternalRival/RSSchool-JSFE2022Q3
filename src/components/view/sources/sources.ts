@@ -1,20 +1,26 @@
+import { Source } from '../../interfaces/app';
 import './sources.css';
 
 class Sources {
-    draw(data) {
-        const fragment = document.createDocumentFragment();
-        const sourceItemTemp = document.querySelector('#sourceItemTemp');
+    draw(data: Source[]) {
+        const fragment: DocumentFragment = document.createDocumentFragment();
+        const sourceItemTemp: HTMLTemplateElement | null = document.querySelector('#sourceItemTemp');
+        if (!sourceItemTemp) throw new Error(`Element #sourceItemTemp is missing`);
 
-        data.forEach((item) => {
-            const sourceClone = sourceItemTemp.content.cloneNode(true);
-
-            sourceClone.querySelector('.source__item-name').textContent = item.name;
-            sourceClone.querySelector('.source__item').setAttribute('data-source-id', item.id);
-
+        data.forEach((item: Source) => {
+            const sourceClone: HTMLTemplateElement | null = sourceItemTemp.content.cloneNode(
+                true
+            ) as HTMLTemplateElement;
+            if (sourceClone) {
+                const sourceItemName: HTMLTemplateElement | null = sourceClone.querySelector('.source__item-name');
+                if (sourceItemName) sourceItemName.textContent = item.name;
+                const sourceItem: HTMLTemplateElement | null = sourceClone.querySelector('.source__item');
+                if (sourceItem) sourceItem.setAttribute('data-source-id', item.id);
+            }
             fragment.append(sourceClone);
         });
-
-        document.querySelector('.sources').append(fragment);
+        const sources: HTMLTemplateElement | null = document.querySelector('.sources');
+        if (sources) sources.append(fragment);
     }
 }
 
