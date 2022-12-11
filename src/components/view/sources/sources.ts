@@ -1,13 +1,13 @@
-import { IDrawSource, Source } from '../../interfaces/interfaces';
+import { IDrawSource, SourceItem } from '../../types/interfaces';
 import './sources.css';
 
 class Sources implements IDrawSource {
-    draw(data: Source[]): void {
+    draw(data: SourceItem[]): void {
         const fragment: DocumentFragment = document.createDocumentFragment();
         const sourceItemTemp: HTMLTemplateElement | null = document.querySelector('#sourceItemTemp');
         if (!sourceItemTemp) throw new Error(`Element #sourceItemTemp is missing`);
 
-        data.forEach((item: Source) => {
+        data.forEach((item: SourceItem): void => {
             const sourceClone: HTMLTemplateElement | null = sourceItemTemp.content.cloneNode(
                 true
             ) as HTMLTemplateElement;

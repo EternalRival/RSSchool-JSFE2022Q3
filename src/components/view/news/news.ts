@@ -1,30 +1,15 @@
-import { IDrawSource, NewsItem } from '../../interfaces/interfaces';
+import { IDrawSource, NewsItem } from '../../types/interfaces';
 import './news.css';
 
 class News implements IDrawSource {
     draw(data: NewsItem[]): void {
-        /*
-        data: {
-            "source": {
-                         "id": "abc-news",
-                         "name": "ABC News"
-                      },
-                      "author": "The Associated Press",
-                      "title": "Scientists lower alert for Mauna Loa, say eruption could end",
-                      "description": "Scientists have lowered the alert level for the Mauna Loa volcano on Hawaii’s Big Island and say its first eruption in nearly 40 years may soon end",
-                      "url": "https://abcnews.go.com/US/wireStory/scientists-lower-alert-mauna-loa-eruption-end-94965247",
-                      "urlToImage": "https://s.abcnews.com/images/US/WireAP_97774604598f4e24a3e644191ea07f90_16x9_992.jpg",
-                      "publishedAt": "2022-12-11T03:03:59Z",
-                      "content": "HONOLULU -- Scientists lowered the alert level for the Mauna Loa volcano on Hawaii's Big Island from a warning to a watch on Saturday and said the mountain's first eruption in nearly 40 years may soo… [+1469 chars]"
-               }[]
-        */
-        const news: NewsItem[] = data.length >= 10 ? data.filter((_, idx: number) => idx < 10) : data;
+        const news: NewsItem[] = data.length >= 10 ? data.filter((_, idx: number): boolean => idx < 10) : data;
 
         const fragment: DocumentFragment = document.createDocumentFragment();
         const newsItemTemp: HTMLTemplateElement | null = document.querySelector('#newsItemTemp');
         if (!newsItemTemp) throw new Error('Element #newsItemTemp is missing');
 
-        news.forEach((item: NewsItem, idx: number) => {
+        news.forEach((item: NewsItem, idx: number): void => {
             const newsClone: HTMLTemplateElement = newsItemTemp.content.cloneNode(true) as HTMLTemplateElement;
             if (!newsClone) return;
             const setTextContent = (selector: string, textContent: string): void => {

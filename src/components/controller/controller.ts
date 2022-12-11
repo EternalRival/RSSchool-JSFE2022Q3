@@ -1,37 +1,30 @@
-import AppLoader from './appLoader.ts';
+import { NewsItem, SourceItem } from '../types/interfaces';
+import AppLoader from './appLoader';
 
 class AppController extends AppLoader {
-    getSources(callback) {
-        super.getResp(
-            {
-                endpoint: 'sources',
-            },
-            callback
-        );
+    getSources(callback: (data: { sources: SourceItem[] }) => void): void {
+        super.getResp({ endpoint: 'sources' }, callback);
     }
 
-    getNews(e, callback) {
-        let target = e.target;
-        const newsContainer = e.currentTarget;
+    getNews(e: Event, callback: (data: { articles: NewsItem[] }) => void): void {
+        const target: EventTarget | null = e.target;
+        const newsContainer: EventTarget | null = e.currentTarget;
 
-        while (target !== newsContainer) {
-            if (target.classList.contains('source__item')) {
-                const sourceId = target.getAttribute('data-source-id');
-                if (newsContainer.getAttribute('data-source') !== sourceId) {
-                    newsContainer.setAttribute('data-source', sourceId);
-                    super.getResp(
-                        {
-                            endpoint: 'everything',
-                            options: {
-                                sources: sourceId,
-                            },
-                        },
-                        callback
-                    );
+        if (!target || !newsContainer) return;
+
+        let targetElement: HTMLElement = target as HTMLElement;
+        const newsContainerElement: HTMLElement = newsContainer as HTMLElement;
+
+        while (targetElement !== newsContainerElement) {
+            if (targetElement.classList.contains('source__item')) {
+                const sourceId: string | null = targetElement.getAttribute('data-source-id');
+                if (sourceId && newsContainerElement.getAttribute('data-source') !== sourceId) {
+                    newsContainerElement.setAttribute('data-source', sourceId);
+                    super.getResp({ endpoint: 'everything', options: { sources: sourceId } }, callback);
                 }
                 return;
             }
-            target = target.parentNode;
+            targetElement = targetElement.parentNode as HTMLElement;
         }
     }
 }
