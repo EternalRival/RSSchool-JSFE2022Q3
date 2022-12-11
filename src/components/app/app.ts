@@ -1,5 +1,6 @@
 import AppController from '../controller/controller';
-import { IApp, NewsItem, SourceItem } from '../types/interfaces';
+import { IApp } from '../types/interfaces';
+import { ResponseData } from '../types/types';
 import { AppView } from '../view/appView';
 
 class App implements IApp {
@@ -15,11 +16,11 @@ class App implements IApp {
 
         if (sourcesElement) {
             sourcesElement.addEventListener('click', (e: Event): void => {
-                this.controller.getNews(e, (data: { articles: NewsItem[] }): void => this.view.drawNews(data));
+                this.controller.getNews(e, (data: ResponseData): void => this.view.drawNews(data));
             });
         }
 
-        this.controller.getSources((data: { sources: SourceItem[] }): void => {
+        this.controller.getSources((data: ResponseData): void => {
             this.view.drawSources(data);
         });
     }

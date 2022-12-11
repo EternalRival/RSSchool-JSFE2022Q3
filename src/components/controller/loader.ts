@@ -1,7 +1,7 @@
-import { NewsItem, SourceItem } from '../types/interfaces';
+import { ILoader } from '../types/interfaces';
 import NewsApi from '../types/newsApi';
-class Loader {
-    // todo
+import { ResponseCallback, ResponseData } from '../types/types';
+class Loader implements ILoader {
     baseLink: string;
     options: NewsApi;
     constructor(baseLink: string, options: NewsApi) {
@@ -11,7 +11,7 @@ class Loader {
 
     getResp(
         { endpoint, options = {} }: { endpoint: string; options?: object },
-        callback: (data: { articles: NewsItem[]; sources: SourceItem[] }) => void = () => {
+        callback: ResponseCallback = (): void => {
             console.error('No callback for GET response');
         }
     ): void {
@@ -39,16 +39,11 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(
-        method: string,
-        endpoint: string,
-        callback: (data: { articles: NewsItem[]; sources: SourceItem[] }) => void,
-        options: object = {}
-    ): void {
+    load(method: string, endpoint: string, callback: ResponseCallback, options: object = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
-            .then((res: Response): Promise<{ articles: NewsItem[]; sources: SourceItem[] }> => res.json())
-            .then((data: { articles: NewsItem[]; sources: SourceItem[] }): void => callback(data))
+            .then((res: Response): Promise<ResponseData> => res.json())
+            .then((data: ResponseData): void => callback(data))
             .catch((err: Error): void => console.error(err));
     }
 }

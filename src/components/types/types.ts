@@ -1,3 +1,8 @@
+import { NewsItem, SourceItem } from './interfaces';
+
+export type ResponseData = { articles: NewsItem[]; sources: SourceItem[] };
+export type ResponseCallback = (data: ResponseData) => void;
+
 export type language = 'ar' | 'de' | 'en' | 'es' | 'fr' | 'he' | 'it' | 'nl' | 'no' | 'pt' | 'ru' | 'sv' | 'ud' | 'zh';
 
 export type category = 'business' | 'entertainment' | 'general' | 'health' | 'science' | 'sports' | 'technology';

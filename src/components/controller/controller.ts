@@ -1,12 +1,12 @@
-import { NewsItem, SourceItem } from '../types/interfaces';
+import { ResponseCallback } from '../types/types';
 import AppLoader from './appLoader';
 
 class AppController extends AppLoader {
-    getSources(callback: (data: { sources: SourceItem[] }) => void): void {
+    getSources(callback: ResponseCallback): void {
         super.getResp({ endpoint: 'sources' }, callback);
     }
 
-    getNews(e: Event, callback: (data: { articles: NewsItem[] }) => void): void {
+    getNews(e: Event, callback: ResponseCallback): void {
         const target: EventTarget | null = e.target;
         const newsContainer: EventTarget | null = e.currentTarget;
 
