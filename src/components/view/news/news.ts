@@ -1,4 +1,4 @@
-import { IKek as IDrawSource, NewsItem, Source } from '../../interfaces/interfaces';
+import { IDrawSource, NewsItem } from '../../interfaces/interfaces';
 import './news.css';
 
 class News implements IDrawSource {
