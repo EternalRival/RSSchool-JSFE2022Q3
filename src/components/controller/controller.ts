@@ -1,4 +1,6 @@
-import { ResponseCallback } from '../types/types';
+import getRandomElements from '../../utils/utils';
+import { SourceItem } from '../types/interfaces';
+import { ResponseCallback, ResponseData } from '../types/types';
 import AppLoader from './appLoader';
 
 class AppController extends AppLoader {
@@ -12,15 +14,31 @@ class AppController extends AppLoader {
 
         if (!target || !newsContainer) return;
 
+        const getResp: (list: string) => void = (list: string): void => {
+            super.getResp({ endpoint: 'everything', options: { sources: list } }, callback);
+        };
+
         let targetElement: HTMLElement = target as HTMLElement;
         const newsContainerElement: HTMLElement = newsContainer as HTMLElement;
 
         while (targetElement !== newsContainerElement) {
             if (targetElement.classList.contains('source__item')) {
                 const sourceId: string | null = targetElement.getAttribute('data-source-id');
+
                 if (sourceId && newsContainerElement.getAttribute('data-source') !== sourceId) {
                     newsContainerElement.setAttribute('data-source', sourceId);
-                    super.getResp({ endpoint: 'everything', options: { sources: sourceId } }, callback);
+
+                    if (sourceId !== 'all') {
+                        getResp(sourceId);
+                    } else {
+                        this.getSources((data: ResponseData): void => {
+                            const sources: SourceItem[] = getRandomElements<SourceItem>(data.sources, 20);
+                            const list: string = sources
+                                .reduce((acc: string, item: SourceItem): string => `${acc + item.id},`, '')
+                                .slice(0, -1);
+                            getResp(list);
+                        });
+                    }
                 }
                 return;
             }
