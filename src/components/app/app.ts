@@ -21,6 +21,7 @@ class App implements IApp {
         }
 
         this.controller.getSources((data: ResponseData): void => {
+            this.controller.sourcesList = data.sources;
             this.view.drawSources(data);
         });
     }

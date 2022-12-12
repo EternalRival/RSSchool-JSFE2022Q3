@@ -1,9 +1,11 @@
 import getRandomElements from '../../utils/utils';
 import { SourceItem } from '../types/interfaces';
-import { ResponseCallback, ResponseData } from '../types/types';
+import { ResponseCallback } from '../types/types';
 import AppLoader from './appLoader';
 
 class AppController extends AppLoader {
+    sourcesList: SourceItem[] | undefined;
+
     getSources(callback: ResponseCallback): void {
         super.getResp({ endpoint: 'sources' }, callback);
     }
@@ -28,16 +30,13 @@ class AppController extends AppLoader {
                 if (sourceId && newsContainerElement.getAttribute('data-source') !== sourceId) {
                     newsContainerElement.setAttribute('data-source', sourceId);
 
-                    if (sourceId !== 'all') {
-                        getResp(sourceId);
+                    if (sourceId === 'all' && this.sourcesList) {
+                        const list: string = getRandomElements<SourceItem>(this.sourcesList, 20)
+                            .reduce((acc: string, item: SourceItem): string => `${acc + item.id},`, '')
+                            .slice(0, -1);
+                        getResp(list);
                     } else {
-                        this.getSources((data: ResponseData): void => {
-                            const sources: SourceItem[] = getRandomElements<SourceItem>(data.sources, 20);
-                            const list: string = sources
-                                .reduce((acc: string, item: SourceItem): string => `${acc + item.id},`, '')
-                                .slice(0, -1);
-                            getResp(list);
-                        });
+                        getResp(sourceId);
                     }
                 }
                 return;
