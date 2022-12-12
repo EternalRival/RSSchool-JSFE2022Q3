@@ -11,6 +11,7 @@ const baseConfig = {
         rules: [
             { test: /\.tsx?$/, loader: 'ts-loader' },
             { test: /\.css$/i, use: ['style-loader', 'css-loader'] },
+            { test: /\.(svg|png)$/i, type: 'asset' },
         ],
     },
     resolve: {
@@ -19,12 +20,14 @@ const baseConfig = {
     output: {
         filename: 'index.js',
         path: path.resolve(__dirname, './dist'),
+        assetModuleFilename: 'assets/[name][ext]',
     },
     plugins: [
         new ESLintPlugin({ extensions: 'ts', failOnWarning: true }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/index.html'),
             filename: 'index.html',
+            favicon: './src/assets/favicon.ico',
         }),
         new CleanWebpackPlugin(),
     ],

@@ -1,14 +1,16 @@
 .sources {
     display: flex;
-    flex-wrap: nowrap;
+    justify-content: flex-start;
+    flex-wrap: wrap;
     width: 100%;
-    height: 120px;
-    overflow: auto;
+    height: 100%;
     align-items: center;
     font: 300 1em 'Fira Sans', sans-serif;
 }
 
 .source__item {
+    flex-grow: 1;
+    width: 34%;
     background: none;
     border: 2px solid #30c5ff;
     font: inherit;
@@ -18,6 +20,9 @@
     color: #70d6ff;
     transition: 0.25s;
     cursor: pointer;
+}
+.source__item:first-child {
+    width: 100%;
 }
 
 .source__item:hover,
