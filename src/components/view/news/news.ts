@@ -1,6 +1,6 @@
 import { IDrawSource, NewsItem } from '../../types/interfaces';
 import './news.css';
-
+import ImgPlaceholder from '../../../assets/image-placeholder.png';
 class News implements IDrawSource {
     draw(data: NewsItem[]): void {
         const news: NewsItem[] = data.length >= 10 ? data.filter((_, idx: number): boolean => idx < 10) : data;
@@ -20,7 +20,7 @@ class News implements IDrawSource {
             if (idx % 2) newsClone.querySelector('.news__item')?.classList.add('alt');
 
             const metaPhoto: HTMLTemplateElement | null = newsClone.querySelector('.news__meta-photo');
-            if (metaPhoto) metaPhoto.style.backgroundImage = `url(${item.urlToImage || 'img/news_placeholder.jpg'})`;
+            if (metaPhoto) metaPhoto.style.backgroundImage = `url(${item.urlToImage || ImgPlaceholder})`;
 
             setTextContent('.news__meta-author', item.author || item.source.name);
             setTextContent('.news__meta-date', item.publishedAt.slice(0, 10).split('-').reverse().join('-'));
@@ -37,6 +37,7 @@ class News implements IDrawSource {
         if (newsElement) {
             newsElement.innerHTML = '';
             newsElement.appendChild(fragment);
+            newsElement.scrollIntoView(true);
         }
     }
 }
