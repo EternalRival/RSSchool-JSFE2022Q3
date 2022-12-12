@@ -42,7 +42,7 @@
 
 @media (max-width: 1280px) {
     .sources {
-        max-height: 30vh;
+        max-height: 33vh;
         overflow-y: auto;
         scrollbar-color: #30c5ff #70d6ff60;
         scrollbar-width: thin;
