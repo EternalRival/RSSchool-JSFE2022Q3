@@ -4,13 +4,15 @@
     flex-wrap: wrap;
     width: 100%;
     height: 100%;
-    align-items: center;
+    align-items: stretch;
     font: 300 1em 'Fira Sans', sans-serif;
 }
 
 .source__item {
+    display: flex;
+    align-items: center;
     flex-grow: 1;
-    width: 34%;
+    width: 17%;
     background: none;
     border: 2px solid #30c5ff;
     font: inherit;
@@ -22,6 +24,7 @@
     cursor: pointer;
 }
 .source__item:first-child {
+    justify-content: center;
     width: 100%;
 }
 
@@ -35,5 +38,26 @@
 
 .source__item-name {
     font-weight: 400;
-    white-space: nowrap;
+}
+
+@media (max-width: 1280px) {
+    .sources {
+        max-height: 30vh;
+        overflow-y: auto;
+        scrollbar-color: #30c5ff #70d6ff60;
+        scrollbar-width: thin;
+    }
+    .sources::-webkit-scrollbar {
+        height: 0.5em;
+        width: 0.5em;
+    }
+    .sources::-webkit-scrollbar-track {
+        background: #70d6ff60;
+        border-radius: 15px;
+    }
+    .sources::-webkit-scrollbar-thumb {
+        background: #30c5ff;
+        box-shadow: inset 0 0 6px #70d6ff;
+        border-radius: 15px;
+    }
 }
