@@ -1,16 +1,17 @@
+import StatusCode from '../types/enums';
 import { ILoader } from '../types/interfaces';
 import NewsApi from '../types/newsApi';
-import { ResponseCallback, ResponseData } from '../types/types';
+import { ResponseCallback, ResponseData, ResponseEntries } from '../types/types';
 class Loader implements ILoader {
     baseLink: string;
-    options: NewsApi;
-    constructor(baseLink: string, options: NewsApi) {
+    options: Readonly<NewsApi>;
+    constructor(baseLink: string, options: Readonly<NewsApi>) {
         this.baseLink = baseLink;
         this.options = options;
     }
 
     getResp(
-        { endpoint, options = {} }: { endpoint: string; options?: object },
+        { endpoint, options = {} }: ResponseEntries,
         callback: ResponseCallback = (): void => {
             console.error('No callback for GET response');
         }
@@ -20,7 +21,7 @@ class Loader implements ILoader {
 
     errorHandler(res: Response): Response {
         if (!res.ok) {
-            if (res.status === 401 || res.status === 404)
+            if (res.status === StatusCode.UNAUTHORIZED || res.status === StatusCode.NOT_FOUND)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
             throw Error(res.statusText);
         }

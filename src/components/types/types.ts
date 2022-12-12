@@ -1,6 +1,7 @@
 import { NewsItem, SourceItem } from './interfaces';
 
-export type ResponseData = { articles: NewsItem[]; sources: SourceItem[] };
+export type ResponseEntries = { endpoint: string; options?: object };
+export type ResponseData = { articles: Required<NewsItem>[]; sources: Required<SourceItem>[] };
 export type ResponseCallback = (data: ResponseData) => void;
 
 export type language = 'ar' | 'de' | 'en' | 'es' | 'fr' | 'he' | 'it' | 'nl' | 'no' | 'pt' | 'ru' | 'sv' | 'ud' | 'zh';

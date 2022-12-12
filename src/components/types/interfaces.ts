@@ -22,25 +22,23 @@ export interface IAppView {
 export interface ILoader {
     baseLink: string;
     options: NewsApi;
-    getResp: (a: { endpoint: string; options?: object | undefined }, callback: ResponseCallback) => void;
+    getResp: (a: { endpoint: string; options: object }, callback: ResponseCallback) => void;
     errorHandler: (res: Response) => Response;
     makeUrl: (options: object, endpoint: string) => string;
     load: (method: string, endpoint: string, callback: ResponseCallback, options: object) => void;
 }
 
-export interface Source {
+export interface SourceItem {
     id: string;
     name: string;
-}
-export interface SourceItem extends Source {
-    description: string;
-    url: string;
-    category: category;
-    language: language;
-    country: country;
+    description?: string;
+    url?: string;
+    category?: category;
+    language?: language;
+    country?: country;
 }
 export interface NewsItem {
-    source: Source;
+    source: SourceItem;
     author: string;
     title: string;
     description: string;

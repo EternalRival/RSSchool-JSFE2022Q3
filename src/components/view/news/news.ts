@@ -9,7 +9,7 @@ class News implements IDrawSource {
         const newsItemTemp: HTMLTemplateElement | null = document.querySelector('#newsItemTemp');
         if (!newsItemTemp) throw new Error('Element #newsItemTemp is missing');
 
-        news.forEach((item: NewsItem, idx: number): void => {
+        news.forEach((item: Required<NewsItem>, idx: number): void => {
             const newsClone: HTMLTemplateElement = newsItemTemp.content.cloneNode(true) as HTMLTemplateElement;
             if (!newsClone) return;
             const setTextContent = (selector: string, textContent: string): void => {

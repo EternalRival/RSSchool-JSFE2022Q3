@@ -1,11 +1,15 @@
-import { IDrawSource, Source, SourceItem } from '../../types/interfaces';
+import { IDrawSource, SourceItem } from '../../types/interfaces';
 import './sources.css';
 
 class Sources implements IDrawSource {
     draw(data: SourceItem[]): void {
         type Template = HTMLTemplateElement | null;
 
-        function createSourceItem(parent: DocumentFragment, template: HTMLTemplateElement, item: Source): void {
+        function createSourceItem(
+            parent: DocumentFragment,
+            template: HTMLTemplateElement,
+            item: Pick<SourceItem, 'id' | 'name'>
+        ): void {
             const clone: Template = template.content.cloneNode(true) as HTMLTemplateElement;
 
             if (!clone) return;
