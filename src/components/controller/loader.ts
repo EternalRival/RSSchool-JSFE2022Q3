@@ -1,22 +1,18 @@
-import StatusCode from '../types/enums';
-import { ILoader } from '../types/interfaces';
-import NewsApi from '../types/newsApi';
-import { ResponseCallback, ResponseData, ResponseEntries } from '../types/types';
-class Loader implements ILoader {
-    baseLink: string;
-    options: Readonly<NewsApi>;
-    constructor(baseLink: string, options: Readonly<NewsApi>) {
+import { RequestMethod, StatusCode } from '../types/enums';
+import { NewsApi } from '../types/newsApi';
+import { ResponseData } from '../types/types';
+
+export class Loader {
+    constructor(private baseLink: string, private options: Readonly<NewsApi>) {
         this.baseLink = baseLink;
         this.options = options;
     }
 
     getResp(
-        { endpoint, options = {} }: ResponseEntries,
-        callback: ResponseCallback = (): void => {
-            console.error('No callback for GET response');
-        }
+        { endpoint, options }: { endpoint: string; options?: object },
+        callback: (data: ResponseData) => void
     ): void {
-        this.load('GET', endpoint, callback, options);
+        this.load(RequestMethod.GET, endpoint, callback, options);
     }
 
     errorHandler(res: Response): Response {
@@ -40,13 +36,14 @@ class Loader implements ILoader {
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback: ResponseCallback, options: object = {}): void {
+    load(method: RequestMethod, endpoint: string, callback: (data: ResponseData) => void, options: object = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res: Response): Promise<ResponseData> => res.json())
-            .then((data: ResponseData): void => callback(data))
+            .then((data): void => {
+                if (callback) callback(data);
+                else console.error('No callback for GET response');
+            })
             .catch((err: Error): void => console.error(err));
     }
 }
-
-export default Loader;

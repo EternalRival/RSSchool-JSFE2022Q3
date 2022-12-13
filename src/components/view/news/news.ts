@@ -1,7 +1,8 @@
-import { IDrawSource, NewsItem } from '../../types/interfaces';
 import './news.css';
+import { NewsItem } from '../../types/interfaces';
 import ImgPlaceholder from '../../../assets/image-placeholder.png';
-class News implements IDrawSource {
+
+export class News {
     draw(data: NewsItem[]): void {
         const news: NewsItem[] = data.length >= 10 ? data.filter((_, idx: number): boolean => idx < 10) : data;
 
@@ -41,5 +42,3 @@ class News implements IDrawSource {
         }
     }
 }
-
-export default News;

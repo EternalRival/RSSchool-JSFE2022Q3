@@ -1,34 +1,31 @@
-import getRandomElements from '../../utils/utils';
+import { getRandomElements } from '../../utils/utils';
 import { SourceItem } from '../types/interfaces';
-import { ResponseCallback } from '../types/types';
-import AppLoader from './appLoader';
+import { ResponseData } from '../types/types';
+import { AppLoader } from './appLoader';
 
-class AppController extends AppLoader {
-    sourcesList: SourceItem[] | undefined;
+export class AppController extends AppLoader {
+    sourcesList?: SourceItem[];
 
-    getSources(callback: ResponseCallback): void {
+    getSources(callback: (data: ResponseData) => void): void {
         super.getResp({ endpoint: 'sources' }, callback);
     }
 
-    getNews(e: Event, callback: ResponseCallback): void {
-        const target: EventTarget | null = e.target;
+    getNews(e: Event, callback: (data: ResponseData) => void): void {
+        let target: EventTarget | null = e.target;
         const newsContainer: EventTarget | null = e.currentTarget;
 
-        if (!target || !newsContainer) return;
-
-        const getResp: (list: string) => void = (list: string): void => {
+        const getResp = (list: string): void => {
             super.getResp({ endpoint: 'everything', options: { sources: list } }, callback);
         };
 
-        let targetElement: HTMLElement = target as HTMLElement;
-        const newsContainerElement: HTMLElement = newsContainer as HTMLElement;
+        if (!(target instanceof HTMLElement && newsContainer instanceof HTMLElement)) return;
 
-        while (targetElement !== newsContainerElement) {
-            if (targetElement.classList.contains('source__item')) {
-                const sourceId: string | null = targetElement.getAttribute('data-source-id');
+        while (target !== newsContainer) {
+            if (target instanceof HTMLElement && target.classList.contains('source__item')) {
+                const sourceId: string | null = target.getAttribute('data-source-id');
 
-                if (sourceId && newsContainerElement.getAttribute('data-source') !== sourceId) {
-                    newsContainerElement.setAttribute('data-source', sourceId);
+                if (sourceId && newsContainer.getAttribute('data-source') !== sourceId) {
+                    newsContainer.setAttribute('data-source', sourceId);
 
                     if (sourceId === 'all' && this.sourcesList) {
                         const list: string = getRandomElements<SourceItem>(this.sourcesList, 20)
@@ -41,9 +38,7 @@ class AppController extends AppLoader {
                 }
                 return;
             }
-            targetElement = targetElement.parentNode as HTMLElement;
+            if (target instanceof HTMLElement) target = target.parentNode;
         }
     }
 }
-
-export default AppController;

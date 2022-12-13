@@ -5,5 +5,3 @@ export function getRandomElements<T>(array: T[], size: number): T[] {
     }
     return result;
 }
-
-export default getRandomElements;

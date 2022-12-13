@@ -1,11 +1,10 @@
-import { IAppView, NewsItem, SourceItem } from '../types/interfaces';
+import { NewsItem, SourceItem } from '../types/interfaces';
 import { ResponseData } from '../types/types';
-import News from './news/news';
-import Sources from './sources/sources';
+import { News } from './news/news';
+import { Sources } from './sources/sources';
 
-export class AppView implements IAppView {
+export class AppView {
     news: News;
-
     sources: Sources;
 
     constructor() {
@@ -14,14 +13,12 @@ export class AppView implements IAppView {
     }
 
     drawNews(data: ResponseData): void {
-        const values: NewsItem[] = data?.articles ? data?.articles : [];
+        const values: NewsItem[] = data.articles ?? [];
         this.news.draw(values);
     }
 
     drawSources(data: ResponseData): void {
-        const values: SourceItem[] = data?.sources ? data?.sources : [];
+        const values: SourceItem[] = data.sources ?? [];
         this.sources.draw(values);
     }
 }
-
-export default AppView;

@@ -1,8 +1,8 @@
-import { category, country, language } from './types';
+import { Category, Country, Language } from './enums';
 
-export default interface NewsApi {
+export interface NewsApi {
     apiKey: string;
-    category?: category;
-    language?: language;
-    country?: country;
+    category?: Category;
+    language?: Language;
+    country?: Country;
 }

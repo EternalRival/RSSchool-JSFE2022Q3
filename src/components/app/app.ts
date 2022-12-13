@@ -1,11 +1,11 @@
-import AppController from '../controller/controller';
-import { IApp } from '../types/interfaces';
+import { AppController } from '../controller/controller';
 import { ResponseData } from '../types/types';
 import { AppView } from '../view/appView';
 
-class App implements IApp {
-    controller: AppController;
-    view: AppView;
+export class App {
+    private controller: AppController;
+    private view: AppView;
+
     constructor() {
         this.controller = new AppController();
         this.view = new AppView();
@@ -26,5 +26,3 @@ class App implements IApp {
         });
     }
 }
-
-export default App;

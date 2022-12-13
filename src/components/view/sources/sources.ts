@@ -1,7 +1,7 @@
-import { IDrawSource, SourceItem } from '../../types/interfaces';
 import './sources.css';
+import { SourceItem } from '../../types/interfaces';
 
-class Sources implements IDrawSource {
+export class Sources {
     draw(data: SourceItem[]): void {
         type Template = HTMLTemplateElement | null;
 
@@ -37,5 +37,3 @@ class Sources implements IDrawSource {
         if (sources) sources.append(fragment);
     }
 }
-
-export default Sources;
