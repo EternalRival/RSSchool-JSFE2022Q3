@@ -123,8 +123,9 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  const [r1, r2] = [rect1, rect2].sort((a, b) => a.top + a.left - b.top + b.left);
+  return r1.top + r1.height >= r2.top && r1.left + r1.width >= r2.left;
 }
 
 /**
@@ -153,8 +154,11 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(circle, point) {
+  const a = Math.abs(circle.center.x - point.x);
+  const b = Math.abs(circle.center.y - point.y);
+  const c = Math.hypot(a, b);
+  return circle.radius > c;
 }
 
 /**
@@ -344,8 +348,14 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const [head, ...tail] = pathes.map((v) => v.split('/')).sort((a, b) => a - b);
+  let common = '';
+  for (let i = 0; i < head.length; i += 1) {
+    if (tail.every((v) => v[i] === head[i])) common += `${head[i]}/`;
+    else break;
+  }
+  return common;
 }
 
 /**
@@ -419,7 +429,9 @@ function evaluateTicTacToePosition(position) {
     const checkRow = (n) => `${p[0][n]}${p[1][n]}${p[2][n]}` === char.repeat(3);
     const checkCol = (n) => `${p[n][0]}${p[n][1]}${p[n][2]}` === char.repeat(3);
     const checkDiag = () => `${p[2][0]}${p[1][1]}${p[0][2]}` === char.repeat(3) || `${p[0][0]}${p[1][1]}${p[2][2]}` === char.repeat(3);
-    for (let i = 0; i < position.length; i += 1) if (checkRow(i) || checkCol(i)) return true;
+    for (let i = 0; i < position.length; i += 1) {
+      if (checkRow(i) || checkCol(i)) return true;
+    }
     return checkDiag(char);
   };
   if (isWinner('X')) return 'X';
