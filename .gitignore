@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+#custom
+.vscode
+.idea
+src/**/*.js
+temp.md
