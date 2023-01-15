@@ -11,3 +11,7 @@ Private repository for @eternalrival
 - [self-introduction](https://rolling-scopes-school.github.io/eternalrival-JSFE2022Q3/self-introduction/)
 
 - [migration-newip-to-ts](https://rolling-scopes-school.github.io/eternalrival-JSFE2022Q3/migration-newip-to-ts/)
+
+- [online-store](https://eternalrival.github.io/online-store/)
+
+- [async-race](https://rolling-scopes-school.github.io/eternalrival-JSFE2022Q3/async-race/)
