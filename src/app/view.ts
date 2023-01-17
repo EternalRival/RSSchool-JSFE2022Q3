@@ -9,9 +9,12 @@ import { View } from '../types/enums';
 
 export class AppView {
   public currentView: Component;
-  public views: Map<View, Component> = new Map();
+  public views = {
+    [View.GARAGE]: new Garage(),
+    [View.WINNERS]: new Winners(),
+  };
 
-  public header: Component = new Header();
+  public header = new Header();
 
   constructor() {
     const root = document.getElementById('root') ?? new Root().node;
@@ -19,20 +22,15 @@ export class AppView {
     const main = new Main();
     const footer = new Footer();
 
-    const garage = new Garage();
-    const winners = new Winners();
-
-    this.currentView = garage;
-    this.views.set(View.GARAGE, garage);
-    this.views.set(View.WINNERS, winners);
+    this.currentView = this.views[View.GARAGE];
 
     root.append(this.header.node, main.node, footer.node);
     main.append(this.currentView);
   }
 
   public setView(view: View): void {
-    const newView = this.views.get(view);
-    if (newView && this.currentView !== newView) {
+    const newView = this.views[view];
+    if (this.currentView !== newView) {
       this.currentView.replaceWith(newView);
       this.currentView = newView;
     }

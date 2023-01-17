@@ -4,8 +4,8 @@ import { Header as HeaderComponent } from '../../components/Header';
 
 export class Header extends HeaderComponent {
   public nodes = {
-    garageBtn: new Button({ textContent: 'To Garage' }),
-    winnersBtn: new Button({ textContent: 'To Winners' }),
+    garageBtn: new Button({ className: 'nav__button', textContent: 'To Garage' }),
+    winnersBtn: new Button({ className: 'nav__button', textContent: 'To Winners' }),
   };
 
   constructor() {

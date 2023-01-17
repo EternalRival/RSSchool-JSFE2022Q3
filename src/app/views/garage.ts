@@ -10,7 +10,7 @@ import { CarData } from '../../types/interfaces';
 
 export class Garage extends Section {
   public nodes = {
-    itemCounter: new Component({ className: 'garage__item-counter', textContent: 'IC' }),
+    itemCounter: new Component({ tag: 'span', className: 'garage__item-counter', textContent: 'IC' }),
     controlBar: new RaceControl(),
     createBar: new CarSettings({ className: 'garage__car-create', buttonText: 'Create' }),
     pagination: new Pagination(),
@@ -20,18 +20,22 @@ export class Garage extends Section {
   constructor(props?: ComponentProps) {
     super({ ...props, className: 'section garage' });
 
-    const heading = new Heading({ tag: 'h1', className: 'page__heading', textContent: 'Garage' });
+    const heading = new Heading({ tag: 'h1', className: 'garage__heading', textContent: 'Garage' });
     const { itemCounter, controlBar, createBar, pagination } = this.nodes;
-    this.container.append(heading, itemCounter, controlBar, createBar, pagination, this.raceTrack);
-
+    this.container.append(pagination, heading, controlBar, createBar, this.raceTrack);
+    heading.append(itemCounter);
     //? temp
-    this.renderCars([{ name: 'oleg', id: 1, color: '#0f0' }]);
+    this.renderCars([
+      { name: 'oleg', id: 1, color: '#0f0' },
+      { name: 'oleg', id: 1, color: '#0f0' },
+      { name: 'olej', id: 2, color: '#00f' },
+    ]);
   }
 
   public renderCars(cars: CarData[]): void {
-    const carNodes = cars.map((car) => new Car());
-    const track1 = new Car<HTMLLIElement>({ tag: 'li' });
-    this.raceTrack.append(track1);
+    const tag = 'li';
+    const carNodes = cars.map((car) => new Car(car, { tag }));
+    this.raceTrack.append(...carNodes);
     /*  this.raceTrack.node.replaceChildren(...carNodes); */
   }
 }

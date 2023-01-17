@@ -1,4 +1,4 @@
 export enum View {
-  GARAGE,
-  WINNERS,
+  GARAGE = 'garage',
+  WINNERS = 'winners',
 }

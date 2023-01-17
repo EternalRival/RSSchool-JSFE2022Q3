@@ -1,29 +1,34 @@
 import { Button } from '../../../components/Button';
 import { Component, ComponentProps } from '../../../components/Component';
 import { Input } from '../../../components/Input';
+import { CarData } from '../../../types/interfaces';
 import { HexColor } from '../../../utils/utils';
 
 export class Car<T extends HTMLElement = HTMLElement> extends Component {
   public nodes = {
-    name: new Component({ tag: 'span', className: 'car__name' }),
     buttons: {
-      edit: new Button({ textContent: '📝', className: 'car__button car__edit' }),
-      delete: new Button({ textContent: '❌', className: 'car__button car__delete' }),
-      start: new Button({ textContent: '▶', className: 'car__button car__start' }),
-      stop: new Button({ textContent: '⏹', className: 'car__button car__stop' }),
+      edit: new Button({ ariaLabel: 'car edit button', className: 'car__button car__edit' }),
+      delete: new Button({ ariaLabel: 'car delete button', className: 'car__button car__delete' }),
+      start: new Button({ ariaLabel: 'car start button', className: 'car__button car__start' }),
+      stop: new Button({ ariaLabel: 'car stop button', className: 'car__button car__stop' }),
     },
-    track: new Input({ type: 'range', className: 'car__track', ariaLabel: 'car' }),
+    name: new Component({ tag: 'span', className: 'car__name' }),
+    track: new Input({ type: 'range', className: 'car__track', ariaLabel: 'car', value: '0' }),
   };
 
-  constructor(props?: ComponentProps<T>) {
+  constructor(carData: CarData, props?: ComponentProps<T>) {
     super({ ...props, className: 'car' });
-    const { name, buttons, track } = this.nodes;
+    const { buttons, name, track } = this.nodes;
 
-    this.append(name, ...Object.values(buttons), track);
+    name.text = carData.name;
+
+    this.setCarColor(carData.color);
+
+    this.append(...Object.values(buttons), name, track);
   }
 
-  public setCarColor(color: string): void {
+  private setCarColor(color: string): void {
     const newColor = HexColor.isColor(color) ? color : HexColor.random;
-    this.nodes.track.node.setAttribute('car-color', newColor);
+    this.nodes.track.style.setProperty('--car-color', newColor);
   }
 }

@@ -125,7 +125,8 @@ ul {
   }
 }
 .pagination {
-  margin: .3em auto;
+  display: inline-block;
+  margin: 0.3em auto;
   &__counter {
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button {
@@ -138,4 +139,10 @@ ul {
     width: 2em;
     text-align: center;
   }
+}
+.garage__heading,
+.winners__heading {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 1em;
 }

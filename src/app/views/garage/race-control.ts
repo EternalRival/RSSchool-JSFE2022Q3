@@ -7,7 +7,7 @@ export class RaceControl extends Component {
   public generateBtn = new Button({
     parent: this,
     className: 'garage__race-control-button',
-    textContent: 'Generate Car',
+    textContent: 'Generate Cars',
   });
 
   constructor(props?: ComponentProps) {

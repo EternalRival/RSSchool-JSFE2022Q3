@@ -10,7 +10,12 @@ export class CarSettings extends Component<HTMLFormElement> {
       type: 'text',
       ariaLabel: 'car name input',
     }),
-    color: new Input({ className: 'car-settings__color', type: 'color', ariaLabel: 'car color picker' }),
+    color: new Input({
+      className: 'car-settings__color',
+      type: 'color',
+      ariaLabel: 'car color picker',
+      value: '#00ff00',
+    }),
     submitBtn: new Button({ className: 'car-settings__submit', textContent: 'submit' }),
   };
 

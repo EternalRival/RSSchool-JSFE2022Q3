@@ -12,6 +12,10 @@ export class App {
   }
 
   private initListeners(): void {
+    const { garageBtn, winnersBtn } = this.view.header.nodes;
+    garageBtn.addEventListener('click', () => this.view.setView(View.GARAGE));
+    winnersBtn.addEventListener('click', () => this.view.setView(View.WINNERS));
+    // console.log(this.view.views.get(View.GARAGE).nodes);
     /*     const { garageBtn, winnersBtn } = this.view.header;
     const { submitBtn } = this.view.garage.createBar;
     const { startBtn, resetBtn, generateBtn } = this.view.garage.controlBar;
