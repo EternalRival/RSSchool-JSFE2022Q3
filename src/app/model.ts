@@ -1,5 +1,6 @@
+import { CarBrand, CarModel } from '../types/enums';
 import { CarData } from '../types/interfaces';
-import { HexColor } from '../utils/utils';
+import { getRandomArrayItem, HexColor } from '../utils/utils';
 
 export class Model {
   private defaultCarName = 'Tesla';
@@ -14,5 +15,11 @@ export class Model {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(car),
     });
+  }
+
+  public generateHundredCars(): Promise<Response>[] {
+    const [carBrands, carModels] = [Object.values(CarBrand), Object.values(CarModel)];
+    const getRandomCarName = (): string => `${getRandomArrayItem(carBrands)} ${getRandomArrayItem(carModels)}`;
+    return Array.from({ length: 100 }, () => this.createCar({ name: getRandomCarName(), color: HexColor.random }));
   }
 }

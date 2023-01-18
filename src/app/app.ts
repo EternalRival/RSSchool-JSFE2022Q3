@@ -24,6 +24,10 @@ export class App {
       const carData = createBar.getCarData();
       this.model.createCar(carData);
     });
+
+    const { generateBtn } = this.view.views.garage.nodes.controlBar;
+    generateBtn.addEventListener('click', () => this.model.generateHundredCars());
+
     // console.log(this.view.views.get(View.GARAGE).nodes);
     /*     const { garageBtn, winnersBtn } = this.view.header;
     const { submitBtn } = this.view.garage.createBar;
