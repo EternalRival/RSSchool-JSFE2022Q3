@@ -25,11 +25,6 @@ export class Garage extends Section {
     this.container.append(pagination, heading, controlBar, createBar, this.raceTrack);
     heading.append(itemCounter);
     //? temp
-    this.renderCars([
-      { name: 'oleg', id: 1, color: '#0f0' },
-      { name: 'oleg', id: 1, color: '#0f0' },
-      { name: 'olej', id: 2, color: '#00f' },
-    ]);
   }
 
   public renderCars(cars: CarData[]): void {
@@ -40,5 +35,4 @@ export class Garage extends Section {
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-
 }

@@ -5,13 +5,13 @@ import { Garage } from './views/garage';
 import { Header } from './views/header';
 import { Winners } from './views/winners';
 import { Component } from '../components/Component';
-import { View } from '../types/enums';
+import { Route } from '../types/enums';
 
 export class AppView {
   public currentView: Component;
   public views = {
-    [View.GARAGE]: new Garage(),
-    [View.WINNERS]: new Winners(),
+    [Route.GARAGE]: new Garage(),
+    [Route.WINNERS]: new Winners(),
   };
 
   public header = new Header();
@@ -22,13 +22,13 @@ export class AppView {
     const main = new Main();
     const footer = new Footer();
 
-    this.currentView = this.views[View.GARAGE];
+    this.currentView = this.views[Route.GARAGE];
 
     root.append(this.header.node, main.node, footer.node);
     main.append(this.currentView);
   }
 
-  public setView(view: View): void {
+  public setView(view: Route): void {
     const newView = this.views[view];
     if (this.currentView !== newView) {
       this.currentView.replaceWith(newView);

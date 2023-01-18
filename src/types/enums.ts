@@ -1,4 +1,4 @@
-export enum View {
+export enum Route {
   GARAGE = 'garage',
   WINNERS = 'winners',
 }
