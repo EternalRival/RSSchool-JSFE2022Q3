@@ -38,4 +38,7 @@ export class Garage extends Section {
     this.raceTrack.append(...carNodes);
     /*  this.raceTrack.node.replaceChildren(...carNodes); */
   }
+
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+
 }

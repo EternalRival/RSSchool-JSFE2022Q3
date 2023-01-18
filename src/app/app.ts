@@ -9,12 +9,21 @@ export class App {
   public run(): void {
     console.info('App started!');
     this.initListeners();
+
+    // this.model.createCar({ name: 'kek', color: '#696969' });
   }
 
   private initListeners(): void {
     const { garageBtn, winnersBtn } = this.view.header.nodes;
     garageBtn.addEventListener('click', () => this.view.setView(View.GARAGE));
     winnersBtn.addEventListener('click', () => this.view.setView(View.WINNERS));
+
+    const { createBar } = this.view.views.garage.nodes;
+    createBar.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const carData = createBar.getCarData();
+      this.model.createCar(carData);
+    });
     // console.log(this.view.views.get(View.GARAGE).nodes);
     /*     const { garageBtn, winnersBtn } = this.view.header;
     const { submitBtn } = this.view.garage.createBar;
