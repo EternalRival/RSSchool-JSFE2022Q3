@@ -1,3 +1,10 @@
+export function randomize(min: number, max: number, isInclusive?: boolean): number {
+  return Math.floor(Math.random() * (max - min + +(isInclusive ?? false))) + min;
+}
+export function getRandomArrayItem<T>(array: T[]): T {
+  return array[randomize(0, array.length)];
+}
+
 export const converter = {
   mapToString<T>(map: Map<string, T>): string {
     return JSON.stringify(map, (_, v) => (v instanceof Map ? Array.from(v) : v));
@@ -26,7 +33,9 @@ export function getChunk<T>(number: number, length: number, list: T[]): T[] {
   return list.slice(number * length, (number + 1) * length);
 }
 
-export const xor = (a: boolean, b: boolean): boolean => (a && b) || (!a && !b);
+export function xor(a: boolean, b: boolean): boolean {
+  return (a && b) || (!a && !b);
+}
 
 export function debounce<F extends Callback<F>>(callback: Callback<F>, ms = 350): Callback<F> {
   let timeout: ReturnType<typeof setTimeout>;
@@ -41,9 +50,6 @@ export const HexColor = {
     return /^#(?:[0-9a-fA-F]{3}){1,2}$/.test(value);
   },
   get random(): string {
-    const max = 2 ** 24;
-    const randDec = Math.floor(Math.random() * max);
-    const randHex = randDec.toString(16);
-    return `#${randHex.padStart(6, '0')}`;
+    return `#${randomize(0, 0xffffff).toString(16).padStart(6, '0')}`;
   },
 };
