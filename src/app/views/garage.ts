@@ -29,9 +29,8 @@ export class Garage extends Section {
 
   public renderCars(cars: CarData[]): void {
     const tag = 'li';
-    const carNodes = cars.map((car) => new Car(car, { tag }));
-    this.raceTrack.append(...carNodes);
-    /*  this.raceTrack.node.replaceChildren(...carNodes); */
+    const carNodes = cars.map((car) => new Car(car, { tag }).node);
+    this.raceTrack.node.replaceChildren(...carNodes);
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type

@@ -22,12 +22,18 @@ export class Pagination extends Component {
     const prevBtn = new Button({
       className: 'pagination__button',
       textContent: 'Prev',
-      onclick: (): void => counter.node.stepDown(),
+      onclick: (): void => {
+        counter.node.stepDown();
+        counter.node.dispatchEvent(new Event('change'));
+      },
     });
     const nextBtn = new Button({
       className: 'pagination__button',
       textContent: 'Next',
-      onclick: (): void => counter.node.stepUp(),
+      onclick: (): void => {
+        counter.node.stepUp();
+        counter.node.dispatchEvent(new Event('change'));
+      },
     });
 
     this.append(prevBtn, counter, nextBtn);

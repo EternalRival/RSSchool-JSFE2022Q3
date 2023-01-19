@@ -6,15 +6,28 @@ export class App {
   private model = new Model();
   private view = new AppView();
 
-  public run(): void {
+  public async run(): Promise<void> {
     console.info('App started!');
-    this.initListeners();
 
-    // this.model.createCar({ name: 'kek', color: '#696969' });
-    //? temp
-    this.model.getCars({ limit: 7, page: 1 }).then((cars) => this.view.views.garage.renderCars(cars.json));
-    //todo update
-    //todo pagination fix
+    this.initListeners();
+    this.update();
+
+    //todo update todo pagination fix
+  }
+
+  private async renderCars(): Promise<void> {
+    const cars = await this.model.getCars(Route.GARAGE);
+    this.view.views.garage.renderCars(cars);
+  }
+  private updateTotalCounter(route: Route): void {
+    this.view.setTotalCounter(route, this.model.state[route].totalQuantity);
+  }
+
+  private async createCarHandler(e: Event): Promise<void> {
+    e.preventDefault();
+    const carData = this.view.views.garage.nodes.createBar.getCarData();
+    await this.model.createCar(carData);
+    this.update();
   }
 
   private initListeners(): void {
@@ -23,25 +36,33 @@ export class App {
     winnersBtn.addEventListener('click', () => this.view.setView(Route.WINNERS));
 
     const { createBar } = this.view.views.garage.nodes;
-    createBar.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const carData = createBar.getCarData();
-      this.model.createCar(carData);
-    });
+    createBar.addEventListener('submit', this.createCarHandler.bind(this));
 
     const { startBtn, generateBtn } = this.view.views.garage.nodes.controlBar;
     generateBtn.addEventListener('click', () => this.model.generateHundredCars());
-    startBtn.addEventListener('click', () => this.model.getCars().then((v) => console.log(v)));
 
-    // console.log(this.view.views.get(View.GARAGE).nodes);
-    /*     const { garageBtn, winnersBtn } = this.view.header;
-    const { submitBtn } = this.view.garage.createBar;
-    const { startBtn, resetBtn, generateBtn } = this.view.garage.controlBar;
-    garageBtn.addEventListener('click', () => console.log('garageBtn clicked'));
-    winnersBtn.addEventListener('click', () => console.log('winnersBtn clicked'));
-    submitBtn.addEventListener('click', () => console.log('submitBtn clicked'));
+    const garagePage = this.view.views[Route.GARAGE].nodes.pagination.nodes.counter;
+    garagePage.addEventListener('change', () => {
+      const state = this.model.state[Route.GARAGE];
+
+      if (+garagePage.value > Math.ceil(state.totalQuantity / state.limit)) {
+        garagePage.value = `${state.page}`;
+        return;
+      }
+
+      state.page = +garagePage.value;
+      this.renderCars();
+    });
+
+    /*
+    const { startBtn, resetBtn } = this.view.garage.controlBar;
     startBtn.addEventListener('click', () => console.log('startBtn clicked'));
     resetBtn.addEventListener('click', () => console.log('resetBtn clicked'));
-    generateBtn.addEventListener('click', () => console.log('generateBtn clicked')); */
+    */
+  }
+
+  private async update(): Promise<void> {
+    await this.renderCars();
+    this.updateTotalCounter(Route.GARAGE);
   }
 }

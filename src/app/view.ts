@@ -35,4 +35,8 @@ export class AppView {
       this.currentView = newView;
     }
   }
+
+  public setTotalCounter(route: Route, quantity: number): void {
+    this.views[route].nodes.itemCounter.text = `${quantity}`;
+  }
 }
