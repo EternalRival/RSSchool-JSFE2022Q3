@@ -1,6 +1,6 @@
 import { Input } from '../components/Input';
 import { CarButton, CarSettingsAction, Route } from '../types/enums';
-import { CarData } from '../types/interfaces';
+import { ICarData } from '../types/interfaces';
 import { emitter, EventName } from '../utils/emitter';
 import { Model } from './model';
 import { AppView } from './view';
@@ -29,12 +29,12 @@ export class App {
   private subscribe(): void {
     //* View -> Model
     emitter.subscribe(EventName.routeBtnClicked, (route) => this.routeBtnClickHandler(route));
-    emitter.subscribe(EventName.pageChanged, ({ route, counter }) => this.pageChangeHandler(route, counter));
-    emitter.subscribe(EventName.setCarSubmitted, (action, carData) => this.setCarSubmitHandler(action, carData));
+    emitter.subscribe(EventName.pageChanged, (route, counter) => this.pageChangeHandler(route, counter));
+    emitter.subscribe(EventName.setCarSubmitted, ({ action, carData }) => this.setCarSubmitHandler(action, carData));
     emitter.subscribe(EventName.startBtnClicked, () => this.startBtnClickHandler());
     emitter.subscribe(EventName.resetBtnClicked, () => this.resetBtnClickHandler());
     emitter.subscribe(EventName.generateBtnClicked, () => this.generateBtnClickHandler());
-    emitter.subscribe(EventName.carBtnClicked, ({ button, id }) => this.carButtonClickHandler(button, id));
+    emitter.subscribe(EventName.carBtnClicked, (button, id) => this.carButtonClickHandler(button, id));
     //* Model -> View
   }
 
@@ -55,12 +55,14 @@ export class App {
     this.renderCars();
   }
 
-  private async setCarSubmitHandler(action: CarSettingsAction, carData: CarData): Promise<void> {
+  private async setCarSubmitHandler(action: CarSettingsAction, carData: ICarData): Promise<void> {
     switch (action) {
       case CarSettingsAction.CREATE:
         await this.model.createCar(carData);
         break;
       case CarSettingsAction.UPDATE:
+        console.log(carData);
+        await this.model.updateCar(carData);
         break;
       default:
     }
@@ -81,13 +83,13 @@ export class App {
     this.update();
   }
 
-  private carButtonClickHandler(button: CarButton, id: CarData['id']): void {
+  private async carButtonClickHandler(button: CarButton, id: ICarData['id']): Promise<void> {
     switch (button) {
       case CarButton.EDIT:
-        console.log(`${id}:${button} clicked`);
+        this.model.getCar(id).then((carData) => this.view.openUpdateDialog(carData));
         break;
       case CarButton.DELETE:
-        this.model.deleteCar(id);
+        await this.model.deleteCar(id);
         this.update();
         break;
       case CarButton.START:

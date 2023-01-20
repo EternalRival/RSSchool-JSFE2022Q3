@@ -22,7 +22,7 @@ export class Pagination extends Component {
       textContent: 'Prev',
       onclick: (): void => {
         counter.node.stepDown();
-        emitter.emit(EventName.pageChanged, { route, counter });
+        emitter.emit(EventName.pageChanged, route, counter);
       },
     });
     const nextBtn = new Button({
@@ -30,7 +30,7 @@ export class Pagination extends Component {
       textContent: 'Next',
       onclick: (): void => {
         counter.node.stepUp();
-        emitter.emit(EventName.pageChanged, { route, counter });
+        emitter.emit(EventName.pageChanged, route, counter);
       },
     });
 

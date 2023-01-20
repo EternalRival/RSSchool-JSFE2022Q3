@@ -67,18 +67,56 @@
       -webkit-mask-repeat: no-repeat;
     }
   }
-  .car-settings {
-    &__name {
-      background-color: transparent;
-      border: 1px solid #696969;
-      color: #fff;
-      padding: 0.3em;
-    }
-    &__color {
-      margin-left: 0.3em;
-      vertical-align: middle;
-      background-color: transparent;
-      border: 1px solid #696969;
+}
+
+.car-settings {
+  &__name {
+    background-color: transparent;
+    border: 1px solid #696969;
+    color: #fff;
+    padding: 0.3em;
+  }
+  &__color {
+    margin-left: 0.3em;
+    vertical-align: middle;
+    background-color: transparent;
+    border: 1px solid #696969;
+    &:hover {
+      cursor: pointer;
+      border-color: var(--car-color);
+      box-shadow: 0 0 1px 1px var(--car-color);
     }
   }
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0008;
+  &__dialog {
+    margin: 1.5em;
+    padding: 1.5em;
+    box-shadow: 0 0 0.2em 0.2em var(--car-color);
+    background-color: #000;
+  }
+
+  /*   position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+ */
+  //&.garage__car-update {
+
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // background-color: #000c;
+  //}
 }

@@ -6,7 +6,7 @@ import { CarSettings } from './garage/car-settings';
 import { Car } from './garage/car';
 import { RaceControl } from './garage/race-control';
 import { Pagination } from './pagination';
-import { CarData } from '../../types/interfaces';
+import { ICarData } from '../../types/interfaces';
 import { emitter, EventName } from '../../utils/emitter';
 import { CarSettingsAction, Route } from '../../types/enums';
 
@@ -22,7 +22,7 @@ export class Garage extends Section {
 
     const controlBar = new RaceControl();
 
-    const createBar = new CarSettings(CarSettingsAction.CREATE, { className: `${route}__car-create` });
+    const createBar = new CarSettings({ action: CarSettingsAction.CREATE }, { className: `${route}__car-create` });
 
     const pagination = new Pagination(route);
 
@@ -30,7 +30,7 @@ export class Garage extends Section {
     heading.append(this.total);
   }
 
-  public renderCars(cars: CarData[]): void {
+  public renderCars(cars: ICarData[]): void {
     const tag = 'li';
     const carNodes = cars.map((car) => new Car(car, { tag }).node);
     this.raceTrack.node.replaceChildren(...carNodes);

@@ -7,7 +7,7 @@ export enum EventName {
   'resetBtnClicked',
   'pageChanged',
   'totalUpdated',
-  'event8',
+  'colorPicked',
 }
 
 class Emitter<EventCallback extends Callback<EventCallback>> {

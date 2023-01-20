@@ -1,10 +1,17 @@
-export interface CarData {
+import { CarSettingsAction } from './enums';
+
+export interface ICarData {
   name: string;
   color: string;
   id: number;
 }
-export interface RouteState {
+export interface IRouteState {
   page: number;
   limit: number;
   total: number;
+}
+
+export interface ICarSettings {
+  action: CarSettingsAction;
+  carData?: ICarData;
 }

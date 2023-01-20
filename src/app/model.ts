@@ -1,9 +1,9 @@
 import { CarBrand, CarModel, RequestMethod, Route } from '../types/enums';
-import { CarData, RouteState } from '../types/interfaces';
+import { ICarData, IRouteState } from '../types/interfaces';
 import { getRandomArrayItem, HexColor } from '../utils/utils';
 
 export class Model {
-  public state: Record<Route, RouteState> = {
+  public state: Record<Route, IRouteState> = {
     [Route.GARAGE]: { page: 1, limit: 7, total: 0 },
     [Route.WINNERS]: { page: 1, limit: 10, total: 0 },
   };
@@ -20,7 +20,7 @@ export class Model {
     return `${getRandomArrayItem(brands)} ${getRandomArrayItem(models)}`;
   }
 
-  public async createCar(carData: Omit<CarData, 'id'>): Promise<Response> {
+  public async createCar(carData: Omit<ICarData, 'id'>): Promise<Response> {
     const url = `${this.domain}/${Route.GARAGE}`;
     const car = {
       name: carData.name || this.randomCarName,
@@ -41,10 +41,13 @@ export class Model {
 
   public async deleteCar(id: number): Promise<Response> {
     const url = `${this.domain}/${Route.GARAGE}/${id}`;
-    const response = await fetch(url, { method: RequestMethod.DELETE });
+    const response = await fetch(url, {
+      method: RequestMethod.DELETE,
+    });
     return response;
   }
-  public async updateCar(carData: CarData): Promise<Response> {
+  public async updateCar(carData: ICarData): Promise<Response> {
+    console.log('m', carData);
     const url = `${this.domain}/${Route.GARAGE}/${carData.id}`;
     const response = await fetch(url, {
       method: RequestMethod.PUT,
@@ -53,13 +56,21 @@ export class Model {
     });
     return response;
   }
+  public async getCar(id: number): Promise<ICarData> {
+    const url = `${this.domain}/${Route.GARAGE}/${id}`;
+    const response = await fetch(url, {
+      method: RequestMethod.GET,
+    });
+    return response.json();
+  }
 
-  public async getCars(route: Route): Promise<CarData[]> {
+  public async getCars(route: Route): Promise<ICarData[]> {
     const { page, limit } = this.state[route];
     const url = `${this.domain}/${route}?_page=${page}&_limit=${limit}`;
-    const response = await fetch(url, { method: RequestMethod.GET });
-    const json = await response.json();
+    const response = await fetch(url, {
+      method: RequestMethod.GET,
+    });
     this.state[route].total = Number(response.headers.get('X-Total-Count'));
-    return json;
+    return response.json();
   }
 }
