@@ -52,27 +52,27 @@ export const requirements = {
     ],
     'Car animation': [
       {
-        mod: 0,
+        mod: 1,
         points: 5,
         text: "Near the car's picture should be buttons for starting / stoping the car engine.",
       },
       {
-        mod: 0,
+        mod: 1,
         points: 20,
         text: "User clicks to the engine start button -> UI is waiting for car's velocity answer -> animate the car and makes another request to drive. In case api returned 500 error car animation should be stopped.",
       },
       {
-        mod: 0,
+        mod: 1,
         points: 5,
         text: "User clicks to the engine stop button -> UI is waiting for answer for stopping engine -> car returned to it's initial place.",
       },
       {
-        mod: 0,
+        mod: 1,
         points: 5,
         text: "Start engine button should be disabled in case car is already in driving mode. As well as stop engine button should be disabled when car is on it's initial place.",
       },
       {
-        mod: 0,
+        mod: 1,
         points: 15,
         text: 'Car animation should work fine on any screen (smallest screen size is 500px).',
       },

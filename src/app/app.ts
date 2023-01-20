@@ -1,6 +1,6 @@
 import { Input } from '../components/Input';
-import { CarButton, CarSettingsAction, Route } from '../types/enums';
-import { ICarData } from '../types/interfaces';
+import { CarButton, CarSettingsAction, Route, StatusCode } from '../types/enums';
+import { ICarData, ICarControl, ICarEngineData } from '../types/interfaces';
 import { emitter, EventName } from '../utils/emitter';
 import { Model } from './model';
 import { AppView } from './view';
@@ -34,7 +34,7 @@ export class App {
     emitter.subscribe(EventName.startBtnClicked, () => this.startBtnClickHandler());
     emitter.subscribe(EventName.resetBtnClicked, () => this.resetBtnClickHandler());
     emitter.subscribe(EventName.generateBtnClicked, () => this.generateBtnClickHandler());
-    emitter.subscribe(EventName.carBtnClicked, (button, id) => this.carButtonClickHandler(button, id));
+    emitter.subscribe(EventName.carBtnClicked, (button, carControl) => this.carButtonClickHandler(button, carControl));
     //* Model -> View
   }
 
@@ -83,22 +83,40 @@ export class App {
     this.update();
   }
 
-  private async carButtonClickHandler(button: CarButton, id: ICarData['id']): Promise<void> {
+  private async carButtonClickHandler(button: CarButton, carControl: ICarControl): Promise<void> {
     switch (button) {
       case CarButton.EDIT:
-        this.model.getCar(id).then((carData) => this.view.openUpdateDialog(carData));
+        this.model.getCar(carControl.id).then((carData) => this.view.openUpdateDialog(carData));
         break;
       case CarButton.DELETE:
-        await this.model.deleteCar(id);
+        await this.model.deleteCar(carControl.id);
         this.update();
         break;
       case CarButton.START:
-        console.log(`${id}:${button} clicked`);
+        this.drive(carControl);
         break;
       case CarButton.STOP:
-        console.log(`${id}:${button} clicked`);
+        this.stop(carControl);
         break;
       default:
     }
   }
+
+  private drive = async (carControl: ICarControl): Promise<void> => {
+    const engineData = await this.model.toggleCarEngine(carControl.id, 'started');
+    if (typeof engineData !== 'number') {
+      carControl.drive(engineData);
+      const driveResponse = await this.model.drive(carControl.id);
+      if (driveResponse === StatusCode.INTERNAL_SERVER_ERROR) {
+        carControl.pause();
+      }
+    }
+  };
+
+  private stop = async (carControl: ICarControl): Promise<void> => {
+    const engineData = await this.model.toggleCarEngine(carControl.id, 'stopped');
+    if (typeof engineData !== 'number') {
+      carControl.stop();
+    }
+  };
 }

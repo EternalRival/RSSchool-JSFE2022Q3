@@ -20,7 +20,7 @@
     background-size: 80%;
     background-position: center;
     background-repeat: no-repeat;
-    transition: transform 0.1s;
+    transition: all 0.1s;
     &:hover {
       transform: scale(1.1);
       cursor: pointer;
@@ -28,6 +28,10 @@
     &:active {
       transition: unset;
       transform: scale(1);
+    }
+    &:disabled {
+      pointer-events: none;
+      opacity: 0.3;
     }
   }
   .car__edit {
