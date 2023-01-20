@@ -1,11 +1,11 @@
-import { CarBrand, CarModel, Route } from '../types/enums';
-import { CarData } from '../types/interfaces';
+import { CarBrand, CarModel, RequestMethod, Route } from '../types/enums';
+import { CarData, RouteState } from '../types/interfaces';
 import { getRandomArrayItem, HexColor } from '../utils/utils';
 
 export class Model {
-  public state: Record<Route, { page: number; limit: number; totalQuantity: number }> = {
-    [Route.GARAGE]: { page: 1, limit: 7, totalQuantity: 0 },
-    [Route.WINNERS]: { page: 1, limit: 10, totalQuantity: 0 },
+  public state: Record<Route, RouteState> = {
+    [Route.GARAGE]: { page: 1, limit: 7, total: 0 },
+    [Route.WINNERS]: { page: 1, limit: 10, total: 0 },
   };
 
   private domain = 'http://localhost:3000';
@@ -20,44 +20,46 @@ export class Model {
     return `${getRandomArrayItem(brands)} ${getRandomArrayItem(models)}`;
   }
 
-  public async createCar(carData: CarData): Promise<Response> {
+  public async createCar(carData: Omit<CarData, 'id'>): Promise<Response> {
+    const url = `${this.domain}/${Route.GARAGE}`;
     const car = {
       name: carData.name || this.randomCarName,
       color: HexColor.isColor(carData.color) ? carData.color : HexColor.random,
     };
-    const response = await fetch(`${this.domain}/${Route.GARAGE}`, {
-      method: 'POST',
+    const response = await fetch(url, {
+      method: RequestMethod.POST,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(car),
     });
-    this.state[Route.GARAGE].totalQuantity += 1;
+    this.state[Route.GARAGE].total += 1;
     return response;
   }
 
   public generateHundredCars(): Promise<Response>[] {
     return Array.from({ length: 100 }, () => this.createCar({ name: this.randomCarName, color: HexColor.random }));
   }
-  /* 
-  public async getCars(queryParams?: { limit?: number; page?: number }): Promise<CarData[]> {
-    const route = Route.GARAGE;
-    let url = `${this.domain}/${route}`;
-    if (queryParams) {
-      const entries = Object.entries(queryParams);
-      url += entries.length ? `?${entries.map(([key, value]) => `_${key}=${value}`).join('&')}` : '';
-    }
 
-    const response = await fetch(url, { method: 'GET' });
-    const json = await response.json();
-    this.state[route].totalQuantity = Number(response.headers.get('X-Total-Count'));
-    return json;
-  } */
+  public async deleteCar(id: number): Promise<Response> {
+    const url = `${this.domain}/${Route.GARAGE}/${id}`;
+    const response = await fetch(url, { method: RequestMethod.DELETE });
+    return response;
+  }
+  public async updateCar(carData: CarData): Promise<Response> {
+    const url = `${this.domain}/${Route.GARAGE}/${carData.id}`;
+    const response = await fetch(url, {
+      method: RequestMethod.PUT,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(carData),
+    });
+    return response;
+  }
 
   public async getCars(route: Route): Promise<CarData[]> {
     const { page, limit } = this.state[route];
     const url = `${this.domain}/${route}?_page=${page}&_limit=${limit}`;
-    const response = await fetch(url, { method: 'GET' });
+    const response = await fetch(url, { method: RequestMethod.GET });
     const json = await response.json();
-    this.state[route].totalQuantity = Number(response.headers.get('X-Total-Count'));
+    this.state[route].total = Number(response.headers.get('X-Total-Count'));
     return json;
   }
 }

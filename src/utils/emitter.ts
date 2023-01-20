@@ -1,6 +1,13 @@
 export enum EventName {
-  'event1' = 'event-name-1',
-  'event2' = 'event-name-2',
+  'carBtnClicked',
+  'routeBtnClicked',
+  'setCarSubmitted',
+  'generateBtnClicked',
+  'startBtnClicked',
+  'resetBtnClicked',
+  'pageChanged',
+  'totalUpdated',
+  'event8',
 }
 
 class Emitter<EventCallback extends Callback<EventCallback>> {

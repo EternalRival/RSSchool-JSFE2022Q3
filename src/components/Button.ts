@@ -12,6 +12,6 @@ export class Button extends Component<HTMLButtonElement> {
     this.node.disabled = value;
   }
   public click(): () => void {
-    return this.node.click.bind(this.node);
+    return () => this.node.click();
   }
 }

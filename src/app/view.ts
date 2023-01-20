@@ -10,21 +10,20 @@ import { Route } from '../types/enums';
 export class AppView {
   public currentView: Component;
   public views = {
-    [Route.GARAGE]: new Garage(),
-    [Route.WINNERS]: new Winners(),
+    [Route.GARAGE]: new Garage(Route.GARAGE),
+    [Route.WINNERS]: new Winners(Route.WINNERS),
   };
-
-  public header = new Header();
 
   constructor() {
     const root = document.getElementById('root') ?? new Root().node;
 
+    const header = new Header();
     const main = new Main();
     const footer = new Footer();
 
     this.currentView = this.views[Route.GARAGE];
 
-    root.append(this.header.node, main.node, footer.node);
+    root.append(header.node, main.node, footer.node);
     main.append(this.currentView);
   }
 
@@ -37,6 +36,6 @@ export class AppView {
   }
 
   public setTotalCounter(route: Route, quantity: number): void {
-    this.views[route].nodes.itemCounter.text = `${quantity}`;
+    this.views[route].total.text = `${quantity}`;
   }
 }

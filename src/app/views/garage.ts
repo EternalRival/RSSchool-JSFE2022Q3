@@ -7,24 +7,27 @@ import { Car } from './garage/car';
 import { RaceControl } from './garage/race-control';
 import { Pagination } from './pagination';
 import { CarData } from '../../types/interfaces';
+import { emitter, EventName } from '../../utils/emitter';
+import { CarSettingsAction, Route } from '../../types/enums';
 
 export class Garage extends Section {
-  public nodes = {
-    itemCounter: new Component({ tag: 'span', className: 'garage__item-counter', textContent: 'IC' }),
-    controlBar: new RaceControl(),
-    createBar: new CarSettings({ className: 'garage__car-create', buttonText: 'Create' }),
-    pagination: new Pagination(),
-  };
+  public total = new Component({ tag: 'span', className: `${this.route}__total-counter` });
+
   private raceTrack = new Component<HTMLUListElement>({ tag: 'ul', className: 'race-track' });
 
-  constructor(props?: ComponentProps) {
-    super({ ...props, className: 'section garage' });
+  constructor(private route: Route, props?: ComponentProps) {
+    super({ ...props, className: `section ${route}` });
 
-    const heading = new Heading({ tag: 'h1', className: 'garage__heading', textContent: 'Garage' });
-    const { itemCounter, controlBar, createBar, pagination } = this.nodes;
+    const heading = new Heading({ tag: 'h1', className: `${route}__heading`, textContent: route });
+
+    const controlBar = new RaceControl();
+
+    const createBar = new CarSettings(CarSettingsAction.CREATE, { className: `${route}__car-create` });
+
+    const pagination = new Pagination(route);
+
     this.container.append(pagination, heading, controlBar, createBar, this.raceTrack);
-    heading.append(itemCounter);
-    //? temp
+    heading.append(this.total);
   }
 
   public renderCars(cars: CarData[]): void {
@@ -32,6 +35,4 @@ export class Garage extends Section {
     const carNodes = cars.map((car) => new Car(car, { tag }).node);
     this.raceTrack.node.replaceChildren(...carNodes);
   }
-
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 }

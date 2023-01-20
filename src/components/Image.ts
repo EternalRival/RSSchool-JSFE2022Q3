@@ -13,6 +13,6 @@ export class Image extends Component<HTMLImageElement> {
   }
 
   public get decode(): () => Promise<void> {
-    return this.node.decode.bind(this.node);
+    return () => this.node.decode();
   }
 }

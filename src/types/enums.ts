@@ -1,6 +1,25 @@
+export enum RequestMethod {
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE',
+}
+
 export enum Route {
   GARAGE = 'garage',
   WINNERS = 'winners',
+}
+
+export enum CarButton {
+  EDIT = 'edit',
+  DELETE = 'delete',
+  START = 'start',
+  STOP = 'stop',
+}
+
+export enum CarSettingsAction {
+  CREATE = 'create',
+  UPDATE = 'update',
 }
 
 export enum CarModel {

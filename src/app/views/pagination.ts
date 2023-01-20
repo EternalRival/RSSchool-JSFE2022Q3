@@ -1,30 +1,28 @@
 import { Button } from '../../components/Button';
 import { Component, ComponentProps } from '../../components/Component';
 import { Input } from '../../components/Input';
+import { Route } from '../../types/enums';
+import { emitter, EventName } from '../../utils/emitter';
 
 export class Pagination extends Component {
-  public nodes = {
-    counter: new Input({
+  constructor(route: Route, props?: ComponentProps) {
+    super({ ...props, className: 'pagination' });
+
+    const counter = new Input({
       className: 'pagination__counter',
       type: 'number',
       readOnly: true,
       value: '1',
       min: '1',
       ariaLabel: 'pagination counter',
-    }),
-  };
-
-  constructor(props?: ComponentProps) {
-    super({ ...props, className: 'pagination' });
-
-    const { counter } = this.nodes;
+    });
 
     const prevBtn = new Button({
       className: 'pagination__button',
       textContent: 'Prev',
       onclick: (): void => {
         counter.node.stepDown();
-        counter.node.dispatchEvent(new Event('change'));
+        emitter.emit(EventName.pageChanged, { route, counter });
       },
     });
     const nextBtn = new Button({
@@ -32,7 +30,7 @@ export class Pagination extends Component {
       textContent: 'Next',
       onclick: (): void => {
         counter.node.stepUp();
-        counter.node.dispatchEvent(new Event('change'));
+        emitter.emit(EventName.pageChanged, { route, counter });
       },
     });
 
