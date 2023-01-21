@@ -1,9 +1,10 @@
 import { Input } from '../components/Input';
 import { CarButton, CarSettingsAction, Route, StatusCode } from '../types/enums';
-import { ICarData, ICarControl, ICarEngineData } from '../types/interfaces';
+import { ICarData } from '../types/interfaces';
 import { emitter, EventName } from '../utils/emitter';
 import { Model } from './model';
 import { AppView } from './view';
+import { CarControl } from './views/garage/car-control';
 
 export class App {
   private model = new Model();
@@ -35,6 +36,7 @@ export class App {
     emitter.subscribe(EventName.resetBtnClicked, () => this.resetBtnClickHandler());
     emitter.subscribe(EventName.generateBtnClicked, () => this.generateBtnClickHandler());
     emitter.subscribe(EventName.carBtnClicked, (button, carControl) => this.carButtonClickHandler(button, carControl));
+    emitter.subscribe(EventName.carFinishedRace, (id) => this.raceFinishHandler(id));
     //* Model -> View
   }
 
@@ -61,7 +63,6 @@ export class App {
         await this.model.createCar(carData);
         break;
       case CarSettingsAction.UPDATE:
-        console.log(carData);
         await this.model.updateCar(carData);
         break;
       default:
@@ -71,11 +72,29 @@ export class App {
   }
 
   private startBtnClickHandler(): void {
-    throw new Error('Method not implemented.');
+    document.body.style.pointerEvents = 'none';
+    this.view.views[Route.GARAGE].controlBar.toggleRaceButtons(false);
+    this.view.views[Route.GARAGE].startRace();
+    this.model.race.inProgress = true;
+    this.model.race.carsCrashed = 0;
+    this.model.race.startTime = Date.now();
   }
 
   private resetBtnClickHandler(): void {
-    throw new Error('Method not implemented.');
+    this.view.views[Route.GARAGE].stopRace();
+  }
+
+  private raceFinishHandler(id: ICarData['id']): void {
+    // TODO https://www.youtube.com/watch?v=sTXtlBLh-Ts
+    const { race } = this.model;
+    if (race.inProgress) {
+      race.inProgress = false;
+      race.winnerTime = Date.now() - race.startTime;
+      race.currentWinner = id;
+      console.log(race);
+    }
+    this.view.views[Route.GARAGE].controlBar.toggleRaceButtons(true);
+    document.body.removeAttribute('style');
   }
 
   private async generateBtnClickHandler(): Promise<void> {
@@ -83,7 +102,7 @@ export class App {
     this.update();
   }
 
-  private async carButtonClickHandler(button: CarButton, carControl: ICarControl): Promise<void> {
+  private async carButtonClickHandler(button: CarButton, carControl: CarControl): Promise<void> {
     switch (button) {
       case CarButton.EDIT:
         this.model.getCar(carControl.id).then((carData) => this.view.openUpdateDialog(carData));
@@ -102,21 +121,34 @@ export class App {
     }
   }
 
-  private drive = async (carControl: ICarControl): Promise<void> => {
+  private drive = async (carControl: CarControl): Promise<void> => {
+    carControl.startButtonToggle(false);
     const engineData = await this.model.toggleCarEngine(carControl.id, 'started');
     if (typeof engineData !== 'number') {
       carControl.drive(engineData);
+      if (!this.model.race.inProgress) {
+        carControl.stopButtonToggle(true);
+      }
       const driveResponse = await this.model.drive(carControl.id);
       if (driveResponse === StatusCode.INTERNAL_SERVER_ERROR) {
         carControl.pause();
+        this.model.race.carsCrashed += 1;
+        if (this.model.race.carsCrashed >= this.model.state[Route.GARAGE].limit) {
+          this.view.views[Route.GARAGE].controlBar.toggleRaceButtons(true);
+          document.body.removeAttribute('style');
+        }
       }
     }
   };
 
-  private stop = async (carControl: ICarControl): Promise<void> => {
+  private stop = async (carControl: CarControl): Promise<void> => {
+    carControl.stopButtonToggle(false);
     const engineData = await this.model.toggleCarEngine(carControl.id, 'stopped');
     if (typeof engineData !== 'number') {
       carControl.stop();
+      if (!this.model.race.inProgress) {
+        carControl.startButtonToggle(true);
+      }
     }
   };
 }

@@ -3,8 +3,8 @@ import './assets/styles/styles.scss';
 import { App } from './app/app';
 import { selfCheck } from './selfcheck/checklist';
 
-console.log(selfCheck.student);
-console.log(selfCheck.mentor);
+console.info(selfCheck.student);
+console.info(selfCheck.mentor);
 
 const app = new App();
 app.run();

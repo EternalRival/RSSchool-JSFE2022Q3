@@ -8,6 +8,14 @@ export class Model {
     [Route.WINNERS]: { page: 1, limit: 10, total: 0 },
   };
 
+  public race = {
+    startTime: 0,
+    inProgress: false,
+    currentWinner: 0,
+    winnerTime: 0,
+    carsCrashed: 0,
+  };
+
   private domain = 'http://localhost:3000';
 
   private carDefaultNames: Record<string, string[]> = {
@@ -98,7 +106,6 @@ export class Model {
   }
 
   public async updateCar(carData: ICarData): Promise<unknown> {
-    console.log('m', carData);
     const url = `${this.domain}/${Route.GARAGE}/${carData.id}`;
     const response = await fetch(url, {
       method: RequestMethod.PUT,
@@ -129,7 +136,7 @@ export class Model {
         return response.json();
       case StatusCode.BAD_REQUEST:
       case StatusCode.NOT_FOUND:
-        console.log(response.text());
+        console.info(await response.text());
         return response.status;
       default:
         return response.status;
@@ -152,7 +159,7 @@ export class Model {
       case StatusCode.NOT_FOUND:
       case StatusCode.TOO_MANY_REQUESTS:
       case StatusCode.INTERNAL_SERVER_ERROR:
-        console.log(response.text());
+        console.info(await response.text());
         return response.status;
       default:
         return response.status;

@@ -79,12 +79,12 @@ export const requirements = {
     ],
     'Race animation': [
       {
-        mod: 0,
+        mod: 1,
         points: 10,
         text: 'There should be a button to start race. After user clicks this button all the cars on the current page start driving.',
       },
       {
-        mod: 0,
+        mod: 1,
         points: 10,
         text: "There should be a button to reset race. After user clicks this button all the cars return to it's initial places.",
       },
