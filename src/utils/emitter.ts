@@ -8,7 +8,7 @@ export enum EventName {
   'pageChanged',
   'totalUpdated',
   'colorPicked',
-  carFinishedRace
+  'carFinishedRace',
 }
 
 class Emitter<EventCallback extends Callback<EventCallback>> {

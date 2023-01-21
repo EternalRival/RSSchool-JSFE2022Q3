@@ -2,6 +2,7 @@ import { Input } from '../components/Input';
 import { CarButton, CarSettingsAction, Route, StatusCode } from '../types/enums';
 import { ICarData } from '../types/interfaces';
 import { emitter, EventName } from '../utils/emitter';
+import { getReadableTime } from '../utils/utils';
 import { Model } from './model';
 import { AppView } from './view';
 import { CarControl } from './views/garage/car-control';
@@ -84,17 +85,19 @@ export class App {
     this.view.views[Route.GARAGE].stopRace();
   }
 
-  private raceFinishHandler(id: ICarData['id']): void {
+  private async raceFinishHandler(id: ICarData['id']): Promise<void> {
     // TODO https://www.youtube.com/watch?v=sTXtlBLh-Ts
     const { race } = this.model;
     if (race.inProgress) {
       race.inProgress = false;
       race.winnerTime = Date.now() - race.startTime;
       race.currentWinner = id;
-      console.log(race);
+      const winnerTime = getReadableTime(race.winnerTime);
+      const winnerName = (await this.model.getCar(id)).name;
+      this.view.alertWinner(winnerName, winnerTime);
+      this.view.views[Route.GARAGE].controlBar.toggleRaceButtons(true);
+      document.body.removeAttribute('style');
     }
-    this.view.views[Route.GARAGE].controlBar.toggleRaceButtons(true);
-    document.body.removeAttribute('style');
   }
 
   private async generateBtnClickHandler(): Promise<void> {

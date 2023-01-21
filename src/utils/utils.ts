@@ -53,3 +53,12 @@ export const HexColor = {
     return `#${randomize(0, 0xffffff).toString(16).padStart(6, '0')}`;
   },
 };
+
+export function getReadableTime(time: number): string {
+  const getStr = (num: number): string => `${Math.floor(num)}`.padStart(2, '0');
+  const h = getStr((time / 1000 / 60 / 60) % 24);
+  const m = getStr((time / 1000 / 60) % 60);
+  const s = getStr((time / 1000) % 60);
+  const ms = `${Math.floor(time % 1000)}`.padStart(3, '0');
+  return `${h}:${m}:${s}.${ms}`;
+}

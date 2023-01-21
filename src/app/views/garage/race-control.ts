@@ -23,7 +23,17 @@ export class RaceControl extends Component {
   }
 
   public toggleRaceButtons(mode: boolean): void {
+    if (mode) {
+      this.toggleResetButton(true)
+    } else {
+      this.toggleStartButton(false)
+      this.toggleResetButton(false)
+    }
+  }
+  public toggleStartButton(mode: boolean): void {
     this.startBtn.disabled = !mode;
+  }
+  public toggleResetButton(mode: boolean): void {
     this.resetBtn.disabled = !mode;
   }
 }

@@ -183,7 +183,7 @@ export class Model {
 
   //* Misc
 
-  private async responseHandler<T>(response: Response): Promise<T> {
+  /*   private async responseHandler<T>(response: Response): Promise<T> {
     switch (response.status) {
       case StatusCode.OK:
       case StatusCode.CREATED:
@@ -195,5 +195,5 @@ export class Model {
       default:
         return response.json().catch(() => ({} as T));
     }
-  }
+  } */
 }

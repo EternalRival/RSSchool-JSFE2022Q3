@@ -10,6 +10,7 @@ import { ICarData } from '../types/interfaces';
 import { CarSettings } from './views/garage/car-settings';
 import { emitter, EventName } from '../utils/emitter';
 import { HexColor } from '../utils/utils';
+import { Modal } from './views/modal-dialog';
 
 export class AppView {
   public currentView: Component;
@@ -47,23 +48,21 @@ export class AppView {
     const route = Route.GARAGE;
     const settings = { action: CarSettingsAction.UPDATE, carData };
 
-    const background = new Component({ className: 'modal', parent: document.body });
-    const dialog = new Component({ className: 'modal__dialog', parent: background });
+    const dialog = new Modal();
     const updateBar = new CarSettings(settings, { className: `${route}__car-update`, parent: dialog });
 
-    const closeDialog = (): void => background.destroy();
     const updateDialogColor = (color: string): void => {
       dialog.style.setProperty('--car-color', HexColor.isColor(color) ? color : HexColor.random);
     };
 
-    updateBar.addEventListener('submit', closeDialog);
-    background.addEventListener('click', (e) => {
-      if (e.target === background.node) {
-        closeDialog();
-      }
-    });
+    updateBar.addEventListener('submit', dialog.destroy);
 
     updateDialogColor(carData.color);
     emitter.subscribe(EventName.colorPicked, updateDialogColor);
+  }
+
+  public alertWinner(winner: string, time: string): void {
+    const dialog = new Modal({ textContent: `${winner} won this race! (${time})` });
+    // TODO пофиксить разблокировку кнопки старт после победы (не включать её)
   }
 }

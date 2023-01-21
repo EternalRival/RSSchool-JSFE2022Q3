@@ -50,5 +50,6 @@ export class Garage extends Section {
       car.control.stopButtonToggle(true);
       car.control.stopRide();
     });
+    this.controlBar.toggleStartButton(true);
   }
 }
