@@ -17,4 +17,6 @@ export class Winners extends Section {
     this.container.append(pagination, heading);
     heading.append(this.total);
   }
+
+  public renderCars(): void {}
 }

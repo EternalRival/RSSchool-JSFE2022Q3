@@ -15,17 +15,17 @@ export class App {
     console.info('App started!');
 
     this.subscribe();
-    this.update();
+    this.update(Route.GARAGE);
+    this.update(Route.WINNERS);
   }
 
-  private async renderCars(): Promise<void> {
-    const route = Route.GARAGE;
+  private async renderCars(route: Route): Promise<void> {
     this.view.views[route].renderCars(await this.model.getCars(route));
   }
 
-  private async update(): Promise<void> {
-    await this.renderCars();
-    Object.values(Route).forEach((route) => this.view.setTotalCounter(route, this.model.state[route].total));
+  private async update(route: Route): Promise<void> {
+    await this.renderCars(route);
+    this.view.setTotalCounter(route, this.model.state[route].total);
   }
 
   private subscribe(): void {
@@ -55,7 +55,7 @@ export class App {
     }
 
     state.page = +page.value;
-    this.renderCars();
+    this.renderCars(route);
   }
 
   private async setCarSubmitHandler(action: CarSettingsAction, carData: ICarData): Promise<void> {
@@ -69,7 +69,7 @@ export class App {
       default:
     }
 
-    this.update();
+    this.update(Route.GARAGE);
   }
 
   private startBtnClickHandler(): void {
@@ -86,13 +86,12 @@ export class App {
   }
 
   private async raceFinishHandler(id: ICarData['id']): Promise<void> {
-    // TODO https://www.youtube.com/watch?v=sTXtlBLh-Ts
     const { race } = this.model;
     if (race.inProgress) {
       race.inProgress = false;
-      race.winnerTime = Date.now() - race.startTime;
+      race.winnerTime = Math.round((Date.now() - race.startTime) / 10) / 100;
       race.currentWinner = id;
-      const winnerTime = getReadableTime(race.winnerTime);
+      const winnerTime = `${race.winnerTime}s`;
       const winnerName = (await this.model.getCar(id)).name;
       this.view.alertWinner(winnerName, winnerTime);
       this.view.views[Route.GARAGE].controlBar.toggleRaceButtons(true);
@@ -102,7 +101,7 @@ export class App {
 
   private async generateBtnClickHandler(): Promise<void> {
     await Promise.allSettled(this.model.generateHundredCars());
-    this.update();
+    this.update(Route.GARAGE);
   }
 
   private async carButtonClickHandler(button: CarButton, carControl: CarControl): Promise<void> {
@@ -112,7 +111,7 @@ export class App {
         break;
       case CarButton.DELETE:
         await this.model.deleteCar(carControl.id);
-        this.update();
+        this.update(Route.GARAGE);
         break;
       case CarButton.START:
         this.drive(carControl);
