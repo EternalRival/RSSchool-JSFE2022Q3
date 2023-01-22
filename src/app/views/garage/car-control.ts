@@ -10,14 +10,15 @@ export class CarControl {
     private stopButton: HTMLButtonElement,
   ) {}
   public drive(engineData: ICarEngineData): void {
+    const delay = 10;
     this.track.max = `${engineData.distance}`;
     this.driving = setInterval(() => {
       if (this.track.value === this.track.max) {
         this.pause();
         emitter.emit(EventName.carFinishedRace, this.id);
       }
-      this.track.stepUp(engineData.velocity);
-    });
+      this.track.stepUp(engineData.velocity * delay);
+    }, delay);
   }
   public pause(): void {
     clearInterval(this.driving);

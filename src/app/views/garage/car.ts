@@ -13,6 +13,7 @@ export class Car<T extends HTMLElement = HTMLElement> extends Component {
     ariaLabel: 'car',
     min: '0',
     value: '0',
+    step: '1',
     disabled: true,
   });
 

@@ -47,7 +47,7 @@ export class App {
 
   private pageChangeHandler(route: Route, counter: Input): void {
     const state = this.model.state[route];
-    const page = counter;
+    const page = counter.node;
 
     if (+page.value > Math.ceil(state.total / state.limit)) {
       page.value = `${state.page}`;
@@ -126,6 +126,7 @@ export class App {
 
   private drive = async (carControl: CarControl): Promise<void> => {
     carControl.startButtonToggle(false);
+    this.view.views[Route.GARAGE].controlBar.toggleStartButton(false);
     const engineData = await this.model.toggleCarEngine(carControl.id, 'started');
     if (typeof engineData !== 'number') {
       carControl.drive(engineData);
@@ -136,9 +137,10 @@ export class App {
       if (driveResponse === StatusCode.INTERNAL_SERVER_ERROR) {
         carControl.pause();
         this.model.race.carsCrashed += 1;
-        if (this.model.race.carsCrashed >= this.model.state[Route.GARAGE].limit) {
+        if (this.model.race.carsCrashed >= this.view.views.garage.raceTrackSize) {
           this.view.views[Route.GARAGE].controlBar.toggleRaceButtons(true);
           document.body.removeAttribute('style');
+          this.model.race.inProgress = false;
         }
       }
     }

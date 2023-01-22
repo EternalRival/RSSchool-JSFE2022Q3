@@ -7,7 +7,6 @@ import { Car } from './garage/car';
 import { RaceControl } from './garage/race-control';
 import { Pagination } from './pagination';
 import { ICarData } from '../../types/interfaces';
-import { emitter, EventName } from '../../utils/emitter';
 import { CarSettingsAction, Route } from '../../types/enums';
 
 export class Garage extends Section {
@@ -36,6 +35,7 @@ export class Garage extends Section {
     this.raceTrack.clear();
     this.currentCars = cars.map((car) => new Car(car, { tag: 'li' }));
     this.raceTrack.append(...this.currentCars);
+    this.controlBar.toggleStartButton(true);
   }
 
   public startRace(): void {
@@ -51,5 +51,9 @@ export class Garage extends Section {
       car.control.stopRide();
     });
     this.controlBar.toggleStartButton(true);
+  }
+
+  public get raceTrackSize(): number {
+    return this.currentCars?.length ?? 0;
   }
 }
