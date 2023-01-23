@@ -6,7 +6,6 @@ import { IWinner, IWinnerTableItem } from '../../types/interfaces';
 import { Pagination } from './pagination';
 
 export class Winners extends Section {
-  // TODO
   public total = new Component({ tag: 'span', className: `${this.route}__total-counter` });
   private tableBody = new Component<HTMLTableSectionElement>({ tag: 'tbody', className: 'winners-table__tbody' });
 

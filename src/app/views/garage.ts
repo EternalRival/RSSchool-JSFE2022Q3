@@ -33,6 +33,7 @@ export class Garage extends Section {
 
   public renderCars(cars: ICarData[]): void {
     this.raceTrack.clear();
+    this.currentCars?.forEach((car) => car.control.pause());
     this.currentCars = cars.map((car) => new Car(car, { tag: 'li' }));
     this.raceTrack.append(...this.currentCars);
     this.controlBar.toggleStartButton(true);

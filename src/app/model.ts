@@ -190,7 +190,8 @@ export class Model {
         return Promise.all(
           (await response.json()).map(async (winner: IWinner, index: number) => {
             const { color, name } = await this.getCar(winner.id);
-            return { number: index + 1, car: color, name, wins: winner.wins, time: winner.time };
+            const startNumber = this.state.winners.limit * (this.state.winners.page - 1) + 1;
+            return { number: startNumber + index, car: color, name, wins: winner.wins, time: winner.time };
           }),
         );
       default:
