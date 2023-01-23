@@ -32,10 +32,10 @@ export class Winners extends Section {
     Object.values(winner).forEach((cell, index) => {
       const td = new Component({ parent: row, tag: 'td', className: 'winners-table__td' });
       if (index === 1) {
-        td.style.setProperty('--car-color', cell);
-        td.classList.add('winners-table__car');
+        td.node.style.setProperty('--car-color', cell);
+        td.node.classList.add('winners-table__car');
       } else {
-        td.text = cell;
+        td.node.textContent = cell;
       }
     });
     return row.node;

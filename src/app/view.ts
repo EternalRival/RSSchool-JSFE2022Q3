@@ -41,7 +41,7 @@ export class AppView {
   }
 
   public setTotalCounter(route: Route, quantity: number): void {
-    this.views[route].total.text = `${quantity}`;
+    this.views[route].total.node.textContent = `${quantity}`;
   }
 
   public openUpdateDialog(carData: ICarData): void {
@@ -52,10 +52,10 @@ export class AppView {
     const updateBar = new CarSettings(settings, { className: `${route}__car-update`, parent: dialog });
 
     const updateDialogColor = (color: string): void => {
-      dialog.style.setProperty('--car-color', HexColor.isColor(color) ? color : HexColor.random);
+      dialog.node.style.setProperty('--car-color', HexColor.isColor(color) ? color : HexColor.random);
     };
 
-    updateBar.addEventListener('submit', dialog.destroy);
+    updateBar.node.addEventListener('submit', dialog.destroy);
 
     updateDialogColor(carData.color);
     emitter.subscribe(EventName.colorPicked, updateDialogColor);

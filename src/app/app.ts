@@ -81,8 +81,6 @@ export class App {
   }
 
   private startBtnClickHandler(): void {
-    console.log(this.model.state[Route.GARAGE].total)
-    console.log(this.model.state[Route.GARAGE].total>0)
     if (this.model.state[Route.GARAGE].total > 0) {
       document.body.style.pointerEvents = 'none';
       this.view.views[Route.GARAGE].controlBar.toggleRaceButtons(false);

@@ -24,7 +24,7 @@ export class Car<T extends HTMLElement = HTMLElement> extends Component {
 
     const name = new Component({ tag: 'span', className: 'car__name', textContent: carData.name });
 
-    this.track.style.setProperty('--car-color', carData.color);
+    this.track.node.style.setProperty('--car-color', carData.color);
 
     const buttons = this.createButtons();
 

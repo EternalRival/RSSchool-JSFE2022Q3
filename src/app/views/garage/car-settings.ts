@@ -23,7 +23,7 @@ export class CarSettings extends Component<HTMLFormElement> {
       ariaLabel: 'car name input',
       value: currentSettings.carData.name,
       oninput: (): void => {
-        currentSettings.carData.name = name.value;
+        currentSettings.carData.name = name.node.value;
       },
     });
 
@@ -33,15 +33,15 @@ export class CarSettings extends Component<HTMLFormElement> {
       ariaLabel: 'car color picker',
       value: currentSettings.carData.color,
       oninput: (): void => {
-        currentSettings.carData.color = color.value;
-        this.style.setProperty('--car-color', currentSettings.carData.color);
+        currentSettings.carData.color = color.node.value;
+        this.node.style.setProperty('--car-color', currentSettings.carData.color);
         emitter.emit(EventName.colorPicked, currentSettings.carData.color);
       },
     });
 
     const submitBtn = new Button({ className: 'car-settings__submit', textContent: settings.action });
 
-    this.addEventListener('submit', (e) => {
+    this.node.addEventListener('submit', (e) => {
       e.preventDefault();
       emitter.emit(EventName.setCarSubmitted, currentSettings);
     });

@@ -5,7 +5,7 @@ export class Modal extends Component {
   constructor(props?: Omit<ComponentProps, 'parent'>) {
     super({ ...props, className: 'modal__dialog' });
     this.background.append(this);
-    this.background.addEventListener('click', (e) => {
+    this.background.node.addEventListener('click', (e) => {
       if (e.target === this.background.node) {
         this.destroy();
       }
