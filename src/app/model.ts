@@ -168,7 +168,6 @@ export class Model {
 
   //* Winners
 
-  // eslint-disable-next-line max-lines-per-function
   public async getWinners(sortParams?: {
     _sort: 'id' | 'wins' | 'time';
     _order: 'ASC' | 'DESC';
@@ -198,11 +197,28 @@ export class Model {
         return [];
     }
   }
-  public async getWinner(): Promise<unknown> {
-    throw new Error('Method not implemented.');
+  public async getWinner(id: number): Promise<IWinner> {
+    const url = `${this.domain}/${Route.WINNERS}/${id}?${this.buildQuery(['id', id])}`;
+    const response = await fetch(url, {
+      method: RequestMethod.GET,
+    });
+
+    switch (response.status) {
+      case StatusCode.OK:
+      case StatusCode.NOT_FOUND:
+        return response.json();
+      default:
+        return {} as IWinner;
+    }
   }
   public async createWinner(): Promise<unknown> {
-    const winner = { id: this.race.currentWinner, wins: 1, time: this.race.winnerTime };
+    const winner = await this.getWinner(this.race.currentWinner);
+    if ('id' in winner) {
+      return this.updateWinner(winner);
+    }
+
+    Object.assign(winner, { id: this.race.currentWinner, time: this.race.winnerTime, wins: 1 });
+
     const url = `${this.domain}/${Route.WINNERS}`;
     const response = await fetch(url, {
       method: RequestMethod.POST,
@@ -226,8 +242,17 @@ export class Model {
     }
   }
 
-  public async updateWinner(): Promise<unknown> {
-    throw new Error('Method not implemented.');
+  public async updateWinner(winner: IWinner): Promise<unknown> {
+    const { id, wins, time } = winner;
+    const updated = { wins: wins + 1, time: Math.min(this.race.winnerTime, time) };
+
+    const url = `${this.domain}/${Route.WINNERS}/${id}?id=${id}`;
+    const response = await fetch(url, {
+      method: RequestMethod.PUT,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updated),
+    });
+    return response;
   }
 
   //* Misc
