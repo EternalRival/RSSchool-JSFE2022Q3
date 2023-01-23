@@ -2,7 +2,7 @@ import { Component, ComponentProps } from '../../components/Component';
 import { Heading } from '../../components/Heading';
 import { Section } from '../../components/Section';
 import { Route } from '../../types/enums';
-import { IWinner, IWinnerTableItem } from '../../types/interfaces';
+import { IWinnerTableItem } from '../../types/interfaces';
 import { Pagination } from './pagination';
 
 export class Winners extends Section {

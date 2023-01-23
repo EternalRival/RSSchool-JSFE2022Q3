@@ -61,8 +61,7 @@ export class AppView {
     emitter.subscribe(EventName.colorPicked, updateDialogColor);
   }
 
-  public alertWinner(winner: string, time: string): void {
-    const dialog = new Modal({ textContent: `${winner} won this race! (${time})` });
-    // TODO пофиксить разблокировку кнопки старт после победы (не включать её)
+  public alertWinner(winner: string, time: string): Modal {
+    return new Modal({ textContent: `${winner} won this race! (${time})` });
   }
 }

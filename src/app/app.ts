@@ -2,7 +2,6 @@ import { Input } from '../components/Input';
 import { CarButton, CarSettingsAction, Route, StatusCode } from '../types/enums';
 import { ICarData } from '../types/interfaces';
 import { emitter, EventName } from '../utils/emitter';
-import { getReadableTime } from '../utils/utils';
 import { Model } from './model';
 import { AppView } from './view';
 import { CarControl } from './views/garage/car-control';

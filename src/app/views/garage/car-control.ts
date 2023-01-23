@@ -3,12 +3,14 @@ import { emitter, EventName } from '../../../utils/emitter';
 
 export class CarControl {
   private driving?: ReturnType<typeof setInterval>;
+
   constructor(
     public id: ICarData['id'],
     private track: HTMLInputElement,
     private startButton: HTMLButtonElement,
     private stopButton: HTMLButtonElement,
   ) {}
+
   public drive(engineData: ICarEngineData): void {
     const delay = 10;
     this.track.max = `${engineData.distance}`;
@@ -27,12 +29,14 @@ export class CarControl {
     this.pause();
     this.track.value = this.track.min;
   }
+
   public startButtonToggle(mode: boolean): void {
     this.startButton.disabled = !mode;
   }
   public stopButtonToggle(mode: boolean): void {
     this.stopButton.disabled = !mode;
   }
+
   public startRide(): void {
     this.startButton.click();
   }

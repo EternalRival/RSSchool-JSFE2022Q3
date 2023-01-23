@@ -255,20 +255,4 @@ export class Model {
     });
     return response;
   }
-
-  //* Misc
-
-  /*   private async responseHandler<T>(response: Response): Promise<T> {
-    switch (response.status) {
-      case StatusCode.OK:
-      case StatusCode.CREATED:
-        return response.json();
-      case StatusCode.BAD_REQUEST:
-      case StatusCode.NOT_FOUND:
-      case StatusCode.TOO_MANY_REQUESTS:
-      case StatusCode.INTERNAL_SERVER_ERROR:
-      default:
-        return response.json().catch(() => ({} as T));
-    }
-  } */
 }

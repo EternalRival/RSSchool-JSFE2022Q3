@@ -12,11 +12,10 @@ export class Header extends HeaderComponent {
     const navList = new Component({ tag: 'ul', className: 'header__nav-list' });
 
     const navItems = Object.values(Route).map((route) => {
-      const onclick = (): void => emitter.emit(EventName.routeBtnClicked, route);
-      const button = new Button({ className: 'nav__button', textContent: `To ${route}`, onclick });
-
       const item = new Component({ tag: 'li', className: 'header__nav-item' });
-      item.append(button);
+
+      const button = new Button({ parent: item, className: 'nav__button', textContent: `To ${route}` });
+      button.node.addEventListener('click', () => emitter.emit(EventName.routeBtnClicked, route));
 
       return item;
     });
@@ -26,8 +25,3 @@ export class Header extends HeaderComponent {
     navList.append(...navItems);
   }
 }
-
-/* const { garageBtn, winnersBtn } = this.view.header.nodes;
-garageBtn.addEventListener('click', () => this.view.setView(Route.GARAGE));
-winnersBtn.addEventListener('click', () => this.view.setView(Route.WINNERS));
- */

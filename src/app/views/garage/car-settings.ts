@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { Button } from '../../../components/Button';
 import { Component, ComponentProps } from '../../../components/Component';
 import { Input } from '../../../components/Input';
@@ -13,7 +12,6 @@ export class CarSettings extends Component<HTMLFormElement> {
     }
 
     const defaults = { name: '', color: '#038681' };
-
     const currentSettings = { carData: defaults, ...settings };
 
     const name = new Input({
@@ -40,7 +38,6 @@ export class CarSettings extends Component<HTMLFormElement> {
     });
 
     const submitBtn = new Button({ className: 'car-settings__submit', textContent: settings.action });
-
     this.node.addEventListener('submit', (e) => {
       e.preventDefault();
       emitter.emit(EventName.setCarSubmitted, currentSettings);
