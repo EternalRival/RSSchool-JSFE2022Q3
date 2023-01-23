@@ -1,5 +1,5 @@
 import { CarBrand, CarModel, RequestMethod, Route, StatusCode } from '../types/enums';
-import { ICarData, ICarEngineData, IRouteState } from '../types/interfaces';
+import { ICarData, ICarEngineData, IRouteState, IWinner, IWinnerTableItem } from '../types/interfaces';
 import { getRandomArrayItem, HexColor } from '../utils/utils';
 
 export class Model {
@@ -34,13 +34,13 @@ export class Model {
 
   //* Garage
 
-  public async getCars(route: Route): Promise<ICarData[]> {
-    const { page, limit } = this.state[route];
-    const url = `${this.domain}/${route}?${this.buildQuery(['_page', page], ['_limit', limit])}`;
+  public async getCars(): Promise<ICarData[]> {
+    const { page, limit } = this.state[Route.GARAGE];
+    const url = `${this.domain}/${Route.GARAGE}?${this.buildQuery(['_page', page], ['_limit', limit])}`;
     const response = await fetch(url, {
       method: RequestMethod.GET,
     });
-    this.state[route].total = Number(response.headers.get('X-Total-Count'));
+    this.state[Route.GARAGE].total = Number(response.headers.get('X-Total-Count'));
 
     switch (response.status) {
       case StatusCode.OK:
@@ -168,8 +168,35 @@ export class Model {
 
   //* Winners
 
-  public async getWinners(): Promise<unknown> {
-    throw new Error('Method not implemented.');
+  // eslint-disable-next-line max-lines-per-function
+  public async getWinners(sortParams?: {
+    _sort: 'id' | 'wins' | 'time';
+    _order: 'ASC' | 'DESC';
+  }): Promise<IWinnerTableItem[]> {
+    const { page, limit } = this.state[Route.WINNERS];
+
+    const queryParams: [string, unknown][] = Object.entries({ _page: page, _limit: limit });
+    if (sortParams) {
+      queryParams.push(...Object.entries(sortParams));
+    }
+
+    const url = `${this.domain}/${Route.WINNERS}?${this.buildQuery(...queryParams)}`;
+    const response = await fetch(url, {
+      method: RequestMethod.GET,
+    });
+    this.state[Route.WINNERS].total = Number(response.headers.get('X-Total-Count'));
+
+    switch (response.status) {
+      case StatusCode.OK:
+        return Promise.all(
+          (await response.json()).map(async (winner: IWinner, index: number) => {
+            const { color, name } = await this.getCar(winner.id);
+            return { number: index + 1, car: color, name, wins: winner.wins, time: winner.time };
+          }),
+        );
+      default:
+        return [];
+    }
   }
   public async getWinner(): Promise<unknown> {
     throw new Error('Method not implemented.');

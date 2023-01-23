@@ -20,7 +20,17 @@ export class App {
   }
 
   private async renderCars(route: Route): Promise<void> {
-    this.view.views[route].renderCars(await this.model.getCars(route));
+    const aa = await this.model.getWinners({ _sort: 'time', _order: 'ASC' });
+    console.log(aa);
+    switch (route) {
+      case Route.GARAGE:
+        this.view.views[route].renderCars(await this.model.getCars());
+        break;
+      case Route.WINNERS:
+        this.view.views[route].renderCars(aa);
+        break;
+      default:
+    }
   }
 
   private async update(route: Route): Promise<void> {
