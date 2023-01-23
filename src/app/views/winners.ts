@@ -43,7 +43,6 @@ export class Winners extends Section {
   }
 
   public renderCars(winners: IWinnerTableItem[]): void {
-    console.log(winners);
     this.tableBody.node.replaceChildren(...winners.map((winner) => this.buildWinnerRow(winner)));
   }
 }

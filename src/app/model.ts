@@ -91,7 +91,7 @@ export class Model {
   }
 
   public async deleteCar(id: number): Promise<unknown> {
-    const url = `${this.domain}/${Route.GARAGE}/${id}`;
+    const url = `${this.domain}/${Route.GARAGE}/${id}?id=${id}`;
     const response = await fetch(url, {
       method: RequestMethod.DELETE,
     });
@@ -202,8 +202,30 @@ export class Model {
     throw new Error('Method not implemented.');
   }
   public async createWinner(): Promise<unknown> {
-    throw new Error('Method not implemented.');
+    const winner = { id: this.race.currentWinner, wins: 1, time: this.race.winnerTime };
+    const url = `${this.domain}/${Route.WINNERS}`;
+    const response = await fetch(url, {
+      method: RequestMethod.POST,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(winner),
+    });
+    return response;
   }
+  public async deleteWinner(id: number): Promise<unknown> {
+    const url = `${this.domain}/${Route.WINNERS}/${id}?id=${id}`;
+    const response = await fetch(url, {
+      method: RequestMethod.DELETE,
+    });
+
+    switch (response.status) {
+      case StatusCode.OK:
+      case StatusCode.NOT_FOUND:
+        return response.json();
+      default:
+        return {};
+    }
+  }
+
   public async updateWinner(): Promise<unknown> {
     throw new Error('Method not implemented.');
   }

@@ -20,14 +20,12 @@ export class App {
   }
 
   private async renderCars(route: Route): Promise<void> {
-    const aa = await this.model.getWinners({ _sort: 'time', _order: 'ASC' });
-    console.log(aa);
     switch (route) {
       case Route.GARAGE:
         this.view.views[route].renderCars(await this.model.getCars());
         break;
       case Route.WINNERS:
-        this.view.views[route].renderCars(aa);
+        this.view.views[route].renderCars(await this.model.getWinners({ _sort: 'time', _order: 'ASC' }));
         break;
       default:
     }
@@ -106,6 +104,8 @@ export class App {
       this.view.alertWinner(winnerName, winnerTime);
       this.view.views[Route.GARAGE].controlBar.toggleRaceButtons(true);
       document.body.removeAttribute('style');
+      await this.model.createWinner();
+      await this.update(Route.WINNERS);
     }
   }
 
@@ -121,7 +121,9 @@ export class App {
         break;
       case CarButton.DELETE:
         await this.model.deleteCar(carControl.id);
+        await this.model.deleteWinner(carControl.id);
         this.update(Route.GARAGE);
+        this.update(Route.WINNERS);
         break;
       case CarButton.START:
         this.drive(carControl);
