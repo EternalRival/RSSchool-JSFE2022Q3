@@ -2,10 +2,9 @@ const path = require('path');
 
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-/* const CopyPlugin = require('copy-webpack-plugin'); */
 
 const PROJECT = {
-  title: 'Async Race',
+  title: 'Async-Race',
   lang: 'en',
   isEmptyBodyRequired: true,
 };
@@ -25,7 +24,6 @@ const getTemplate = (subtitle) => `<!DOCTYPE html>
 module.exports = {
   entry: {
     app: path.resolve(__dirname, 'src', 'index.ts'),
-    404: path.resolve(__dirname, 'src', '404.ts'),
   },
 
   output: {
@@ -42,13 +40,6 @@ module.exports = {
       favicon: path.resolve('src', 'assets', 'icons', 'favicon.webp'),
       chunks: ['app'],
     }),
-    new HtmlWebpackPlugin({
-      templateContent: getTemplate('404'),
-      filename: '404.html',
-      favicon: path.resolve('src', 'assets', 'icons', 'favicon.webp'),
-      chunks: ['404'],
-    }),
-    /* new CopyPlugin({ patterns: [{ from: './src/assets/folder', to: './assets/folder' }] }), */
   ],
 
   module: {
