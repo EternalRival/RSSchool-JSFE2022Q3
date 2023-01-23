@@ -25,7 +25,7 @@ export const requirements = {
     ],
     'Garage view': [
       {
-        mod: 0,
+        mod: 1,
         points: 15,
         text: 'User should be able to create, update, delete a car, and see the list of the cars. Car has only two attributes: "name" and "color". For "delete"-operation car should be deleted from "garage" table as well as from "winners".',
       },
@@ -89,24 +89,24 @@ export const requirements = {
         text: "There should be a button to reset race. After user clicks this button all the cars return to it's initial places.",
       },
       {
-        mod: 0,
+        mod: 1,
         points: 10,
         text: "After some car finishes first user should see the message contains car's name that shows which one has won.",
       },
     ],
     'Winners view': [
       {
-        mod: 0,
+        mod: 1,
         points: 10,
         text: 'After some car wins it should be displayed at the "Winners view" table.',
       },
       {
-        mod: 0,
+        mod: 1,
         points: 5,
         text: 'There should be pagination (10 winners per one page).',
       },
       {
-        mod: 0,
+        mod: 1,
         points: 10,
         text: 'Table should include the next culumns: "№", "Image of the car", "Name of the car", "Wins number", "Best time in seconds" (names of the columns can differ). If the same car wins more than once the number of wins should be incremented while best time should be saved only if it\'s better than the stored one.',
       },
@@ -150,7 +150,7 @@ export const requirements = {
         text: 'Code divided to small functions with a clear names and purposes. Each function should be less or equal to 40 lines.',
       },
       {
-        mod: 1,
+        mod: 0,
         points: 5,
         text: 'There are not unnecessary code duplications.',
       },

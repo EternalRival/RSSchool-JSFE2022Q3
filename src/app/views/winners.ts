@@ -18,7 +18,7 @@ export class Winners extends Section {
     const table = new Component({ tag: 'table', className: 'winners-table' });
     const tableHead = new Component({ parent: table, tag: 'thead', className: 'winners-table__thead' });
     const tableHeadRow = new Component({ parent: tableHead, tag: 'tr', className: 'winners-table__tr' });
-    ['Number', 'Car', 'Name', 'Wins', 'Best time (seconds)'].forEach(
+    ['№', 'Car', 'Name', 'Wins', 'Best time (seconds)'].forEach(
       (name) => new Component({ parent: tableHeadRow, tag: 'th', className: 'winners-table__th', textContent: name }),
     );
 
