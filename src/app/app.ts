@@ -81,12 +81,16 @@ export class App {
   }
 
   private startBtnClickHandler(): void {
-    document.body.style.pointerEvents = 'none';
-    this.view.views[Route.GARAGE].controlBar.toggleRaceButtons(false);
-    this.view.views[Route.GARAGE].startRace();
-    this.model.race.inProgress = true;
-    this.model.race.carsCrashed = 0;
-    this.model.race.startTime = Date.now();
+    console.log(this.model.state[Route.GARAGE].total)
+    console.log(this.model.state[Route.GARAGE].total>0)
+    if (this.model.state[Route.GARAGE].total > 0) {
+      document.body.style.pointerEvents = 'none';
+      this.view.views[Route.GARAGE].controlBar.toggleRaceButtons(false);
+      this.view.views[Route.GARAGE].startRace();
+      this.model.race.inProgress = true;
+      this.model.race.carsCrashed = 0;
+      this.model.race.startTime = Date.now();
+    }
   }
 
   private resetBtnClickHandler(): void {
