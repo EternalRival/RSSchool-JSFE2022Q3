@@ -55,7 +55,7 @@ export class AppView {
       dialog.node.style.setProperty('--car-color', HexColor.isColor(color) ? color : HexColor.random);
     };
 
-    updateBar.node.addEventListener('submit', dialog.destroy);
+    updateBar.node.addEventListener('submit', () => dialog.destroy());
 
     updateDialogColor(carData.color);
     emitter.subscribe(EventName.colorPicked, updateDialogColor);
