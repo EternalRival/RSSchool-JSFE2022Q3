@@ -1,10 +1,4 @@
-const { createReadStream } = require('fs');
 const { resolve } = require('path');
+const { createReadStream } = require('fs');
 
-const filePath = resolve(__dirname, './text.txt');
-
-const stream = createReadStream(filePath, 'utf-8');
-
-stream.on('data', (chunk) => {
-  console.log(chunk);
-});
+createReadStream(resolve(__dirname, 'text.txt'), 'utf-8').on('data', console.info);

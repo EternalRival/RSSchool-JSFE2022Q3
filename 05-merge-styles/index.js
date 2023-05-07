@@ -1,23 +1,24 @@
-const { createWriteStream, createReadStream } = require('fs');
-const { readdir } = require('fs/promises');
-const { resolve, extname } = require('path');
+const { readdir, readFile, writeFile, mkdir } = require('fs/promises');
+const { resolve, extname, dirname } = require('path');
 
-const DIR = 'styles';
+const getFullfilled = async (promises) => {
+  const settled = await Promise.allSettled(promises);
+  const fulfilled = settled.filter(({ status }) => status === 'fulfilled');
+  return fulfilled.map(({ value }) => value);
+};
 
-async function buildStyles(dir) {
-  const dirPath = resolve(__dirname, dir);
-  const fileNames = await readdir(dirPath, { withFileTypes: true });
-  const filePaths = fileNames.reduce((p, c) => {
-    const path = resolve(dirPath, c.name);
-    if (!c.isFile() || extname(path) !== '.css') return p;
-    return [...p, path];
-  }, []);
-  const stream = createWriteStream(resolve(__dirname, 'project-dist', 'bundle.css'));
+const getFilesByExtension = async (dirPath, extension) => {
+  const files = await readdir(dirPath, { withFileTypes: true });
+  return files.filter((file) => file.isFile() && extname(file.name) === extension);
+};
 
-  await Promise.all(filePaths.map((filePath) => createReadStream(filePath).pipe(stream)));
-}
+const mergeStyles = async (srcDir, destPath) => {
+  const styleFiles = await getFilesByExtension(srcDir, extname(destPath));
+  const promises = styleFiles.map((file) => readFile(resolve(srcDir, file.name)));
+  const bundle = (await getFullfilled(promises)).join('\n');
+  await mkdir(dirname(destPath), { recursive: true });
+  await writeFile(destPath, bundle);
+  return `merged: [${styleFiles.map(({ name }) => name).join(', ')}] -> ${destPath}`;
+};
 
-console.log('Building styles…');
-buildStyles(DIR).then(() => {
-  console.log('Build completed');
-});
+mergeStyles(resolve(__dirname, 'styles'), resolve(__dirname, 'project-dist', 'bundle.css')).then(console.log);

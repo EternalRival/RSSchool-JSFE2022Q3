@@ -1,40 +1,32 @@
-const fs = require('fs');
-const path = require('path');
-const readline = require('readline');
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+const { createWriteStream } = require('fs');
+const { resolve } = require('path');
+const { createInterface } = require('readline');
 
-const sayWelcome = () => {
-  const hello = 'Hello! Enter some text for writing to the file.';
-  const info = "(To exit, press Ctrl+C or type 'exit')".padEnd(hello.length, ' ');
-  const separator = '═'.repeat(hello.length + 2);
-  const greetings = `╔${separator}╗\n║ ${hello} ║\n║ ${info} ║\n╚${separator}╝`;
-  console.log(greetings);
-};
-const sayExitMessage = () => {
-  process.stdout.cursorTo(0);
-  process.stdout.write('Thx for your cooperation!');
-  process.exit(0);
-};
-
-const fileName = 'some-text.txt'
-const filePath = path.resolve(__dirname, fileName);
-const stream = fs.createWriteStream(filePath);
-
-sayWelcome();
-rl.prompt();
-
-rl.on('line', (input) => {
+const writeToFile = (fileName, welcomeMessage, exitMessage) => {
+  const stream = createWriteStream(resolve(__dirname, fileName));
+  console.info(welcomeMessage);
+  const rl = createInterface({ input: process.stdin, output: process.stdout });
+  rl.on('close', () => {
+    console.info(`\r${exitMessage}`);
+    process.exit(0);
+  });
+  rl.on('line', (input) => {
+    if (input === 'exit') rl.close();
+    else stream.write(input + '\n');
+    rl.prompt();
+  });
   rl.prompt();
-  switch (input) {
-    case 'exit':
-      rl.close();
-      break;
-    default:
-      stream.write(input + '\n');
-  }
-}).on('close', () => {
-  sayExitMessage();
-});
+};
+
+const wrapWithBorder = (message) => {
+  const lines = message.split('\n');
+  const maxLength = Math.max(...lines.map((line) => line.length));
+  const border = '═'.repeat(maxLength + 2);
+  return [`╔${border}╗`, ...lines.map((line) => `║ ${line.padEnd(maxLength)} ║`), `╚${border}╝`].join('\n');
+};
+
+writeToFile(
+  'some-text.txt',
+  wrapWithBorder('Hello! Enter some text for writing to the file.\n(To exit, press Ctrl+C or type `exit`)'),
+  wrapWithBorder('Thx for your cooperation!'),
+);

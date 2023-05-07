@@ -1,30 +1,23 @@
 const { readdir, stat } = require('fs/promises');
 const { resolve, parse } = require('path');
 
-const DIR = 'secret-folder';
+const getFileData = async (file, dirPath) => {
+  if (!file.isFile()) throw new Error(`${file.name} is not a file`);
+  const filePath = resolve(dirPath, file.name);
+  const { size } = await stat(filePath);
+  const { name, ext } = parse(filePath);
+  return { name, ext, size };
+};
+const formatFileData = ({ name, ext, size }) => `${name} - ${ext.slice(1)} - ${(size / 1024).toFixed(3)}kb`;
 
-async function getFilesData(dirPath) {
-  const fileNames = await readdir(dirPath);
-
-  return fileNames.reduce(async (p, c) => {
-    const path = resolve(__dirname, DIR, c);
-    const stats = await stat(path);
-
-    if (!stats.isFile()) return p;
-
-    const file = parse(path);
-    const { name } = file;
-    const ext = file.ext.slice(1);
-    const bytes = stats.size;
-
-    return [...(await p), { path, name, ext, bytes, stats }];
+const getFormattedFileData = async (dir) => {
+  const dirPath = resolve(__dirname, dir);
+  const files = await readdir(dirPath, { withFileTypes: true });
+  const fileData = await Promise.allSettled(files.map((file) => getFileData(file, dirPath)));
+  return fileData.reduce((formattedFileData, { status, value }) => {
+    if (status === 'fulfilled') formattedFileData.push(formatFileData(value));
+    return formattedFileData;
   }, []);
-}
+};
 
-getFilesData(resolve(__dirname, DIR)).then((files) => {
-  files.forEach((file) => {
-    const { name, ext } = file;
-    const kb = (file.bytes / 1024).toFixed(3);
-    console.log(`${name} - ${ext} - ${kb}kb`);
-  });
-});
+getFormattedFileData('secret-folder').then((formattedFileData) => console.log(formattedFileData.join('\n')));
