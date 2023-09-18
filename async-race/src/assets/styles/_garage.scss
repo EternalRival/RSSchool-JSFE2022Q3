@@ -1,0 +1,126 @@
+.garage {
+  .race-track {
+    margin: 0.5em auto;
+  }
+  .car {
+    padding: 0.2em;
+    background-color: #fff3;
+  }
+  .car__name {
+    display: inline-block;
+    vertical-align: top;
+    padding: 0.5em;
+  }
+  .car__button {
+    height: 32px;
+    aspect-ratio: 1;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.1s;
+    &:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+    &:active {
+      transition: unset;
+      transform: scale(1);
+    }
+    &:disabled {
+      pointer-events: none;
+      opacity: 0.3;
+    }
+  }
+  .car__edit {
+    background-image: url('../images/car-edit.svg');
+  }
+  .car__start {
+    background-image: url('../images/car-start.svg');
+  }
+  .car__stop {
+    background-image: url('../images/car-stop.svg');
+  }
+  .car__delete {
+    background-image: url('../images/car-delete.svg');
+  }
+  .car__track {
+    margin: 0.5em auto;
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    background-color: transparent;
+    background-image: url('../images/finish-flag.svg');
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    border-bottom: 1px dashed #808080;
+
+    &::-webkit-slider-thumb {
+      box-shadow: inset 0 -1.5em 1em -1em #fff;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 32px;
+      aspect-ratio: 2.6/1;
+      background-color: var(--car-color);
+      -webkit-mask-image: url('../images/tesla.svg');
+      -webkit-mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+    }
+  }
+}
+
+.car-settings {
+  &__name {
+    background-color: transparent;
+    border: 1px solid #696969;
+    color: #fff;
+    padding: 0.3em;
+  }
+  &__color {
+    margin-left: 0.3em;
+    vertical-align: middle;
+    background-color: transparent;
+    border: 1px solid #696969;
+    &:hover {
+      cursor: pointer;
+      border-color: var(--car-color);
+      box-shadow: 0 0 1px 1px var(--car-color);
+    }
+  }
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0008;
+  &__dialog {
+    margin: 1.5em;
+    padding: 1.5em;
+    box-shadow: 0 0 0.2em 0.2em var(--car-color);
+    background-color: #000;
+  }
+
+  /*   position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+ */
+  //&.garage__car-update {
+
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // background-color: #000c;
+  //}
+}

@@ -1,0 +1,26 @@
+.winners {
+  &-table {
+    border-collapse: collapse;
+    &__th {
+      background-color: $color-best;
+    }
+    &__th,
+    &__td {
+      border: 1px solid $color-best;
+      padding: 0.4em;
+    }
+    &__car {
+      width: 4em;
+      aspect-ratio: 2.6/1;
+      background-color: var(--car-color);
+      -webkit-mask-image: url('../images/tesla.svg');
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      -webkit-mask-size: 80%;
+      mask-image: url('../images/tesla.svg');
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+    }
+  }
+}

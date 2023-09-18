@@ -1,0 +1,164 @@
+/* eslint-disable max-len */
+export const requirements = {
+  'Functional': {
+    'Basic structure': [
+      {
+        mod: 1,
+        points: 5,
+        text: 'There should be two views on the site: "Garage" and "Winners".',
+      },
+      {
+        mod: 1,
+        points: 5,
+        text: '"Garage" view should contain its name, page number, and the full amount of items in the database (how many car user has in his garage).',
+      },
+      {
+        mod: 1,
+        points: 5,
+        text: '"Winners" view should contain its name, page number, and the full amount of items in the database (how many records the winners table contains).',
+      },
+      {
+        mod: 1,
+        points: 10,
+        text: "View state should be saved when user switches from one view to another. For example, page number shouldn't be reset, input controls should contain that they contained before switching, etc.",
+      },
+    ],
+    'Garage view': [
+      {
+        mod: 1,
+        points: 15,
+        text: 'User should be able to create, update, delete a car, and see the list of the cars. Car has only two attributes: "name" and "color". For "delete"-operation car should be deleted from "garage" table as well as from "winners".',
+      },
+      {
+        mod: 1,
+        points: 10,
+        text: "User should be able to select any color from an RGB-Palete like here and see the picture of the car colored with the color selected and car's name.",
+      },
+      {
+        mod: 1,
+        points: 5,
+        text: "Near the car's picture should be buttons to update its attributes or delete it.",
+      },
+      {
+        mod: 1,
+        points: 10,
+        text: 'There should be pagination on the "Garage" view (7 cars per one page).',
+      },
+      {
+        mod: 1,
+        points: 10,
+        text: 'There should be a button to create random cars (100 cars per click). Name should be assembled from two random parts, for example "Tesla" + "Model S", or "Ford" + "Mustang" (At least 10 different names for each part). Color should be also generated randomly.',
+      },
+    ],
+    'Car animation': [
+      {
+        mod: 1,
+        points: 5,
+        text: "Near the car's picture should be buttons for starting / stoping the car engine.",
+      },
+      {
+        mod: 1,
+        points: 20,
+        text: "User clicks to the engine start button -> UI is waiting for car's velocity answer -> animate the car and makes another request to drive. In case api returned 500 error car animation should be stopped.",
+      },
+      {
+        mod: 1,
+        points: 5,
+        text: "User clicks to the engine stop button -> UI is waiting for answer for stopping engine -> car returned to it's initial place.",
+      },
+      {
+        mod: 1,
+        points: 5,
+        text: "Start engine button should be disabled in case car is already in driving mode. As well as stop engine button should be disabled when car is on it's initial place.",
+      },
+      {
+        mod: 1,
+        points: 15,
+        text: 'Car animation should work fine on any screen (smallest screen size is 500px).',
+      },
+    ],
+    'Race animation': [
+      {
+        mod: 1,
+        points: 10,
+        text: 'There should be a button to start race. After user clicks this button all the cars on the current page start driving.',
+      },
+      {
+        mod: 1,
+        points: 10,
+        text: "There should be a button to reset race. After user clicks this button all the cars return to it's initial places.",
+      },
+      {
+        mod: 1,
+        points: 10,
+        text: "After some car finishes first user should see the message contains car's name that shows which one has won.",
+      },
+    ],
+    'Winners view': [
+      {
+        mod: 1,
+        points: 10,
+        text: 'After some car wins it should be displayed at the "Winners view" table.',
+      },
+      {
+        mod: 1,
+        points: 5,
+        text: 'There should be pagination (10 winners per one page).',
+      },
+      {
+        mod: 1,
+        points: 10,
+        text: 'Table should include the next culumns: "№", "Image of the car", "Name of the car", "Wins number", "Best time in seconds" (names of the columns can differ). If the same car wins more than once the number of wins should be incremented while best time should be saved only if it\'s better than the stored one.',
+      },
+      {
+        mod: 0,
+        points: 10,
+        text: 'User should be able to sort cars by wins number and by best time (ASC, DESC).',
+      },
+    ],
+  },
+  'Non-functional': {
+    "Mentor's check": [
+      {
+        mod: 1,
+        points: 40,
+        text: "Application is divided to logical modules / layers. Like working with api it's separate module, as well as working with UI rendering, or working with an application state, etc. Better discuss architecture with a mentor before implementing.",
+      },
+      {
+        mod: 1,
+        points: 30,
+        text: 'All the HTML-content is generated by JavaScript (body contains only one tag script inside).',
+      },
+      {
+        mod: 1,
+        points: 25,
+        text: 'Application is SPA.',
+      },
+      {
+        mod: 1,
+        points: 20,
+        text: 'Webpack or another bundler should be used. There should be one HTML-file, JS-file, and one CSS-file (or it can be embedded right in the HTML-file).',
+      },
+      {
+        mod: 1,
+        points: 15,
+        text: "Eslint with Airbnb style guide should be used. Some paricular eslint-rules can be disabled or changed only after agrement with a mentor. There shouldn't be any eslint errors or warnings.",
+      },
+      {
+        mod: 1,
+        points: 10,
+        text: 'Code divided to small functions with a clear names and purposes. Each function should be less or equal to 40 lines.',
+      },
+      {
+        mod: 0,
+        points: 5,
+        text: 'There are not unnecessary code duplications.',
+      },
+      {
+        mod: 1,
+        points: 5,
+        text: "Code shouldn't contain magical numbers or strings. ",
+      },
+    ],
+  },
+};
