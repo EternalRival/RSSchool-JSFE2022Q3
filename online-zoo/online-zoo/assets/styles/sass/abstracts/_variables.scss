@@ -1,0 +1,18 @@
+$small: 1320px;
+$tablet:  940px;
+$mobile: 600px;
+
+$small0: 1000px;
+$tablet0: 640px;
+$mobile0: 320px;
+
+@keyframes shake {
+  20%,
+  60% {
+    transform: translateX(-2px);
+  }
+  40%,
+  80% {
+    transform: translateX(2px);
+  }
+}

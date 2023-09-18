@@ -1,0 +1,26 @@
+.logo {
+  padding: 0.5px 2px;
+  &.container {
+    display: flex;
+    flex-direction: column;
+    width: 82px;
+    height: 52px;
+    box-sizing: border-box;
+    border: 1px solid #ffffff;
+    border-radius: 2px;
+    text-decoration: none;
+    color: #ffffff;
+  }
+  &.text {
+    margin: 0;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19.0145px;
+    line-height: 120%;
+    text-align: center;
+
+    background: url("../../icons/bamboo.svg") no-repeat;
+    background-position: bottom 0.3em left 0.35em;
+  }
+}

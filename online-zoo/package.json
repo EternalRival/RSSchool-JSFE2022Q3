@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "eslint": "^8.23.1",
+    "scss": "^0.2.4"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1"
+  }
+}
