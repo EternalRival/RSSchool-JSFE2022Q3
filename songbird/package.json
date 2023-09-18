@@ -1,0 +1,40 @@
+{
+  "name": "eternalrival-jsfe2022q3",
+  "version": "1.0.0",
+  "description": "Private repository for @eternalrival",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "npm run build && npx gh-pages -d dist -e songbird -m feat:_update_deploy",
+    "deploy-prod": "npm run prod && npx gh-pages -d dist -e songbird -m feat:_update_deploy",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rmdir /s /q dist",
+    "prod": "cross-env NODE_ENV=production webpack",
+    "start": "webpack serve",
+    "build": "cross-env NODE_ENV=development webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rolling-scopes-school/eternalrival-JSFE2022Q3.git"
+  },
+  "author": "erdev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rolling-scopes-school/eternalrival-JSFE2022Q3/issues"
+  },
+  "homepage": "https://github.com/rolling-scopes-school/eternalrival-JSFE2022Q3#readme",
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.7.2",
+    "eslint": "^8.27.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "favicons-webpack-plugin": "^6.0.0-alpha.2",
+    "html-webpack-plugin": "^5.5.0",
+    "sass": "^1.56.1",
+    "sass-loader": "^13.2.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.11.1"
+  }
+}
