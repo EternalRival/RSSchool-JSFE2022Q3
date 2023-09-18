@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunketernalrival_jsfe2022q3=self.webpackChunketernalrival_jsfe2022q3||[]).push([[6804],{6804:(e,s,a)=>{e.exports=a.p+"assets/alf.webp"}}]);

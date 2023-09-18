@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunketernalrival_jsfe2022q3=self.webpackChunketernalrival_jsfe2022q3||[]).push([[3221],{3221:(e,s,t)=>{e.exports=t.p+"assets/tbbt.webp"}}]);

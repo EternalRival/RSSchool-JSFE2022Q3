@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunketernalrival_jsfe2022q3=self.webpackChunketernalrival_jsfe2022q3||[]).push([[7488],{7488:(e,s,a)=>{e.exports=a.p+"assets/steins-gate.mp3"}}]);

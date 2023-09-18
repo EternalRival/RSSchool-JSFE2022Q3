@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunketernalrival_jsfe2022q3=self.webpackChunketernalrival_jsfe2022q3||[]).push([[2217],{2217:(e,s,a)=>{e.exports=a.p+"assets/x-men.mp3"}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunketernalrival_jsfe2022q3=self.webpackChunketernalrival_jsfe2022q3||[]).push([[1840],{1840:(e,s,a)=>{e.exports=a.p+"assets/flash.mp3"}}]);
